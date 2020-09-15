@@ -7,9 +7,9 @@
 
 <fx:root prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yes" fitHeight="400.0" fitWidth="600.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../picures/Riskbakgrund.png" />
+            <Image url="@picures/Riskbakgrund.png" />
          </image>
       </ImageView>
       <Rectangle fx:id="cube1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="440.0" layoutY="239.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />

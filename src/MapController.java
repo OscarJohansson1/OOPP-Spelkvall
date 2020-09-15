@@ -81,4 +81,9 @@ public class MapController extends AnchorPane {
 
     }
 
+    public Space getSelectedSpace()
+    {
+        return  selectedSpace;
+    }
+
 }
