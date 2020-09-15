@@ -1,10 +1,10 @@
 public class Player {
 
     private int units;
-    private String id;
+    private int id;
     private String color;
 
-    public Player(int units, String id, String color) {
+    public Player(int units, int id, String color) {
         this.units = units;
         this.id = id;
         this.color = color;
@@ -18,11 +18,11 @@ public class Player {
         this.units = units;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
