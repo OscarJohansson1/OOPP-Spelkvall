@@ -3,21 +3,16 @@ import java.util.ArrayList;
 public class Attack {
 
     Dice dice = new Dice();
-    Space space = new Space();
+    //Space space = new Space();
     private boolean attack = false;
 
     //This method checks if the attack is possible and declares which space is to be attacked
     void DeclareAttack(Space mySpace, Space opponentSpace, int myUnits){
 
-        if (isAttackPossible(myUnits)){
-            if (nextTo(mySpace, opponentSpace))
+            if (nextTo(mySpace, opponentSpace) && isAttackPossible(myUnits))
             {
                 attack = true;
             }
-        }
-
-
-
     }
 
 
@@ -26,25 +21,24 @@ public class Attack {
     //This also declares the winner of the attack
     void calculateAttack(int myUnits, int opponentUnits){
 
-        int myDices = myUnits;
-        int opponentDices = opponentUnits;
+        int myDice = (myUnits -1);
+        int opponentDice = opponentUnits;
 
         if(attack){
 
-            ArrayList<Integer> myResults = dice.rollNDIces(myDices);
-            ArrayList<Integer> opponentResults = dice.rollNDIces(opponentDices);
+            ArrayList<Integer> myResults = dice.rollNDIce(myDice);
+            ArrayList<Integer> opponentResults = dice.rollNDIce(opponentDice);
 
+            while(myResults.size() > 1 && opponentResults.size() > 1 ){
 
-
+                if(findHighestDie(myResults) > findHighestDie(opponentResults)){
+                    //Kill one unit in opponent space
+                }
+                else if(findHighestDie(myResults) < findHighestDie(opponentResults)){
+                    //Kill one unit in current player space
+                }
+            }
         }
-
-
-    }
-
-    //Don't know if needed yet
-    //This method calculates the results of the attack and the losses of the losing side
-    void resultsOfAttack(){
-
     }
 
     //This checks if one space on the board is next to another
@@ -57,12 +51,18 @@ public class Attack {
         return myUnits > 1;
     }
 
-    private ArrayList<Integer> sortArrayByHighest(ArrayList<Integer> array){
+    private Integer findHighestDie(ArrayList<Integer> rolls){
 
-        for (int i = 0; i < array.size(); i++){
+        int value = 0;
+        int index = 0;
 
+        for (int i = 0; i < rolls.size(); i++){
+            if (i > value){
+                value = rolls.get(i);
+                index = i;
+            }
         }
-
-        return array;
+        rolls.remove(index);
+        return value;
     }
 }

@@ -6,7 +6,7 @@ public class Dice {
 
 
     //Roll one dice and return a number between 1-6
-    public int rollADice(){
+    public int rollADie(){
         int value = (int)(Math.random() * NUMBER_RANGE) + 1;
         System.out.println(value);
         return value;
@@ -14,11 +14,11 @@ public class Dice {
     }
 
     //Roll N dices and return an ArrayList with the results
-    public ArrayList<Integer> rollNDIces(int n){
+    public ArrayList<Integer> rollNDIce(int n){
         ArrayList<Integer> results = new ArrayList<>();
 
         for (int i = 0; i < n; i++){
-            results.add(rollADice());
+            results.add(rollADie());
         }
 
         System.out.println(results.toString());
