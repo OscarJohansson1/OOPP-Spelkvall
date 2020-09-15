@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 public class Chans extends Application {
 
 
+
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -18,9 +19,21 @@ public class Chans extends Application {
         stage.setTitle("Chans");
         stage.setScene(scene);
         stage.show();
+
+
     }
 
 
-    public static void main(String args[]) {launch(args);
+    public static void main(String args[]) {
+        Attack attack = new Attack();
+        Dice dice = new Dice();
+
+        //attack.findHighestDie(dice.rollNDIce(5));
+        attack.calculateAttack(5, 5);
+
+        launch(args);
+
+
+
     }
 }
