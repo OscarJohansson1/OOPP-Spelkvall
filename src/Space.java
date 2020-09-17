@@ -10,6 +10,7 @@ public class Space {
     @FXML
     private final Rectangle cube;
 
+
     public Space(int id, Player player, int units, String name, Rectangle cube){
         this.id = id;
         this.player = player;
@@ -50,5 +51,9 @@ public class Space {
 
     public String getName() {
         return name;
+    }
+    public Rectangle getCube()
+    {
+        return cube;
     }
 }
