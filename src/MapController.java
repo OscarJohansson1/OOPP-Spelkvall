@@ -108,7 +108,7 @@ public class MapController extends AnchorPane {
         skip.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
+                skipCheck = false;
             }
         });
 
