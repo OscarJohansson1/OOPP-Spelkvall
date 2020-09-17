@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 public class Round {
 
     Player currentPlayer;
-    Phase currentPhase;
+    Phase currentPhase = Phase.DEPLOY;
     MapController mapController;
     Space mySpace;
     Space oppSpace;
@@ -99,7 +99,7 @@ public class Round {
 
     }
 
-            /*
+    /*
         while(){        // Attackloop
 
         -if- Vill du fortsätta attackera? Om knappen är nedtryckt?
@@ -132,37 +132,7 @@ public class Round {
 
 
         }
-         */
-
-    //Chans skriver startRound(player); och så ska Round sköta resten.
-    //START FÖR ROUND HÄR
-
-    /*
-    Round kallas på när man ska manipulera spelflödet och dess faser.
-    I Chans finns gameloopen. Chans sätter igång en Round som i sin tur togglar igenom alla faser tills Round är slut.
-    Round får spelare från Chans när den skapar en Round.
-    Switcha spelare efter
-
-    I Chans:
-
-        /*
-
-    Första spelaren väljs randomly
-
-    //Gameloop
-
-        //Byt till nästa spelare
-        //Round startar, Round togglar genom alla faser
-            //Startar Deploy
-            //Startar Attack
-            //Startar Move
-        //Round är färdig.
-
-        //Är spelet avslutat? Win conditions met?
-
     */
-
-
 
     public Color getCurrentPlayerColor() {
         return currentPlayer.getColor();
