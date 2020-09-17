@@ -24,6 +24,7 @@ public class Movement {
             }
         } else {
             System.out.println("Both spaces do not belong to the current player, this message should never be shown.");
+
         }
     }
 }
