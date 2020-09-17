@@ -32,6 +32,13 @@ public class MapController extends AnchorPane {
     private
     Button skip;
 
+    @FXML
+    private
+    Text playerText;
+    @FXML
+    public
+    Text phaseText;
+
     private Space selectedSpace;
 
     private Space space1;
@@ -41,6 +48,10 @@ public class MapController extends AnchorPane {
 
     private Player player1 = new Player(10,1, Color.RED);
     private Player player2 = new Player(10, 2, Color.BLUE);
+
+    private boolean skipCheck = false;
+
+    private Round round;
 
     public MapController() {
 
@@ -103,6 +114,17 @@ public class MapController extends AnchorPane {
             }
         });
 
+        skip.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                skipCheck = false;
+            }
+        });
+
+        round = new Round(player1, this);
+        playerText.setText(round.currentPlayer.getId() + "");
+        round.startRound(round.currentPlayer);
+
     }
 
     public Space getSelectedSpace()
@@ -111,6 +133,8 @@ public class MapController extends AnchorPane {
     }
 
     public Button getSkipButton(){return skip; }
+
+    public boolean getSkipCheck(){return skipCheck; }
 
 
 
