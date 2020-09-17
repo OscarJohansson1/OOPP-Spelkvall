@@ -5,6 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
 
 <fx:root fx:id="rootpane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -34,5 +35,7 @@
             <Button layoutX="147.0" layoutY="161.0" mnemonicParsing="false" text="Skip" />
          </children>
       </AnchorPane>
+      <Text fx:id="phaseText" layoutX="20.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase" wrappingWidth="31.13671875" />
+      <Text fx:id="playerText" layoutX="20.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player" />
    </children>
 </fx:root>

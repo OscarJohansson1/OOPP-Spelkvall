@@ -30,7 +30,7 @@ public class Round {
 
     }
 
-    public Round(Player currentPlayer){
+    public Round(Player currentPlayer, MapController mapController){
 
         this.currentPlayer = currentPlayer;
         this.mapController = mapController;
@@ -41,15 +41,17 @@ public class Round {
     public void startRound(Player currentPlayer){
 
         //Deploymentfasen, kastar in i deployments loop
+        mapController.phaseText.setText(currentPhase.name());
         currentPhase = currentPhase.next;
         //Deployment.startDeploying();
-
+        mapController.phaseText.setText(currentPhase.name());
         //Attackfasen, kastar in i attackloopen
         currentPhase = currentPhase.next;
         startAttacking(currentPlayer);
-
+        mapController.phaseText.setText(currentPhase.name());
         //Movementfasen, kastar in i movementloopen, inväntar rörelseorder
         currentPhase = currentPhase.next;
+
         //Movement.startMoving();
 
     }
