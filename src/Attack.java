@@ -3,26 +3,24 @@ import java.util.ArrayList;
 public class Attack {
 
     Dice dice = new Dice();
-    private boolean attack = false;
 
     //This method checks if the attack is possible and declares which space is to be attacked
-    void DeclareAttack(Space mySpace, Space opponentSpace, int myUnits) {
+    boolean DeclareAttack(Space mySpace, Space opponentSpace, int myUnits) {
 
         if (nextTo(mySpace, opponentSpace) && isAttackPossible(myUnits)) {
-            attack = true;
-            System.out.println("Valid attack");
+
+            return nextTo(mySpace, opponentSpace) && isAttackPossible(myUnits);
         }
+        return false;
     }
 
 
     //This method calculates the attack with the help of dices according to the official rules of Risk.
     //This also declares the winner of the attack
-    void calculateAttack(int myUnits, int opponentUnits, Space mySpace, Space enemySpace) {
+    void calculateAttack(Space mySpace, Space enemySpace) {
 
-        int myDice = (myUnits - 1);
-        int opponentDice = opponentUnits;
-
-        if (attack) {
+        int myDice = (mySpace.getUnits() - 1);
+        int opponentDice = enemySpace.getUnits();
 
             ArrayList<Integer> myResults = dice.rollNDIce(myDice);
             ArrayList<Integer> opponentResults = dice.rollNDIce(opponentDice);
@@ -50,7 +48,7 @@ public class Attack {
                     System.out.println("Attacker loses one unit");
                 }
             }
-        }
+
     }
 
     //This checks if one space on the board is next to another
