@@ -1,11 +1,13 @@
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class Round {
 
-    //TODO:  Create rounds and phases
-
     Player currentPlayer;
     Phase currentPhase;
+    MapController mapController;
+
 
     public enum Phase {
 
@@ -28,6 +30,7 @@ public class Round {
     public Round(Player currentPlayer){
 
         this.currentPlayer = currentPlayer;
+        this.mapController = mapController;
     }
 
     //Ge en random spelare första turen
@@ -40,7 +43,7 @@ public class Round {
 
         //Attackfasen, kastar in i attackloopen
         currentPhase = currentPhase.next;
-        //Attack.startAttacking();
+        startAttacking(currentPlayer);
 
         //Movementfasen, kastar in i movementloopen, inväntar rörelseorder
         currentPhase = currentPhase.next;
@@ -48,12 +51,66 @@ public class Round {
 
     }
 
+    public void startAttacking(Player currentPlayer){
+
+        while(!mapController.getSkipCheck()){
+
+
+
+            while(!mapController.getSkipCheck()){
+
+
+
+            }
+
+            while(!mapController.getSkipCheck()){
+
+
+
+            }
+
+        }
+
+        /*
+        while(){        // Attackloop
+
+        -if- Vill du fortsätta attackera? Om knappen är nedtryckt?
+
+            while(true){
+            -choose- din space att attackera ifrån
+            currentPlayer == Space.getPlayer;
+
+            mySpace?
+
+            }
+
+            while(true){
+            -choose- deras space att attackera
+            currentPlayer == Space.getPlayer;
+
+            theirSpace
+            }
+
+            -control- att attacken är giltig
+            declareAttack
+
+            -execute-
+            calculateAttack
+
+        -present-
+        Nu kommer vi köra i terminalen. Sen kommer det utvecklas.
+
+    }
+
+
+        }
+         */
+
+    }
+
     //Chans skriver startRound(player); och så ska Round sköta resten.
     //START FÖR ROUND HÄR
 
-
-
-    //TODO: Se till att användaren börjar med DEPLOY och slutar med END efter att den har gått igenom alla stages.
     /*
     Round kallas på när man ska manipulera spelflödet och dess faser.
     I Chans finns gameloopen. Chans sätter igång en Round som i sin tur togglar igenom alla faser tills Round är slut.
@@ -79,12 +136,18 @@ public class Round {
 
     */
 
+
+
     public Color getCurrentPlayerColor() {
         return currentPlayer.getColor();
     }
 
     public Player getCurrentPlayer(){
         return currentPlayer;
+    }
+
+    public Phase getCurrentPhase(){
+        return currentPhase;
     }
 
 

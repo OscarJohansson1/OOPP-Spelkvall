@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Attack {
 
-    Dice dice = new Dice();
+
     //Space space = new Space();
     private boolean attack = false;
 
