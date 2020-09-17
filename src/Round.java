@@ -7,6 +7,9 @@ public class Round {
     Player currentPlayer;
     Phase currentPhase;
     MapController mapController;
+    Space mySpace;
+    Space oppSpace;
+    Attack attack = new Attack();
 
 
     public enum Phase {
@@ -57,21 +60,44 @@ public class Round {
 
 
 
-            while(!mapController.getSkipCheck()){
+            while(!mapController.getSkipCheck() && mySpace == null){
 
+                if(!(currentPlayer == mapController.getSelectedSpace().getPlayer())){
+                    //Signalera fel
+                    mySpace = mapController.getSelectedSpace();
+                    break;
+                }
 
+            }
+
+            while(!mapController.getSkipCheck() && oppSpace == null){
+
+                if(currentPlayer == mapController.getSelectedSpace().getPlayer()){
+                    //Signalera fel
+                    oppSpace = mapController.getSelectedSpace();
+                    break;
+                }
 
             }
 
-            while(!mapController.getSkipCheck()){
+            if(attack.DeclareAttack(mySpace, oppSpace, mySpace.getUnits())) {
 
+                attack.calculateAttack(mySpace, oppSpace);
 
+                mySpace = null;
+                oppSpace = null;
+
+            }else{
+                oppSpace = null;
 
             }
+
 
         }
 
-        /*
+    }
+
+            /*
         while(){        // Attackloop
 
         -if- Vill du fortsätta attackera? Om knappen är nedtryckt?
@@ -105,8 +131,6 @@ public class Round {
 
         }
          */
-
-    }
 
     //Chans skriver startRound(player); och så ska Round sköta resten.
     //START FÖR ROUND HÄR
