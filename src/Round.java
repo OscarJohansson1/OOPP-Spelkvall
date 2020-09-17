@@ -83,6 +83,10 @@ public class Round {
         return currentPlayer.getColor();
     }
 
+    public Player getCurrentPlayer(){
+        return currentPlayer;
+    }
+
 
 
 }
