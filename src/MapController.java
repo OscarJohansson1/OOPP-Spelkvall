@@ -42,6 +42,8 @@ public class MapController extends AnchorPane {
     private Player player1 = new Player(10,1, Color.RED);
     private Player player2 = new Player(10, 2, Color.BLUE);
 
+    private boolean skipCheck = false;
+
     public MapController() {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
@@ -103,6 +105,13 @@ public class MapController extends AnchorPane {
             }
         });
 
+        skip.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+            }
+        });
+
     }
 
     public Space getSelectedSpace()
@@ -111,6 +120,8 @@ public class MapController extends AnchorPane {
     }
 
     public Button getSkipButton(){return skip; }
+
+    public boolean getSkipCheck(){return skipCheck; }
 
 
 
