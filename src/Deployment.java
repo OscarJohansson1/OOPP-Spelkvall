@@ -1,21 +1,23 @@
 public class Deployment {
 
     private int unitsToDeploy;
-    private Player player;
-    private MapController mc = new MapController();
+    //private MapController mc = new MapController();
 
-    public Deployment(Player player, int unitsToDeploy) {
-        this.unitsToDeploy = unitsToDeploy;
-        this.player = player;
+    public Deployment() {
+
     }
 
-    public void startDeployment(Player player, int unitsToDeploy) {
-            this.unitsToDeploy = unitsToDeploy;
-            this.player = player;
+    public void startDeployment(Space space, Player currentplayer) {
+        this.unitsToDeploy = currentplayer.getUnits();
             while(!allUnitsDeployed()) {
-                while (mc.getSelectedSpace().getPlayer().getId() != player.getId());
-                deployUnit(mc.getSelectedSpace());
+                if(space.getPlayer() == currentplayer)
+                deployUnit(space);
+                else{
+                    System.out.println("Inte nuvarande spelare");
+                    return;
+                }
             }
+            currentplayer.setUnits(0);
     }
 
     private void deployUnit(Space space){
@@ -23,6 +25,7 @@ public class Deployment {
             unitsToDeploy--;
             space.updateSpace(space.getUnits() + 1);
         }
+
     }
 
     private boolean allUnitsDeployed() {

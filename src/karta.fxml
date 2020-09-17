@@ -18,24 +18,30 @@
       <Rectangle fx:id="cube4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="163.0" layoutY="279.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
       <Rectangle fx:id="cube3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="331.0" layoutY="213.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
       <Rectangle fx:id="cube2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="402.0" layoutY="135.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <Button layoutX="84.0" layoutY="161.0" mnemonicParsing="false" text="Deploy" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="attackPhase" prefHeight="200.0" prefWidth="200.0">
          <children>
             <Button fx:id="skip" layoutX="147.0" layoutY="161.0" mnemonicParsing="false" text="Skip" />
-            <Button layoutX="85.0" layoutY="161.0" mnemonicParsing="false" text="Attack" />
+            <Button fx:id="attackButton" layoutX="85.0" layoutY="161.0" mnemonicParsing="false" text="Attack" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="movePhase" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button layoutX="86.0" layoutY="161.0" mnemonicParsing="false" text="Move" />
-            <Button layoutX="147.0" layoutY="161.0" mnemonicParsing="false" text="Skip" />
+            <Button fx:id="moveButton" layoutX="86.0" layoutY="161.0" mnemonicParsing="false" text="Move" />
+            <Button fx:id="done" layoutX="147.0" layoutY="161.0" mnemonicParsing="false" text="Done" />
          </children>
       </AnchorPane>
       <Text fx:id="phaseText" layoutX="20.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase" wrappingWidth="31.13671875" />
       <Text fx:id="playerText" layoutX="20.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player" />
+      <Text fx:id="text1" layoutX="436.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fx:id="text4" layoutX="167.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fx:id="text2" layoutX="406.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fx:id="text3" layoutX="335.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <AnchorPane fx:id="deployPhase" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="deployButton" layoutX="84.0" layoutY="161.0" mnemonicParsing="false" text="Deploy" />
+            <Button fx:id="donedeploy" layoutX="147.0" layoutY="161.0" mnemonicParsing="false" text="Done" />
+         </children>
+      </AnchorPane>
+      <Text fx:id="vald" layoutX="406.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vald" />
    </children>
 </fx:root>

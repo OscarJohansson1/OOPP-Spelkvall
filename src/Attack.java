@@ -17,8 +17,9 @@ public class Attack {
 
     //This method calculates the attack with the help of dices according to the official rules of Risk.
     //This also declares the winner of the attack
-    void calculateAttack(Space mySpace, Space enemySpace) {
+    int calculateAttack(Space mySpace, Space enemySpace) {
 
+        System.out.println(mySpace.getUnits() + " " + enemySpace.getUnits());
         int myDice = (mySpace.getUnits() - 1);
         int opponentDice = enemySpace.getUnits();
 
@@ -35,10 +36,12 @@ public class Attack {
 
                     if (enemySpace.getUnits() < 1){
                         System.out.println(enemySpace.getPlayer());
-                        enemySpace.updateSpace(mySpace.getPlayer(), mySpace.getUnits() -1);
+                        enemySpace.updateSpace(mySpace.getPlayer(), mySpace.getUnits() - 1);
+                        mySpace.updateSpace(1);
                         System.out.println("Units in area are all dead");
                         System.out.println(mySpace.getPlayer());
                         System.out.println(enemySpace.getPlayer());
+                        return 1;
                     }
 
                 } else {
@@ -48,6 +51,7 @@ public class Attack {
                     System.out.println("Attacker loses one unit");
                 }
             }
+            return 0;
 
     }
 

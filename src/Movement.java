@@ -18,10 +18,15 @@ public class Movement {
 
             //TODO insert way for player to determine desired unit spread via the UI
 
+            System.out.println(space1.getUnits());
+            System.out.println(space2.getUnits());
             if (units1 > 0 && units2 > 0 && units1 + units2 == totalUnits) {
-                space1.updateSpace(this.currentRound.getCurrentPlayer(), units1);
-                space2.updateSpace(this.currentRound.getCurrentPlayer(), units2);
+                space1.updateSpace(this.currentRound.getCurrentPlayer(), units2);
+                space2.updateSpace(this.currentRound.getCurrentPlayer(), units1);
             }
+            System.out.println(space1.getUnits());
+            System.out.println(space2.getUnits());
+
         } else {
             System.out.println("Both spaces do not belong to the current player, this message should never be shown.");
 

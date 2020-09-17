@@ -17,11 +17,11 @@ public class Chans extends Application {
 
         MapController mapController = new MapController();
         Parent root = mapController;
-
+        /*
         StartController startController = new StartController();
-        Parent start = startController;
+        Parent start = startController;*/
 
-        Scene menu = new Scene(start, 1600, 900);
+        Scene menu = new Scene(root, 1600, 900);
 
         stage.setTitle("Menu");
         stage.setScene(menu);
@@ -39,9 +39,7 @@ public class Chans extends Application {
 
 
     public static void main(String args[]) {
-        Attack attack = new Attack();
-        Dice dice = new Dice();
-        javafx.scene.shape.Rectangle rect = new Rectangle();
+
         //Player player1 = new Player(20, 2, color.BLACK);
         //Player player2 = new Player(20, 2, color.RED);
         //Space mySpace = new Space(1, player1, 5, "Hubba", rect);
