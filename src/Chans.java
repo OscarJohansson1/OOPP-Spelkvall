@@ -19,21 +19,21 @@ public class Chans extends Application {
         Parent root = mapController;
         /*
         StartController startController = new StartController();
-        Parent start = startController;*/
+        Parent start = startController;
 
         Scene menu = new Scene(root, 1600, 900);
 
         stage.setTitle("Menu");
         stage.setScene(menu);
         stage.show();
+        */
 
-        /*
         Scene scene = new Scene(root, 1600, 900);
 
         stage.setTitle("Chans");
         stage.setScene(scene);
         stage.show();
-*/
+
 
     }
 

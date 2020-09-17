@@ -32,7 +32,7 @@
       </AnchorPane>
       <Text fx:id="phaseText" layoutX="20.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase" wrappingWidth="31.13671875" />
       <Text fx:id="playerText" layoutX="20.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player" />
-      <Text fx:id="text1" layoutX="436.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fx:id="text1" layoutX="443.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text fx:id="text4" layoutX="167.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text fx:id="text2" layoutX="406.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text fx:id="text3" layoutX="335.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />

@@ -31,7 +31,16 @@ public class StartController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        //initialize();
+        initialize();
 
+    }
+
+    private void initialize() {
+        startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                // do nothing
+            }
+        });
     }
 }

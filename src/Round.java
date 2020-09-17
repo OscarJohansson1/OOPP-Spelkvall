@@ -55,6 +55,7 @@ public class Round {
             else {
                 currentPlayer = mapController.player1;
             }
+            mapController.rootpane.getChildren().get(mapController.getChildren().indexOf(mapController.deployPhase)).toFront();
             mapController.phaseText.setText(currentPhase.name());
             return;
 
@@ -100,13 +101,16 @@ public class Round {
                 break;
         }
     }
+
     public void startDeployment()
     {
+        System.out.println(currentPlayer.getUnits() + "");
+        System.out.println(mapController.getSelectedSpace());
         if(mapController.getSelectedSpace() != null && currentPlayer.getUnits() > 0) {
-
+            System.out.println("1");
             mySpace = mapController.getSelectedSpace();
             if (mySpace != null ) {
-
+                System.out.println("2");
                 deployment.startDeployment(mySpace, currentPlayer);
                 mapController.updateText();
                 mySpace = null;
@@ -157,7 +161,8 @@ public class Round {
                 mySpace = mapController.getSelectedSpace();
                 return;
             }
-            else if ((currentPlayer == mapController.getSelectedSpace().getPlayer()) && oppSpace == null) {
+            else if ((currentPlayer == mapController.getSelectedSpace().getPlayer()) && oppSpace == null &&
+            mapController.getSelectedSpace() != mySpace) {
                 //Signalera fel
                 oppSpace = mapController.getSelectedSpace();
 

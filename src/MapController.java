@@ -104,7 +104,7 @@ public class MapController extends AnchorPane {
     }
     public void initialize()
     {
-        space1 = new Space(1, player1, 10, "1",cube1);
+        space1 = new Space(1, player1, 3, "1",cube1);
         cube1.setFill(player1.getColor());
         space2 = new Space(2, player1, 5, "2",cube2);
         cube2.setFill(player1.getColor());
@@ -129,7 +129,27 @@ public class MapController extends AnchorPane {
                 selectedSpace = space1;
             }
         });
+        text1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+
+                selectedSpace = space1;
+
+
+            }
+        });
         cube2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+
+                selectedSpace = space2;
+
+
+            }
+        });
+        text2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
@@ -149,9 +169,29 @@ public class MapController extends AnchorPane {
 
             }
         });
+        text3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+
+                selectedSpace = space3;
+
+
+            }
+        });
         cube4.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+
+                selectedSpace = space4;
+
+
+            }
+        });
+        text4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
 
                 selectedSpace = space4;
 
@@ -162,7 +202,8 @@ public class MapController extends AnchorPane {
         skip.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                    round.nextPhase();
+                round.nextPhase();
+
             }
         });
         done.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -203,6 +244,7 @@ public class MapController extends AnchorPane {
 
     public Space getSelectedSpace()
     {
+        System.out.println(selectedSpace + " selected");
         return  selectedSpace;
     }
 

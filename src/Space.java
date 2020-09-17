@@ -22,7 +22,6 @@ public class Space {
     public void updateSpace(Player player, int units) {
         setPlayer(player);
         setUnits(units);
-        // Change color and units
     }
 
     public void updateSpace(int units) {
