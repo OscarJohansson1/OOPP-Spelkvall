@@ -32,15 +32,15 @@ public class Attack {
 
                     //Kill one unit in opponent space
                     enemySpace.updateSpace(enemySpace.getUnits() -1);
-                    System.out.println("Defender loses one unit");
+                    //System.out.println("Defender loses one unit");
 
                     if (enemySpace.getUnits() < 1){
-                        System.out.println(enemySpace.getPlayer());
+                        //System.out.println(enemySpace.getPlayer());
                         enemySpace.updateSpace(mySpace.getPlayer(), mySpace.getUnits() - 1);
                         mySpace.updateSpace(1);
-                        System.out.println("Units in area are all dead");
-                        System.out.println(mySpace.getPlayer());
-                        System.out.println(enemySpace.getPlayer());
+                        //System.out.println("Units in area are all dead");
+                        //System.out.println(mySpace.getPlayer());
+                        //System.out.println(enemySpace.getPlayer());
                         return 1;
                     }
 
@@ -48,7 +48,7 @@ public class Attack {
 
                     //Kill one unit in current player space
                     mySpace.updateSpace(mySpace.getUnits() -1);
-                    System.out.println("Attacker loses one unit");
+                    //System.out.println("Attacker loses one unit");
                 }
             }
             return 0;
