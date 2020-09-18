@@ -44,7 +44,7 @@ public class Round {
     public void nextPhase(){
 
         //Byter till nästa fas
-
+        mapController.resetSelectedSpace();
         if(currentPhase == Phase.MOVE)
         {
             currentPhase = Phase.DEPLOY;
@@ -119,12 +119,16 @@ public class Round {
         }
         if(currentPlayer.getUnits() == 0){
             nextPhase();
+            mapController.resetSelectedSpace();
         }
 
     }
     public void startAttacking(){
         if(mapController.getSelectedSpace() != null)
         {
+            mapController.getSelectedSpace();
+            mapController.getSelectedSpace2();
+
             if((currentPlayer == mapController.getSelectedSpace().getPlayer()) && mySpace == null){
                 //Signalera fel
                 mySpace = mapController.getSelectedSpace();
@@ -143,7 +147,6 @@ public class Round {
                 }
                 mapController.updateColor();
                 mapController.updateText();
-
                 mySpace = null;
                 oppSpace = null;
                 return;
