@@ -31,7 +31,7 @@ public class Attack {
                 if (findHighestDie(myResults) > findHighestDie(opponentResults)) {
 
                     //Kill one unit in opponent space
-                    enemySpace.updateSpace(-1);
+                    enemySpace.updateSpace(enemySpace.getUnits() -1);
                     System.out.println("Defender loses one unit");
 
                     if (enemySpace.getUnits() < 1){
@@ -47,7 +47,7 @@ public class Attack {
                 } else {
 
                     //Kill one unit in current player space
-                    mySpace.updateSpace(-1);
+                    mySpace.updateSpace(mySpace.getUnits() -1);
                     System.out.println("Attacker loses one unit");
                 }
             }
