@@ -108,7 +108,7 @@ public class MapController extends AnchorPane {
         cube1.setFill(player1.getColor());
         space2 = new Space(2, player1, 5, "2",cube2);
         cube2.setFill(player1.getColor());
-        space3 = new Space(3, player2, 1, "3",cube3);
+        space3 = new Space(3, player2, 6, "3",cube3);
         cube3.setFill(player2.getColor());
         space4 = new Space(4, player2, 1, "4",cube4);
         cube4.setFill(player2.getColor());

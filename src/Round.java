@@ -141,6 +141,8 @@ public class Round {
                     mapController.updateColor();
                     mapController.updateText();
                 }
+                mapController.updateColor();
+                mapController.updateText();
 
                 mySpace = null;
                 oppSpace = null;

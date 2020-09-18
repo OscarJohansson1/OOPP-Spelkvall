@@ -9,19 +9,19 @@ public class Deployment {
 
     public void startDeployment(Space space, Player currentplayer) {
         this.unitsToDeploy = currentplayer.getUnits();
-        /*
-        while(!allUnitsDeployed()) {
-            if(space.getPlayer() == currentplayer)
-            deployUnit(space);
-            else{
-                System.out.println("Inte nuvarande spelare");
-                return;
-            }
-        }
-        currentplayer.setUnits(0);
-         */
+
+        //while(!allUnitsDeployed()) {
+        if(space.getPlayer() == currentplayer)
         deployUnit(space);
-        currentplayer.setUnits(0);
+        else{
+            System.out.println("Inte nuvarande spelare");
+            return;
+        }
+
+        //currentplayer.setUnits(0);
+
+        //deployUnit(space);
+        //currentplayer.setUnits(0);
 
     }
 
