@@ -107,11 +107,11 @@ public class Round {
         System.out.println(currentPlayer.getUnits() + "");
         System.out.println(mapController.getSelectedSpace());
         if(mapController.getSelectedSpace() != null && currentPlayer.getUnits() > 0) {
-            System.out.println("1");
             mySpace = mapController.getSelectedSpace();
             if (mySpace != null ) {
-                System.out.println("2");
-                deployment.startDeployment(mySpace, currentPlayer);
+                if(!deployment.startDeployment(mySpace, currentPlayer)){
+                    mapController.resetSelectedSpace();
+                }
                 mapController.updateText();
                 mySpace = null;
                 oppSpace = null;
@@ -126,20 +126,19 @@ public class Round {
     public void startAttacking(){
         if(mapController.getSelectedSpace() != null)
         {
-            mapController.getSelectedSpace();
-            mapController.getSelectedSpace2();
+            if(mapController.getSelectedSpace() != null && mapController.getSelectedSpace2() != null)
+            {
+                if((currentPlayer == mapController.getSelectedSpace().getPlayer()) && mySpace == null){
+                    //Signalera fel
+                    mySpace = mapController.getSelectedSpace();
 
-            if((currentPlayer == mapController.getSelectedSpace().getPlayer()) && mySpace == null){
-                //Signalera fel
-                mySpace = mapController.getSelectedSpace();
-                return;
-            }
-            else if (!(currentPlayer == mapController.getSelectedSpace().getPlayer()) && oppSpace == null) {
-                //Signalera fel
-                oppSpace = mapController.getSelectedSpace();
+                }
+                if (!(currentPlayer == mapController.getSelectedSpace2().getPlayer()) && oppSpace == null) {
+                    //Signalera fel
+                    oppSpace = mapController.getSelectedSpace2();
 
-            }
-            if(attack.DeclareAttack(mySpace, oppSpace, mySpace.getUnits()) && mySpace != null && oppSpace != null && mySpace != oppSpace) {
+                }
+                if(mySpace != null && oppSpace != null && mySpace != oppSpace && attack.DeclareAttack(mySpace, oppSpace, mySpace.getUnits()) ) {
 
                 if(1 == attack.calculateAttack(mySpace, oppSpace)){
                     mapController.updateColor();
@@ -147,13 +146,19 @@ public class Round {
                 }
                 mapController.updateColor();
                 mapController.updateText();
+                mapController.resetSelectedSpace();
                 mySpace = null;
                 oppSpace = null;
-                return;
-            }else{
-                oppSpace = null;
-                return;
+
             }
+            else {
+                    oppSpace = null;
+                    mySpace = null;
+                    mapController.resetSelectedSpace();
+
+                }
+            }
+
 
         }
     }
@@ -164,18 +169,19 @@ public class Round {
             if((currentPlayer == mapController.getSelectedSpace().getPlayer()) && mySpace == null){
                 //Signalera fel
                 mySpace = mapController.getSelectedSpace();
-                return;
+
             }
-            else if ((currentPlayer == mapController.getSelectedSpace().getPlayer()) && oppSpace == null &&
-            mapController.getSelectedSpace() != mySpace) {
+            if ((currentPlayer == mapController.getSelectedSpace2().getPlayer()) && oppSpace == null &&
+            mapController.getSelectedSpace2() != mySpace) {
                 //Signalera fel
-                oppSpace = mapController.getSelectedSpace();
+                oppSpace = mapController.getSelectedSpace2();
 
             }
             if(mySpace != null && oppSpace != null)
             {
                 movement.MoveUnits(mySpace,oppSpace);
                 mapController.updateText();
+                mapController.resetSelectedSpace();
                 mySpace = null;
                 oppSpace = null;
             }

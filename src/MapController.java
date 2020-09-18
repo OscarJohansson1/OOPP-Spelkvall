@@ -130,7 +130,7 @@ public class MapController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
 
                 selectSpace(space1);
-                resetColor(cube1);
+                resetColor(cube1,selectedSpace);
 
             }
         });
@@ -140,7 +140,7 @@ public class MapController extends AnchorPane {
 
 
                 selectSpace(space1);
-                resetColor(cube1);
+                resetColor(cube1,selectedSpace);
 
             }
         });
@@ -150,7 +150,7 @@ public class MapController extends AnchorPane {
 
 
                 selectSpace(space2);
-                resetColor(cube2);
+                resetColor(cube2,selectedSpace);
 
             }
         });
@@ -160,7 +160,7 @@ public class MapController extends AnchorPane {
 
 
                 selectSpace(space2);
-                resetColor(cube2);
+                resetColor(cube2,selectedSpace);
 
             }
         });
@@ -170,7 +170,7 @@ public class MapController extends AnchorPane {
 
 
                 selectSpace(space3);
-                resetColor(cube3);
+                resetColor(cube3,selectedSpace);
 
             }
         });
@@ -180,7 +180,7 @@ public class MapController extends AnchorPane {
 
 
                 selectSpace(space3);
-                resetColor(cube3);
+                resetColor(cube3,selectedSpace);
 
             }
         });
@@ -189,7 +189,7 @@ public class MapController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
 
                 selectSpace(space4);
-                resetColor(cube4);
+                resetColor(cube4,selectedSpace);
 
             }
         });
@@ -199,7 +199,7 @@ public class MapController extends AnchorPane {
 
 
                 selectSpace(space4);
-                resetColor(cube4);
+                resetColor(cube4,selectedSpace);
 
 
             }
@@ -264,24 +264,20 @@ public class MapController extends AnchorPane {
         {
             getSelectedSpace2();
         }
-
-
-
     }
     public Space getSelectedSpace()
     {
-        System.out.println(selectedSpace.getName() + " selected");
         return  selectedSpace;
     }
     public Space getSelectedSpace2()
     {
-        System.out.println(selectedSpace2.getName() + " selected");
         return  selectedSpace2;
     }
     public void resetSelectedSpace()
     {
         selectedSpace = null;
-        resetColor(null);
+        selectedSpace2 = null;
+        resetColor(null, null);
     }
 
     public Button getSkipButton(){return skip; }
@@ -324,28 +320,28 @@ public class MapController extends AnchorPane {
         text3.setFill(Color.WHITE);
         text4.setFill(Color.WHITE);
 
-        playerText.setText(round.currentPlayer.getId() + "");
+        playerText.setText("Currentplayer: " + round.currentPlayer.getId() + "");
         phaseText.setText(round.currentPhase.name());
     }
-    public void resetColor(Rectangle cube)
+    public void resetColor(Rectangle cube, Space selectedSpace)
     {
         cube1.setFill(findColor(space1.getPlayer()));
         cube2.setFill(findColor(space2.getPlayer()));
         cube3.setFill(findColor(space3.getPlayer()));
         cube4.setFill(findColor(space4.getPlayer()));
-        if(cube == cube1)
+        if(cube == cube1 || selectedSpace == space1)
         {
             cube1.setFill(findHighLightColor(space1.getPlayer()));
         }
-        else if(cube == cube2)
+        if(cube == cube2 || selectedSpace == space2)
         {
             cube2.setFill(findHighLightColor(space2.getPlayer()));
         }
-        else if(cube == cube3)
+        if(cube == cube3 ||  selectedSpace == space3)
         {
             cube3.setFill(findHighLightColor(space3.getPlayer()));
         }
-        else if(cube == cube4)
+        if(cube == cube4 || selectedSpace == space4)
         {
             cube4.setFill(findHighLightColor(space4.getPlayer()));
         }

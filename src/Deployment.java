@@ -7,15 +7,17 @@ public class Deployment {
 
     }
 
-    public void startDeployment(Space space, Player currentplayer) {
+    public boolean startDeployment(Space space, Player currentplayer) {
         this.unitsToDeploy = currentplayer.getUnits();
 
         //while(!allUnitsDeployed()) {
-        if(space.getPlayer() == currentplayer)
-        deployUnit(space);
+        if(space.getPlayer() == currentplayer) {
+            deployUnit(space);
+            return true;
+        }
         else{
             System.out.println("Inte nuvarande spelare");
-            return;
+            return false;
         }
 
         //currentplayer.setUnits(0);
