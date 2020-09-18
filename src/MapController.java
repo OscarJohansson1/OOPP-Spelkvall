@@ -28,6 +28,10 @@ public class MapController extends AnchorPane {
     @FXML
     AnchorPane rootpane;
     @FXML
+    AnchorPane startMenu;
+    @FXML
+    Button startButton;
+    @FXML
     private
     Button skip;
     @FXML
@@ -118,6 +122,7 @@ public class MapController extends AnchorPane {
         text.setX(cube1.getX() + (cube1.getWidth() / 2));
         text.setY(cube1.getY() + (cube1.getHeight() / 2));
         rootpane.getChildren().add(text);
+
 
 
         cube1.setOnMouseClicked(new EventHandler<MouseEvent>() {

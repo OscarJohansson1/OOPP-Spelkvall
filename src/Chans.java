@@ -15,24 +15,19 @@ public class Chans extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        MapController mapController = new MapController();
-        Parent root = mapController;
-        /*
-        StartController startController = new StartController();
+
+
+        StartController startController = new StartController(stage);
         Parent start = startController;
 
-        Scene menu = new Scene(root, 1600, 900);
+        Scene menu = new Scene(start, 1600, 900);
 
         stage.setTitle("Menu");
         stage.setScene(menu);
         stage.show();
-        */
 
-        Scene scene = new Scene(root, 1600, 900);
 
-        stage.setTitle("Chans");
-        stage.setScene(scene);
-        stage.show();
+
 
 
     }
