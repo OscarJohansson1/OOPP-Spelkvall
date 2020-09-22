@@ -1,3 +1,5 @@
+package Program.Model;
+
 import javafx.fxml.FXML;
 import javafx.scene.shape.Rectangle;
 
@@ -7,16 +9,16 @@ public class Space {
     private Player player;
     private int units;
     private final String name;
-    @FXML
-    private final Rectangle cube;
 
 
-    public Space(int id, Player player, int units, String name, Rectangle cube){
+
+
+    public Space(int id, Player player, int units, String name){
         this.id = id;
         this.player = player;
         this.units = units;
         this.name = name;
-        this.cube = cube;
+
     }
 
     public void updateSpace(Player player, int units) {
@@ -51,8 +53,5 @@ public class Space {
     public String getName() {
         return name;
     }
-    public Rectangle getCube()
-    {
-        return cube;
-    }
+
 }

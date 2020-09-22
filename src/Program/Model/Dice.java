@@ -1,6 +1,8 @@
+package Program.Model;
+
 import java.util.ArrayList;
 
-public class Dice {
+class Dice {
 
     private final int NUMBER_RANGE = 6;
 

@@ -1,18 +1,20 @@
-public class Deployment {
+package Program.Model;
 
-    private int unitsToDeploy;
-    //private MapController mc = new MapController();
+class Deployment {
+
+
+    //private Program.View.View.Controller.MapController mc = new Program.View.View.Controller.MapController();
 
     public Deployment() {
 
     }
 
-    public boolean startDeployment(Space space, Player currentplayer) {
-        this.unitsToDeploy = currentplayer.getUnits();
+    public static boolean startDeployment(Space space, Player currentplayer) {
+        int unitsToDeploy = currentplayer.getUnits();
 
         //while(!allUnitsDeployed()) {
         if(space.getPlayer() == currentplayer) {
-            deployUnit(space);
+            deployUnit(space,unitsToDeploy);
             return true;
         }
         else{
@@ -28,7 +30,7 @@ public class Deployment {
 
     }
 
-    private void deployUnit(Space space){
+    private static void deployUnit(Space space, int unitsToDeploy){
         if(unitsToDeploy > 0) {
             unitsToDeploy--;
             space.updateSpace(space.getUnits() + 1);
@@ -36,7 +38,7 @@ public class Deployment {
 
     }
 
-    private boolean allUnitsDeployed() {
+    private boolean allUnitsDeployed(int unitsToDeploy) {
         return unitsToDeploy == 0;
     }
 }

@@ -1,3 +1,5 @@
+package Program.Controller;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,14 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class StartController extends AnchorPane {
 
@@ -55,6 +52,7 @@ public class StartController extends AnchorPane {
                 stage.setTitle("Chans");
                 stage.setScene(scene);
                 stage.show();
+                mapController.modelDataHandler.startGame();
             }
         });
     }

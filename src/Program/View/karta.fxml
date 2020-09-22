@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root fx:id="rootpane" prefHeight="900.0" prefWidth="1364.0" style="-fx-background-color: white;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="yes" fitHeight="900.0" fitWidth="1364.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../picures/Riskbakgrund.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="cube1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="39.0" layoutX="877.0" layoutY="532.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Text fx:id="text1" layoutX="892.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hubba" wrappingWidth="83.16168203928046">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cube4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="349.0" layoutY="674.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Rectangle fx:id="cube3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="811.0" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Rectangle fx:id="cube2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="705.0" layoutY="580.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <AnchorPane fx:id="attackPhase" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="skipAttack" layoutX="160.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Skip" />
+            <Button fx:id="attackButton" layoutX="40.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Attack" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="movePhase" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="moveButton" layoutX="40.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Move" />
+            <Button fx:id="doneMove" layoutX="160.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Done" />
+         </children>
+      </AnchorPane>
+      <Text fx:id="phaseText" layoutX="20.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase" wrappingWidth="421.80339431762695">
+         <font>
+            <Font size="24.0" />
+         </font></Text>
+      <Text fx:id="playerText" layoutX="20.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player" wrappingWidth="587.9726791381836">
+         <font>
+            <Font size="24.0" />
+         </font></Text>
+      <Text fx:id="text4" layoutX="360.0" layoutY="705.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lindhölma">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="text2" layoutX="718.0" layoutY="610.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A-damen">
+         <font>
+            <Font size="24.0" />
+         </font></Text>
+      <Text fx:id="text3" layoutX="821.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GT Spritis">
+         <font>
+            <Font size="24.0" />
+         </font></Text>
+      <AnchorPane fx:id="deployPhase" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="deployButton" layoutX="40.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Deploy" />
+            <Button fx:id="donedeploy" layoutX="160.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Done" />
+         </children>
+      </AnchorPane>
+   </children>
+</fx:root>

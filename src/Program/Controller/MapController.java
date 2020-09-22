@@ -1,31 +1,34 @@
+package Program.Controller;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-import java.awt.*;
+import Program.Model.ModelDataHandler;
+import Program.View.View;
+
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MapController extends AnchorPane {
     @FXML
-    private
+    public
     Rectangle cube1;
     @FXML
-    private
+    public
     Rectangle cube2;
     @FXML
-    private
+    public
     Rectangle cube3;
     @FXML
-    private
+    public
     Rectangle cube4;
     @FXML
+    public
     AnchorPane rootpane;
     @FXML
     AnchorPane startMenu;
@@ -33,45 +36,47 @@ public class MapController extends AnchorPane {
     Button startButton;
     @FXML
     private
-    Button skip;
+    Button skipAttack;
     @FXML
-    Button done;
+    Button doneMove;
     @FXML
     Button donedeploy;
 
     @FXML
-    private
+    public
     Text playerText;
     @FXML
+    public
     Text phaseText;
 
     @FXML
-
+    public
     AnchorPane deployPhase;
     @FXML
-
+    public
     AnchorPane attackPhase;
     @FXML
-
+    public
     AnchorPane movePhase;
 
     @FXML
-    Text text1;
+    public Text text1;
     @FXML
-    Text text2;
+    public Text text2;
     @FXML
-    Text text3;
+    public Text text3;
     @FXML
-    Text text4;
+    public Text text4;
     @FXML
     Text vald;
 
     @FXML
+    public
     Button deployButton;
-
+    public
     @FXML
     Button attackButton;
-
+    public
     @FXML
     Button moveButton;
 
@@ -79,7 +84,8 @@ public class MapController extends AnchorPane {
 
     public boolean attack = true;
 
-    private Round round;
+    ModelDataHandler modelDataHandler = new ModelDataHandler();
+    private View view = new View(this);
 
     public MapController() {
 
@@ -92,12 +98,10 @@ public class MapController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         initialize();
-
-
     }
     public void initialize()
     {
-        //TODO: Hänvisa till View för att göra en setup av map
+        //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
 
 
 
@@ -105,8 +109,8 @@ public class MapController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                selectSpace(space1);
-                resetColor(cube1,selectedSpace);
+                modelDataHandler.recieveSelectedSpace(1);
+                view.resetColor(cube1,modelDataHandler.getColorOnSpace(1));
 
             }
         });
@@ -115,18 +119,16 @@ public class MapController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
 
 
-                selectSpace(space1);
-                resetColor(cube1,selectedSpace);
+                modelDataHandler.recieveSelectedSpace(1);
+                view.resetColor(cube1,modelDataHandler.getColorOnSpace(1));
 
             }
         });
         cube2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
-
-                selectSpace(space2);
-                resetColor(cube2,selectedSpace);
+                modelDataHandler.recieveSelectedSpace(2);
+                view.resetColor(cube2,modelDataHandler.getColorOnSpace(2));
 
             }
         });
@@ -135,8 +137,8 @@ public class MapController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
 
 
-                selectSpace(space2);
-                resetColor(cube2,selectedSpace);
+                modelDataHandler.recieveSelectedSpace(2);
+                view.resetColor(cube2,modelDataHandler.getColorOnSpace(2));
 
             }
         });
@@ -145,8 +147,8 @@ public class MapController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
 
 
-                selectSpace(space3);
-                resetColor(cube3,selectedSpace);
+                modelDataHandler.recieveSelectedSpace(3);
+                view.resetColor(cube3,modelDataHandler.getColorOnSpace(3));
 
             }
         });
@@ -155,8 +157,8 @@ public class MapController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
 
 
-                selectSpace(space3);
-                resetColor(cube3,selectedSpace);
+                modelDataHandler.recieveSelectedSpace(3);
+                view.resetColor(cube3,modelDataHandler.getColorOnSpace(3));
 
             }
         });
@@ -164,8 +166,9 @@ public class MapController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                selectSpace(space4);
-                resetColor(cube4,selectedSpace);
+                modelDataHandler.recieveSelectedSpace(4);
+
+                view.resetColor(cube4,modelDataHandler.getColorOnSpace(4));
 
             }
         });
@@ -174,57 +177,60 @@ public class MapController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
 
 
-                selectSpace(space4);
-                resetColor(cube4,selectedSpace);
+                modelDataHandler.recieveSelectedSpace(4);
+
+                view.resetColor(cube4,modelDataHandler.getColorOnSpace(4));
 
 
             }
         });
 
-        skip.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        skipAttack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                round.nextPhase();
+                modelDataHandler.nextPhase();
+                view.updatePhase("ATTACK");
+
 
             }
         });
-        done.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        doneMove.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                round.nextPhase();
+                modelDataHandler.nextPhase();
+                view.updatePhase("MOVE");
             }
         });
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                round.nextPhase();
+                modelDataHandler.nextPhase();
+                view.updatePhase("DEPLOY");
             }
         });
         deployButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                round.nextMove();
+                modelDataHandler.nextMove();
             }
         });
         attackButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                round.nextMove();
+                modelDataHandler.nextMove();
             }
         });
         moveButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                round.nextMove();
+                modelDataHandler.nextMove();
             }
         });
 
-
-        update();
-
+        view.setUpStart();
     }
 
-    public Button getSkipButton(){return skip; }
+    public Button getSkipButton(){return skipAttack; }
 
     public boolean getSkipCheck(){return skipCheck; }
 

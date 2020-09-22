@@ -1,11 +1,11 @@
+package Program.Model;
+
 import java.util.ArrayList;
 
-public class Attack {
-
-    Dice dice = new Dice();
+ public class Attack {
 
     //This method checks if the attack is possible and declares which space is to be attacked
-    boolean DeclareAttack(Space mySpace, Space opponentSpace, int myUnits) {
+    public static boolean DeclareAttack(Space mySpace, Space opponentSpace, int myUnits) {
 
         if (nextTo(mySpace, opponentSpace) && isAttackPossible(myUnits)) {
 
@@ -13,12 +13,10 @@ public class Attack {
         }
         return false;
     }
-
-
     //This method calculates the attack with the help of dices according to the official rules of Risk.
     //This also declares the winner of the attack
-    int calculateAttack(Space mySpace, Space enemySpace) {
-
+    public static int calculateAttack(Space mySpace, Space enemySpace) {
+        Dice dice = new Dice();
         System.out.println(mySpace.getUnits() + " " + enemySpace.getUnits());
         int myDice = (mySpace.getUnits() - 1);
         int opponentDice = enemySpace.getUnits();
@@ -56,16 +54,16 @@ public class Attack {
     }
 
     //This checks if one space on the board is next to another
-    private boolean nextTo(Space mySpace, Space opponentSpace) {
+    private static boolean nextTo(Space mySpace, Space opponentSpace) {
 
         return true;
     }
 
-    private boolean isAttackPossible(int myUnits) {
+    public static boolean isAttackPossible(int myUnits) {
         return myUnits > 1;
     }
 
-    Integer findHighestDie(ArrayList<Integer> rolls) {
+    public static Integer findHighestDie(ArrayList<Integer> rolls) {
 
         int value = 0;
         int index = 0;
