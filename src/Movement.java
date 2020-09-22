@@ -1,17 +1,14 @@
 public class Movement {
 
-    private Round currentRound;
+    //Fråga modelDataHandler om currentplayer, inte round.
+    private modelDataHandler modelDataHandler;
 
-    public Movement(Round currentRound) {
-        this.currentRound = currentRound;
+    private boolean validateSpaces(modelDataHandler modelDataHandler, Space space1, Space space2) {
+        return (modelDataHandler.getCurrentPlayer() == space1.getPlayer()) && (modelDataHandler.getCurrentPlayer() == space2.getPlayer());
     }
 
-    private boolean validateSpaces(Round currentRound, Space space1, Space space2) {
-        return (currentRound.getCurrentPlayer() == space1.getPlayer()) && (currentRound.getCurrentPlayer() == space2.getPlayer());
-    }
-
-    public void MoveUnits(Space space1, Space space2) {
-        if (validateSpaces(this.currentRound, space1, space2)) {
+    public void MoveUnits(Space space1, Space space2, Player player) {
+        if (validateSpaces(modelDataHandler, space1, space2)) {
             int units1 = space1.getUnits();
             int units2 = space2.getUnits();
             int totalUnits = space1.getUnits() + space2.getUnits();
@@ -21,8 +18,8 @@ public class Movement {
             System.out.println(space1.getUnits());
             System.out.println(space2.getUnits());
             if (units1 > 0 && units2 > 0 && units1 + units2 == totalUnits) {
-                space1.updateSpace(this.currentRound.getCurrentPlayer(), units2);
-                space2.updateSpace(this.currentRound.getCurrentPlayer(), units1);
+                space1.updateSpace(modelDataHandler.getCurrentPlayer(), units2);
+                space2.updateSpace(modelDataHandler.getCurrentPlayer(), units1);
             }
             System.out.println(space1.getUnits());
             System.out.println(space2.getUnits());
