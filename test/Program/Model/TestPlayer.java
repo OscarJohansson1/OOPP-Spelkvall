@@ -1,6 +1,8 @@
+package Program.Model;
+
 import org.junit.Test;
 
-public class TestWin {
+public class TestPlayer {
 
     @Test
     public void testDeployment() {
@@ -12,10 +14,4 @@ public class TestWin {
 
 
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetBadIndex() {
-        // Test
-    }
-
 }

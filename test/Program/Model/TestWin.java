@@ -1,6 +1,8 @@
+package Program.Model;
+
 import org.junit.Test;
 
-public class TestRound {
+public class TestWin {
 
     @Test
     public void testDeployment() {
@@ -12,4 +14,10 @@ public class TestRound {
 
 
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetBadIndex() {
+        // Test
+    }
+
 }

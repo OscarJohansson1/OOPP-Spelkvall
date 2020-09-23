@@ -1,3 +1,5 @@
+package Program.Model;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import javafx.scene.shape.Rectangle;

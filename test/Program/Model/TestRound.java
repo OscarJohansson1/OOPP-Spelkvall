@@ -1,6 +1,8 @@
+package Program.Model;
+
 import org.junit.Test;
 
-public class TestPlayer {
+public class TestRound {
 
     @Test
     public void testDeployment() {

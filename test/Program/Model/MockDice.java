@@ -1,3 +1,5 @@
+package Program.Model;
+
 import java.util.ArrayList;
 
 public class MockDice {

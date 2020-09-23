@@ -1,9 +1,8 @@
+package Program.Model;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
-import Program.Model.Attack;
-import Program.Model.Player;
-import Program.Model.Space;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.junit.Before;
@@ -13,8 +12,6 @@ import java.util.ArrayList;
 
 public class TestAttack {
 
-    Rectangle rec1;
-    Rectangle rec2;
 
     Player player1;
     Player player2;
