@@ -4,14 +4,7 @@ import javafx.scene.paint.Color;
 
 class Round {
 
-    private Player currentPlayer;
     private Phase currentPhase = Phase.DEPLOY;
-    private Space mySpace;
-    private Space oppSpace;
-    /*Deployment deployment = new Deployment();
-    Attack attack = new Attack();
-    Program.View.View.Model.Movement movement = new Program.View.View.Model.Movement(this);*/
-
 
     public enum Phase {
 
@@ -31,13 +24,6 @@ class Round {
 
     }
 
-    public Round(Player currentPlayer){
-
-        this.currentPlayer = currentPlayer;
-    }
-
-    //Ge en random spelare första turen
-
     public void nextPhase(){
         //Byter till nästa fas
         if(currentPhase == Phase.MOVE)
@@ -48,35 +34,21 @@ class Round {
         }
         currentPhase = currentPhase.next;
     }
-    public void startPhase(Space selectedSpace, Space selectedSpace2)
+    public boolean startPhase(Space selectedSpace, Space selectedSpace2, Player currentPlayer)
     {
-        if(selectedSpace != null && selectedSpace2 != null)
+        if(selectedSpace != null)
         {
-            if(mySpace == null){
-                //Signalera fel
-                mySpace = selectedSpace;
-
-            }
-            if (oppSpace == null && selectedSpace != mySpace) {
-            //Signalera fel
-            oppSpace = selectedSpace2;
-
-            }
             if(currentPhase == Phase.DEPLOY)
             {
-                if(!Deployment.startDeployment(mySpace, currentPlayer)){
-                    resetSpaces();
-                }
-
+                return Deployment.startDeployment(selectedSpace, currentPlayer);
             }
-            else {
-                if(oppSpace != null)
+            else if(selectedSpace2 != null){
                 switch (currentPhase)
                 {
                     case ATTACK:
-                        if( mySpace != oppSpace && Attack.DeclareAttack(mySpace, oppSpace, mySpace.getUnits()) ) {
+                        if( selectedSpace != selectedSpace2 && Attack.DeclareAttack(selectedSpace, selectedSpace2, selectedSpace.getUnits()) ) {
 
-                            if(1 == Attack.calculateAttack(mySpace, oppSpace)){
+                            if(1 == Attack.calculateAttack(selectedSpace, selectedSpace2)){
                             /*mapController.updateColor();
                             mapController.updateText();*/
                             }
@@ -85,40 +57,28 @@ class Round {
                         mapController.updateText();
                         mapController.resetSelectedSpace();
                         */
-                            resetSpaces();
+
                         }
                         else {
-                            resetSpaces();
-                            //mapController.resetSelectedSpace();
+
+                        //mapController.resetSelectedSpace();
                         }
-                        break;
+                        return true;
                     case MOVE:
-                        Movement.MoveUnits(mySpace,oppSpace);
-                        resetSpaces();
+                        Movement.MoveUnits(selectedSpace,selectedSpace2);
+
                         /*mapController.updateText();
                         mapController.resetSelectedSpace();*/
-                        break;
+                        return true;
+                    default:
+                        return false;
+
                 }
             }
         }
+        return false;
     }
-    private void resetSpaces() {
-        mySpace = null;
-        oppSpace = null;
-    }
-    public Color getCurrentPlayerColor() {
-        return currentPlayer.getColor();
-    }
-
-    Player getCurrentPlayer(){
-        return currentPlayer;
-    }
-
     public Phase getCurrentPhase(){
         return currentPhase;
     }
-
-
-
-
 }

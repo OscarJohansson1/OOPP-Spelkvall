@@ -10,9 +10,6 @@ public class Space {
     private int units;
     private final String name;
 
-
-
-
     public Space(int id, Player player, int units, String name){
         this.id = id;
         this.player = player;

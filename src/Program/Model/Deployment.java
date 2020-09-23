@@ -15,6 +15,7 @@ class Deployment {
         //while(!allUnitsDeployed()) {
         if(space.getPlayer() == currentplayer) {
             deployUnit(space,unitsToDeploy);
+            System.out.println("Deployed units");
             return true;
         }
         else{

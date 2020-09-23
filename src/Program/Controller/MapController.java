@@ -38,8 +38,10 @@ public class MapController extends AnchorPane {
     private
     Button skipAttack;
     @FXML
+    private
     Button doneMove;
     @FXML
+    private
     Button donedeploy;
 
     @FXML
@@ -68,24 +70,21 @@ public class MapController extends AnchorPane {
     @FXML
     public Text text4;
     @FXML
-    Text vald;
-
-    @FXML
-    public
+    private
     Button deployButton;
-    public
     @FXML
+    private
     Button attackButton;
-    public
     @FXML
+    private
     Button moveButton;
 
     private boolean skipCheck = false;
 
     public boolean attack = true;
 
-    ModelDataHandler modelDataHandler = new ModelDataHandler();
-    private View view = new View(this);
+    private ModelDataHandler modelDataHandler = new ModelDataHandler();
+    private View view = new View();
 
     public MapController() {
 
@@ -99,10 +98,9 @@ public class MapController extends AnchorPane {
         }
         initialize();
     }
-    public void initialize()
-    {
-        //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
 
+    public void initialize() {
+        //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
 
 
         cube1.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -110,8 +108,8 @@ public class MapController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
 
                 modelDataHandler.recieveSelectedSpace(1);
-                view.resetColor(cube1,modelDataHandler.getColorOnSpace(1));
-
+                view.setColor(cube1, modelDataHandler.getColorOnSpace(1).darker(), MapController.this);
+                updateSpace(1);
             }
         });
         text1.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -120,25 +118,25 @@ public class MapController extends AnchorPane {
 
 
                 modelDataHandler.recieveSelectedSpace(1);
-                view.resetColor(cube1,modelDataHandler.getColorOnSpace(1));
-
+                view.setColor(cube1, modelDataHandler.getColorOnSpace(1).darker(), MapController.this);
+                updateSpace(1);
             }
         });
         cube2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 modelDataHandler.recieveSelectedSpace(2);
-                view.resetColor(cube2,modelDataHandler.getColorOnSpace(2));
-
+                view.setColor(cube2, modelDataHandler.getColorOnSpace(2).darker(), MapController.this);
+                updateSpace(2);
             }
         });
         text2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-
                 modelDataHandler.recieveSelectedSpace(2);
-                view.resetColor(cube2,modelDataHandler.getColorOnSpace(2));
+                view.setColor(cube2, modelDataHandler.getColorOnSpace(2).darker(), MapController.this);
+                updateSpace(2);
 
             }
         });
@@ -146,20 +144,18 @@ public class MapController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-
                 modelDataHandler.recieveSelectedSpace(3);
-                view.resetColor(cube3,modelDataHandler.getColorOnSpace(3));
-
+                view.setColor(cube3, modelDataHandler.getColorOnSpace(3).darker(), MapController.this);
+                updateSpace(3);
             }
         });
         text3.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-
                 modelDataHandler.recieveSelectedSpace(3);
-                view.resetColor(cube3,modelDataHandler.getColorOnSpace(3));
-
+                view.setColor(cube3, modelDataHandler.getColorOnSpace(3).darker(), MapController.this);
+                updateSpace(3);
             }
         });
         cube4.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -168,19 +164,18 @@ public class MapController extends AnchorPane {
 
                 modelDataHandler.recieveSelectedSpace(4);
 
-                view.resetColor(cube4,modelDataHandler.getColorOnSpace(4));
-
+                view.setColor(cube4, modelDataHandler.getColorOnSpace(4).darker(), MapController.this);
+                updateSpace(4);
             }
         });
         text4.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-
                 modelDataHandler.recieveSelectedSpace(4);
 
-                view.resetColor(cube4,modelDataHandler.getColorOnSpace(4));
-
+                view.setColor(cube4, modelDataHandler.getColorOnSpace(4).darker(), MapController.this);
+                updateSpace(4);
 
             }
         });
@@ -189,56 +184,88 @@ public class MapController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 modelDataHandler.nextPhase();
-                view.updatePhase("ATTACK");
-
-
+                view.updatePhase("MOVE", MapController.this);
+                view.resetColor(modelDataHandler.findPlayerColor(0),modelDataHandler.findPlayerColor(1),MapController.this);
             }
         });
         doneMove.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 modelDataHandler.nextPhase();
-                view.updatePhase("MOVE");
+                view.updatePhase("DEPLOY", MapController.this);
+                view.resetColor(modelDataHandler.findPlayerColor(0),modelDataHandler.findPlayerColor(1),MapController.this);
             }
         });
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 modelDataHandler.nextPhase();
-                view.updatePhase("DEPLOY");
+                view.updatePhase("ATTACK", MapController.this);
+                view.resetColor(modelDataHandler.findPlayerColor(0),modelDataHandler.findPlayerColor(1),MapController.this);
             }
         });
         deployButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                modelDataHandler.nextMove();
+                if(modelDataHandler.nextMove())
+                {
+                    updateSpace(modelDataHandler.getSelectedSpace().getId());
+
+                }
             }
         });
         attackButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                modelDataHandler.nextMove();
+                if(modelDataHandler.nextMove())
+                {
+                    updateSpace(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
+                }
             }
         });
         moveButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                modelDataHandler.nextMove();
+                if(modelDataHandler.nextMove())
+                {
+                    updateSpace(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
+                }
             }
         });
-
-        view.setUpStart();
+        view.setUpStart(this);
+        view.updatePhasePlayerText(modelDataHandler.getCurrentPlayerName(), modelDataHandler.getCurrenPhase(), this);
+        view.updateTextUnits(1, modelDataHandler.findUnitsOnSpace(1));
+        view.updateTextUnits(2, modelDataHandler.findUnitsOnSpace(2));
+        view.updateTextUnits(3, modelDataHandler.findUnitsOnSpace(3));
+        view.updateTextUnits(4, modelDataHandler.findUnitsOnSpace(4));
     }
 
-    public Button getSkipButton(){return skipAttack; }
+    private void updateSpace(int id) {
+        if (modelDataHandler.getSelectedSpace() != null) {
+            view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id));
+            view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id), this);
+        }
+    }
 
-    public boolean getSkipCheck(){return skipCheck; }
+    private void updateSpace(int id, int id2) {
+        if (modelDataHandler.getSelectedSpace() != null && modelDataHandler.getSelectedSpace2() != null) {
+            updateSpace(id);
+            view.updateTextUnits(id2, modelDataHandler.findUnitsOnSpace(id2));
+            view.setColor(getCube(id2), modelDataHandler.getColorOnSpace(id2), this);
+        }
+    }
 
+    private Rectangle getCube(int id) {
 
-
-
-
-
-
-
+        if (id == 1) {
+            return cube1;
+        } else if (id == 2) {
+            return cube2;
+        } else if (id == 3) {
+            return cube3;
+        } else if (id == 4) {
+            return cube4;
+        }
+        return null;
+    }
 }

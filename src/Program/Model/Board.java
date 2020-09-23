@@ -5,6 +5,8 @@ import javafx.scene.paint.Color;
 class Board {
 
     private Space[] spaces;
+    Space selectedSpace;
+    Space selectedSpace2;
 
     public Board(Space[] spaces)
     {
@@ -21,5 +23,15 @@ class Board {
 
         }
         return null;
+    }
+    void selectSpace(Space space)
+    {
+        if(selectedSpace != null)
+        {
+            selectedSpace2 = space;
+        }
+        else {
+            selectedSpace = space;
+        }
     }
 }

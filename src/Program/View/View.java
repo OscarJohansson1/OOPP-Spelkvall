@@ -15,39 +15,32 @@ import java.io.IOException;
 
 public class View extends AnchorPane {
 
-    private MapController mapController;
-
     private Text[] texts;
 
-    public View(MapController mapController)
-    {
-        this.mapController = mapController;
-    }
     public void setUpMap(){
-
-
     }
-    public void setUpStart(){
+    public void setUpStart(MapController mapController){
 
-        texts = new Text[] { mapController.text1,mapController.text2,mapController.text3,mapController.text4};
-
+        texts = new Text[] { null,mapController.text1,mapController.text2,mapController.text3,mapController.text4};
     }
-    public void updateText(String playername, String currentPhase, int id, int units)
+    public void updatePhasePlayerText(String playername, String currentPhase, MapController mapController)
+    {
+        mapController.playerText.setText("Currentplayer: " + playername + "");
+        mapController.phaseText.setText(currentPhase);
+    }
+    public void updateTextUnits(int id, int units)
     {
         for(int i = 0; i < texts.length; i++)
         {
-            if(i == id)
+            if(texts[i] == texts[id])
             {
                 texts[i].setText(units + "");
                 texts[i].setFill(Color.WHITE);
                 break;
             }
         }
-        mapController.playerText.setText("Currentplayer: " + playername + "");
-        mapController.phaseText.setText(currentPhase);
     }
-
-    public void resetColor(Rectangle cube, Color color)
+    public void setColor(Rectangle cube, Color color, MapController mapController)
     {
         if(cube == mapController.cube1)
         {
@@ -62,9 +55,15 @@ public class View extends AnchorPane {
         else if(cube == mapController.cube4){
             mapController.cube4.setFill(color);
         }
-
     }
-    public void updatePhase(String string)
+    public void resetColor( Color color1, Color color2, MapController mapController)
+    {
+        mapController.cube1.setFill(color1);
+        mapController.cube2.setFill(color1);
+        mapController.cube3.setFill(color2);
+        mapController.cube4.setFill(color2);
+    }
+    public void updatePhase(String string, MapController mapController)
     {
         switch (string)
         {
@@ -82,23 +81,4 @@ public class View extends AnchorPane {
         }
         mapController.phaseText.setText(string);
     }
-
-    //Initialize i mapController, gör till en setUpMap()
-    /*
-    space1 = new Program.View.View.Model.Space(1, player1, 3, "1",cube1);
-        cube1.setFill(player1.getColor());
-    space2 = new Program.View.View.Model.Space(2, player1, 5, "2",cube2);
-        cube2.setFill(player1.getColor());
-    space3 = new Program.View.View.Model.Space(3, player2, 6, "3",cube3);
-        cube3.setFill(player2.getColor());
-    space4 = new Program.View.View.Model.Space(4, player2, 1, "4",cube4);
-        cube4.setFill(player2.getColor());
-    Text text = new Text();
-        text.setText("1");
-        text.setFill(Color.GREEN);
-        text.setX(cube1.getX() + (cube1.getWidth() / 2));
-        text.setY(cube1.getY() + (cube1.getHeight() / 2));
-        rootpane.getChildren().add(text);
-
-     */
 }

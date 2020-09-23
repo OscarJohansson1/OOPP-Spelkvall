@@ -10,13 +10,29 @@ public class ModelDataHandler {
     };
     private Player currentplayer;
 
-    private Space selectedSpace;
-    private Space selectedSpace2;
-
     private Round round;
 
     private Board board;
 
+    public ModelDataHandler()
+    {
+        startGame();
+    }
+    public void startGame()
+    {
+        currentplayer = players[0];
+        board = new Board(new Space[] {
+                new Space(1,players[0],10,"1"),
+                new Space(2,players[0],10,"2"),
+                new Space(3,players[1],10,"3"),
+                new Space(4,players[1],10,"4")
+        });
+        round = new Round();
+    }
+    public Color findPlayerColor(int id)
+    {
+        return players[id].getColor();
+    }
     public Color findHighLightColor(Player player)
     {
         for(int i = 0; i < players.length; i++)
@@ -28,42 +44,27 @@ public class ModelDataHandler {
         }
         return null;
     }
-
-    private void selectSpace(Space space)
-    {
-        if(selectedSpace != null)
-        {
-            selectedSpace2 = space;
-        }
-        else {
-            selectedSpace = space;
-        }
-    }
     public Space getSelectedSpace()
     {
-        return  selectedSpace;
+        return  board.selectedSpace;
     }
     public Space getSelectedSpace2()
     {
-        return  selectedSpace2;
+        return  board.selectedSpace2;
     }
     public void resetSelectedSpace()
     {
-        selectedSpace = null;
-        selectedSpace2 = null;
+        board.selectedSpace = null;
+        board.selectedSpace2 = null;
     }
-
     public void recieveSelectedSpace(int id)
     {
-        if(board.findSpace(id).getPlayer() == currentplayer)
-        selectedSpace = board.findSpace(id);
+        if(board.findSpace(id).getPlayer() == currentplayer && board.selectedSpace == null)
+        board.selectedSpace = board.findSpace(id);
+        else if(board.findSpace(id).getPlayer() != currentplayer){
+            board.selectedSpace2 = board.findSpace(id);
+        }
     }
-    public void recieveSelectedSpace2(int id)
-    {
-        if(board.findSpace(id).getPlayer() == currentplayer)
-            selectedSpace2 = board.findSpace(id);
-    }
-
     public void nextPlayer(Player player)
     {
         for(int i = 0; i < players.length; i++)
@@ -82,33 +83,37 @@ public class ModelDataHandler {
         return currentplayer;
     }
 
+    public String getCurrentPlayerName()
+    {
+        return String.valueOf(currentplayer.getId());
+    }
+    public String getCurrenPhase()
+    {
+        return round.getCurrentPhase().name();
+    }
     public void nextPhase()
     {
         round.nextPhase();
         resetSelectedSpace();
-        nextPlayer(currentplayer);
     }
-    public void nextMove()
+    public boolean nextMove()
     {
-        round.startPhase(selectedSpace,selectedSpace2);
+        if(board.selectedSpace != null && board.selectedSpace2 != null)
+        {
+            if(round.startPhase(board.selectedSpace,board.selectedSpace2, currentplayer)){
+                return true;
+            }
+        }
+        return false;
     }
 
-    public Space findUnitsOnSpace(int id)
+    public int findUnitsOnSpace(int id)
     {
-        return board.findSpace(id);
+        return board.findSpace(id).getUnits();
     }
     public Color getColorOnSpace(int id)
     {
         return board.findSpace(id).getPlayer().getColor();
     }
-    public void startGame()
-    {
-        currentplayer = players[0];
-        board = new Board(new Space[] {
-                new Space(1,players[0],10,"1"),
-                new Space(2,players[0],10,"2"),
-                new Space(3,players[1],10,"3"),
-                new Space(4,players[1],10,"4")
-        });
-    }
+
 }
