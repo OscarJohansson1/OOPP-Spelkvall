@@ -25,7 +25,6 @@ public class TestMovement {
 
         space1 = new Space(1, player1, 5, "Test");
         space2 = new Space(2, player1, 3, "Test");
-        space3 = new Space(3, player2, 7, "Test");
 
         movement = new Movement();
     }
@@ -36,14 +35,5 @@ public class TestMovement {
         movement.MoveUnits(space1, space2);
         assertEquals(3, space1.getUnits(), "Didn't switch units with space2");
     }
-
-    @Test
-    public void testMovementOpponentsSpace() {
-        // Rewrite test when movement has been implemented correctly
-        movement.MoveUnits(space1, space3);
-        assertEquals(5, space1.getUnits(), "Amount of units changed even if different players held the spaces");
-    }
-
-
 
 }

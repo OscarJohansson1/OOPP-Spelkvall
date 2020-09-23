@@ -2,20 +2,31 @@ package Program.Model;
 
 import java.util.ArrayList;
 
- public class Attack {
+ class Attack {
 
     //This method checks if the attack is possible and declares which space is to be attacked
-    public static boolean DeclareAttack(Space mySpace, Space opponentSpace, int myUnits) {
 
-        if (nextTo(mySpace, opponentSpace) && isAttackPossible(myUnits)) {
+     /**
+      * Method that returns if an attack is possible, based on if the spaces are neighbours and there's more than
+      * one attacking unit.
+      * @param mySpace The space which the attacker attacks from.
+      * @param opponentSpace The space which is attacked.
+      * @param myUnits Amount of units on the space (mySpace) the attacker attacks from.
+      * @return Whether the attack between the two spaces is possible.
+      */
+    static boolean DeclareAttack(Space mySpace, Space opponentSpace, int myUnits) {
+        // myUnits kanske kan fås av mySpace.getUnits i en framtida refaktorisering
+        return nextTo(mySpace, opponentSpace) && isAttackPossible(myUnits);
 
-            return nextTo(mySpace, opponentSpace) && isAttackPossible(myUnits);
-        }
-        return false;
     }
-    //This method calculates the attack with the help of dices according to the official rules of Risk.
-    //This also declares the winner of the attack
-    public static int calculateAttack(Space mySpace, Space enemySpace) {
+
+     /**
+      * Method that calculates the attack and updates the state of the spaces involved in the attack.
+      * @param mySpace The space which the attacker attacks from.
+      * @param enemySpace The space which is attacked.
+      * @return An int with value 1 if the attack was successful and 0 if the attack was unsuccessful
+      */
+    static int calculateAttack(Space mySpace, Space enemySpace) {
         Dice dice = new Dice();
         System.out.println(mySpace.getUnits() + " " + enemySpace.getUnits());
         int myDice = (mySpace.getUnits() - 1);
@@ -59,11 +70,16 @@ import java.util.ArrayList;
         return true;
     }
 
-    public static boolean isAttackPossible(int myUnits) {
+    private static boolean isAttackPossible(int myUnits) {
         return myUnits > 1;
     }
 
-    public static Integer findHighestDie(ArrayList<Integer> rolls) {
+     /**
+      * Method that finds the die with the highest value in an ArrayList of Integers (Dice) and removes it.
+      * @param rolls An ArrayList with Integer-values of a dice-roll.
+      * @return The value of the die with the highest value.
+      */
+    static Integer findHighestDie(ArrayList<Integer> rolls) {
 
         int value = 0;
         int index = 0;

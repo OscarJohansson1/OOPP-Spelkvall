@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
 
