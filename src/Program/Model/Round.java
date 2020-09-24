@@ -24,7 +24,10 @@ class Round {
 
     }
 
-    public void nextPhase(){
+    /**
+     * Method that switch to the next phase.
+     */
+    void nextPhase(){
         //Byter till nästa fas
         if(currentPhase == Phase.MOVE)
         {

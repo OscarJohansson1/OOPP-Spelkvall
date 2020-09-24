@@ -8,11 +8,17 @@ class Board {
     Space selectedSpace;
     Space selectedSpace2;
 
-    public Board(Space[] spaces)
+    Board(Space[] spaces)
     {
         this.spaces = spaces;
     }
-    public Space findSpace(int id)
+
+    /**
+     * Method that finds a space on the board based on id.
+     * @param id id-number of the space
+     * @return The space if id exists, else null
+     */
+    Space findSpace(int id)
     {
         for(int i = 0; i < spaces.length; i++)
         {
@@ -24,6 +30,11 @@ class Board {
         }
         return null;
     }
+
+    /**
+     * Method that takes a space and set it as a selected space.
+     * @param space A space that will be added as a selected space.
+     */
     void selectSpace(Space space)
     {
         if(selectedSpace != null)
