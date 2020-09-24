@@ -2,7 +2,12 @@ package Program.Model;
 
 class Movement {
 
-    public static void MoveUnits(Space space1, Space space2) {
+    /**
+     * Method that moves units from one space to another. (currently switch place)
+     * @param space1 Space which units move from.
+     * @param space2 Space which units move to.
+     */
+    static void MoveUnits(Space space1, Space space2) {
 
         int units1 = space1.getUnits();
         int units2 = space2.getUnits();
