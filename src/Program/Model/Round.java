@@ -25,7 +25,7 @@ class Round {
     }
 
     /**
-     * Method that switch to the next phase.
+     * Method that switch to the next phase. If the current phase is Move, switch to Deploy instead.
      */
     void nextPhase(){
         //Byter till nästa fas
@@ -37,7 +37,16 @@ class Round {
         }
         currentPhase = currentPhase.next;
     }
-    public boolean startPhase(Space selectedSpace, Space selectedSpace2, Player currentPlayer)
+
+    /**
+     * Method that calls start-methods of Deployment, Attack and Move, based on current phase, selected spaces and
+     * the current player.
+     * @param selectedSpace The space the action starts from. Eg. the space to deploy units on, attack from and move from
+     * @param selectedSpace2 The space the action impacts. Eg. the space that is attacked or moved to.
+     * @param currentPlayer The active player during the turn.
+     * @return True if phase can start as expected, else false.
+     */
+    boolean startPhase(Space selectedSpace, Space selectedSpace2, Player currentPlayer)
     {
         if(selectedSpace != null)
         {
@@ -81,7 +90,7 @@ class Round {
         }
         return false;
     }
-    public Phase getCurrentPhase(){
+    Phase getCurrentPhase(){
         return currentPhase;
     }
 }
