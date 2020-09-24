@@ -56,12 +56,12 @@ public class View extends AnchorPane {
             mapController.cube4.setFill(color);
         }
     }
-    public void resetColor( Color color1, Color color2, MapController mapController)
+    public void resetColor(Color[] colors, MapController mapController)
     {
-        mapController.cube1.setFill(color1);
-        mapController.cube2.setFill(color1);
-        mapController.cube3.setFill(color2);
-        mapController.cube4.setFill(color2);
+        mapController.cube1.setFill(colors[1]);
+        mapController.cube2.setFill(colors[2]);
+        mapController.cube3.setFill(colors[3]);
+        mapController.cube4.setFill(colors[4]);
     }
     public void updatePhase(String string, MapController mapController)
     {

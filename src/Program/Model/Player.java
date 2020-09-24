@@ -18,16 +18,12 @@ public class Player {
         return units;
     }
 
-    public void setUnits(int units) {
+    void setUnits(int units) {
         this.units = units;
     }
 
-    public int getId() {
+    int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Color getColor() {

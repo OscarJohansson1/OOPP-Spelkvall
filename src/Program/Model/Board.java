@@ -12,7 +12,6 @@ class Board {
     {
         this.spaces = spaces;
     }
-
     /**
      * Method that finds a space on the board based on id.
      * @param id id-number of the space
@@ -29,20 +28,5 @@ class Board {
 
         }
         return null;
-    }
-
-    /**
-     * Method that takes a space and set it as a selected space.
-     * @param space A space that will be added as a selected space.
-     */
-    void selectSpace(Space space)
-    {
-        if(selectedSpace != null)
-        {
-            selectedSpace2 = space;
-        }
-        else {
-            selectedSpace = space;
-        }
     }
 }

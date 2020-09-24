@@ -18,7 +18,7 @@ public class ModelDataHandler {
     {
         startGame();
     }
-    public void startGame()
+    private void startGame()
     {
         currentplayer = players[0];
         board = new Board(new Space[] {
@@ -33,17 +33,6 @@ public class ModelDataHandler {
     {
         return players[id].getColor();
     }
-    public Color findHighLightColor(Player player)
-    {
-        for(int i = 0; i < players.length; i++)
-        {
-            if(player == players[i])
-            {
-                return players[i].getColor().darker();
-            }
-        }
-        return null;
-    }
     public Space getSelectedSpace()
     {
         return  board.selectedSpace;
@@ -52,18 +41,22 @@ public class ModelDataHandler {
     {
         return  board.selectedSpace2;
     }
-    public void resetSelectedSpace()
+    private void resetSelectedSpace()
     {
         board.selectedSpace = null;
         board.selectedSpace2 = null;
     }
-    public void recieveSelectedSpace(int id)
+    public boolean receiveSelectedSpace(int id)
     {
-        if(board.findSpace(id).getPlayer() == currentplayer && board.selectedSpace == null)
-        board.selectedSpace = board.findSpace(id);
-        else if(board.findSpace(id).getPlayer() != currentplayer){
-            board.selectedSpace2 = board.findSpace(id);
+        if(board.findSpace(id).getPlayer() == currentplayer && board.selectedSpace == null) {
+            board.selectedSpace = board.findSpace(id);
+            return true;
         }
+        else if((board.selectedSpace !=  null && round.getCurrentPhase().equals(Round.Phase.MOVE) && board.findSpace(id).getPlayer() == currentplayer) || board.selectedSpace != null && board.findSpace(id).getPlayer() != currentplayer && round.getCurrentPhase().equals(Round.Phase.ATTACK)){
+            board.selectedSpace2 = board.findSpace(id);
+            return true;
+        }
+        return false;
     }
     public void nextPlayer(Player player)
     {
@@ -78,11 +71,6 @@ public class ModelDataHandler {
             }
         }
     }
-    public Player getCurrentPlayer()
-    {
-        return currentplayer;
-    }
-
     public String getCurrentPlayerName()
     {
         return String.valueOf(currentplayer.getId());
@@ -98,7 +86,7 @@ public class ModelDataHandler {
     }
     public boolean nextMove()
     {
-        if(board.selectedSpace != null && board.selectedSpace2 != null)
+        if((board.selectedSpace != null && round.getCurrentPhase().equals(Round.Phase.DEPLOY)) || board.selectedSpace2 != null)
         {
             if(round.startPhase(board.selectedSpace,board.selectedSpace2, currentplayer)){
                 return true;

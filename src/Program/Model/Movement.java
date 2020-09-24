@@ -1,7 +1,6 @@
 package Program.Model;
 
 class Movement {
-
     /**
      * Method that moves units from one space to another. (currently switch place)
      * @param space1 Space which units move from.

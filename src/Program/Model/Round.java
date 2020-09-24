@@ -58,33 +58,18 @@ class Round {
                 switch (currentPhase)
                 {
                     case ATTACK:
-                        if( selectedSpace != selectedSpace2 && Attack.DeclareAttack(selectedSpace, selectedSpace2, selectedSpace.getUnits()) ) {
+                        if(Attack.DeclareAttack(selectedSpace, selectedSpace2, selectedSpace.getUnits()) ) {
 
                             if(1 == Attack.calculateAttack(selectedSpace, selectedSpace2)){
-                            /*mapController.updateColor();
-                            mapController.updateText();*/
+                                return true;
                             }
-                        /*
-                        mapController.updateColor();
-                        mapController.updateText();
-                        mapController.resetSelectedSpace();
-                        */
-
                         }
-                        else {
-
-                        //mapController.resetSelectedSpace();
-                        }
-                        return true;
+                        return false;
                     case MOVE:
                         Movement.MoveUnits(selectedSpace,selectedSpace2);
-
-                        /*mapController.updateText();
-                        mapController.resetSelectedSpace();*/
                         return true;
                     default:
                         return false;
-
                 }
             }
         }
