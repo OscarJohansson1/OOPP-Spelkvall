@@ -9,7 +9,13 @@ class Deployment {
 
     }
 
-    public static boolean startDeployment(Space space, Player currentplayer) {
+    /**
+     * Method that adds one unit to a space if the player controls the space.
+     * @param space The space which should be increased with one unit.
+     * @param currentplayer The player that plays the current turn.
+     * @return If the deployment was successful.
+     */
+    static boolean startDeployment(Space space, Player currentplayer) {
         int unitsToDeploy = currentplayer.getUnits();
 
         //while(!allUnitsDeployed()) {
