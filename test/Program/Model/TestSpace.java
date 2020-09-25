@@ -2,16 +2,39 @@ package Program.Model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestSpace {
 
+    Player player2;
+    Player player1;
+    Space space1;
+
+    @Before
+    public void before(){
+
+        player1 = new Player(10, 1, Color.color(1,0,0));
+        player2 = new Player(15, 2, Color.color(0,0,1));
+        space1 = new Space(1, player1,10, "Space");
+
+    }
+
     @Test
     public void testUpdateSpace() {
-        //Program.View.View.Model.Space space = new Program.View.View.Model.Space(1, new Program.View.View.Model.Player(100, 1, "Green" ), 10, "Hubben");
-        //space.updateSpace(20);
 
-        //assertEquals(space.getUnits(), 20);
+        space1.updateSpace(20);
+        assertEquals(space1.getUnits(), 20);
+
+    }
+
+    @Test
+    public void testUpdateSpaceNewPlayer() {
+
+        space1.updateSpace(player2,20);
+        assertEquals(space1.getPlayer(), player2, "Player didn't change when space was updated");
+
     }
 }

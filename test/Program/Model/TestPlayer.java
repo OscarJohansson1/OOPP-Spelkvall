@@ -3,6 +3,7 @@ package Program.Model;
 import org.junit.Test;
 
 public class TestPlayer {
+    // Kanske inte behövs
 
     @Test
     public void testDeployment() {
