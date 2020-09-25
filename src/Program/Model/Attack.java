@@ -26,7 +26,7 @@ import java.util.ArrayList;
       * @param enemySpace The space which is attacked.
       * @return An int with value 1 if the attack was successful and 0 if the attack was unsuccessful
       */
-    static int calculateAttack(Space mySpace, Space enemySpace) {
+    static boolean calculateAttack(Space mySpace, Space enemySpace) {
         Dice dice = new Dice();
         System.out.println(mySpace.getUnits() + " " + enemySpace.getUnits());
         int myDice = (mySpace.getUnits() - 1);
@@ -50,7 +50,7 @@ import java.util.ArrayList;
                         //System.out.println("Units in area are all dead");
                         //System.out.println(mySpace.getPlayer());
                         //System.out.println(enemySpace.getPlayer());
-                        return 1;
+                        return true;
                     }
 
                 } else {
@@ -58,9 +58,10 @@ import java.util.ArrayList;
                     //Kill one unit in current player space
                     mySpace.updateSpace(mySpace.getUnits() -1);
                     //System.out.println("Attacker loses one unit");
+                    return true;
                 }
             }
-            return 0;
+            return false;
 
     }
 

@@ -38,11 +38,11 @@ public class TestAttack {
 
     @Test
     public void testCalculateAttackSuccessful(){
-        int winner = Attack.calculateAttack(space1, space2);
+        boolean winner = Attack.calculateAttack(space1, space2);
         if (space1.getPlayer() == space2.getPlayer()){
-            assertEquals(1, winner, "Successful attack, but wrong return");
+            assertEquals(true, winner, "Successful attack, but wrong return");
         } else {
-            assertEquals(0, winner, "Unsuccessful attack, but wrong return");
+            assertEquals(false, winner, "Unsuccessful attack, but wrong return");
         }
     }
 

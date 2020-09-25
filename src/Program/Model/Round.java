@@ -28,12 +28,10 @@ class Round {
      * Method that switch to the next phase. If the current phase is Move, switch to Deploy instead.
      */
     void nextPhase(){
-        //Byter till nästa fas
         if(currentPhase == Phase.MOVE)
         {
             currentPhase = Phase.DEPLOY;
             return;
-
         }
         currentPhase = currentPhase.next;
     }
@@ -59,15 +57,11 @@ class Round {
                 {
                     case ATTACK:
                         if(Attack.DeclareAttack(selectedSpace, selectedSpace2, selectedSpace.getUnits()) ) {
-
-                            if(1 == Attack.calculateAttack(selectedSpace, selectedSpace2)){
-                                return true;
-                            }
+                            return Attack.calculateAttack(selectedSpace, selectedSpace2);
                         }
                         return false;
                     case MOVE:
-                        Movement.MoveUnits(selectedSpace,selectedSpace2);
-                        return true;
+                        return Movement.MoveUnits(selectedSpace,selectedSpace2);
                     default:
                         return false;
                 }

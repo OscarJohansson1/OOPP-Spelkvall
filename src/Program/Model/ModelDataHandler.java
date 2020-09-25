@@ -10,6 +10,8 @@ public class ModelDataHandler {
     };
     private Player currentplayer;
 
+    private int roundcount = 1;
+
     private Round round;
 
     private Board board;
@@ -47,7 +49,7 @@ public class ModelDataHandler {
     {
         return  board.selectedSpace2;
     }
-    private void resetSelectedSpace()
+    public void resetSelectedSpace()
     {
         board.selectedSpace = null;
         board.selectedSpace2 = null;
@@ -60,7 +62,7 @@ public class ModelDataHandler {
      */
     public boolean receiveSelectedSpace(int id)
     {
-        if(board.findSpace(id).getPlayer() == currentplayer && board.selectedSpace == null) {
+        if(board.findSpace(id).getPlayer() == currentplayer && (board.selectedSpace == null || round.getCurrentPhase().equals(Round.Phase.DEPLOY))) {
             board.selectedSpace = board.findSpace(id);
             return true;
         }
@@ -72,13 +74,12 @@ public class ModelDataHandler {
         }
         return false;
     }
-
     /**
      * Method that changes the currentPlayer to the next player in the player list. If the player is the last player in
      * the list, the first player in the list is selected as the new currentPlayer.
      * @param player The currentPlayer.
      */
-    public void nextPlayer(Player player)
+    private void nextPlayer(Player player)
     {
         for(int i = 0; i < players.length; i++)
         {
@@ -91,7 +92,6 @@ public class ModelDataHandler {
             }
         }
     }
-
     /**
      * Method that returns the id of a player as a String
      * @return the id of a player as a String.
@@ -117,6 +117,12 @@ public class ModelDataHandler {
     {
         round.nextPhase();
         resetSelectedSpace();
+        roundcount++;
+        if(roundcount > 3)
+        {
+            nextPlayer(currentplayer);
+            roundcount = 1;
+        }
     }
 
     /**
@@ -127,13 +133,10 @@ public class ModelDataHandler {
     {
         if((board.selectedSpace != null && round.getCurrentPhase().equals(Round.Phase.DEPLOY)) || board.selectedSpace2 != null)
         {
-            if(round.startPhase(board.selectedSpace,board.selectedSpace2, currentplayer)){
-                return true;
-            }
+            return round.startPhase(board.selectedSpace, board.selectedSpace2, currentplayer);
         }
         return false;
     }
-
     /**
      * Method that returns the units on a space based on id.
      * @param id Id of the space that the amount of units should be returned.
@@ -143,7 +146,6 @@ public class ModelDataHandler {
     {
         return board.findSpace(id).getUnits();
     }
-
     /**
      * Method that returns the color on a space based on id.
      * @param id Id of the space that the color should be returned.

@@ -6,7 +6,7 @@ class Movement {
      * @param space1 Space which units move from.
      * @param space2 Space which units move to.
      */
-    static void MoveUnits(Space space1, Space space2) {
+    static boolean MoveUnits(Space space1, Space space2) {
 
         int units1 = space1.getUnits();
         int units2 = space2.getUnits();
@@ -22,6 +22,7 @@ class Movement {
         }
         System.out.println(space1.getUnits());
         System.out.println(space2.getUnits());
+        return true;
     }
 
 

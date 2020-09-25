@@ -143,14 +143,10 @@ public class MapController extends AnchorPane {
     private
     Button moveButton;
 
-    private boolean skipCheck = false;
-
-    public boolean attack = true;
-
     private ModelDataHandler modelDataHandler = new ModelDataHandler();
     private View view = new View();
 
-    public MapController() {
+    MapController() {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
         fxmlLoader.setRoot(this);
@@ -162,8 +158,7 @@ public class MapController extends AnchorPane {
         }
         initialize();
     }
-
-    public void initialize() {
+    private void initialize() {
         //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
 
         cubeHubben.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -229,6 +224,7 @@ public class MapController extends AnchorPane {
                 modelDataHandler.nextPhase();
                 view.updatePhase("DEPLOY", MapController.this);
                 resetColor();
+                view.updatePhasePlayerText(modelDataHandler.getCurrentPlayerName(), "DEPLOY",MapController.this);
             }
         });
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -242,7 +238,10 @@ public class MapController extends AnchorPane {
         deployButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                modelDataHandler.nextMove();
+                if(modelDataHandler.nextMove())
+                {
+                    setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
+                }
             }
         });
         attackButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -251,6 +250,7 @@ public class MapController extends AnchorPane {
                 if(modelDataHandler.nextMove())
                 {
                     setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
+                    modelDataHandler.resetSelectedSpace();
                 }
             }
         });
@@ -260,6 +260,7 @@ public class MapController extends AnchorPane {
                 if(modelDataHandler.nextMove())
                 {
                     setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
+                    modelDataHandler.resetSelectedSpace();
                 }
             }
         });
@@ -274,11 +275,19 @@ public class MapController extends AnchorPane {
     private void setSpace(int id) {
         if(modelDataHandler.receiveSelectedSpace(id))
         {
-            if (modelDataHandler.getSelectedSpace() != null) {
-                view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id));
-                view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), this);
+            if(modelDataHandler.getSelectedSpace2() == null)
+            {
+                resetColor();
             }
+            else {
+                resetColor(modelDataHandler.getSelectedSpace().getId());
+            }
+            view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id));
+            view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), this);
         }
+    }
+    private void setSpaceEvent(int id) {
+        view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id));
     }
     private void setSpaceEvent(int id, int id2) {
         view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id));
@@ -286,8 +295,7 @@ public class MapController extends AnchorPane {
         view.updateTextUnits(id2, modelDataHandler.findUnitsOnSpace(id2));
         view.setColor(getCube(id2), modelDataHandler.getColorOnSpace(id2), this);
     }
-    private void resetColor()
-    {
+    private void resetColor() {
         Color[] colors = new Color[] {
                 null,
                 modelDataHandler.getColorOnSpace(1),
@@ -298,9 +306,25 @@ public class MapController extends AnchorPane {
         };
         view.resetColor(colors,this);
     }
+    private void resetColor(int id) {
+        Color[] colors = new Color[] {
+                null,
+                modelDataHandler.getColorOnSpace(1),
+                modelDataHandler.getColorOnSpace(2),
+                modelDataHandler.getColorOnSpace(3),
+                modelDataHandler.getColorOnSpace(4)
 
+        };
+        for(int i = 1; i < colors.length; i++)
+        {
+            if(i == id)
+            {
+                colors[i] = colors[i].darker().darker();
+            }
+        }
+        view.resetColor(colors,this);
+    }
     private Rectangle getCube(int id) {
-
         if (id == 1) {
             return cubeHubben;
         } else if (id == 2) {
