@@ -8,22 +8,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root fx:id="rootpane" prefHeight="900.0" prefWidth="1364.0" style="-fx-background-color: white;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="rootpane" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="yes" fitHeight="900.0" fitWidth="1364.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yes" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../picures/Riskbakgrund.png" />
+            <Image url="@../picures/OOPP-Map.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="cube1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="39.0" layoutX="877.0" layoutY="532.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
-      <Text fx:id="text1" layoutX="892.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hubba" wrappingWidth="83.16168203928046">
+      <Rectangle fx:id="cubeHubben" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="39.0" layoutX="1487.0" layoutY="354.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Text layoutX="1531.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hubben" wrappingWidth="99.16168203928046">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Rectangle fx:id="cube4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="349.0" layoutY="674.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
-      <Rectangle fx:id="cube3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="811.0" layoutY="299.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
-      <Rectangle fx:id="cube2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="705.0" layoutY="580.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Rectangle fx:id="cubeSpektrum" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="365.0" layoutY="632.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Rectangle fx:id="cubeGTSpritis" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1014.0" layoutY="201.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Rectangle fx:id="cubeADammen" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="1381.0" layoutY="712.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
       <AnchorPane fx:id="attackPhase" prefHeight="200.0" prefWidth="200.0">
          <children>
             <Button fx:id="skipAttack" layoutX="160.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Skip" />
@@ -44,16 +44,16 @@
          <font>
             <Font size="24.0" />
          </font></Text>
-      <Text fx:id="text4" layoutX="360.0" layoutY="705.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lindhölma">
+      <Text layoutX="411.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spektrum">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="text2" layoutX="718.0" layoutY="610.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A-damen">
+      <Text layoutX="1438.0" layoutY="743.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A-damen">
          <font>
             <Font size="24.0" />
          </font></Text>
-      <Text fx:id="text3" layoutX="821.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GT Spritis">
+      <Text layoutX="1065.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GT Spritis">
          <font>
             <Font size="24.0" />
          </font></Text>
@@ -63,5 +63,135 @@
             <Button fx:id="donedeploy" layoutX="160.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Done" />
          </children>
       </AnchorPane>
+      <Rectangle fx:id="cubeFokus" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="846.0" layoutY="412.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="902.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Focus">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeBasen" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="39.0" layoutX="1561.0" layoutY="494.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Text layoutX="1615.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Basen" wrappingWidth="99.16168203928046">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeKajsabaren" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="39.0" layoutX="1470.0" layoutY="429.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Text layoutX="1517.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kajsabaren" wrappingWidth="119.16168203928046">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeRödaRummet" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="1441.0" layoutY="664.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1488.0" layoutY="693.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Röda Rummet">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeVerum" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="1543.0" layoutY="611.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1582.0" layoutY="641.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Verum">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeVillan" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="1547.0" layoutY="695.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1593.0" layoutY="722.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Villan">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeTågvagnen" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="1289.0" layoutY="648.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1334.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tågvagnen">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeGasquen" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="1187.0" layoutY="674.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1228.0" layoutY="708.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gasquen">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeOlgas" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="1124.0" layoutY="594.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1170.0" layoutY="624.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Olgas">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeChalmersplatsen" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="880.0" layoutY="729.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="926.0" layoutY="759.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chalmersplatsen">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeRunAn" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="1050.0" layoutY="695.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1091.0" layoutY="723.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RunAn">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeFortNox" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="990.0" layoutY="248.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1035.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FortNox">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeChabo" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="790.0" layoutY="303.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="830.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chabo">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeWijkanders" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="610.0" layoutY="284.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="657.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wijkanders">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeGoldenI" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="514.0" layoutY="231.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="568.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Golden I">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeZaloonen" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1228.0" layoutY="286.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1270.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zaloonen">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeWinden" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1212.0" layoutY="333.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1128.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Winden">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeLofTDet" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1266.0" layoutY="345.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1318.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LofTDet">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeAlvan" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="295.0" layoutY="748.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="344.0" layoutY="783.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Älvan">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeHRum" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="426.0" layoutY="756.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="481.0" layoutY="784.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H-Rum?">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="cubeOrigogården" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="973.0" layoutY="491.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Text layoutX="1024.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Origogården">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="textHubben" layoutX="1495.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fx:id="textZaloonen" layoutX="1237.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fx:id="textKajsabaren" layoutX="1478.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fx:id="textBasen" layoutX="1571.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
    </children>
 </fx:root>

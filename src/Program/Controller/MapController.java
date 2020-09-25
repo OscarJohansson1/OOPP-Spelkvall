@@ -18,16 +18,79 @@ import java.io.IOException;
 public class MapController extends AnchorPane {
     @FXML
     public
-    Rectangle cube1;
+    Rectangle cubeHubben;
     @FXML
     public
-    Rectangle cube2;
+    Rectangle cubeBasen;
     @FXML
     public
-    Rectangle cube3;
+    Rectangle cubeKajsabaren;
     @FXML
     public
-    Rectangle cube4;
+    Rectangle cubeZaloonen;
+    @FXML
+    public
+    Rectangle cubeWinden;
+    @FXML
+    public
+    Rectangle cubeLoftTDet;
+    @FXML
+    public
+    Rectangle cubeRodaRummet;
+    @FXML
+    public
+    Rectangle cubeVerum;
+    @FXML
+    public
+    Rectangle cubeVillan;
+    @FXML
+    public
+    Rectangle cubeADammen;
+    @FXML
+    public
+    Rectangle cubeFocus;
+    @FXML
+    public
+    Rectangle cubeFortNox;
+    @FXML
+    public
+    Rectangle cubeGTSpritis;
+    @FXML
+    public
+    Rectangle cubeGoldenI;
+    @FXML
+    public
+    Rectangle cubeChabo;
+    @FXML
+    public
+    Rectangle cubeWijkanders;
+    @FXML
+    public
+    Rectangle cubeHrum;
+    @FXML
+    public
+    Rectangle cubeAlvan;
+    @FXML
+    public
+    Rectangle cubeSpektrum;
+    @FXML
+    public
+    Rectangle cubeGasquen;
+    @FXML
+    public
+    Rectangle cubeChalmersplatsen;
+    @FXML
+    public
+    Rectangle cubeOlgas;
+    @FXML
+    public
+    Rectangle cubeRunAn;
+    @FXML
+    public
+    Rectangle cubeTågvagnen;
+
+
+
     @FXML
     public
     AnchorPane rootpane;
@@ -63,13 +126,13 @@ public class MapController extends AnchorPane {
     AnchorPane movePhase;
 
     @FXML
-    public Text text1;
+    public Text textHubben;
     @FXML
-    public Text text2;
+    public Text textBasen;
     @FXML
-    public Text text3;
+    public Text textKajsabaren;
     @FXML
-    public Text text4;
+    public Text textZaloonen;
     @FXML
     private
     Button deployButton;
@@ -103,49 +166,49 @@ public class MapController extends AnchorPane {
     public void initialize() {
         //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
 
-        cube1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        cubeHubben.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 setSpace(1);
             }
         });
-        text1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        textHubben.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 setSpace(1);
             }
         });
-        cube2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        cubeBasen.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 setSpace(2);
             }
         });
-        text2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        textBasen.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 setSpace(2);
             }
         });
-        cube3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        cubeKajsabaren.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 setSpace(3);
             }
         });
-        text3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        textKajsabaren.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 setSpace(3);
             }
         });
-        cube4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        cubeZaloonen.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 setSpace(4);
             }
         });
-        text4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        textZaloonen.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 setSpace(4);
@@ -239,13 +302,13 @@ public class MapController extends AnchorPane {
     private Rectangle getCube(int id) {
 
         if (id == 1) {
-            return cube1;
+            return cubeHubben;
         } else if (id == 2) {
-            return cube2;
+            return cubeBasen;
         } else if (id == 3) {
-            return cube3;
+            return cubeKajsabaren;
         } else if (id == 4) {
-            return cube4;
+            return cubeZaloonen;
         }
         return null;
     }

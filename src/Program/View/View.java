@@ -26,7 +26,7 @@ public class View extends AnchorPane {
      */
     public void setUpStart(MapController mapController){
 
-        texts = new Text[] { null,mapController.text1,mapController.text2,mapController.text3,mapController.text4};
+        texts = new Text[] { null,mapController.textHubben,mapController.textBasen,mapController.textKajsabaren,mapController.textZaloonen};
     }
 
     /**
@@ -67,18 +67,18 @@ public class View extends AnchorPane {
      */
     public void setColor(Rectangle cube, Color color, MapController mapController)
     {
-        if(cube == mapController.cube1)
+        if(cube == mapController.cubeHubben)
         {
-            mapController.cube1.setFill(color);
+            mapController.cubeHubben.setFill(color);
         }
-        else if(cube == mapController.cube2){
-            mapController.cube2.setFill(color);
+        else if(cube == mapController.cubeBasen){
+            mapController.cubeBasen.setFill(color);
         }
-        else if(cube == mapController.cube3){
-            mapController.cube3.setFill(color);
+        else if(cube == mapController.cubeKajsabaren){
+            mapController.cubeKajsabaren.setFill(color);
         }
-        else if(cube == mapController.cube4){
-            mapController.cube4.setFill(color);
+        else if(cube == mapController.cubeZaloonen){
+            mapController.cubeZaloonen.setFill(color);
         }
     }
 
@@ -89,10 +89,10 @@ public class View extends AnchorPane {
      */
     public void resetColor(Color[] colors, MapController mapController)
     {
-        mapController.cube1.setFill(colors[1]);
-        mapController.cube2.setFill(colors[2]);
-        mapController.cube3.setFill(colors[3]);
-        mapController.cube4.setFill(colors[4]);
+        mapController.cubeHubben.setFill(colors[1]);
+        mapController.cubeBasen.setFill(colors[2]);
+        mapController.cubeKajsabaren.setFill(colors[3]);
+        mapController.cubeZaloonen.setFill(colors[4]);
     }
 
     /**

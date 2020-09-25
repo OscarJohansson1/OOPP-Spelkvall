@@ -14,7 +14,7 @@ public class Chans extends Application {
         StartController startController = new StartController(stage);
         Parent start = startController;
 
-        Scene menu = new Scene(start, 1364, 900);
+        Scene menu = new Scene(start, 1920, 1080);
 
         stage.setTitle("Menu");
         stage.setScene(menu);
