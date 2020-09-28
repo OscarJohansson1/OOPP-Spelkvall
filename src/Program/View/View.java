@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import Program.Controller.MapController;
 
 import java.io.IOException;
+import java.util.List;
 
 public class View extends AnchorPane {
 
@@ -26,7 +27,8 @@ public class View extends AnchorPane {
      */
     public void setUpStart(MapController mapController){
 
-        texts = new Text[] { null,mapController.textHubben,mapController.textBasen,mapController.textKajsabaren,mapController.textZaloonen};
+        mapController.cubeHubben.setText("10");
+        //texts = new Text[] { null,mapController.textHubben,mapController.textBasen,mapController.textKajsabaren,mapController.textZaloonen};
     }
 
     /**
@@ -46,14 +48,13 @@ public class View extends AnchorPane {
      * @param id Id of space that the amount of units should be updated on.
      * @param units The new amount of units.
      */
-    public void updateTextUnits(int id, int units)
+    public void updateTextUnits(int id, int units, List<Button> allButtons)
     {
-        for(int i = 0; i < texts.length; i++)
-        {
-            if(texts[i] == texts[id])
-            {
-                texts[i].setText(units + "");
-                texts[i].setFill(Color.WHITE);
+        for (Button allButton : allButtons) {
+            if (allButton == allButtons.get(id)) {
+                allButton.setText(units + "");
+                allButton.setStyle("-fx-color: #FFFFFF");
+                //allButton.setTextFill();
                 break;
             }
         }
@@ -61,25 +62,25 @@ public class View extends AnchorPane {
 
     /**
      * Method that sets the color an the spaces.
-     * @param cube The cube representing a space.
+     * @param button The cube representing a space.
      * @param color The color of the space.
-     * @param mapController The mapController used in the project.
+     * @param allButtons A list of all the buttons
      */
-    public void setColor(Rectangle cube, Color color, MapController mapController)
+    public void setColor(Button button, Color color, List<Button> allButtons)
     {
-        if(cube == mapController.cubeHubben)
-        {
-            mapController.cubeHubben.setFill(color);
+
+        String hex = String.format( "#%02X%02X%02X",
+                (int)( color.getRed() * 255 ),
+                (int)( color.getGreen() * 255 ),
+                (int)( color.getBlue() * 255 ) );
+
+        for (Button allButton : allButtons) {
+            if (button == allButton) {
+                allButton.setStyle("-fx-background-color: " + hex + ";");
+                System.out.println(hex);
+            }
         }
-        else if(cube == mapController.cubeBasen){
-            mapController.cubeBasen.setFill(color);
-        }
-        else if(cube == mapController.cubeKajsabaren){
-            mapController.cubeKajsabaren.setFill(color);
-        }
-        else if(cube == mapController.cubeZaloonen){
-            mapController.cubeZaloonen.setFill(color);
-        }
+
     }
 
     /**
@@ -89,10 +90,13 @@ public class View extends AnchorPane {
      */
     public void resetColor(Color[] colors, MapController mapController)
     {
+        /*
         mapController.cubeHubben.setFill(colors[1]);
         mapController.cubeBasen.setFill(colors[2]);
         mapController.cubeKajsabaren.setFill(colors[3]);
         mapController.cubeZaloonen.setFill(colors[4]);
+
+         */
     }
 
     /**

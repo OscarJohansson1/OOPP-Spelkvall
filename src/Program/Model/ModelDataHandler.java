@@ -24,10 +24,11 @@ public class ModelDataHandler {
     }
     private void startGame()
     {
+        currentplayer = players.get(0);
         int player = -1;
         Player lastrandomplayer = players.get(0);
         List<Space> spaces = new ArrayList<>();
-        for(int i = 0; i < 26; i++)
+        for(int i = 0; i < 25; i++)
         {
             player++;
             if(player > 1)
