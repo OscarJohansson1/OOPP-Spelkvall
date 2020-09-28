@@ -1,6 +1,7 @@
 package Program.Controller;
 
 import Program.Model.Player;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -71,76 +73,44 @@ public class SetUpGameController extends AnchorPane {
     private GridPane gridPane;
 
     @FXML
-    private Rectangle rec1;
+    private Button rec1;
     @FXML
-    private Rectangle rec2;
+    private Button rec2;
     @FXML
-    private Rectangle rec3;
+    private Button rec3;
     @FXML
-    private Rectangle rec4;
+    private Button rec4;
     @FXML
-    private Rectangle rec5;
+    private Button rec5;
     @FXML
-    private Rectangle rec6;
+    private Button rec6;
     @FXML
-    private Rectangle rec7;
+    private Button rec7;
     @FXML
-    private Rectangle rec8;
+    private Button rec8;
     @FXML
-    private Rectangle rec9;
+    private Button rec9;
     @FXML
-    private Rectangle rec10;
+    private Button rec10;
     @FXML
-    private Rectangle rec11;
+    private Button rec11;
     @FXML
-    private Rectangle rec12;
+    private Button rec12;
     @FXML
-    private Rectangle rec13;
+    private Button rec13;
     @FXML
-    private Rectangle rec14;
+    private Button rec14;
     @FXML
-    private Rectangle rec15;
+    private Button rec15;
     @FXML
-    private Rectangle rec16;
+    private Button rec16;
 
-    @FXML
-    private Text text1;
-    @FXML
-    private Text text2;
-    @FXML
-    private Text text3;
-    @FXML
-    private Text text4;
-    @FXML
-    private Text text5;
-    @FXML
-    private Text text6;
-    @FXML
-    private Text text7;
-    @FXML
-    private Text text8;
-    @FXML
-    private Text text9;
-    @FXML
-    private Text text10;
-    @FXML
-    private Text text11;
-    @FXML
-    private Text text12;
-    @FXML
-    private Text text13;
-    @FXML
-    private Text text14;
-    @FXML
-    private Text text15;
-    @FXML
-    private Text text16;
 
     private ArrayList<Player> playerList = new ArrayList<>();
     private ArrayList<Integer> nextPlayerNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
             11, 12, 13, 14, 15, 16));
-    private ArrayList<Rectangle> recList;
-    private ArrayList<Text> textList;
+    private ArrayList<Button> playerButtonList;
+    private ArrayList<Button> divisionList;
 
     Stage stage;
 
@@ -154,13 +124,21 @@ public class SetUpGameController extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        textList = new ArrayList<>(Arrays.asList(text1, text2, text3, text4, text5, text6, text7, text8,
-                text9, text10, text11, text12, text13, text14, text15, text16));
-        recList = new ArrayList<>(Arrays.asList(rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, rec9,
+        playerButtonList = new ArrayList<>(Arrays.asList(rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, rec9,
                 rec10, rec11, rec12, rec13, rec14, rec15, rec16));
+        divisionList = new ArrayList<>(Arrays.asList(recA, recAE, recD, recE, recF, recH, recI, recIT, recK,
+                recKfKb, recM, recSjo, recTB, recTD, recV, recZ));
 
         this.stage = stage;
         initialize();
+    }
+
+    private void mouseClicked(Button button){
+
+    }
+
+    private void makeSelected(Button button){
+
     }
 
     private void createPlayerList(int players){
@@ -198,20 +176,17 @@ public class SetUpGameController extends AnchorPane {
 
     private void updatePlayerGrid(){
 
-        for(int i = 0; i < playerList.size(); i++){
-            recList.get(i).setVisible(true);
-            textList.get(i).setVisible(true);
+        for(int i = 0; i < slider.getValue(); i++){
+            playerButtonList.get(i).setVisible(true);
         }
-        for(int i = playerList.size(); i < recList.size(); i++){
-            recList.get(i).setVisible(false);
-            textList.get(i).setVisible(false);
+        for(int i = (int) slider.getValue(); i < playerButtonList.size(); i++){
+            playerButtonList.get(i).setVisible(false);
         }
     }
 
 
     private void initialize() {
 
-        gridPane.get
         updatePlayerGrid();
 
         slider.setOnDragDetected(new EventHandler<MouseEvent>() {
@@ -250,208 +225,24 @@ public class SetUpGameController extends AnchorPane {
             }
         });
 
+        for(Button button : divisionList){
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    mouseClicked(button);
+                }
+            });
+        }
 
-        recA.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                //updatePlayer("#FF0000", "A");
-                recA.setFill(Paint.valueOf("#FFFFFF"));
-            }
-        });
-        textA.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#FF0000", "A");
-            }
-        });
-        recAE.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#BFFF00", "AE");
-            }
-        });
-        textAE.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#BFFF00", "AE");
-            }
-        });
-        recD.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#FF8000", "D");
-            }
-        });
-        textD.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#FF8000", "D");
-            }
-        });
-        recE.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#FFFF00", "E");
-            }
-        });
-        textE.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#FFFF00", "E");
-            }
-        });
-        recF.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#000000", "F");
-            }
-        });
-        textF.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#000000", "F");
-            }
-        });
-        recH.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#DE3163", "H");
-            }
-        });
-        textH.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#DE3163", "H");
-            }
-        });
-        recI.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#9F00C5", "I");
-            }
-        });
-        textI.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#9F00C5", "I");
-            }
-        });
-        recIT.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                //updatePlayer("#09CDDA", "IT");
-                recIT.setFill(Paint.valueOf("#A0A0A0"));
-                textIT.setText("1");
-                rec1.setFill(Paint.valueOf("#09CDDA"));
-                text1.setText("Player 1 - IT");
-            }
-        });
-        textIT.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                //updatePlayer("#09CDDA", "IT");
-                recIT.setFill(Paint.valueOf("#A0A0A0"));
-                textIT.setText("1");
-                rec1.setFill(Paint.valueOf("#09CDDA"));
-                text1.setText("Player 1 - IT");
-            }
-        });
-        recK.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#00C000", "K");
-            }
-        });
-        textK.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#00C000", "K");
-            }
-        });
-        recKfKb.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#007000", "KfKb");
-            }
-        });
-        textKfKb.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#007000", "KfKb");
-            }
-        });
-        recM.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#964B00", "M");
-            }
-        });
-        textM.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#964B00", "M");
-            }
-        });
-        recSjo.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#000080", "Sjö");
-            }
-        });
-        textSjo.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#000080", "Sjö");
-            }
-        });
-        recTB.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#FFFFFF", "TB");
-            }
-        });
-        textTB.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#FFFFFF", "TB");
-            }
-        });
-        recTD.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#5F021F", "TD");
-            }
-        });
-        textTD.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#5F021F", "TD");
-            }
-        });
-        recV.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#4141FF", "V");
-            }
-        });
-        textV.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#4141FF", "V");
-            }
-        });
-        recZ.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#808080", "Z");
-            }
-        });
-        textZ.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayer("#808080", "Z");
-            }
-        });
+        for(Button button : playerButtonList){
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    makeSelected(button);
+
+                }
+            });
+        }
     }
 
 }
