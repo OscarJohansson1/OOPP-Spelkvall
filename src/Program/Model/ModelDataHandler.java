@@ -2,12 +2,14 @@ package Program.Model;
 
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 public class ModelDataHandler {
 
-    private Player[] players = new Player[] {
-            new Player(10,1,Color.RED),
-            new Player(10,2,Color.BLUE)
-    };
+    private List<Player> players = new ArrayList<>(Arrays.asList(new Player(10,1,Color.BLUE),new Player(10,2,Color.RED)));
     private Player currentplayer;
 
     private int roundcount = 1;
@@ -22,13 +24,18 @@ public class ModelDataHandler {
     }
     private void startGame()
     {
-        currentplayer = players[0];
-        board = new Board(new Space[] {
-                new Space(1,players[0],10,"1"),
-                new Space(2,players[0],10,"2"),
-                new Space(3,players[1],10,"3"),
-                new Space(4,players[1],10,"4")
-        });
+        int player = -1;
+        Player lastrandomplayer = players.get(0);
+        List<Space> spaces = new ArrayList<>();
+        for(int i = 0; i < 26; i++)
+        {
+            player++;
+            if(player > 1)
+                player = 0;
+            lastrandomplayer = getRandomPlayer(lastrandomplayer);
+            spaces.add(new Space(i,lastrandomplayer,10,"1"));
+        }
+        board = new Board(spaces);
         round = new Round();
     }
 
@@ -39,7 +46,7 @@ public class ModelDataHandler {
      */
     public Color findPlayerColor(int id)
     {
-        return players[id].getColor();
+        return players.get(id).getColor();
     }
     public Space getSelectedSpace()
     {
@@ -81,16 +88,26 @@ public class ModelDataHandler {
      */
     private void nextPlayer(Player player)
     {
-        for(int i = 0; i < players.length; i++)
+        for(int i = 0; i < players.size(); i++)
         {
-            if(player == players[i] && i + 1 <  players.length)
+            if(player == players.get(i) && i + 1 <  players.size())
             {
-                currentplayer = players[i+1];
+                currentplayer = players.get(i+1);
             }
-            else if(i + 1 < players.length){
-                currentplayer = players[0];
+            else if(i + 1 < players.size()){
+                currentplayer = players.get(i);
             }
         }
+    }
+    private Player getRandomPlayer(Player lastpickedplayer)
+    {
+        Random random = new Random();
+        int player;
+        do {
+            player = random.nextInt(players.size());
+        } while (player == players.indexOf(lastpickedplayer));
+
+        return players.get(player);
     }
     /**
      * Method that returns the id of a player as a String
