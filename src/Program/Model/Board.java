@@ -2,13 +2,15 @@ package Program.Model;
 
 import javafx.scene.paint.Color;
 
+import java.util.List;
+
 class Board {
 
-    private Space[] spaces;
+    private List<Space> spaces;
     Space selectedSpace;
     Space selectedSpace2;
 
-    Board(Space[] spaces)
+    Board(List<Space> spaces)
     {
         this.spaces = spaces;
     }
@@ -19,13 +21,12 @@ class Board {
      */
     Space findSpace(int id)
     {
-        for(int i = 0; i < spaces.length; i++)
+        for(int i = 0; i < spaces.size(); i++)
         {
-            if(spaces[i].getId() == id)
+            if(spaces.get(i).getId() == id)
             {
-                return spaces[i];
+                return spaces.get(i);
             }
-
         }
         return null;
     }
