@@ -2,14 +2,10 @@ package Program.Controller;
 
 import Program.Model.ModelDataHandler;
 import Program.View.View;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -122,9 +118,6 @@ public class MapController extends AnchorPane {
     @FXML
     public
     Text phaseText;
-    @FXML
-    public
-    Text deployableUnitsText;
 
     @FXML
     public
@@ -144,20 +137,6 @@ public class MapController extends AnchorPane {
     @FXML
     private
     Button moveButton;
-
-    @FXML
-    private
-    Slider moveSlider;
-    @FXML
-    private
-    Button firstMarked;
-    @FXML
-    private
-    Button secondMarked;
-    @FXML
-    private
-    Text showMoveUnitsText;
-
 
     private ModelDataHandler modelDataHandler;
     private View view = new View();
@@ -180,14 +159,11 @@ public class MapController extends AnchorPane {
                 cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
                 cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen, cubeOrigogarden));
 
-
         modelDataHandler = new ModelDataHandler(allButtons.size());
         initialize();
     }
     private void initialize() {
         //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
-
-
 
         for (int i = 0; i<allButtons.size(); i++){
             int var = i;
@@ -204,8 +180,6 @@ public class MapController extends AnchorPane {
                 modelDataHandler.nextPhase();
                 view.updatePhase("MOVE", MapController.this);
                 resetColor();
-                resetDisplayCubes();
-                sliderVisibility(true);
             }
         });
         doneMove.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -214,9 +188,7 @@ public class MapController extends AnchorPane {
                 modelDataHandler.nextPhase();
                 view.updatePhase("DEPLOY", MapController.this);
                 resetColor();
-                resetDisplayCubes();
                 view.updatePhasePlayerText(modelDataHandler.getCurrentPlayerName(), "DEPLOY",MapController.this);
-                sliderVisibility(true);
             }
         });
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -225,8 +197,6 @@ public class MapController extends AnchorPane {
                 modelDataHandler.nextPhase();
                 view.updatePhase("ATTACK", MapController.this);
                 resetColor();
-                resetDisplayCubes();
-                sliderVisibility(false);
             }
         });
         deployButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -235,7 +205,6 @@ public class MapController extends AnchorPane {
                 if(modelDataHandler.nextMove())
                 {
                     setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
-                    view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
                 }
             }
         });
@@ -257,20 +226,8 @@ public class MapController extends AnchorPane {
                     setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
                     modelDataHandler.resetSelectedSpace();
                 }
-                else{
-                    resetDisplayCubes();
-                }
             }
         });
-
-        moveSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                modelDataHandler.getSliderAmount(newValue.intValue());
-                view.updateSliderText(newValue.intValue(), showMoveUnitsText);
-            }
-        });
-
         view.setUpStart(this);
         view.updatePhasePlayerText(modelDataHandler.getCurrentPlayerName(), modelDataHandler.getCurrenPhase(), this);
         for(int i = 0; i < allButtons.size(); i++)
@@ -278,27 +235,7 @@ public class MapController extends AnchorPane {
             view.updateTextUnits(i, modelDataHandler.findUnitsOnSpace(i), allButtons);
         }
         resetColor();
-        view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
-
-
-
     }
-
-    private void sliderVisibility(Boolean visible){
-        if(visible){
-            moveSlider.setVisible(true);
-            firstMarked.setVisible(true);
-            secondMarked.setVisible(true);
-            showMoveUnitsText.setVisible(true);
-        }
-        else{
-            moveSlider.setVisible(false);
-            firstMarked.setVisible(false);
-            secondMarked.setVisible(false);
-            showMoveUnitsText.setVisible(false);
-        }
-    }
-
     private void setSpace(int id) {
         if(modelDataHandler.receiveSelectedSpace(id))
         {
@@ -311,7 +248,6 @@ public class MapController extends AnchorPane {
             }
             view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id), allButtons);
             view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
-            displayCubes(id);
         }
     }
     private void setSpaceEvent(int id) {
@@ -349,19 +285,5 @@ public class MapController extends AnchorPane {
             }
         }
         return null;
-    }
-
-    private void displayCubes(int id){
-        if (firstMarked.getStyle().isEmpty()){
-            view.updateDisplayCubes(firstMarked, modelDataHandler.getColorOnSpace(id));
-        }
-        else{
-            view.updateDisplayCubes(secondMarked, modelDataHandler.getColorOnSpace(id));
-        }
-    }
-
-    private void resetDisplayCubes(){
-            view.resetDisplayCubes(firstMarked);
-            view.resetDisplayCubes(secondMarked);
     }
 }

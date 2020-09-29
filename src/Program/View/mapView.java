@@ -14,7 +14,7 @@ import Program.Controller.MapController;
 import java.io.IOException;
 import java.util.List;
 
-public class View extends AnchorPane {
+public class mapView extends AnchorPane {
 
     private Text[] texts;
 

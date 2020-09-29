@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
 public class StartController extends AnchorPane {
 
@@ -20,13 +22,18 @@ public class StartController extends AnchorPane {
     @FXML
     private Button startButton;
 
-    MapController mapController = new MapController();
-    Parent root = mapController;
-    Stage stage;
+    private SetUpGameController setUpGameController;// = new SetUpGameController();
+    //MapController mapController = new MapController();
+    private Parent root;// = setUpGameController;
+    private Stage stage;
 
 
 
     public StartController(Stage stage) {
+
+        this.stage = stage;
+        setUpGameController = new SetUpGameController(stage);
+        root = setUpGameController;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartMenu.fxml"));
         fxmlLoader.setRoot(this);
@@ -37,7 +44,6 @@ public class StartController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        this.stage = stage;
         initialize();
 
     }
