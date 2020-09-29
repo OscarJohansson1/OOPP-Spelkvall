@@ -147,10 +147,7 @@ public class SetUpGameController extends AnchorPane {
         startGameButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println(playerList.size());
-                System.out.println(slider.getValue());
                 if(playerList.size() >= slider.getValue()) {
-                    System.out.println(playerList.subList(0, (int) slider.getValue()));
                     MapController mapController = new MapController();
                     Parent root = mapController;
                     //give players to
@@ -201,7 +198,6 @@ public class SetUpGameController extends AnchorPane {
 
     private void mouseClicked(Button button){
         if(!selectedButtons.contains(button) && nextToChoose <= 16) {
-            System.out.println(button.getStyle().substring(22,29));
             playerList.add(new Player(0, nextToChoose, Color.web(button.getStyle().substring(22,29))));
 
             Button playerButton = playerButtonList.get(nextToChoose - 1);
