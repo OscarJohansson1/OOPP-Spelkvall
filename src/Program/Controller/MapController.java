@@ -1,7 +1,7 @@
 package Program.Controller;
 
 import Program.Model.ModelDataHandler;
-import Program.View.View;
+import Program.View.mapView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -139,7 +139,7 @@ public class MapController extends AnchorPane {
     Button moveButton;
 
     private ModelDataHandler modelDataHandler;
-    private View view = new View();
+    private mapView view = new mapView();
     private List<Button> allButtons;
 
 
