@@ -18,6 +18,8 @@ public class ModelDataHandler {
 
     private Board board;
 
+    private int unitsToUse;
+
     public ModelDataHandler(int amountOfSpaces)
     {
         startGame(amountOfSpaces);
@@ -151,7 +153,7 @@ public class ModelDataHandler {
     {
         if((board.selectedSpace != null && round.getCurrentPhase().equals(Round.Phase.DEPLOY)) || board.selectedSpace2 != null)
         {
-            return round.startPhase(board.selectedSpace, board.selectedSpace2, currentplayer);
+            return round.startPhase(board.selectedSpace, board.selectedSpace2, currentplayer, unitsToUse);
         }
         return false;
     }
@@ -174,5 +176,13 @@ public class ModelDataHandler {
         return board.findSpace(id).getPlayer().getColor();
     }
     public List<Color> getColorOnAllSpaces(){return board.getColorOnAllSpaces();}
+
+    public void getSliderAmount(int unitsToUse){
+            this.unitsToUse = unitsToUse;
+    }
+
+    public int getDeployableUnits(){
+        return currentplayer.getUnits();
+    }
 
 }

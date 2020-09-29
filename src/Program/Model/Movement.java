@@ -6,7 +6,7 @@ class Movement {
      * @param space1 Space which units move from.
      * @param space2 Space which units move to.
      */
-    static boolean MoveUnits(Space space1, Space space2) {
+    static boolean MoveUnits(Space space1, Space space2, int amount) {
 
         int units1 = space1.getUnits();
         int units2 = space2.getUnits();
@@ -16,9 +16,9 @@ class Movement {
 
         System.out.println(space1.getUnits());
         System.out.println(space2.getUnits());
-        if (units1 > 0 && units2 > 0 && units1 + units2 == totalUnits) {
-            space1.updateSpace(space1.getPlayer(), units2);
-            space2.updateSpace(space1.getPlayer(), units1);
+        if (units1 > 0 && units2 > 0 && units1 + units2 == totalUnits && (units2 - amount > 1)) {
+            space1.updateSpace(space1.getPlayer(), units2 - amount);
+            space2.updateSpace(space1.getPlayer(), units1 + amount);
         }
         System.out.println(space1.getUnits());
         System.out.println(space2.getUnits());

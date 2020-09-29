@@ -44,13 +44,13 @@ class Round {
      * @param currentPlayer The active player during the turn.
      * @return True if phase can start as expected, else false.
      */
-    boolean startPhase(Space selectedSpace, Space selectedSpace2, Player currentPlayer)
+    boolean startPhase(Space selectedSpace, Space selectedSpace2, Player currentPlayer, int units)
     {
         if(selectedSpace != null)
         {
             if(currentPhase == Phase.DEPLOY)
             {
-                return Deployment.startDeployment(selectedSpace, currentPlayer);
+                return Deployment.startDeployment(selectedSpace, currentPlayer,units);
             }
             else if(selectedSpace2 != null){
                 switch (currentPhase)
@@ -61,7 +61,7 @@ class Round {
                         }
                         return false;
                     case MOVE:
-                        return Movement.MoveUnits(selectedSpace,selectedSpace2);
+                        return Movement.MoveUnits(selectedSpace,selectedSpace2, units);
                     default:
                         return false;
                 }
