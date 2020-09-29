@@ -5,15 +5,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1364.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="900.0" fitWidth="1606.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" layoutX="424.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../picures/RiskTransformers.jpg" />
+            <Image url="@../picures/ChalmersChance.png" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" layoutX="641.0" layoutY="432.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="81.0" text="Start Game" />
-      <Button layoutX="643.0" layoutY="505.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="81.0" text="Settings" />
-      <Button layoutX="640.0" layoutY="581.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="81.0" text="Quit Game" />
+      <Button fx:id="startButton" layoutX="920.0" layoutY="486.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="81.0" text="Start Game" />
+      <Button layoutX="919.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="81.0" text="Settings" />
+      <Button layoutX="919.0" layoutY="629.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="81.0" text="Quit Game" />
    </children>
 </fx:root>
