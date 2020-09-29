@@ -53,7 +53,7 @@ public class StartController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                Scene scene = new Scene(root, 1600, 900);
+                Scene scene = new Scene(root, 1920, 1080);
 
                 stage.setTitle("Chans");
                 stage.setScene(scene);
