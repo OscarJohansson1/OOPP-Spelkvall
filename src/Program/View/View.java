@@ -54,7 +54,7 @@ public class View extends AnchorPane {
             if (allButton == allButtons.get(id)) {
                 allButton.setText(units + "");
                 allButton.setStyle("-fx-color: #FFFFFF");
-                //allButton.setTextFill();
+                allButton.setTextFill(Color.WHITE);
                 break;
             }
         }
@@ -68,19 +68,11 @@ public class View extends AnchorPane {
      */
     public void setColor(Button button, Color color, List<Button> allButtons)
     {
-
-        String hex = String.format( "#%02X%02X%02X",
-                (int)( color.getRed() * 255 ),
-                (int)( color.getGreen() * 255 ),
-                (int)( color.getBlue() * 255 ) );
-
         for (Button allButton : allButtons) {
             if (button == allButton) {
-                allButton.setStyle("-fx-background-color: " + hex + ";");
-                System.out.println(hex);
+                allButton.setStyle(colorToHex(color));
             }
         }
-
     }
 
     /**
@@ -88,15 +80,20 @@ public class View extends AnchorPane {
      * @param colors An array with colors.
      * @param mapController The mapController used in the project.
      */
-    public void resetColor(Color[] colors, MapController mapController)
+    public void resetColor(List<Color> colors, List<Button> allButtons)
     {
-        /*
-        mapController.cubeHubben.setFill(colors[1]);
-        mapController.cubeBasen.setFill(colors[2]);
-        mapController.cubeKajsabaren.setFill(colors[3]);
-        mapController.cubeZaloonen.setFill(colors[4]);
-
-         */
+        for(int i = 0; i < allButtons.size(); i++)
+        {
+           allButtons.get(i).setStyle(colorToHex(colors.get(i)));
+        }
+    }
+    private String colorToHex(Color color)
+    {
+        String hex = String.format( "#%02X%02X%02X",
+                (int)( color.getRed() * 255 ),
+                (int)( color.getGreen() * 255 ),
+                (int)( color.getBlue() * 255 ));
+        return "-fx-background-color: " +  hex + ";";
     }
 
     /**

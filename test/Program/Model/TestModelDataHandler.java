@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestModelDataHandler {
 
-    ModelDataHandler mdh = new ModelDataHandler();
+    ModelDataHandler mdh = new ModelDataHandler(25);
 
     @Test
     public void testRound() {

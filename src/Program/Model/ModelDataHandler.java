@@ -18,23 +18,23 @@ public class ModelDataHandler {
 
     private Board board;
 
-    public ModelDataHandler()
+    public ModelDataHandler(int amountOfSpaces)
     {
-        startGame();
+        startGame(amountOfSpaces);
     }
-    private void startGame()
+    private void startGame(int amountOfSpaces)
     {
         currentplayer = players.get(0);
         int player = -1;
         Player lastrandomplayer = players.get(0);
         List<Space> spaces = new ArrayList<>();
-        for(int i = 0; i < 25; i++)
+        for(int i = 0; i < amountOfSpaces; i++)
         {
             player++;
             if(player > 1)
                 player = 0;
             lastrandomplayer = getRandomPlayer(lastrandomplayer);
-            spaces.add(new Space(i,lastrandomplayer,10,"1"));
+            spaces.add(new Space(i,lastrandomplayer,10,i + ""));
         }
         board = new Board(spaces);
         round = new Round();
@@ -173,5 +173,6 @@ public class ModelDataHandler {
     {
         return board.findSpace(id).getPlayer().getColor();
     }
+    public List<Color> getColorOnAllSpaces(){return board.getColorOnAllSpaces();}
 
 }

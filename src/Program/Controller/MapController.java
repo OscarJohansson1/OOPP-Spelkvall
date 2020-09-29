@@ -138,7 +138,7 @@ public class MapController extends AnchorPane {
     private
     Button moveButton;
 
-    private ModelDataHandler modelDataHandler = new ModelDataHandler();
+    private ModelDataHandler modelDataHandler;
     private View view = new View();
     private List<Button> allButtons;
 
@@ -159,7 +159,7 @@ public class MapController extends AnchorPane {
                 cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
                 cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen, cubeOrigogarden));
 
-
+        modelDataHandler = new ModelDataHandler(allButtons.size());
         initialize();
     }
     private void initialize() {
@@ -170,11 +170,10 @@ public class MapController extends AnchorPane {
             allButtons.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    setSpace(var + 1);
+                    setSpace(var);
                 }
             });
         }
-
         skipAttack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -231,10 +230,10 @@ public class MapController extends AnchorPane {
         });
         view.setUpStart(this);
         view.updatePhasePlayerText(modelDataHandler.getCurrentPlayerName(), modelDataHandler.getCurrenPhase(), this);
-        view.updateTextUnits(1, modelDataHandler.findUnitsOnSpace(1), allButtons);
-        view.updateTextUnits(2, modelDataHandler.findUnitsOnSpace(2),allButtons);
-        view.updateTextUnits(3, modelDataHandler.findUnitsOnSpace(3), allButtons);
-        view.updateTextUnits(4, modelDataHandler.findUnitsOnSpace(4), allButtons);
+        for(int i = 0; i < allButtons.size(); i++)
+        {
+            view.updateTextUnits(i, modelDataHandler.findUnitsOnSpace(i), allButtons);
+        }
         resetColor();
     }
     private void setSpace(int id) {
@@ -253,6 +252,7 @@ public class MapController extends AnchorPane {
     }
     private void setSpaceEvent(int id) {
         view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id), allButtons);
+        view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
     }
     private void setSpaceEvent(int id, int id2) {
         view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id), allButtons);
@@ -260,39 +260,28 @@ public class MapController extends AnchorPane {
         view.updateTextUnits(id2, modelDataHandler.findUnitsOnSpace(id2), allButtons);
         view.setColor(getCube(id2), modelDataHandler.getColorOnSpace(id2), allButtons);
     }
+    private List<Color> getColors()
+    {
+        return modelDataHandler.getColorOnAllSpaces();
+    }
     private void resetColor() {
-        Color[] colors = new Color[] {
-                null,
-                modelDataHandler.getColorOnSpace(1),
-                modelDataHandler.getColorOnSpace(2),
-                modelDataHandler.getColorOnSpace(3),
-                modelDataHandler.getColorOnSpace(4)
-
-        };
-        view.resetColor(colors,this);
+        view.resetColor(getColors(),allButtons);
     }
     private void resetColor(int id) {
-        Color[] colors = new Color[] {
-                null,
-                modelDataHandler.getColorOnSpace(1),
-                modelDataHandler.getColorOnSpace(2),
-                modelDataHandler.getColorOnSpace(3),
-                modelDataHandler.getColorOnSpace(4)
-
-        };
-        for(int i = 1; i < colors.length; i++)
+        List<Color> colors = getColors();
+        for(int i = 1; i < allButtons.size(); i++)
         {
-            if(i == id)
-            {
-                colors[i] = colors[i].darker().darker();
+            if(i == id) {
+
+                colors.set(i,colors.get(i).darker().darker());
             }
         }
-        view.resetColor(colors,this);
+        view.resetColor(colors,allButtons);
     }
     private Button getCube(int id) {
-        for (int i = 0; i < allButtons.size(); i++){
-            if (allButtons.get(id) == allButtons.get(i)){
-                return allButtons.get(i);
+        for (Button allButton : allButtons) {
+            if (allButtons.get(id) == allButton) {
+                return allButton;
             }
         }
         return null;

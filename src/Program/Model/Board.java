@@ -2,6 +2,7 @@ package Program.Model;
 
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class Board {
@@ -29,5 +30,13 @@ class Board {
             }
         }
         return null;
+    }
+    public List<Color> getColorOnAllSpaces()
+    {
+        List<Color> colors = new ArrayList<>();
+        for (Space space : spaces) {
+            colors.add(space.getPlayer().getColor());
+        }
+        return colors;
     }
 }
