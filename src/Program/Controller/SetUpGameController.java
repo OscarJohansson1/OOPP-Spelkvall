@@ -105,7 +105,8 @@ public class SetUpGameController extends AnchorPane {
     @FXML
     private Button rec16;
 
-
+    private int nextToChoose = 1;
+    private ArrayList<Button> selectedButtons = new ArrayList<>();
     private ArrayList<Player> playerList = new ArrayList<>();
     private ArrayList<Integer> nextPlayerNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
             11, 12, 13, 14, 15, 16));
@@ -133,58 +134,6 @@ public class SetUpGameController extends AnchorPane {
         initialize();
     }
 
-    private void mouseClicked(Button button){
-
-    }
-
-    private void makeSelected(Button button){
-
-    }
-
-    private void createPlayerList(int players){
-        if (players > playerList.size()){
-            for(int i = playerList.size(); i < players; i++){
-                playerList.add(new Player(0, i + 1, Color.web("#FF0000")));
-            }
-        } else if (players < playerList.size()){
-            for(int i = playerList.size(); i > players; i--){
-                playerList.remove(playerList.size() - 1);
-            }
-        }
-    }
-
-    private int getAndRemoveNextPlayerToChoose(){
-        return nextPlayerNumber.remove(0);
-    }
-
-    private void addPlayerToChoose(int playerNumber){
-        int i = 0;
-        if(nextPlayerNumber.contains(playerNumber)){
-            return;
-        } else {
-            while(nextPlayerNumber.get(i) < playerNumber){
-                i++;
-            }
-            nextPlayerNumber.add(i, playerNumber);
-        }
-    }
-
-    private void updatePlayer(String color, String studentDivision){
-        int n = getAndRemoveNextPlayerToChoose();
-        playerList.add(playerList.indexOf(playerList.remove(n)), new Player(0, n, Color.web(color)));
-    }
-
-    private void updatePlayerGrid(){
-
-        for(int i = 0; i < slider.getValue(); i++){
-            playerButtonList.get(i).setVisible(true);
-        }
-        for(int i = (int) slider.getValue(); i < playerButtonList.size(); i++){
-            playerButtonList.get(i).setVisible(false);
-        }
-    }
-
-
     private void initialize() {
 
         updatePlayerGrid();
@@ -192,21 +141,26 @@ public class SetUpGameController extends AnchorPane {
         slider.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                createPlayerList((int) slider.getValue());
                 updatePlayerGrid();
             }
         });
         startGameButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                System.out.println(playerList.size());
+                System.out.println(slider.getValue());
+                if(playerList.size() >= slider.getValue()) {
+                    System.out.println(playerList.subList(0, (int) slider.getValue()));
+                    MapController mapController = new MapController();
+                    Parent root = mapController;
+                    //give players to
 
-                MapController mapController = new MapController();
-                Parent root = mapController;
-                Scene scene = new Scene(root, 1920, 1080);
+                    Scene scene = new Scene(root, 1920, 1080);
 
-                stage.setTitle("Chans");
-                stage.setScene(scene);
-                stage.show();
+                    stage.setTitle("Chans");
+                    stage.setScene(scene);
+                    stage.show();
+                }
 
             }
         });
@@ -245,4 +199,55 @@ public class SetUpGameController extends AnchorPane {
         }
     }
 
+    private void mouseClicked(Button button){
+        if(!selectedButtons.contains(button) && nextToChoose <= 16) {
+            System.out.println(button.getStyle().substring(22,29));
+            playerList.add(new Player(0, nextToChoose, Color.web(button.getStyle().substring(22,29))));
+
+            Button playerButton = playerButtonList.get(nextToChoose - 1);
+            playerButton.setText("Player " + nextToChoose + " represents " + button.getText());
+            playerButton.setStyle(button.getStyle());
+
+            button.setStyle("-fx-background-color: #A0A0A0");
+            button.setText(Integer.toString(nextToChoose));
+
+            selectedButtons.add(button);
+            nextToChoose++;
+        }
+    }
+
+    private void makeSelected(Button button){
+
+    }
+
+    private int getAndRemoveNextPlayerToChoose(){
+        return nextPlayerNumber.remove(0);
+    }
+
+    private void addPlayerToChoose(int playerNumber){
+        int i = 0;
+        if(nextPlayerNumber.contains(playerNumber)){
+            return;
+        } else {
+            while(nextPlayerNumber.get(i) < playerNumber){
+                i++;
+            }
+            nextPlayerNumber.add(i, playerNumber);
+        }
+    }
+
+    private void updatePlayer(String color, String studentDivision){
+        int n = getAndRemoveNextPlayerToChoose();
+        playerList.add(playerList.indexOf(playerList.remove(n)), new Player(0, n, Color.web(color)));
+    }
+
+    private void updatePlayerGrid(){
+
+        for(int i = 0; i < slider.getValue(); i++){
+            playerButtonList.get(i).setVisible(true);
+        }
+        for(int i = (int) slider.getValue(); i < playerButtonList.size(); i++){
+            playerButtonList.get(i).setVisible(false);
+        }
+    }
 }

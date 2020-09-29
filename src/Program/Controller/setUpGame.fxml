@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -44,12 +43,12 @@
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recAE" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: bfff00;" text="AE" textFill="WHITE" GridPane.columnIndex="1">
+            <Button fx:id="recAE" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #bfff00;" text="AE" textFill="WHITE" GridPane.columnIndex="1">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recA" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: ff0000;" text="A" textFill="WHITE">
+            <Button fx:id="recA" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #ff0000;" text="A" textFill="WHITE">
                <font>
                   <Font size="48.0" />
                </font>
@@ -59,7 +58,7 @@
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recH" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: de3163;" text="H" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="recH" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #de3163;" text="H" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="48.0" />
                </font>
@@ -132,102 +131,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Rectangle fx:id="rec1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
-            <Rectangle fx:id="rec9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.columnIndex="1" />
-            <Rectangle fx:id="rec2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.rowIndex="1" />
-            <Rectangle fx:id="rec10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Rectangle fx:id="rec3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.rowIndex="2" />
-            <Rectangle fx:id="rec11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Rectangle fx:id="rec4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.rowIndex="3" />
-            <Rectangle fx:id="rec12" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Rectangle fx:id="rec5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.rowIndex="4" />
-            <Rectangle fx:id="rec13" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Rectangle fx:id="rec6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.rowIndex="5" />
-            <Rectangle fx:id="rec14" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Rectangle fx:id="rec7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.rowIndex="6" />
-            <Rectangle fx:id="rec15" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Rectangle fx:id="rec8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.rowIndex="7" />
-            <Rectangle fx:id="rec16" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="65.0" stroke="BLACK" strokeType="INSIDE" width="300.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Text fx:id="text1" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER" wrappingWidth="300.0">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text9" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 9" textAlignment="CENTER" wrappingWidth="300.0" GridPane.columnIndex="1">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text2" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" textAlignment="CENTER" wrappingWidth="300.0" GridPane.rowIndex="1">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text10" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 10" textAlignment="CENTER" wrappingWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text3" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" textAlignment="CENTER" wrappingWidth="300.0" GridPane.rowIndex="2">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text11" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 11" textAlignment="CENTER" wrappingWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text4" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" textAlignment="CENTER" wrappingWidth="300.0" GridPane.rowIndex="3">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text12" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 12" textAlignment="CENTER" wrappingWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text5" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 5" textAlignment="CENTER" wrappingWidth="300.0" GridPane.rowIndex="4">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text13" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 13" textAlignment="CENTER" wrappingWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text6" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 6" textAlignment="CENTER" wrappingWidth="300.0" GridPane.rowIndex="5">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text14" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 14" textAlignment="CENTER" wrappingWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text7" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 7" textAlignment="CENTER" wrappingWidth="300.0" GridPane.rowIndex="6">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text15" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 15" textAlignment="CENTER" wrappingWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text8" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 8" textAlignment="CENTER" wrappingWidth="300.0" GridPane.rowIndex="7">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="text16" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 16" textAlignment="CENTER" wrappingWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
+            <Button fx:id="rec1" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 1" />
+            <Button fx:id="rec2" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 2" GridPane.rowIndex="1" />
+            <Button fx:id="rec3" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 3" GridPane.rowIndex="2" />
+            <Button fx:id="rec4" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 4" GridPane.rowIndex="3" />
+            <Button fx:id="rec5" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 5" GridPane.rowIndex="4" />
+            <Button fx:id="rec6" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 6" GridPane.rowIndex="5" />
+            <Button fx:id="rec7" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 7" GridPane.rowIndex="6" />
+            <Button fx:id="rec8" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 8" GridPane.rowIndex="7" />
+            <Button fx:id="rec9" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 9" GridPane.columnIndex="1" />
+            <Button fx:id="rec10" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 10" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="rec11" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 11" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="rec12" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 12" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="rec13" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 13" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="rec14" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 14" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="rec15" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 15" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button fx:id="rec16" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 16" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Button fx:id="startGameButton" layoutX="1391.0" layoutY="778.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: #1e90ff;" text="Start Game">
