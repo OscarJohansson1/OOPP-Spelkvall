@@ -15,7 +15,7 @@
             <Image url="@../picures/OOPP-Map.png" />
          </image>
       </ImageView>
-      <Text layoutX="1531.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hubben" wrappingWidth="99.16168203928046">
+      <Text fx:id="textHubben" layoutX="1531.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hubben" wrappingWidth="99.16168203928046">
          <font>
             <Font size="24.0" />
          </font>
@@ -40,16 +40,16 @@
          <font>
             <Font size="24.0" />
          </font></Text>
-      <Text layoutX="411.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spektrum">
+      <Text fx:id="textSpektrum" layoutX="411.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spektrum">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1438.0" layoutY="743.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A-damen">
+      <Text fx:id="textAdammen" layoutX="1438.0" layoutY="743.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A-damen">
          <font>
             <Font size="24.0" />
          </font></Text>
-      <Text layoutX="1065.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GT Spritis">
+      <Text fx:id="textGTSpritis" layoutX="1065.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GT Spritis">
          <font>
             <Font size="24.0" />
          </font></Text>
@@ -64,107 +64,107 @@
             </Text>
          </children>
       </AnchorPane>
-      <Text layoutX="902.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Focus">
+      <Text fx:id="textFocus" layoutX="902.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Focus">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1615.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Basen" wrappingWidth="99.16168203928046">
+      <Text fx:id="textBasen" layoutX="1615.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Basen" wrappingWidth="99.16168203928046">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1517.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kajsabaren" wrappingWidth="119.16168203928046">
+      <Text fx:id="textKajsabaren" layoutX="1517.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kajsabaren" wrappingWidth="119.16168203928046">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1488.0" layoutY="693.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Röda Rummet">
+      <Text fx:id="textRodaRummet" layoutX="1488.0" layoutY="693.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Röda Rummet">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1582.0" layoutY="641.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Verum">
+      <Text fx:id="textVerum" layoutX="1582.0" layoutY="641.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Verum">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1593.0" layoutY="722.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Villan">
+      <Text fx:id="textVillan" layoutX="1593.0" layoutY="722.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Villan">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1334.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tågvagnen">
+      <Text fx:id="textTagvagnen" layoutX="1334.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tågvagnen">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1228.0" layoutY="708.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gasquen">
+      <Text fx:id="textGasquen" layoutX="1228.0" layoutY="708.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gasquen">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1170.0" layoutY="624.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Olgas">
+      <Text fx:id="textOlgas" layoutX="1170.0" layoutY="624.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Olgas">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="926.0" layoutY="759.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chalmersplatsen">
+      <Text fx:id="textChalmersplatsen" layoutX="926.0" layoutY="759.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chalmersplatsen">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1091.0" layoutY="723.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RunAn">
+      <Text fx:id="textRunAn" layoutX="1091.0" layoutY="723.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RunAn">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1035.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FortNox">
+      <Text fx:id="textFortNox" layoutX="1035.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FortNox">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="830.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chabo">
+      <Text fx:id="textChabo" layoutX="830.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chabo">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="657.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wijkanders">
+      <Text fx:id="textWijkanders" layoutX="657.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wijkanders">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="568.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Golden I">
+      <Text fx:id="textGoldenI" layoutX="568.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Golden I">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1270.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zaloonen">
+      <Text fx:id="textZaloonen" layoutX="1270.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zaloonen">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1128.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Winden">
+      <Text fx:id="textWinden" layoutX="1128.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Winden">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1318.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LofTDet">
+      <Text fx:id="textLofTDet" layoutX="1318.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LofTDet">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="344.0" layoutY="783.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Älvan">
+      <Text fx:id="textAlvan" layoutX="344.0" layoutY="783.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Älvan">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="481.0" layoutY="784.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H-Rum?">
+      <Text fx:id="textHrum" layoutX="481.0" layoutY="784.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H-Rum?">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="1024.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Origogården">
+      <Text fx:id="textOrigogården" layoutX="1024.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Origogården">
          <font>
             <Font size="24.0" />
          </font>

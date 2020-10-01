@@ -11,7 +11,6 @@ class Movement {
         int units1 = space1.getUnits();
         int units2 = space2.getUnits();
 
-
         //TODO insert way for player to determine desired unit spread via the UI
 
         System.out.println(space1.getUnits());

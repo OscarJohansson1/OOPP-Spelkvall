@@ -97,7 +97,81 @@ public class MapController extends AnchorPane {
     public
     Button cubeOrigogarden;
 
-
+    @FXML
+    public
+    Text textHubben;
+    @FXML
+    public
+    Text textBasen;
+    @FXML
+    public
+    Text textKajsaBaren;
+    @FXML
+    public
+    Text textZaloonen;
+    @FXML
+    public
+    Text textWinden;
+    @FXML
+    public
+    Text textLofTDet;
+    @FXML
+    public
+    Text textRodaRummet;
+    @FXML
+    public
+    Text textVerum;
+    @FXML
+    public
+    Text textVillan;
+    @FXML
+    public
+    Text textAdammen;
+    @FXML
+    public
+    Text textFocus;
+    @FXML
+    public
+    Text textFortNox;
+    @FXML
+    public
+    Text textGTSpritis;
+    @FXML
+    public
+    Text textGoldenI;
+    @FXML
+    public
+    Text textChabo;
+    @FXML
+    public
+    Text textWijkanders;
+    @FXML
+    public
+    Text textHrum;
+    @FXML
+    public
+    Text textAlvan;
+    @FXML
+    public
+    Text textSpektrum;
+    @FXML
+    public
+    Text textGasquen;
+    @FXML
+    public
+    Text textChalmersplatsen;
+    @FXML
+    public
+    Text textOlgas;
+    @FXML
+    public
+    Text textRunAn;
+    @FXML
+    public
+    Text textTagvagnen;
+    @FXML
+    public
+    Text textOrigogården;
 
     @FXML
     public
@@ -158,10 +232,18 @@ public class MapController extends AnchorPane {
     private
     Text showMoveUnitsText;
 
+    @FXML
+    private
+    Text firstDisplayText;
+    @FXML
+    private
+    Text secondDisplayText;
+
 
     private ModelDataHandler modelDataHandler;
     private mapView view = new mapView();
     private List<Button> allButtons;
+    private List<Text> allTexts;
 
 
     MapController() {
@@ -178,7 +260,11 @@ public class MapController extends AnchorPane {
 
         allButtons = new ArrayList<>(Arrays.asList(cubeHubben,cubeBasen,cubeKajsabaren,cubeZaloonen,cubeWinden,cubeLofTDet,
                 cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
-                cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen, cubeOrigogarden));
+                cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden));
+
+        allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsaBaren, textZaloonen, textWijkanders, textLofTDet,
+                textRodaRummet,textVerum, textVillan, textAdammen, textFocus, textFortNox,textGTSpritis, textGoldenI, textChabo,textWijkanders,textHrum,
+                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogården));
 
 
         modelDataHandler = new ModelDataHandler(allButtons.size());
@@ -205,6 +291,7 @@ public class MapController extends AnchorPane {
                 view.updatePhase("MOVE", MapController.this);
                 resetColor();
                 resetDisplayCubes();
+                resetDisplayText();
                 sliderVisibility(true);
             }
         });
@@ -215,6 +302,7 @@ public class MapController extends AnchorPane {
                 view.updatePhase("DEPLOY", MapController.this);
                 resetColor();
                 resetDisplayCubes();
+                resetDisplayText();
                 view.updatePhasePlayerText(modelDataHandler.getCurrentPlayerName(), "DEPLOY",MapController.this);
                 sliderVisibility(true);
             }
@@ -226,6 +314,7 @@ public class MapController extends AnchorPane {
                 view.updatePhase("ATTACK", MapController.this);
                 resetColor();
                 resetDisplayCubes();
+                resetDisplayText();
                 sliderVisibility(false);
             }
         });
@@ -258,7 +347,7 @@ public class MapController extends AnchorPane {
                     modelDataHandler.resetSelectedSpace();
                 }
                 resetDisplayCubes();
-
+                resetDisplayText();
             }
         });
 
@@ -278,9 +367,6 @@ public class MapController extends AnchorPane {
         }
         resetColor();
         view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
-
-
-
     }
 
     private void sliderVisibility(Boolean visible){
@@ -362,5 +448,14 @@ public class MapController extends AnchorPane {
     private void resetDisplayCubes(){
         view.resetDisplayCubes(firstMarked);
         view.resetDisplayCubes(secondMarked);
+    }
+
+    private void displayText(Text displayText, Text cubeText){
+       view.updateDisplayTexts(displayText, cubeText);
+    }
+
+    private void resetDisplayText(){
+        view.resetDisplayTexts(firstDisplayText);
+        view.resetDisplayTexts(secondDisplayText);
     }
 }

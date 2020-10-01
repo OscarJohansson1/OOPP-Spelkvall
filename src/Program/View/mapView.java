@@ -87,6 +87,14 @@ public class mapView extends AnchorPane {
         button.setStyle(null);
     }
 
+    public void updateDisplayTexts(Text displayText, Text cubeText){
+        displayText.setText(cubeText.getText());
+    }
+
+    public void resetDisplayTexts(Text text){
+        text.setStyle(null);
+    }
+
     public void updateDeployableUnits(Text text, int units){
         text.setText("Deployable units: " + units + "");
     }
