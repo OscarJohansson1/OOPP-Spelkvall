@@ -18,7 +18,7 @@ public class ModelDataHandler {
 
     private Board board;
 
-    private int unitsToUse;
+    private int unitsToUse = 1;
 
     public ModelDataHandler(int amountOfSpaces)
     {

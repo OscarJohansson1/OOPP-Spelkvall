@@ -257,9 +257,8 @@ public class MapController extends AnchorPane {
                     setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
                     modelDataHandler.resetSelectedSpace();
                 }
-                else{
-                    resetDisplayCubes();
-                }
+                resetDisplayCubes();
+
             }
         });
 
