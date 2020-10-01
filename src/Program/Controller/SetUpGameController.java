@@ -215,12 +215,12 @@ public class SetUpGameController extends AnchorPane {
     private void makeSelected(Button button){
 
     }
-
+    /*
     private int getAndRemoveNextPlayerToChoose(){
         return nextPlayerNumber.remove(0);
-    }
+    }*/
 
-    private void addPlayerToChoose(int playerNumber){
+    /*private void addPlayerToChoose(int playerNumber){
         int i = 0;
         if(nextPlayerNumber.contains(playerNumber)){
             return;
@@ -230,20 +230,15 @@ public class SetUpGameController extends AnchorPane {
             }
             nextPlayerNumber.add(i, playerNumber);
         }
-    }
+    }*/
 
-    private void updatePlayer(String color, String studentDivision){
+    /*private void updatePlayer(String color, String studentDivision){
         int n = getAndRemoveNextPlayerToChoose();
         playerList.add(playerList.indexOf(playerList.remove(n)), new Player(0, n, Color.web(color)));
-    }
+    }*/
 
     private void updatePlayerGrid(){
 
-        for(int i = 0; i < slider.getValue(); i++){
-            playerButtonList.get(i).setVisible(true);
-        }
-        for(int i = (int) slider.getValue(); i < playerButtonList.size(); i++){
-            playerButtonList.get(i).setVisible(false);
-        }
+
     }
 }
