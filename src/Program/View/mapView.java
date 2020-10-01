@@ -43,6 +43,10 @@ public class mapView extends AnchorPane {
         mapController.phaseText.setText(currentPhase);
     }
 
+    public void updateSliderText(int units, Text text){
+        text.setText(units + "");
+    }
+
     /**
      * Method that update the amount of units-text based on id of space.
      * @param id Id of space that the amount of units should be updated on.
@@ -75,10 +79,21 @@ public class mapView extends AnchorPane {
         }
     }
 
+    public void updateDisplayCubes(Button button, Color color){
+        button.setStyle(colorToHex(color));
+    }
+
+    public void resetDisplayCubes(Button button){
+        button.setStyle(null);
+    }
+
+    public void updateDeployableUnits(Text text, int units){
+        text.setText("Deployable units: " + units + "");
+    }
+
     /**
      * Method that resets the colors to a standard colors.
      * @param colors An array with colors.
-     * @param mapController The mapController used in the project.
      */
     public void resetColor(List<Color> colors, List<Button> allButtons)
     {

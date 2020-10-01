@@ -7,10 +7,10 @@ class Deployment {
      * @param currentplayer The player that plays the current turn.
      * @return If the deployment was successful.
      */
-    static boolean startDeployment(Space space, Player currentplayer) {
-        if(space.getPlayer() == currentplayer) {
-            deployUnit(space,currentplayer.getUnits());
-            currentplayer.setUnits(currentplayer.getUnits() - 1);
+    static boolean startDeployment(Space space, Player currentplayer, int amount) {
+        if(space.getPlayer() == currentplayer && currentplayer.getUnits() >= amount) {
+            deployUnit(space,amount);
+            currentplayer.setUnits(currentplayer.getUnits() - amount);
             return true;
         }
         else{
@@ -20,7 +20,7 @@ class Deployment {
     }
     private static void deployUnit(Space space, int unitsToDeploy){
         if(unitsToDeploy > 0) {
-            space.updateSpace(space.getUnits() + 1);
+            space.updateSpace(space.getUnits() + unitsToDeploy);
         }
         else {
             System.out.println("No Units Remaining");

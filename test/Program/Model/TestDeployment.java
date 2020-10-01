@@ -35,13 +35,13 @@ public class TestDeployment {
 
     @Test
     public void testStartDeploymentUnitIncrement() {
-        Deployment.startDeployment(space1, player1);
+        Deployment.startDeployment(space1, player1, 5);
         assertEquals(6, space1.getUnits(), "Amount of units on space didn't increase with 1");
     }
 
     @Test
     public void testStartDeploymentWrongSpace() {
-        Deployment.startDeployment(space2, player1);
+        Deployment.startDeployment(space2, player1,5);
         assertEquals(5, space2.getUnits(), "Amount of units on space changed, when it shouldn't");
     }
 }

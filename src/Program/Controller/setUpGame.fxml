@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root fx:id="pane" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #ffffff;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="pane" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #ffffff;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Circle fill="DODGERBLUE" layoutX="168.0" layoutY="159.0" radius="130.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="442.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player Selection" textAlignment="CENTER" wrappingWidth="1052.6602783203125">
@@ -19,7 +19,7 @@
          </font>
       </Text>
       <Slider fx:id="slider" blockIncrement="4.0" layoutX="455.0" layoutY="232.0" majorTickUnit="1.0" max="16.0" min="2.0" minorTickCount="0" prefHeight="48.0" prefWidth="1039.0" showTickLabels="true" snapToTicks="true" value="4.0" />
-      <GridPane gridLinesVisible="true" layoutX="83.0" layoutY="348.0" prefHeight="520.0" prefWidth="520.0">
+      <GridPane gridLinesVisible="true" layoutX="135.0" layoutY="348.0" prefHeight="600.0" prefWidth="600.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -33,89 +33,89 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="recE" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #ffff00;" text="E" textFill="WHITE" GridPane.columnIndex="3">
+            <Button fx:id="recE" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #ffff00;" text="E" textFill="WHITE" GridPane.columnIndex="3">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recD" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #ff8000;" text="D" textFill="WHITE" GridPane.columnIndex="2">
+            <Button fx:id="recD" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #ff8000;" text="D" textFill="WHITE" GridPane.columnIndex="2">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recAE" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #bfff00;" text="AE" textFill="WHITE" GridPane.columnIndex="1">
+            <Button fx:id="recAE" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #bfff00;" text="AE" textFill="WHITE" GridPane.columnIndex="1">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recA" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #ff0000;" text="A" textFill="WHITE">
+            <Button fx:id="recA" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #ff0000;" text="A" textFill="WHITE">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recF" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #000000;" text="F" textFill="WHITE" GridPane.rowIndex="1">
+            <Button fx:id="recF" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #000000;" text="F" textFill="WHITE" GridPane.rowIndex="1">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recH" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #de3163;" text="H" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="recH" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #de3163;" text="H" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recI" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #9f00c5;" text="I" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button fx:id="recI" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #9f00c5;" text="I" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recIT" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #09cdda;" text="IT" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Button fx:id="recIT" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #09cdda;" text="IT" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recK" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #00c000;" text="K" textFill="WHITE" GridPane.rowIndex="2">
+            <Button fx:id="recK" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #00c000;" text="K" textFill="WHITE" GridPane.rowIndex="2">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recKfKb" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #007000;" text="KfKb" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button fx:id="recKfKb" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #007000;" text="KfKb" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="36.0" />
                </font>
             </Button>
-            <Button fx:id="recM" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #964b00;" text="M" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Button fx:id="recM" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #964b00;" text="M" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recSjo" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #000080;" text="Sjö" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <Button fx:id="recSjo" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #000080;" text="Sjö" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recTB" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" text="TB" GridPane.rowIndex="3">
+            <Button fx:id="recTB" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="TB" GridPane.rowIndex="3">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recTD" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #5f021f;" text="TD" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button fx:id="recTD" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #5f021f;" text="TD" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recV" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #4141ff;" text="V" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Button fx:id="recV" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #4141ff;" text="V" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recZ" mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-background-color: #808080;" text="Z" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <Button fx:id="recZ" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #808080;" text="Z" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <font>
                   <Font size="48.0" />
                </font>
             </Button>
          </children>
       </GridPane>
-      <GridPane fx:id="gridPane" layoutX="698.0" layoutY="348.0" prefHeight="520.0" prefWidth="600.0">
+      <GridPane fx:id="gridPane" layoutX="886.0" layoutY="344.0" prefHeight="600.0" prefWidth="600.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -131,30 +131,30 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="rec1" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 1" />
-            <Button fx:id="rec2" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 2" GridPane.rowIndex="1" />
-            <Button fx:id="rec3" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 3" GridPane.rowIndex="2" />
-            <Button fx:id="rec4" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 4" GridPane.rowIndex="3" />
-            <Button fx:id="rec5" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 5" GridPane.rowIndex="4" />
-            <Button fx:id="rec6" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 6" GridPane.rowIndex="5" />
-            <Button fx:id="rec7" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 7" GridPane.rowIndex="6" />
-            <Button fx:id="rec8" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 8" GridPane.rowIndex="7" />
-            <Button fx:id="rec9" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 9" GridPane.columnIndex="1" />
-            <Button fx:id="rec10" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 10" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="rec11" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 11" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="rec12" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 12" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="rec13" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 13" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="rec14" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 14" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="rec15" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 15" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Button fx:id="rec16" mnemonicParsing="false" prefHeight="65.0" prefWidth="300.0" text="Player 16" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button fx:id="rec1" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 1" />
+            <Button fx:id="rec2" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 2" GridPane.rowIndex="1" />
+            <Button fx:id="rec3" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 3" GridPane.rowIndex="2" />
+            <Button fx:id="rec4" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 4" GridPane.rowIndex="3" />
+            <Button fx:id="rec5" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 5" GridPane.rowIndex="4" />
+            <Button fx:id="rec6" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 6" GridPane.rowIndex="5" />
+            <Button fx:id="rec7" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 7" GridPane.rowIndex="6" />
+            <Button fx:id="rec8" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 8" GridPane.rowIndex="7" />
+            <Button fx:id="rec9" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 9" GridPane.columnIndex="1" />
+            <Button fx:id="rec10" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 10" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="rec11" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 11" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="rec12" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 12" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="rec13" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 13" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="rec14" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 14" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="rec15" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 15" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button fx:id="rec16" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Player 16" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
-      <Button fx:id="startGameButton" layoutX="1391.0" layoutY="778.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: #1e90ff;" text="Start Game">
+      <Button fx:id="startGameButton" layoutX="1689.0" layoutY="939.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="200.0" style="-fx-background-color: #1e90ff;" text="Start Game">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="backButton" layoutX="1391.0" layoutY="670.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="150.0" text="Back">
+      <Button fx:id="backButton" layoutX="1689.0" layoutY="809.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="200.0" text="Back">
          <font>
             <Font size="24.0" />
          </font>

@@ -32,7 +32,7 @@ public class TestMovement {
     @Test
     public void testMovement() {
         // Rewrite test when movement has been implemented correctly
-        movement.MoveUnits(space1, space2);
+        movement.MoveUnits(space1, space2, 10);
         assertEquals(3, space1.getUnits(), "Didn't switch units with space2");
     }
 
