@@ -8,7 +8,7 @@ public class Player {
     private int id;
     private Color color;
 
-    public Player(int units, int id, Color color) {
+    Player(int units, int id, Color color) {
         this.units = units;
         this.id = id;
         this.color = color;

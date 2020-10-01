@@ -92,7 +92,7 @@ public class mapView extends AnchorPane {
     }
 
     public void resetDisplayTexts(Text text){
-        text.setStyle(null);
+        text.setText("");
     }
 
     public void updateDeployableUnits(Text text, int units){

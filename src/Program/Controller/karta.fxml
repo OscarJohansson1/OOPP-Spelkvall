@@ -198,7 +198,7 @@
       <Button fx:id="firstMarked" layoutX="29.0" layoutY="250.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="secondMarked" layoutX="241.0" layoutY="251.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Text fx:id="showMoveUnitsText" layoutX="151.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-      <Text fx:id="firstDisplayText" layoutX="40.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text fx:id="secondDisplayText" layoutX="252.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fx:id="firstDisplayText" layoutX="29.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fx:id="secondDisplayText" layoutX="241.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
    </children>
 </fx:root>

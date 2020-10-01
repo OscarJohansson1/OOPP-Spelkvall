@@ -1,6 +1,5 @@
 package Program.Controller;
 
-import Program.Model.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -107,7 +106,7 @@ public class SetUpGameController extends AnchorPane {
 
     private int nextToChoose = 1;
     private ArrayList<Button> selectedButtons = new ArrayList<>();
-    private ArrayList<Player> playerList = new ArrayList<>();
+    private ArrayList<Color> colorList = new ArrayList<>();
     private ArrayList<Integer> nextPlayerNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
             11, 12, 13, 14, 15, 16));
     private ArrayList<Button> playerButtonList;
@@ -147,8 +146,8 @@ public class SetUpGameController extends AnchorPane {
         startGameButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(playerList.size() >= slider.getValue()) {
-                    MapController mapController = new MapController();
+                if(colorList.size() >= slider.getValue()) {
+                    MapController mapController = new MapController(colorList);
                     Parent root = mapController;
                     //give players to
 
@@ -165,7 +164,7 @@ public class SetUpGameController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                MapController mapController = new MapController();
+                MapController mapController = new MapController(colorList);
                 Parent root = mapController;
                 Scene scene = new Scene(root, 1920, 1080);
 
@@ -198,7 +197,7 @@ public class SetUpGameController extends AnchorPane {
 
     private void mouseClicked(Button button){
         if(!selectedButtons.contains(button) && nextToChoose <= 16) {
-            playerList.add(new Player(0, nextToChoose, Color.web(button.getStyle().substring(22,29))));
+            colorList.add(Color.web(button.getStyle().substring(22,29)));
 
             Button playerButton = playerButtonList.get(nextToChoose - 1);
             playerButton.setText("Player " + nextToChoose + " represents " + button.getText());

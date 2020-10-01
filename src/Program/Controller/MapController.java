@@ -1,6 +1,7 @@
 package Program.Controller;
 
 import Program.Model.ModelDataHandler;
+import Program.Model.Player;
 import Program.View.mapView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -246,7 +247,7 @@ public class MapController extends AnchorPane {
     private List<Text> allTexts;
 
 
-    MapController() {
+    MapController(List<Color> colors) {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
@@ -257,7 +258,7 @@ public class MapController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
+        this.modelDataHandler = modelDataHandler;
         allButtons = new ArrayList<>(Arrays.asList(cubeHubben,cubeBasen,cubeKajsabaren,cubeZaloonen,cubeWinden,cubeLofTDet,
                 cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
                 cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden));
@@ -267,12 +268,11 @@ public class MapController extends AnchorPane {
                 textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogården));
 
 
-        modelDataHandler = new ModelDataHandler(allButtons.size());
+        modelDataHandler = new ModelDataHandler(allButtons.size(), colors);
         initialize();
     }
     private void initialize() {
         //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
-
 
 
         for (int i = 0; i<allButtons.size(); i++){
@@ -293,6 +293,7 @@ public class MapController extends AnchorPane {
                 resetDisplayCubes();
                 resetDisplayText();
                 sliderVisibility(true);
+                addMarkedCube(secondMarked);
             }
         });
         doneMove.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -305,6 +306,7 @@ public class MapController extends AnchorPane {
                 resetDisplayText();
                 view.updatePhasePlayerText(modelDataHandler.getCurrentPlayerName(), "DEPLOY",MapController.this);
                 sliderVisibility(true);
+                removeMarkedCube(secondMarked);
             }
         });
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -313,9 +315,11 @@ public class MapController extends AnchorPane {
                 modelDataHandler.nextPhase();
                 view.updatePhase("ATTACK", MapController.this);
                 resetColor();
-                resetDisplayCubes();
                 resetDisplayText();
                 sliderVisibility(false);
+                addMarkedCube(firstMarked);
+                addMarkedCube(secondMarked);
+
             }
         });
         deployButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -367,6 +371,8 @@ public class MapController extends AnchorPane {
         }
         resetColor();
         view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+        resetDisplayText();
+        removeMarkedCube(secondMarked);
     }
 
     private void sliderVisibility(Boolean visible){
@@ -389,14 +395,24 @@ public class MapController extends AnchorPane {
         {
             if(modelDataHandler.getSelectedSpace2() == null)
             {
+                resetDisplayText();
                 resetColor();
             }
             else {
                 resetColor(modelDataHandler.getSelectedSpace().getId());
+                resetDisplayText(secondDisplayText);
             }
             view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id), allButtons);
             view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
             displayCubes(id);
+            if(firstDisplayText.getText().isEmpty())
+            {
+                displayText(firstDisplayText, getTextFromList(id));
+            }
+            else if(secondDisplayText.getText().isEmpty()){
+                displayText(secondDisplayText, getTextFromList(id));
+            }
+
         }
     }
     private void setSpaceEvent(int id) {
@@ -449,6 +465,32 @@ public class MapController extends AnchorPane {
         view.resetDisplayCubes(firstMarked);
         view.resetDisplayCubes(secondMarked);
     }
+    private void removeMarkedCube(Button button)
+    {
+        if(button == firstMarked)
+        {
+            firstDisplayText.setVisible(false);
+            firstMarked.setVisible(false);
+        }
+        else {
+            secondDisplayText.setVisible(false);
+            secondMarked.setVisible(false);
+        }
+
+    }
+    private void addMarkedCube(Button button)
+    {
+        if(button == firstMarked)
+        {
+            firstDisplayText.setVisible(true);
+            firstMarked.setVisible(true);
+        }
+        else {
+            secondDisplayText.setVisible(true);
+            secondMarked.setVisible(true);
+        }
+
+    }
 
     private void displayText(Text displayText, Text cubeText){
        view.updateDisplayTexts(displayText, cubeText);
@@ -457,5 +499,17 @@ public class MapController extends AnchorPane {
     private void resetDisplayText(){
         view.resetDisplayTexts(firstDisplayText);
         view.resetDisplayTexts(secondDisplayText);
+    }
+    private void resetDisplayText(Text text){
+        view.resetDisplayTexts(text);
+    }
+    private Text getTextFromList(int id)
+    {
+        for (Text allText : allTexts) {
+            if (allText == allTexts.get(id)) {
+                return allText;
+            }
+        }
+        return null;
     }
 }

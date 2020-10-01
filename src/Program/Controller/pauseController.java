@@ -39,7 +39,7 @@ public class pauseController extends AnchorPane {
     @FXML
     private Button quitGameButton;
 
-    MapController mapController = new MapController();
+    MapController mapController;
     Parent root = mapController;
     Stage stage;
 

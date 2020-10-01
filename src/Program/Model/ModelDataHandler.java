@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class ModelDataHandler {
 
-    private List<Player> players = new ArrayList<>(Arrays.asList(new Player(10,1,Color.BLUE),new Player(10,2,Color.RED)));
+    private List<Player> players = new ArrayList<>();
     private Player currentplayer;
 
     private int roundcount = 1;
@@ -20,12 +20,12 @@ public class ModelDataHandler {
 
     private int unitsToUse = 1;
 
-    public ModelDataHandler(int amountOfSpaces)
+    public ModelDataHandler(int amountOfSpaces, List<Color> colors)
     {
-        startGame(amountOfSpaces);
-    }
-    private void startGame(int amountOfSpaces)
-    {
+        for(int i = 0; i < colors.size(); i++)
+        {
+            players.add(new Player((100/colors.size()),i,colors.get(i)));
+        }
         currentplayer = players.get(0);
         int player = -1;
         Player lastrandomplayer = players.get(0);
@@ -104,9 +104,11 @@ public class ModelDataHandler {
             if(player == players.get(i) && i + 1 <  players.size())
             {
                 currentplayer = players.get(i+1);
+                break;
             }
-            else if(i + 1 < players.size()){
-                currentplayer = players.get(i);
+            else if(player == players.get(i)){
+                currentplayer = players.get(0);
+                break;
             }
         }
     }
@@ -126,7 +128,7 @@ public class ModelDataHandler {
      */
     public String getCurrentPlayerName()
     {
-        return String.valueOf(currentplayer.getId());
+        return String.valueOf(currentplayer.getId() + 1);
     }
 
     /**
