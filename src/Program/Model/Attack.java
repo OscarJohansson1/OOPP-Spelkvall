@@ -2,6 +2,11 @@ package Program.Model;
 
 import java.util.ArrayList;
 
+/**
+ * This class makes it possible for the current player to attack another players space. It then calculates the results of the attack
+ * and if all units on the other players space dies then it moves all units except one.
+ */
+
  class Attack {
 
     //This method checks if the attack is possible and declares which space is to be attacked
@@ -17,7 +22,6 @@ import java.util.ArrayList;
     static boolean DeclareAttack(Space mySpace, Space opponentSpace, int myUnits) {
         // myUnits kanske kan fås av mySpace.getUnits i en framtida refaktorisering
         return nextTo(mySpace, opponentSpace) && isAttackPossible(myUnits);
-
     }
 
      /**
