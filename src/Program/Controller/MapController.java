@@ -307,6 +307,7 @@ public class MapController extends AnchorPane {
                 view.updatePhasePlayerText(modelDataHandler.getCurrentPlayerName(), "DEPLOY",MapController.this);
                 sliderVisibility(true);
                 removeMarkedCube(secondMarked);
+                view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
             }
         });
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {

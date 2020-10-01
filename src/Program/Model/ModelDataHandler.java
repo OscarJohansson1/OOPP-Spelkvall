@@ -27,29 +27,25 @@ public class ModelDataHandler {
             players.add(new Player((100/colors.size()),i,colors.get(i)));
         }
         currentplayer = players.get(0);
-        int player = -1;
+        int player = 0;
         Player lastrandomplayer = players.get(0);
         List<Space> spaces = new ArrayList<>();
+        List<Player> playerList = new ArrayList<>();
         for(int i = 0; i < amountOfSpaces; i++)
         {
             player++;
-            if(player > 1)
+            if(player > players.size() - 1){
                 player = 0;
-            lastrandomplayer = getRandomPlayer(lastrandomplayer);
+                playerList.clear();
+            }
+            lastrandomplayer = getRandomPlayer(playerList);
             spaces.add(new Space(i,lastrandomplayer,10,i + ""));
+            playerList.add(lastrandomplayer);
         }
         board = new Board(spaces);
         round = new Round();
     }
-    /*public void updatePlayerGrid(double sliderValue)
-    {
-        for(int i = 0; i < sliderValue; i++){
-            playerButtonList.get(i).setVisible(true);
-        }
-        for(int i = (int) slider.getValue(); i < playerButtonList.size(); i++){
-            playerButtonList.get(i).setVisible(false);
-        }
-    }*/
+
     /**
      * Get player color based on player id.
      * @param id id of the player.
@@ -112,15 +108,18 @@ public class ModelDataHandler {
             }
         }
     }
-    private Player getRandomPlayer(Player lastpickedplayer)
+    private Player getRandomPlayer(List<Player> lastpickedplayers)
     {
         Random random = new Random();
-        int player;
-        do {
-            player = random.nextInt(players.size());
-        } while (player == players.indexOf(lastpickedplayer));
-
-        return players.get(player);
+        Player player;
+        while(true)
+        {
+            player = players.get(random.nextInt(players.size()));
+            if(!lastpickedplayers.contains(player))
+            {
+                return player;
+            }
+        }
     }
     /**
      * Method that returns the id of a player as a String
