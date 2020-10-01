@@ -72,6 +72,7 @@ public class endController extends AnchorPane {
         stage.setScene(scene);
         stage.show();
 
+        /*
         //Skriva ut vem som vann i winnerLabel, måste veta vem som vann --> deras namnattribut
         /*winnerLabel.setText(" The winner is: " + winnerName);
 
@@ -88,6 +89,8 @@ public class endController extends AnchorPane {
                 //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/kfkbloggan.JPG")));
 
         }*/
+
+         */
 
 
 
