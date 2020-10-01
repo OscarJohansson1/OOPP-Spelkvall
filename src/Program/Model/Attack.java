@@ -28,7 +28,6 @@ import java.util.ArrayList;
       */
     static boolean calculateAttack(Space mySpace, Space enemySpace) {
         Dice dice = new Dice();
-        System.out.println(mySpace.getUnits() + " " + enemySpace.getUnits());
         int myDice = (mySpace.getUnits() - 1);
         int opponentDice = enemySpace.getUnits();
 
@@ -36,41 +35,33 @@ import java.util.ArrayList;
             ArrayList<Integer> opponentResults = dice.rollNDIce(opponentDice);
 
             while (myResults.size() > 0 && opponentResults.size() > 0) {
-
                 if (findHighestDie(myResults) > findHighestDie(opponentResults)) {
 
-                    //Kill one unit in opponent space
                     enemySpace.updateSpace(enemySpace.getUnits() -1);
-                    //System.out.println("Defender loses one unit");
 
                     if (enemySpace.getUnits() < 1){
-                        //System.out.println(enemySpace.getPlayer());
                         enemySpace.updateSpace(mySpace.getPlayer(), mySpace.getUnits() - 1);
                         mySpace.updateSpace(1);
-                        //System.out.println("Units in area are all dead");
-                        //System.out.println(mySpace.getPlayer());
-                        //System.out.println(enemySpace.getPlayer());
                         return true;
                     }
-
                 } else {
-
-                    //Kill one unit in current player space
                     mySpace.updateSpace(mySpace.getUnits() -1);
-                    //System.out.println("Attacker loses one unit");
                     return true;
                 }
             }
             return false;
-
     }
 
     //This checks if one space on the board is next to another
     private static boolean nextTo(Space mySpace, Space opponentSpace) {
-
         return true;
     }
 
+     /**
+      * Method that checks if an attack is possible
+      * @param myUnits This is the amount of units that a player has in one space
+      * @return As long as there are more than one unit in a space the player is allowed to make an attack from that space
+      */
     private static boolean isAttackPossible(int myUnits) {
         return myUnits > 1;
     }
@@ -85,7 +76,6 @@ import java.util.ArrayList;
         int value = 0;
         int index = 0;
 
-
         for (int i = 0; i < rolls.size(); i++) {
             if (rolls.get(i) > value) {
                 value = rolls.get(i);
@@ -93,9 +83,6 @@ import java.util.ArrayList;
             }
         }
         rolls.remove(index);
-        //System.out.println("Value:" + value);
-        //System.out.println("Index:" + index);
-        //System.out.println("Array:" + rolls.toString());
         return value;
     }
 }
