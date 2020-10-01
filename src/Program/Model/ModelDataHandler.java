@@ -41,7 +41,15 @@ public class ModelDataHandler {
         board = new Board(spaces);
         round = new Round();
     }
-
+    /*public void updatePlayerGrid(double sliderValue)
+    {
+        for(int i = 0; i < sliderValue; i++){
+            playerButtonList.get(i).setVisible(true);
+        }
+        for(int i = (int) slider.getValue(); i < playerButtonList.size(); i++){
+            playerButtonList.get(i).setVisible(false);
+        }
+    }*/
     /**
      * Get player color based on player id.
      * @param id id of the player.

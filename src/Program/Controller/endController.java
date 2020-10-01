@@ -74,7 +74,7 @@ public class endController extends AnchorPane {
 
         /*
         //Skriva ut vem som vann i winnerLabel, måste veta vem som vann --> deras namnattribut
-        winnerLabel.setText(" The winner is: " + winnerName);
+        /*winnerLabel.setText(" The winner is: " + winnerName);
 
         //Kan skrivas ut efter "division" men då måste vi skriva in det som attribut. Ist. kan man använda färgen.
         //Isåfall måste den vinnande spelarens färg skickas in till endController
@@ -88,7 +88,7 @@ public class endController extends AnchorPane {
             case "dark green":
                 //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/kfkbloggan.JPG")));
 
-        }
+        }*/
 
          */
 
