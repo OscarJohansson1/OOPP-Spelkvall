@@ -14,21 +14,6 @@ import java.util.List;
  */
 public class MapView extends AnchorPane {
 
-    private Text[] texts;
-
-    public void setUpMap(){
-    }
-
-    /**
-     * Method that creates a list with the texts on spaces.
-     * @param mapController The mapController used in the project.
-     */
-    public void setUpStart(MapController mapController){
-
-        //mapController.cubeHubben.setText("10");
-        //texts = new Text[] { null,mapController.textHubben,mapController.textBasen,mapController.textKajsabaren,mapController.textZaloonen};
-    }
-
     /**
      * Method that updates the player and phase texts.
      * @param playername The name of the currentPlayer.
@@ -136,6 +121,7 @@ public class MapView extends AnchorPane {
             allButtons.get(i).setStyle(colorToHex(colors.get(i)));
         }
     }
+
     private String colorToHex(Color color)
     {
         String hex = String.format( "#%02X%02X%02X",

@@ -236,7 +236,6 @@ public class MapController extends AnchorPane {
                 resetDisplayText();
             }
         });
-
         moveSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
@@ -244,8 +243,6 @@ public class MapController extends AnchorPane {
                 view.updateSliderText(newValue.intValue(), showMoveUnitsText);
             }
         });
-
-        view.setUpStart(this);
         view.updatePhasePlayerText(modelDataHandler.getCurrentPlayerName(), modelDataHandler.getCurrenPhase(), this);
         for(int i = 0; i < allButtons.size(); i++)
         {
