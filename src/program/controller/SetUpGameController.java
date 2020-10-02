@@ -216,27 +216,6 @@ class SetUpGameController extends AnchorPane {
     private void makeSelected(Button button){
 
     }
-
-    private int getAndRemoveNextPlayerToChoose(){
-        return nextPlayerNumber.remove(0);
-    }
-
-    private void addPlayerToChoose(int playerNumber){
-        int i = 0;
-        if(!nextPlayerNumber.contains(playerNumber)){
-            while(nextPlayerNumber.get(i) < playerNumber){
-                i++;
-            }
-            nextPlayerNumber.add(i, playerNumber);
-        }
-    }
-
-    /*
-    private void updatePlayer(String color, String studentDivision){
-        int n = getAndRemoveNextPlayerToChoose();
-        playerList.add(playerList.indexOf(playerList.remove(n)), new Player(0, n, Color.web(color)));
-    }*/
-
     private void updatePlayerGrid(int players){
 
         for(int i = 0; i < players; i++){
