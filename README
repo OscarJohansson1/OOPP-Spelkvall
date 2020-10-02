@@ -1,1 +1,4 @@
-Hej
+The application is probably easiest to run through IntelliJ IDEA at the moment, you might have to set up JavaFX (vm-options) and import JUnit in the test-files.
+This will hopefully be made easier in the future, but as of now it is what it is.
+
+If you can't get it to run, we are happy to help :)
