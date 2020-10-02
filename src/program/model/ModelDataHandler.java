@@ -25,23 +25,8 @@ public class ModelDataHandler {
         {
             players.add(new Player((100/colors.size()),i,colors.get(i)));
         }
-        currentplayer = players.get(0);
-        int player = 0;
-        Player lastrandomplayer = players.get(0);
-        List<Space> spaces = new ArrayList<>();
-        List<Player> playerList = new ArrayList<>();
-        for(int i = 0; i < amountOfSpaces; i++)
-        {
-            player++;
-            if(player > players.size() - 1){
-                player = 0;
-                playerList.clear();
-            }
-            lastrandomplayer = getRandomPlayer(playerList);
-            spaces.add(new Space(i,lastrandomplayer,10,i + ""));
-            playerList.add(lastrandomplayer);
-        }
-        board = new Board(spaces);
+        currentplayer = getRandomPlayer(null);
+        board = new Board(randomizeSpaces(amountOfSpaces));
         round = new Round();
     }
 
@@ -107,6 +92,25 @@ public class ModelDataHandler {
             }
         }
     }
+    private List<Space> randomizeSpaces(int amountOfSpaces)
+    {
+        int player = 0;
+        Player lastrandomplayer = players.get(0);
+        List<Space> spaces = new ArrayList<>();
+        List<Player> playerList = new ArrayList<>();
+        for(int i = 0; i < amountOfSpaces; i++)
+        {
+            player++;
+            if(player > players.size() - 1){
+                player = 0;
+                playerList.clear();
+            }
+            lastrandomplayer = getRandomPlayer(playerList);
+            spaces.add(new Space(i,lastrandomplayer,10,i + ""));
+            playerList.add(lastrandomplayer);
+        }
+        return spaces;
+    }
     private Player getRandomPlayer(List<Player> lastpickedplayers)
     {
         Random random = new Random();
@@ -114,8 +118,11 @@ public class ModelDataHandler {
         while(true)
         {
             player = players.get(random.nextInt(players.size()));
-            if(!lastpickedplayers.contains(player))
+            if(lastpickedplayers == null)
             {
+                return player;
+            }
+            else if(!lastpickedplayers.contains(player)){
                 return player;
             }
         }
