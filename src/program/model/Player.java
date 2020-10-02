@@ -23,7 +23,7 @@ public class Player {
         this.color = color;
     }
 
-    public int getUnits() {
+    int getUnits() {
         return units;
     }
 
@@ -35,7 +35,7 @@ public class Player {
         return id;
     }
 
-    public Color getColor() {
+    Color getColor() {
         return color;
     }
 }

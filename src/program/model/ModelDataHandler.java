@@ -213,5 +213,9 @@ public class ModelDataHandler {
     public int getDeployableUnits(){
         return currentPlayer.getUnits();
     }
+    public List<Integer> getDiceResults()
+    {
+        return round.diceresults();
+    }
 
 }

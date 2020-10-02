@@ -1,9 +1,11 @@
 package program.controller;
 
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import program.model.ModelDataHandler;
+import program.view.AttackView;
 import program.view.MapView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -105,8 +107,9 @@ public class MapController extends AnchorPane {
     @FXML public Text phaseText;
     @FXML private Text deployableUnitsText;
 
-    private ModelDataHandler modelDataHandler;
+    ModelDataHandler modelDataHandler;
     private MapView view = new MapView();
+    private AttackController attackController;
     private List<Button> allButtons;
     private List<Text> allTexts;
     private Stage stage;
@@ -221,6 +224,7 @@ public class MapController extends AnchorPane {
                 {
                     setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
                     modelDataHandler.resetSelectedSpace();
+                    changeToAttackView();
                 }
             }
         });
@@ -253,7 +257,15 @@ public class MapController extends AnchorPane {
         resetDisplayText();
         removeMarkedCube(secondMarked);
     }
-
+    private void changeToAttackView()
+    {
+        attackController = new AttackController(stage,this,modelDataHandler.getDiceResults());
+        rootpane.getChildren().add(attackController);
+    }
+    public void removeAttackView()
+    {
+        rootpane.getChildren().remove(attackController);
+    }
     private void sliderVisibility(Boolean visible){
         if(visible){
             moveSlider.setVisible(true);

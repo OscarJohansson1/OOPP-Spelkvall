@@ -1,6 +1,7 @@
 package program.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class makes it possible for the current player to attack another players space. It then calculates the results of the attack
@@ -26,33 +27,47 @@ import java.util.ArrayList;
       * @param enemySpace The space which is attacked.
       * @return An int with value 1 if the attack was successful and 0 if the attack was unsuccessful
       */
-    static boolean calculateAttack(Space mySpace, Space enemySpace) {
+    static List<Integer> calculateAttack(Space mySpace, Space enemySpace) {
         Dice dice = new Dice();
-        int myDice = (mySpace.getUnits() - 1);
+        int myDice = (3);
         int opponentDice = enemySpace.getUnits();
 
-        ArrayList<Integer> myResults = dice.rollNDIce(myDice);
-        ArrayList<Integer> opponentResults = dice.rollNDIce(opponentDice);
+            ArrayList<Integer> myResults = dice.rollNDIce(myDice);
+            ArrayList<Integer> opponentResults = dice.rollNDIce(2);
+
+            ArrayList<Integer> allresults = new ArrayList<>();
+            allresults.addAll(myResults);
+            allresults.addAll(opponentResults);
+
 
         while (myResults.size() > 0 && opponentResults.size() > 0) {
             if (findHighestDie(myResults) > findHighestDie(opponentResults)) {
 
                 enemySpace.updateSpace(enemySpace.getUnits() -1);
 
+
                 if (enemySpace.getUnits() < 1){
                     enemySpace.updateSpace(mySpace.getPlayer(), mySpace.getUnits() - 1);
                     mySpace.updateSpace(1);
-                    return true;
+
                 }
+
+                    if (enemySpace.getUnits() < 1){
+                        enemySpace.updateSpace(mySpace.getPlayer(), mySpace.getUnits() - 1);
+                        mySpace.updateSpace(1);
+
+                    }
                 } else {
                     mySpace.updateSpace(mySpace.getUnits() -1);
-                    return true;
+
                 }
             }
-        return false;
+            return allresults;
     }
 
 
+
+    //This checks if one space on the board is next to another
     /**
      * This method checks if one space is next to another space
      * @param mySpace The space that the current player is attacking from

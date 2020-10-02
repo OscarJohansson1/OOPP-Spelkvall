@@ -36,7 +36,7 @@ public class TestAttack {
         assertTrue(Attack.DeclareAttack(space1, space2, player1.getUnits()));
     }
 
-    @Test
+    /*@Test
     public void testCalculateAttackSuccessful(){
         boolean winner = Attack.calculateAttack(space1, space2);
         if (space1.getPlayer() == space2.getPlayer()){
@@ -44,7 +44,7 @@ public class TestAttack {
         } else {
             assertEquals(false, winner, "Unsuccessful attack, but wrong return");
         }
-    }
+    }*/
 
     @Test
     public void testCalculateAttackUnitsLeft(){
