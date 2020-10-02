@@ -43,8 +43,8 @@ public class endController extends AnchorPane {
     @FXML
     private HBox winnerHBox;
 
-    MapController mapController = new MapController();
-    Parent root = mapController;
+    //MapController mapController = new MapController();
+    //Parent root = mapController;
     Stage stage;
 
     public endController(Stage stage) {
@@ -66,14 +66,15 @@ public class endController extends AnchorPane {
     private void initialize() {
         //TODO: Här vet jag inte hur man ska koppla. Vi vill att endMenu visas då spelet är slut.
 
-        Scene scene = new Scene(root, 1920, 1080);
+        /*Scene scene = new Scene(root, 1920, 1080);
 
         stage.setTitle("End");
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
 
+        /*
         //Skriva ut vem som vann i winnerLabel, måste veta vem som vann --> deras namnattribut
-        winnerLabel.setText(" The winner is: " + winnerName);
+        /*winnerLabel.setText(" The winner is: " + winnerName);
 
         //Kan skrivas ut efter "division" men då måste vi skriva in det som attribut. Ist. kan man använda färgen.
         //Isåfall måste den vinnande spelarens färg skickas in till endController
@@ -87,7 +88,9 @@ public class endController extends AnchorPane {
             case "dark green":
                 //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/kfkbloggan.JPG")));
 
-        }
+        }*/
+
+
 
 
 

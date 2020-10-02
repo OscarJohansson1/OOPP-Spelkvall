@@ -1,6 +1,7 @@
 package Program.Controller;
 
-import Program.Model.Player;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -107,7 +108,7 @@ public class SetUpGameController extends AnchorPane {
 
     private int nextToChoose = 1;
     private ArrayList<Button> selectedButtons = new ArrayList<>();
-    private ArrayList<Player> playerList = new ArrayList<>();
+    private ArrayList<Color> colorList = new ArrayList<>();
     private ArrayList<Integer> nextPlayerNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
             11, 12, 13, 14, 15, 16));
     private ArrayList<Button> playerButtonList;
@@ -136,19 +137,19 @@ public class SetUpGameController extends AnchorPane {
 
     private void initialize() {
 
-        updatePlayerGrid();
+        updatePlayerGrid((int) slider.getValue());
 
-        slider.setOnDragDetected(new EventHandler<MouseEvent>() {
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayerGrid();
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                updatePlayerGrid( newValue.intValue());
             }
         });
         startGameButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(playerList.size() >= slider.getValue()) {
-                    MapController mapController = new MapController();
+                if(colorList.size() >= slider.getValue()) {
+                    MapController mapController = new MapController(colorList);
                     Parent root = mapController;
                     //give players to
 
@@ -165,7 +166,7 @@ public class SetUpGameController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                MapController mapController = new MapController();
+                MapController mapController = new MapController(colorList);
                 Parent root = mapController;
                 Scene scene = new Scene(root, 1920, 1080);
 
@@ -198,7 +199,7 @@ public class SetUpGameController extends AnchorPane {
 
     private void mouseClicked(Button button){
         if(!selectedButtons.contains(button) && nextToChoose <= 16) {
-            playerList.add(new Player(0, nextToChoose, Color.web(button.getStyle().substring(22,29))));
+            colorList.add(Color.web(button.getStyle().substring(22,29)));
 
             Button playerButton = playerButtonList.get(nextToChoose - 1);
             playerButton.setText("Player " + nextToChoose + " represents " + button.getText());
@@ -232,17 +233,18 @@ public class SetUpGameController extends AnchorPane {
         }
     }
 
+    /*
     private void updatePlayer(String color, String studentDivision){
         int n = getAndRemoveNextPlayerToChoose();
         playerList.add(playerList.indexOf(playerList.remove(n)), new Player(0, n, Color.web(color)));
-    }
+    }*/
 
-    private void updatePlayerGrid(){
+    private void updatePlayerGrid(int players){
 
-        for(int i = 0; i < slider.getValue(); i++){
+        for(int i = 0; i < players; i++){
             playerButtonList.get(i).setVisible(true);
         }
-        for(int i = (int) slider.getValue(); i < playerButtonList.size(); i++){
+        for(int i = players; i < playerButtonList.size(); i++){
             playerButtonList.get(i).setVisible(false);
         }
     }

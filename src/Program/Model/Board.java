@@ -5,6 +5,10 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the board and is keeping track of the board
+ */
+
 class Board {
 
     private List<Space> spaces;
@@ -15,6 +19,7 @@ class Board {
     {
         this.spaces = spaces;
     }
+
     /**
      * Method that finds a space on the board based on id.
      * @param id id-number of the space
@@ -31,6 +36,11 @@ class Board {
         }
         return null;
     }
+
+    /**
+     * This method initialises all the colors on the spaces that the board starts with
+     * @return It then returns the colors
+     */
     public List<Color> getColorOnAllSpaces()
     {
         List<Color> colors = new ArrayList<>();

@@ -10,15 +10,14 @@ class Movement {
 
         int units1 = space1.getUnits();
         int units2 = space2.getUnits();
-        int totalUnits = space1.getUnits() + space2.getUnits();
 
         //TODO insert way for player to determine desired unit spread via the UI
 
         System.out.println(space1.getUnits());
         System.out.println(space2.getUnits());
-        if (units1 > 0 && units2 > 0 && units1 + units2 == totalUnits && (units2 - amount > 1)) {
-            space1.updateSpace(space1.getPlayer(), units2 - amount);
-            space2.updateSpace(space1.getPlayer(), units1 + amount);
+        if (units1 > 0 && units2 > 0 && (units1 - amount >= 1)) {
+            space1.updateSpace(space1.getPlayer(), units1 - amount);
+            space2.updateSpace(space1.getPlayer(), units2 + amount);
         }
         System.out.println(space1.getUnits());
         System.out.println(space2.getUnits());

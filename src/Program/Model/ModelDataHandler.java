@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class ModelDataHandler {
 
-    private List<Player> players = new ArrayList<>(Arrays.asList(new Player(10,1,Color.BLUE),new Player(10,2,Color.RED)));
+    private List<Player> players = new ArrayList<>();
     private Player currentplayer;
 
     private int roundcount = 1;
@@ -18,25 +18,29 @@ public class ModelDataHandler {
 
     private Board board;
 
-    private int unitsToUse;
+    private int unitsToUse = 1;
 
-    public ModelDataHandler(int amountOfSpaces)
+    public ModelDataHandler(int amountOfSpaces, List<Color> colors)
     {
-        startGame(amountOfSpaces);
-    }
-    private void startGame(int amountOfSpaces)
-    {
+        for(int i = 0; i < colors.size(); i++)
+        {
+            players.add(new Player((100/colors.size()),i,colors.get(i)));
+        }
         currentplayer = players.get(0);
-        int player = -1;
+        int player = 0;
         Player lastrandomplayer = players.get(0);
         List<Space> spaces = new ArrayList<>();
+        List<Player> playerList = new ArrayList<>();
         for(int i = 0; i < amountOfSpaces; i++)
         {
             player++;
-            if(player > 1)
+            if(player > players.size() - 1){
                 player = 0;
-            lastrandomplayer = getRandomPlayer(lastrandomplayer);
+                playerList.clear();
+            }
+            lastrandomplayer = getRandomPlayer(playerList);
             spaces.add(new Space(i,lastrandomplayer,10,i + ""));
+            playerList.add(lastrandomplayer);
         }
         board = new Board(spaces);
         round = new Round();
@@ -96,21 +100,26 @@ public class ModelDataHandler {
             if(player == players.get(i) && i + 1 <  players.size())
             {
                 currentplayer = players.get(i+1);
+                break;
             }
-            else if(i + 1 < players.size()){
-                currentplayer = players.get(i);
+            else if(player == players.get(i)){
+                currentplayer = players.get(0);
+                break;
             }
         }
     }
-    private Player getRandomPlayer(Player lastpickedplayer)
+    private Player getRandomPlayer(List<Player> lastpickedplayers)
     {
         Random random = new Random();
-        int player;
-        do {
-            player = random.nextInt(players.size());
-        } while (player == players.indexOf(lastpickedplayer));
-
-        return players.get(player);
+        Player player;
+        while(true)
+        {
+            player = players.get(random.nextInt(players.size()));
+            if(!lastpickedplayers.contains(player))
+            {
+                return player;
+            }
+        }
     }
     /**
      * Method that returns the id of a player as a String
@@ -118,7 +127,7 @@ public class ModelDataHandler {
      */
     public String getCurrentPlayerName()
     {
-        return String.valueOf(currentplayer.getId());
+        return String.valueOf(currentplayer.getId() + 1);
     }
 
     /**
