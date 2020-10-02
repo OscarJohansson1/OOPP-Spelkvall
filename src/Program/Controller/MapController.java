@@ -1,8 +1,7 @@
-package Program.Controller;
+package program.controller;
 
-import Program.Model.ModelDataHandler;
-import Program.Model.Player;
-import Program.View.mapView;
+import program.model.ModelDataHandler;
+import program.view.MapView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -10,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -242,7 +240,7 @@ public class MapController extends AnchorPane {
 
 
     private ModelDataHandler modelDataHandler;
-    private mapView view = new mapView();
+    private MapView view = new MapView();
     private List<Button> allButtons;
     private List<Text> allTexts;
 

@@ -1,6 +1,4 @@
-package Program.Model;
-
-import javafx.scene.paint.Color;
+package program.model;
 
 /**
  * This class is controlling the different stages in one round. The method StartPhase() is always called

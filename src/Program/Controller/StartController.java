@@ -1,4 +1,4 @@
-package Program.Controller;
+package program.controller;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,8 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Set;
 
 public class StartController extends AnchorPane {
 

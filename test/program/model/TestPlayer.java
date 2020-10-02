@@ -1,13 +1,12 @@
-package Program.Model;
+package program.model;
 
 import org.junit.Test;
 
-public class TestWin {
+public class TestPlayer {
+    // Kanske inte behövs
 
-    // Tror inte den här kommer behövas i slutändan
-
-    //@Test
-    //public void testWin() {
+    @Test
+    public void testDeployment() {
         //Program.View.View.Model.Player p1 = new Program.View.View.Model.Player(10, 1, Color.color(20, 20, 20));
         //Program.View.View.Model.Player p2 = new Program.View.View.Model.Player(10, 2, Color.color(100, 0, 20));
 
@@ -15,11 +14,5 @@ public class TestWin {
         //dp.startDeployment(p1, 5);
 
 
-    //}
-
-    //@Test(expected = IllegalArgumentException.class)
-    //public void testGetBadIndex() {
-        // Test
-    //}
-
+    }
 }

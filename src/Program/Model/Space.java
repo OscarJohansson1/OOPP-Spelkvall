@@ -1,7 +1,4 @@
-package Program.Model;
-
-import javafx.fxml.FXML;
-import javafx.scene.shape.Rectangle;
+package program.model;
 
 public class Space {
 

@@ -1,4 +1,4 @@
-package Program.Controller;
+package program.controller;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,12 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
