@@ -256,7 +256,7 @@ public class MapController extends AnchorPane {
     MapController(List<Color> colors, Stage stage) {
 
         this.stage = stage;
-        pauseController = new PauseController(stage);
+        pauseController = new PauseController(stage, this);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
         fxmlLoader.setRoot(this);
@@ -299,11 +299,7 @@ public class MapController extends AnchorPane {
             public void handle(KeyEvent t) {
                 if(t.getCode()== KeyCode.ESCAPE)
                 {
-                    if(rootpane.getChildren().contains(pauseController)) {
-                        rootpane.getChildren().remove(pauseController);
-                    }else{
-                        rootpane.getChildren().add(pauseController);
-                    }
+                    checkPauseController();
                 }
             }
         });
@@ -413,6 +409,14 @@ public class MapController extends AnchorPane {
             firstMarked.setVisible(false);
             secondMarked.setVisible(false);
             showMoveUnitsText.setVisible(false);
+        }
+    }
+
+    public void checkPauseController(){
+        if(rootpane.getChildren().contains(pauseController)) {
+            rootpane.getChildren().remove(pauseController);
+        }else{
+            rootpane.getChildren().add(pauseController);
         }
     }
 
