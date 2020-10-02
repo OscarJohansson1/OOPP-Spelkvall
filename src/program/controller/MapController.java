@@ -1,5 +1,8 @@
 package program.controller;
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import program.model.ModelDataHandler;
 import program.view.MapView;
 import javafx.beans.value.ChangeListener;
@@ -243,10 +246,14 @@ public class MapController extends AnchorPane {
     private MapView view = new MapView();
     private List<Button> allButtons;
     private List<Text> allTexts;
+    private Stage stage;
+    private PauseController pauseController;
 
 
-    MapController(List<Color> colors) {
+    MapController(List<Color> colors, Stage stage) {
 
+        this.stage = stage;
+        pauseController = new PauseController(stage);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
         fxmlLoader.setRoot(this);
@@ -282,6 +289,24 @@ public class MapController extends AnchorPane {
                 }
             });
         }
+
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>
+                () {
+
+            @Override
+            public void handle(KeyEvent t) {
+                if(t.getCode()== KeyCode.ESCAPE)
+                {
+                    if(rootpane.getChildren().contains(pauseController)) {
+                        rootpane.getChildren().remove(pauseController);
+                    }else{
+                        rootpane.getChildren().add(pauseController);
+                    }
+                }
+            }
+        });
+
+
         skipAttack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

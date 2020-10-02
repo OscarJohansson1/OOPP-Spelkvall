@@ -1,8 +1,10 @@
 package program.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -61,44 +63,45 @@ public class PauseController extends AnchorPane {
 
     public void returnButtonPressed(){
 
-        /*
-        //Uppdatera kartan
-        updateMap();
-        //Lägg kartan längst fram
-        map.toFront();
-        //Visa interfacen igen
-        interfacePane.setVisible(true);
-         */
+       /*
+       //Uppdatera kartan
+       updateMap();
+       //Lägg kartan längst fram
+       map.toFront();
+       //Visa interfacen igen
+       interfacePane.setVisible(true);
+        */
     }
 
     public void newGameButtonPressed(){
 
-        /*
-        //Avsluta omgången
-        game.end();
-        //Gå till setUpGame.fxml
-        ... hur man nu skriver det
-         */
+        StartController startController = new StartController(stage);
+        Parent root = startController;
+        Scene scene = new Scene(root, 1920, 1080);
+
+        stage.setTitle("Menu");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void endGameButtonPressed(){
 
-         /*
-        //Avsluta omgången
-        game.end();
-        //Gå till endMenu.fxml
-        ... hur man nu skriver det
-         */
+        EndController endController = new EndController(stage);
+        Parent root = endController;
+        Scene scene = new Scene(root, 1920, 1080);
+
+        stage.setTitle("End");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void quitGameButtonPressed(){
 
-        /*
-        //Gå till endMenu.fxml
-        ... hur man nu skriver det
-         */
+        Platform.exit();
+        System.exit(0);
     }
 
 
 
 }
+

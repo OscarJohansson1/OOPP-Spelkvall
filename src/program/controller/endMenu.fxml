@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #FFFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controller.EndController">
+<fx:root prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #FFFFFFF;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox fx:id="winnerHBox" alignment="CENTER" layoutX="200.0" layoutY="173.0" prefHeight="200.0" prefWidth="1874.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
          <children>
@@ -45,4 +45,4 @@
          </children>
       </Pane>
    </children>
-</AnchorPane>
+</fx:root>

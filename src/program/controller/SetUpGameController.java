@@ -145,7 +145,7 @@ public class SetUpGameController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(colorList.size() >= slider.getValue()) {
-                    MapController mapController = new MapController(colorList);
+                    MapController mapController = new MapController(colorList, stage);
                     Parent root = mapController;
                     //give players to
 
@@ -162,7 +162,7 @@ public class SetUpGameController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                MapController mapController = new MapController(colorList);
+                MapController mapController = new MapController(colorList, stage);
                 Parent root = mapController;
                 Scene scene = new Scene(root, 1920, 1080);
 
