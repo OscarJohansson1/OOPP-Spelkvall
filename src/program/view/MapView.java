@@ -9,6 +9,9 @@ import program.controller.MapController;
 
 import java.util.List;
 
+/**
+ * the view for karta.fxml
+ */
 public class MapView extends AnchorPane {
 
     private Text[] texts;

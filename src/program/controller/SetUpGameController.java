@@ -20,7 +20,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SetUpGameController extends AnchorPane {
+/**
+ * the controller for StartMenu.fxml
+ */
+class SetUpGameController extends AnchorPane {
 
     @FXML
     private Slider slider;
@@ -110,8 +113,12 @@ public class SetUpGameController extends AnchorPane {
     private ArrayList<Button> playerButtonList;
     private ArrayList<Button> divisionList;
 
-    Stage stage;
+    private Stage stage;
 
+    /**
+     * this is the constructor for SetUpGameController
+     * @param stage the main stage
+     */
     SetUpGameController(Stage stage){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("setUpGame.fxml"));
         fxmlLoader.setRoot(this);
@@ -121,18 +128,16 @@ public class SetUpGameController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
-        playerButtonList = new ArrayList<>(Arrays.asList(rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, rec9,
-                rec10, rec11, rec12, rec13, rec14, rec15, rec16));
-        divisionList = new ArrayList<>(Arrays.asList(recA, recAE, recD, recE, recF, recH, recI, recIT, recK,
-                recKfKb, recM, recSjo, recTB, recTD, recV, recZ));
-
         this.stage = stage;
         initialize();
     }
 
     private void initialize() {
 
+        playerButtonList = new ArrayList<>(Arrays.asList(rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, rec9,
+                rec10, rec11, rec12, rec13, rec14, rec15, rec16));
+        divisionList = new ArrayList<>(Arrays.asList(recA, recAE, recD, recE, recF, recH, recI, recIT, recK,
+                recKfKb, recM, recSjo, recTB, recTD, recV, recZ));
         updatePlayerGrid((int) slider.getValue());
 
         slider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -145,8 +150,7 @@ public class SetUpGameController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(colorList.size() >= slider.getValue()) {
-                    MapController mapController = new MapController(colorList, stage);
-                    Parent root = mapController;
+                    Parent root = new MapController(colorList, stage);
                     //give players to
 
                     Scene scene = new Scene(root, 1920, 1080);
@@ -162,8 +166,7 @@ public class SetUpGameController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                MapController mapController = new MapController(colorList, stage);
-                Parent root = mapController;
+                Parent root = new MapController(colorList, stage);
                 Scene scene = new Scene(root, 1920, 1080);
 
                 stage.setTitle("Chans");
@@ -219,9 +222,7 @@ public class SetUpGameController extends AnchorPane {
 
     private void addPlayerToChoose(int playerNumber){
         int i = 0;
-        if(nextPlayerNumber.contains(playerNumber)){
-            return;
-        } else {
+        if(!nextPlayerNumber.contains(playerNumber)){
             while(nextPlayerNumber.get(i) < playerNumber){
                 i++;
             }

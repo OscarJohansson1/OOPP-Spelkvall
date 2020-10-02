@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * the controller for endMenu.fxml
+ */
 public class EndController extends AnchorPane {
 
     @FXML
@@ -42,11 +45,9 @@ public class EndController extends AnchorPane {
     @FXML
     private HBox winnerHBox;
 
-    //MapController mapController = new MapController();
-    //Parent root = mapController;
-    Stage stage;
+    private Stage stage;
 
-    public EndController(Stage stage) {
+    EndController(Stage stage) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("endMenu.fxml"));
         fxmlLoader.setRoot(this);
@@ -97,8 +98,7 @@ public class EndController extends AnchorPane {
 
     public void newGameButtonPressed(){
 
-        StartController startController = new StartController(stage);
-        Parent root = startController;
+        Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
         stage.setTitle("Menu");
@@ -114,8 +114,7 @@ public class EndController extends AnchorPane {
 
     public void toMenuButtonPressed(){
 
-        StartController startController = new StartController(stage);
-        Parent root = startController;
+        Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
         stage.setTitle("Menu");

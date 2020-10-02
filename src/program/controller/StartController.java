@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The controller for the StartMenu.fxml
+ */
 public class StartController extends AnchorPane {
 
     @FXML
@@ -25,8 +28,10 @@ public class StartController extends AnchorPane {
     private Parent root;// = setUpGameController;
     private Stage stage;
 
-
-
+    /**
+     *
+     * @param stage the main stage
+     */
     public StartController(Stage stage) {
 
         this.stage = stage;

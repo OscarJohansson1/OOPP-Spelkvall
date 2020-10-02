@@ -22,157 +22,160 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * the controller for karta.fxml
+ */
 public class MapController extends AnchorPane {
     @FXML
     public
     Button cubeHubben;
     @FXML
-    public
+    private
     Button cubeBasen;
     @FXML
-    public
+    private
     Button cubeKajsabaren;
     @FXML
-    public
+    private
     Button cubeZaloonen;
     @FXML
-    public
+    private
     Button cubeWinden;
     @FXML
-    public
+    private
     Button cubeLofTDet;
     @FXML
-    public
+    private
     Button cubeRodaRummet;
     @FXML
-    public
+    private
     Button cubeVerum;
     @FXML
-    public
+    private
     Button cubeVillan;
     @FXML
-    public
+    private
     Button cubeADammen;
     @FXML
-    public
+    private
     Button cubeFocus;
     @FXML
-    public
+    private
     Button cubeFortNox;
     @FXML
-    public
+    private
     Button cubeGTSpritis;
     @FXML
-    public
+    private
     Button cubeGoldenI;
     @FXML
-    public
+    private
     Button cubeChabo;
     @FXML
-    public
+    private
     Button cubeWijkanders;
     @FXML
-    public
+    private
     Button cubeHrum;
     @FXML
-    public
+    private
     Button cubeAlvan;
     @FXML
-    public
+    private
     Button cubeSpektrum;
     @FXML
-    public
+    private
     Button cubeGasquen;
     @FXML
-    public
+    private
     Button cubeChalmersplatsen;
     @FXML
-    public
+    private
     Button cubeOlgas;
     @FXML
-    public
+    private
     Button cubeRunAn;
     @FXML
-    public
+    private
     Button cubeTagvagnen;
     @FXML
-    public
+    private
     Button cubeOrigogarden;
 
     @FXML
-    public
+    private
     Text textHubben;
     @FXML
-    public
+    private
     Text textBasen;
     @FXML
-    public
+    private
     Text textKajsaBaren;
     @FXML
-    public
+    private
     Text textZaloonen;
     @FXML
     public
     Text textWinden;
     @FXML
-    public
+    private
     Text textLofTDet;
     @FXML
-    public
+    private
     Text textRodaRummet;
     @FXML
-    public
+    private
     Text textVerum;
     @FXML
-    public
+    private
     Text textVillan;
     @FXML
-    public
+    private
     Text textAdammen;
     @FXML
-    public
+    private
     Text textFocus;
     @FXML
-    public
+    private
     Text textFortNox;
     @FXML
-    public
+    private
     Text textGTSpritis;
     @FXML
-    public
+    private
     Text textGoldenI;
     @FXML
-    public
+    private
     Text textChabo;
     @FXML
-    public
+    private
     Text textWijkanders;
     @FXML
-    public
+    private
     Text textHrum;
     @FXML
-    public
+    private
     Text textAlvan;
     @FXML
-    public
+    private
     Text textSpektrum;
     @FXML
-    public
+    private
     Text textGasquen;
     @FXML
-    public
+    private
     Text textChalmersplatsen;
     @FXML
-    public
+    private
     Text textOlgas;
     @FXML
-    public
+    private
     Text textRunAn;
     @FXML
-    public
+    private
     Text textTagvagnen;
     @FXML
-    public
+    private
     Text textOrigogården;
 
     @FXML
@@ -199,7 +202,7 @@ public class MapController extends AnchorPane {
     public
     Text phaseText;
     @FXML
-    public
+    private
     Text deployableUnitsText;
 
     @FXML
@@ -263,7 +266,6 @@ public class MapController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        this.modelDataHandler = modelDataHandler;
         allButtons = new ArrayList<>(Arrays.asList(cubeHubben,cubeBasen,cubeKajsabaren,cubeZaloonen,cubeWinden,cubeLofTDet,
                 cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
                 cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden));
