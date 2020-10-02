@@ -113,6 +113,8 @@ class SetUpGameController extends AnchorPane {
     private ArrayList<Button> playerButtonList;
     private ArrayList<Button> divisionList;
 
+    private int amountOfPlayers = 0;
+
     private Stage stage;
 
     /**
@@ -166,13 +168,12 @@ class SetUpGameController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                Parent root = new MapController(colorList, stage);
+                Parent root = new StartController(stage);
                 Scene scene = new Scene(root, 1920, 1080);
 
                 stage.setTitle("Chans");
                 stage.setScene(scene);
                 stage.show();
-
             }
         });
 
@@ -197,7 +198,7 @@ class SetUpGameController extends AnchorPane {
     }
 
     private void mouseClicked(Button button){
-        if(!selectedButtons.contains(button) && nextToChoose <= 16) {
+        if(!selectedButtons.contains(button) && nextToChoose <= amountOfPlayers) {
             colorList.add(Color.web(button.getStyle().substring(22,29)));
 
             Button playerButton = playerButtonList.get(nextToChoose - 1);
@@ -244,5 +245,6 @@ class SetUpGameController extends AnchorPane {
         for(int i = players; i < playerButtonList.size(); i++){
             playerButtonList.get(i).setVisible(false);
         }
+        amountOfPlayers = players;
     }
 }
