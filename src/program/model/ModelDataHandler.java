@@ -6,12 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ *
+ */
+
 public class ModelDataHandler {
 
     private List<Player> players = new ArrayList<>();
-    private Player currentplayer;
+    private Player currentPlayer;
 
-    private int roundcount = 1;
+    private int roundCount = 1;
 
     private Round round;
 
@@ -19,13 +23,19 @@ public class ModelDataHandler {
 
     private int unitsToUse = 1;
 
+    /**
+     *
+     * @param amountOfSpaces This is all the spaces on the board
+     * @param colors This is a list of all the colors for the players that has been chosen
+     */
+
     public ModelDataHandler(int amountOfSpaces, List<Color> colors)
     {
         for(int i = 0; i < colors.size(); i++)
         {
             players.add(new Player((100/colors.size()),i,colors.get(i)));
         }
-        currentplayer = getRandomPlayer(null);
+        currentPlayer = getRandomPlayer(null);
         board = new Board(randomizeSpaces(amountOfSpaces));
         round = new Round();
     }
@@ -60,13 +70,13 @@ public class ModelDataHandler {
      */
     public boolean receiveSelectedSpace(int id)
     {
-        if(board.findSpace(id).getPlayer() == currentplayer && (board.selectedSpace == null || round.getCurrentPhase().equals(Round.Phase.DEPLOY))) {
+        if(board.findSpace(id).getPlayer() == currentPlayer && (board.selectedSpace == null || round.getCurrentPhase().equals(Round.Phase.DEPLOY))) {
             board.selectedSpace = board.findSpace(id);
             return true;
         }
         else if((board.selectedSpace !=  null && round.getCurrentPhase().equals(Round.Phase.MOVE) &&
-                board.findSpace(id).getPlayer() == currentplayer) || board.selectedSpace != null &&
-                board.findSpace(id).getPlayer() != currentplayer && round.getCurrentPhase().equals(Round.Phase.ATTACK)){
+                board.findSpace(id).getPlayer() == currentPlayer) || board.selectedSpace != null &&
+                board.findSpace(id).getPlayer() != currentPlayer && round.getCurrentPhase().equals(Round.Phase.ATTACK)){
             board.selectedSpace2 = board.findSpace(id);
             return true;
         }
@@ -83,15 +93,17 @@ public class ModelDataHandler {
         {
             if(player == players.get(i) && i + 1 <  players.size())
             {
-                currentplayer = players.get(i+1);
+                currentPlayer = players.get(i+1);
                 break;
             }
             else if(player == players.get(i)){
-                currentplayer = players.get(0);
+                currentPlayer = players.get(0);
                 break;
             }
         }
     }
+
+
     private List<Space> randomizeSpaces(int amountOfSpaces)
     {
         int player = 0;
@@ -111,18 +123,25 @@ public class ModelDataHandler {
         }
         return spaces;
     }
-    private Player getRandomPlayer(List<Player> lastpickedplayers)
+
+    /**
+     * This method is used to randomise a player from the playerList that needs to get a space,
+     * this is done by excluding the players that already got a space.
+     * @param lastPickedPlayers This list is used to know which players need to be excluded from the next handout of spaces
+     * @return It then returns the player that's going to get a space
+     */
+    private Player getRandomPlayer(List<Player> lastPickedPlayers)
     {
         Random random = new Random();
         Player player;
         while(true)
         {
             player = players.get(random.nextInt(players.size()));
-            if(lastpickedplayers == null)
+            if(lastPickedPlayers == null)
             {
                 return player;
             }
-            else if(!lastpickedplayers.contains(player)){
+            else if(!lastPickedPlayers.contains(player)){
                 return player;
             }
         }
@@ -133,7 +152,7 @@ public class ModelDataHandler {
      */
     public String getCurrentPlayerName()
     {
-        return String.valueOf(currentplayer.getId() + 1);
+        return String.valueOf(currentPlayer.getId() + 1);
     }
 
     /**
@@ -152,11 +171,11 @@ public class ModelDataHandler {
     {
         round.nextPhase();
         resetSelectedSpace();
-        roundcount++;
-        if(roundcount > 3)
+        roundCount++;
+        if(roundCount > 3)
         {
-            nextPlayer(currentplayer);
-            roundcount = 1;
+            nextPlayer(currentPlayer);
+            roundCount = 1;
         }
     }
 
@@ -168,7 +187,7 @@ public class ModelDataHandler {
     {
         if((board.selectedSpace != null && round.getCurrentPhase().equals(Round.Phase.DEPLOY)) || board.selectedSpace2 != null)
         {
-            return round.startPhase(board.selectedSpace, board.selectedSpace2, currentplayer, unitsToUse);
+            return round.startPhase(board.selectedSpace, board.selectedSpace2, currentPlayer, unitsToUse);
         }
         return false;
     }
@@ -197,7 +216,7 @@ public class ModelDataHandler {
     }
 
     public int getDeployableUnits(){
-        return currentplayer.getUnits();
+        return currentPlayer.getUnits();
     }
 
 }
