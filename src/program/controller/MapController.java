@@ -26,224 +26,83 @@ import java.util.List;
  * the controller for karta.fxml
  */
 public class MapController extends AnchorPane {
-    @FXML
-    public
-    Button cubeHubben;
-    @FXML
-    private
-    Button cubeBasen;
-    @FXML
-    private
-    Button cubeKajsabaren;
-    @FXML
-    private
-    Button cubeZaloonen;
-    @FXML
-    private
-    Button cubeWinden;
-    @FXML
-    private
-    Button cubeLofTDet;
-    @FXML
-    private
-    Button cubeRodaRummet;
-    @FXML
-    private
-    Button cubeVerum;
-    @FXML
-    private
-    Button cubeVillan;
-    @FXML
-    private
-    Button cubeADammen;
-    @FXML
-    private
-    Button cubeFocus;
-    @FXML
-    private
-    Button cubeFortNox;
-    @FXML
-    private
-    Button cubeGTSpritis;
-    @FXML
-    private
-    Button cubeGoldenI;
-    @FXML
-    private
-    Button cubeChabo;
-    @FXML
-    private
-    Button cubeWijkanders;
-    @FXML
-    private
-    Button cubeHrum;
-    @FXML
-    private
-    Button cubeAlvan;
-    @FXML
-    private
-    Button cubeSpektrum;
-    @FXML
-    private
-    Button cubeGasquen;
-    @FXML
-    private
-    Button cubeChalmersplatsen;
-    @FXML
-    private
-    Button cubeOlgas;
-    @FXML
-    private
-    Button cubeRunAn;
-    @FXML
-    private
-    Button cubeTagvagnen;
-    @FXML
-    private
-    Button cubeOrigogarden;
+    @FXML private Button cubeHubben;
+    @FXML private Button cubeBasen;
+    @FXML private Button cubeKajsabaren;
+    @FXML private Button cubeZaloonen;
+    @FXML private Button cubeWinden;
+    @FXML private Button cubeLofTDet;
+    @FXML private Button cubeRodaRummet;
+    @FXML private Button cubeVerum;
+    @FXML private Button cubeVillan;
+    @FXML private Button cubeADammen;
+    @FXML private Button cubeFocus;
+    @FXML private Button cubeFortNox;
+    @FXML private Button cubeGTSpritis;
+    @FXML private Button cubeGoldenI;
+    @FXML private Button cubeChabo;
+    @FXML private Button cubeWijkanders;
+    @FXML private Button cubeHrum;
+    @FXML private Button cubeAlvan;
+    @FXML private Button cubeSpektrum;
+    @FXML private Button cubeGasquen;
+    @FXML private Button cubeChalmersplatsen;
+    @FXML private Button cubeOlgas;
+    @FXML private Button cubeRunAn;
+    @FXML private Button cubeTagvagnen;
+    @FXML private Button cubeOrigogarden;
 
-    @FXML
-    private
-    Text textHubben;
-    @FXML
-    private
-    Text textBasen;
-    @FXML
-    private
-    Text textKajsaBaren;
-    @FXML
-    private
-    Text textZaloonen;
-    @FXML
-    public
-    Text textWinden;
-    @FXML
-    private
-    Text textLofTDet;
-    @FXML
-    private
-    Text textRodaRummet;
-    @FXML
-    private
-    Text textVerum;
-    @FXML
-    private
-    Text textVillan;
-    @FXML
-    private
-    Text textAdammen;
-    @FXML
-    private
-    Text textFocus;
-    @FXML
-    private
-    Text textFortNox;
-    @FXML
-    private
-    Text textGTSpritis;
-    @FXML
-    private
-    Text textGoldenI;
-    @FXML
-    private
-    Text textChabo;
-    @FXML
-    private
-    Text textWijkanders;
-    @FXML
-    private
-    Text textHrum;
-    @FXML
-    private
-    Text textAlvan;
-    @FXML
-    private
-    Text textSpektrum;
-    @FXML
-    private
-    Text textGasquen;
-    @FXML
-    private
-    Text textChalmersplatsen;
-    @FXML
-    private
-    Text textOlgas;
-    @FXML
-    private
-    Text textRunAn;
-    @FXML
-    private
-    Text textTagvagnen;
-    @FXML
-    private
-    Text textOrigogården;
+    @FXML private Text textHubben;
+    @FXML private Text textBasen;
+    @FXML private Text textKajsaBaren;
+    @FXML private Text textZaloonen;
+    @FXML public Text textWinden;
+    @FXML private Text textLofTDet;
+    @FXML private Text textRodaRummet;
+    @FXML private Text textVerum;
+    @FXML private Text textVillan;
+    @FXML private Text textAdammen;
+    @FXML private Text textFocus;
+    @FXML private Text textFortNox;
+    @FXML private Text textGTSpritis;
+    @FXML private Text textGoldenI;
+    @FXML private Text textChabo;
+    @FXML private Text textWijkanders;
+    @FXML private Text textHrum;
+    @FXML private Text textAlvan;
+    @FXML private Text textSpektrum;
+    @FXML private Text textGasquen;
+    @FXML private Text textChalmersplatsen;
+    @FXML private Text textOlgas;
+    @FXML private Text textRunAn;
+    @FXML private Text textTagvagnen;
+    @FXML private Text textOrigogården;
 
-    @FXML
-    public
-    AnchorPane rootpane;
-    @FXML
-    AnchorPane startMenu;
-    @FXML
-    Button startButton;
-    @FXML
-    private
-    Button skipAttack;
-    @FXML
-    private
-    Button doneMove;
-    @FXML
-    private
-    Button donedeploy;
+    @FXML public AnchorPane rootpane;
+    @FXML AnchorPane startMenu;
 
-    @FXML
-    public
-    Text playerText;
-    @FXML
-    public
-    Text phaseText;
-    @FXML
-    private
-    Text deployableUnitsText;
+    @FXML public AnchorPane deployPhase;
+    @FXML public AnchorPane attackPhase;
+    @FXML public AnchorPane movePhase;
 
-    @FXML
-    public
-    AnchorPane deployPhase;
-    @FXML
-    public
-    AnchorPane attackPhase;
-    @FXML
-    public
-    AnchorPane movePhase;
-    @FXML
-    private
-    Button deployButton;
-    @FXML
-    private
-    Button attackButton;
-    @FXML
-    private
-    Button moveButton;
+    @FXML private Slider moveSlider;
 
-    @FXML
-    private
-    Slider moveSlider;
-    @FXML
-    private
-    Button firstMarked;
-    @FXML
-    private
-    Button secondMarked;
-    @FXML
-    private
-    Text showMoveUnitsText;
+    @FXML Button startButton;
+    @FXML private Button skipAttack;
+    @FXML private Button doneMove;
+    @FXML private Button donedeploy;
+    @FXML private Button deployButton;
+    @FXML private Button attackButton;
+    @FXML private Button moveButton;
+    @FXML private Button firstMarked;
+    @FXML private Button secondMarked;
 
-    @FXML
-    private
-    Text firstDisplayText;
-    @FXML
-    private
-    Text secondDisplayText;
-
+    @FXML private Text showMoveUnitsText;
+    @FXML private Text firstDisplayText;
+    @FXML private Text secondDisplayText;
+    @FXML public Text playerText;
+    @FXML public Text phaseText;
+    @FXML private Text deployableUnitsText;
 
     private ModelDataHandler modelDataHandler;
     private MapView view = new MapView();
