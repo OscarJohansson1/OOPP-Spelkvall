@@ -1,5 +1,7 @@
 package Program.Controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -135,12 +137,12 @@ public class SetUpGameController extends AnchorPane {
 
     private void initialize() {
 
-        updatePlayerGrid();
+        updatePlayerGrid((int) slider.getValue());
 
-        slider.setOnDragDetected(new EventHandler<MouseEvent>() {
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
-            public void handle(MouseEvent mouseEvent) {
-                updatePlayerGrid();
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                updatePlayerGrid( newValue.intValue());
             }
         });
         startGameButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -214,12 +216,12 @@ public class SetUpGameController extends AnchorPane {
     private void makeSelected(Button button){
 
     }
-    /*
+
     private int getAndRemoveNextPlayerToChoose(){
         return nextPlayerNumber.remove(0);
-    }*/
+    }
 
-    /*private void addPlayerToChoose(int playerNumber){
+    private void addPlayerToChoose(int playerNumber){
         int i = 0;
         if(nextPlayerNumber.contains(playerNumber)){
             return;
@@ -229,15 +231,21 @@ public class SetUpGameController extends AnchorPane {
             }
             nextPlayerNumber.add(i, playerNumber);
         }
-    }*/
+    }
 
-    /*private void updatePlayer(String color, String studentDivision){
+    /*
+    private void updatePlayer(String color, String studentDivision){
         int n = getAndRemoveNextPlayerToChoose();
         playerList.add(playerList.indexOf(playerList.remove(n)), new Player(0, n, Color.web(color)));
     }*/
 
-    private void updatePlayerGrid(){
+    private void updatePlayerGrid(int players){
 
-
+        for(int i = 0; i < players; i++){
+            playerButtonList.get(i).setVisible(true);
+        }
+        for(int i = players; i < playerButtonList.size(); i++){
+            playerButtonList.get(i).setVisible(false);
+        }
     }
 }
