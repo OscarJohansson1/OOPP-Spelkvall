@@ -1,18 +1,9 @@
 package program.model;
 
-/**
- * This class is controlling the different stages in one round. The method StartPhase() is always called
- * when the phases Deploy, Attack or Move is called in ModelDataHandler
- */
-
 class Round {
 
     private Phase currentPhase = Phase.DEPLOY;
 
-    /**
-     * This enum is used to check what state the game is in to be able to create an order
-     * for the different stages in one round
-     */
     public enum Phase {
 
         DEPLOY, ATTACK, MOVE, END;
