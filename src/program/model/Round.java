@@ -1,8 +1,18 @@
 package program.model;
 
+/**
+ * This class is controlling the different phases for one round.
+ * StartPhase() is always called when Deploy, Attack, or Movement is called in ModelDataHandler
+ */
+
 class Round {
 
     private Phase currentPhase = Phase.DEPLOY;
+
+    /**
+     * This is an enum with all the different phases in one round.
+     * It also makes it possible to know what the next phase is
+     */
 
     public enum Phase {
 

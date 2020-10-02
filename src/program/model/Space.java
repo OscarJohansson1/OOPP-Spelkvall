@@ -1,5 +1,9 @@
 package program.model;
 
+/**
+ * This class holds methods that´s controlling the spaces. Mostly creating them and updating them.
+ */
+
 public class Space {
 
     private final int id;
@@ -7,6 +11,13 @@ public class Space {
     private int units;
     private final String name;
 
+    /**
+     * This is a constructor for a space
+     * @param id This is the id for a space, it is used to find a space
+     * @param player This is the player that owns the space
+     * @param units This is the amount of units in a space
+     * @param name This is the name of the space
+     */
     public Space(int id, Player player, int units, String name){
         this.id = id;
         this.player = player;
