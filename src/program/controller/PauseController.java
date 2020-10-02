@@ -19,6 +19,9 @@ import java.io.IOException;
 public class PauseController extends AnchorPane {
 
     @FXML
+    private AnchorPane rootpane;
+
+    @FXML
     private HBox pauseHBox;
 
     @FXML
@@ -39,9 +42,13 @@ public class PauseController extends AnchorPane {
     @FXML
     private Button quitGameButton;
 
-    private Stage stage;
+    MapController mapController;
+    Parent root = mapController;
+    Stage stage;
 
-    PauseController(Stage stage) {
+    public PauseController(Stage stage, MapController mapcontroller) {
+
+        this.mapController = mapcontroller;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pauseMenu.fxml"));
         fxmlLoader.setRoot(this);
@@ -57,12 +64,14 @@ public class PauseController extends AnchorPane {
 
     }
 
-    private void initialize() {
+    public void initialize() {
         //TODO: What now? Pause ska finnas från start av programmet och ska sedan finnas kvar i ett lager bakom kartan.
 
     }
 
-     public void returnButtonPressed(){
+    public void returnButtonPressed(){
+
+       mapController.checkPauseController();
 
        /*
        //Uppdatera kartan
