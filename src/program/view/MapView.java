@@ -102,7 +102,7 @@ public class MapView extends AnchorPane {
     {
         for(int i = 0; i < allButtons.size(); i++)
         {
-           allButtons.get(i).setStyle(colorToHex(colors.get(i)));
+            allButtons.get(i).setStyle(colorToHex(colors.get(i)));
         }
     }
     private String colorToHex(Color color)
