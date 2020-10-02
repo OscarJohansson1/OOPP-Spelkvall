@@ -41,6 +41,11 @@ public class MapView extends AnchorPane {
         mapController.phaseText.setText(currentPhase);
     }
 
+    /**
+     * Updates the slider's text to show desired value.
+     * @param units Desired number of units shown by text.
+     * @param text Instance of text to be changed.
+     */
     public void updateSliderText(int units, Text text){
         text.setText(units + "");
     }
@@ -77,28 +82,51 @@ public class MapView extends AnchorPane {
         }
     }
 
+    /**
+     * Sets a given map space to the desired color.
+     * @param button Map space to be changed.
+     * @param color Desired color.
+     */
     public void updateDisplayCubes(Button button, Color color){
         button.setStyle(colorToHex(color));
     }
 
+    /**
+     * Removes color from a map space.
+     * @param button Map space to edit.
+     */
     public void resetDisplayCubes(Button button){
         button.setStyle(null);
     }
 
+    /**
+     * Sets desired text to be equal to another text.
+     * @param displayText Text to be changed.
+     * @param cubeText Text to be copied.
+     */
     public void updateDisplayTexts(Text displayText, Text cubeText){
         displayText.setText(cubeText.getText());
     }
 
+    /**
+     * Sets given text to an empty string.
+     * @param text
+     */
     public void resetDisplayTexts(Text text){
         text.setText("");
     }
 
+    /**
+     * Sets given text to show desired amount of units.
+     * @param text Text to be changed.
+     * @param units Amount of units to display.
+     */
     public void updateDeployableUnits(Text text, int units){
         text.setText("Deployable units: " + units + "");
     }
 
     /**
-     * Method that resets the colors to a standard colors.
+     * Method that resets the colors to standard colors.
      * @param colors An array with colors.
      */
     public void resetColor(List<Color> colors, List<Button> allButtons)
