@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
  */
 
 public class Player {
-
     private int units;
     private int id;
     private Color color;
@@ -39,6 +38,4 @@ public class Player {
     public Color getColor() {
         return color;
     }
-
-
 }

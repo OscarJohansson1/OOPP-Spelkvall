@@ -8,9 +8,6 @@ import java.util.ArrayList;
  */
 
  class Attack {
-
-    //This method checks if the attack is possible and declares which space is to be attacked
-
      /**
       * Method that returns if an attack is possible, based on if the spaces are neighbours and there's more than
       * one attacking unit.
@@ -20,7 +17,6 @@ import java.util.ArrayList;
       * @return Whether the attack between the two spaces is possible.
       */
     static boolean DeclareAttack(Space mySpace, Space opponentSpace, int myUnits) {
-        // myUnits kanske kan fås av mySpace.getUnits i en framtida refaktorisering
         return nextTo(mySpace, opponentSpace) && isAttackPossible(myUnits);
     }
 
@@ -35,29 +31,36 @@ import java.util.ArrayList;
         int myDice = (mySpace.getUnits() - 1);
         int opponentDice = enemySpace.getUnits();
 
-            ArrayList<Integer> myResults = dice.rollNDIce(myDice);
-            ArrayList<Integer> opponentResults = dice.rollNDIce(opponentDice);
+        ArrayList<Integer> myResults = dice.rollNDIce(myDice);
+        ArrayList<Integer> opponentResults = dice.rollNDIce(opponentDice);
 
-            while (myResults.size() > 0 && opponentResults.size() > 0) {
-                if (findHighestDie(myResults) > findHighestDie(opponentResults)) {
+        while (myResults.size() > 0 && opponentResults.size() > 0) {
+            if (findHighestDie(myResults) > findHighestDie(opponentResults)) {
 
-                    enemySpace.updateSpace(enemySpace.getUnits() -1);
+                enemySpace.updateSpace(enemySpace.getUnits() -1);
 
-                    if (enemySpace.getUnits() < 1){
-                        enemySpace.updateSpace(mySpace.getPlayer(), mySpace.getUnits() - 1);
-                        mySpace.updateSpace(1);
-                        return true;
-                    }
+                if (enemySpace.getUnits() < 1){
+                    enemySpace.updateSpace(mySpace.getPlayer(), mySpace.getUnits() - 1);
+                    mySpace.updateSpace(1);
+                    return true;
+                }
                 } else {
                     mySpace.updateSpace(mySpace.getUnits() -1);
                     return true;
                 }
             }
-            return false;
+        return false;
     }
 
-    //This checks if one space on the board is next to another
+
+    /**
+     * This method checks if one space is next to another space
+     * @param mySpace The space that the current player is attacking from
+     * @param opponentSpace The space that the current player is attacking that belongs to another player
+     * @return True if the two spaces is next to each other
+     */
     private static boolean nextTo(Space mySpace, Space opponentSpace) {
+        //Going to be implemented at a later stage
         return true;
     }
 
@@ -76,7 +79,6 @@ import java.util.ArrayList;
       * @return The value of the die with the highest value.
       */
     static Integer findHighestDie(ArrayList<Integer> rolls) {
-
         int value = 0;
         int index = 0;
 

@@ -14,13 +14,9 @@ public class ModelDataHandler {
 
     private List<Player> players = new ArrayList<>();
     private Player currentPlayer;
-
     private int roundCount = 1;
-
     private Round round;
-
     private Board board;
-
     private int unitsToUse = 1;
 
     /**
@@ -28,7 +24,6 @@ public class ModelDataHandler {
      * @param amountOfSpaces This is all the spaces on the board
      * @param colors This is a list of all the colors for the players that has been chosen
      */
-
     public ModelDataHandler(int amountOfSpaces, List<Color> colors)
     {
         for(int i = 0; i < colors.size(); i++)

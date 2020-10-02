@@ -10,7 +10,6 @@ import java.util.List;
  */
 
 class Board {
-
     private List<Space> spaces;
     Space selectedSpace;
     Space selectedSpace2;

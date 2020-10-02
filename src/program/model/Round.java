@@ -6,16 +6,13 @@ package program.model;
  */
 
 class Round {
-
     private Phase currentPhase = Phase.DEPLOY;
 
     /**
      * This is an enum with all the different phases in one round.
      * It also makes it possible to know what the next phase is
      */
-
     public enum Phase {
-
         DEPLOY, ATTACK, MOVE, END;
 
         private Phase next;
@@ -29,7 +26,6 @@ class Round {
         public Phase getNextPhase() {
             return next;
         }
-
     }
 
     /**

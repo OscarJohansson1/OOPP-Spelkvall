@@ -7,7 +7,6 @@ import java.util.ArrayList;
  */
 
 class Dice {
-
     private final int NUMBER_RANGE = 6;
 
     /**
@@ -18,7 +17,6 @@ class Dice {
         int value = (int)(Math.random() * NUMBER_RANGE) + 1;
         System.out.println(value);
         return value;
-
     }
 
     /**
@@ -28,13 +26,9 @@ class Dice {
      */
     ArrayList<Integer> rollNDIce(int n){
         ArrayList<Integer> results = new ArrayList<>();
-
         for (int i = 0; i < n; i++){
             results.add(rollADie());
         }
-
-        System.out.println(results.toString());
-
         return results;
     }
 }

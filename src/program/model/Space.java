@@ -5,7 +5,6 @@ package program.model;
  */
 
 public class Space {
-
     private final int id;
     private Player player;
     private int units;
@@ -23,7 +22,6 @@ public class Space {
         this.player = player;
         this.units = units;
         this.name = name;
-
     }
 
     /**
@@ -67,5 +65,4 @@ public class Space {
     public String getName() {
         return name;
     }
-
 }
