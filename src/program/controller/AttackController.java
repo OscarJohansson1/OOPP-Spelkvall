@@ -15,10 +15,7 @@ import program.view.AttackView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class AttackController extends AnchorPane {
@@ -36,7 +33,8 @@ public class AttackController extends AnchorPane {
 
 
     private List<ImageView> images;
-
+    private List<ImageView> fakeimages;
+    private Timer timer = new Timer();
     private List<Integer> dices;
     private Stage stage;
     private AttackView attackView = new AttackView();
@@ -57,11 +55,12 @@ public class AttackController extends AnchorPane {
         this.dices = dices;
 
         images = new ArrayList<>(Arrays.asList(attackerDieImage1,attackerDieImage2,attackerDieImage3, defenderDieImage1,defenderDieImage2));
-
+        fakeimages = images;
         this.mapController = mapController;
 
+
     }
-     public void attackButtonPressed() throws FileNotFoundException {
+     public void attackButtonPressed() {
          Random random = new Random();
          System.out.println(dices.size());
          for(int i = 0; i < dices.size(); i++)
@@ -77,6 +76,40 @@ public class AttackController extends AnchorPane {
          attackButton.setVisible(false);
          abortButton.setText("Attack done");
      }
+     private void spinDices()
+     {
+
+         resetTask();
+         while(true)
+         {
+             if(fakeimages.size() != 0)
+             {
+                 for (ImageView fakeimage : fakeimages) {
+                     attackView.updateDie(fakeimage, new Random().nextInt(7), "White");
+                 }
+             }
+             else {
+                 break;
+             }
+         }
+     }
+     private TimerTask task = new TimerTask() {
+         @Override
+         public void run() {
+             if(fakeimages.size() != 0)
+             {
+                 fakeimages.remove(fakeimages.size() - 1);
+
+             }
+         }
+     };
+    private void resetTask()
+    {
+        timer.cancel();
+        timer = new Timer();
+        TimerTask newtask = task;
+        timer.schedule(task,1000);
+    }
      public void abortButtonPressed()
      {
          mapController.removeAttackView();

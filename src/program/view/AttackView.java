@@ -13,18 +13,16 @@ import java.util.List;
 public class AttackView extends AnchorPane {
 
 
-    public void updateDie(ImageView imageView, int number, String dicecolor) throws FileNotFoundException {
+    public void updateDie(ImageView imageView, int number, String dicecolor) {
         Image image;
-        String string;
-
         switch (dicecolor) {
             case "White":
-                image = new Image("file:C:/Users/William/Documents/GitHub/clone/OOPP-Spelkvall/src/program/picures/dice_white_"+number+".png");
+                image = new Image("file:src/program/picures/dice_white_"+number+".png");
                 imageView.setImage(image);
                 System.out.println(imageView.getImage().getUrl());
                 break;
             case "Black":
-                image = new Image("file:C:/Users/William/Documents/GitHub/clone/OOPP-Spelkvall/src/program/picures/dice_black_"+number+".png");
+                image = new Image("file:src/program/picures/dice_black_"+number+".png");
                 imageView.setImage(image);
                 break;
         }
