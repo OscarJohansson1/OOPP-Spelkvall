@@ -1,22 +1,17 @@
-package Program.Controller;
+package program.controller;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class pauseController extends AnchorPane {
+public class PauseController extends AnchorPane {
 
     @FXML
     private HBox pauseHBox;
@@ -43,7 +38,7 @@ public class pauseController extends AnchorPane {
     Parent root = mapController;
     Stage stage;
 
-    public pauseController(Stage stage) {
+    public PauseController(Stage stage) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pauseMenu.fxml"));
         fxmlLoader.setRoot(this);

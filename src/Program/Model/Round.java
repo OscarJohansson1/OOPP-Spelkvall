@@ -1,6 +1,4 @@
-package Program.Model;
-
-import javafx.scene.paint.Color;
+package program.model;
 
 class Round {
 

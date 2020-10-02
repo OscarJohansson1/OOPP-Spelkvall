@@ -1,4 +1,4 @@
-package Program.Model;
+package program.model;
 
 /**
  * This class makes it possible for a player to move units from one space to another.

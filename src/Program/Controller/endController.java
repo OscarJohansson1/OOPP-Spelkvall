@@ -1,15 +1,10 @@
-package Program.Controller;
+package program.controller;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -17,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class endController extends AnchorPane {
+public class EndController extends AnchorPane {
 
     @FXML
     private Button pauseButton;
@@ -47,7 +42,7 @@ public class endController extends AnchorPane {
     //Parent root = mapController;
     Stage stage;
 
-    public endController(Stage stage) {
+    public EndController(Stage stage) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("endMenu.fxml"));
         fxmlLoader.setRoot(this);

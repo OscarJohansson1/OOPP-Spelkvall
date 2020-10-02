@@ -1,4 +1,4 @@
-package Program.Model;
+package program.model;
 
 /**
  * This class makes it possible for the current player to deploy units in the marked space IF the marked space is owned
