@@ -1,11 +1,13 @@
 package program.controller;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -22,6 +24,12 @@ public class StartController extends AnchorPane {
 
     @FXML
     private Button startButton;
+
+    @FXML
+    private Button quitButton;
+
+    @FXML
+    private ImageView chanceImageView;
 
     private SetUpGameController setUpGameController;// = new SetUpGameController();
     //MapController mapController = new MapController();
@@ -56,6 +64,7 @@ public class StartController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
+                //Skapar setUpGameController
                 Scene scene = new Scene(root, 1920, 1080);
 
                 stage.setTitle("Chans");
@@ -64,5 +73,16 @@ public class StartController extends AnchorPane {
 
             }
         });
+
+        quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+                Platform.exit();
+                System.exit(0);
+
+            }
+        });
     }
+
 }
