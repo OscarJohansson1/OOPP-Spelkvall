@@ -25,85 +25,45 @@ import java.util.Arrays;
  */
 class SetUpGameController extends AnchorPane {
 
-    @FXML
-    private Slider slider;
+    @FXML private Slider slider;
+    @FXML private AnchorPane pane;
+    @FXML private GridPane gridPane;
 
-    @FXML
-    private AnchorPane pane;
+    @FXML private Button backButton;
+    @FXML private Button startGameButton;
+    @FXML private Button recA;
+    @FXML private Button recAE;
+    @FXML private Button recD;
+    @FXML private Button recE;
+    @FXML private Button recF;
+    @FXML private Button recH;
+    @FXML private Button recI;
+    @FXML private Button recIT;
+    @FXML private Button recK;
+    @FXML private Button recKfKb;
+    @FXML private Button recM;
+    @FXML private Button recSjo;
+    @FXML private Button recTB;
+    @FXML private Button recTD;
+    @FXML private Button recV;
+    @FXML private Button recZ;
 
-    @FXML
-    private Button backButton;
-    @FXML
-    private Button startGameButton;
-
-    @FXML
-    private Button recA;
-    @FXML
-    private Button recAE;
-    @FXML
-    private Button recD;
-    @FXML
-    private Button recE;
-    @FXML
-    private Button recF;
-    @FXML
-    private Button recH;
-    @FXML
-    private Button recI;
-    @FXML
-    private Button recIT;
-    @FXML
-    private Button recK;
-    @FXML
-    private Button recKfKb;
-    @FXML
-    private Button recM;
-    @FXML
-    private Button recSjo;
-    @FXML
-    private Button recTB;
-    @FXML
-    private Button recTD;
-    @FXML
-    private Button recV;
-    @FXML
-    private Button recZ;
-
-    @FXML
-    private GridPane gridPane;
-
-    @FXML
-    private Button rec1;
-    @FXML
-    private Button rec2;
-    @FXML
-    private Button rec3;
-    @FXML
-    private Button rec4;
-    @FXML
-    private Button rec5;
-    @FXML
-    private Button rec6;
-    @FXML
-    private Button rec7;
-    @FXML
-    private Button rec8;
-    @FXML
-    private Button rec9;
-    @FXML
-    private Button rec10;
-    @FXML
-    private Button rec11;
-    @FXML
-    private Button rec12;
-    @FXML
-    private Button rec13;
-    @FXML
-    private Button rec14;
-    @FXML
-    private Button rec15;
-    @FXML
-    private Button rec16;
+    @FXML private Button rec1;
+    @FXML private Button rec2;
+    @FXML private Button rec3;
+    @FXML private Button rec4;
+    @FXML private Button rec5;
+    @FXML private Button rec6;
+    @FXML private Button rec7;
+    @FXML private Button rec8;
+    @FXML private Button rec9;
+    @FXML private Button rec10;
+    @FXML private Button rec11;
+    @FXML private Button rec12;
+    @FXML private Button rec13;
+    @FXML private Button rec14;
+    @FXML private Button rec15;
+    @FXML private Button rec16;
 
     private int nextToChoose = 1;
     private ArrayList<Button> selectedButtons = new ArrayList<>();
@@ -135,7 +95,6 @@ class SetUpGameController extends AnchorPane {
     }
 
     private void initialize() {
-
         playerButtonList = new ArrayList<>(Arrays.asList(rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, rec9,
                 rec10, rec11, rec12, rec13, rec14, rec15, rec16));
         divisionList = new ArrayList<>(Arrays.asList(recA, recAE, recD, recE, recF, recH, recI, recIT, recK,
@@ -176,7 +135,6 @@ class SetUpGameController extends AnchorPane {
                 stage.show();
             }
         });
-
         for(Button button : divisionList){
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -185,7 +143,6 @@ class SetUpGameController extends AnchorPane {
                 }
             });
         }
-
         for(Button button : playerButtonList){
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -214,7 +171,7 @@ class SetUpGameController extends AnchorPane {
     }
 
     private void makeSelected(Button button){
-
+        //Going to implement at a later stage
     }
     private void updatePlayerGrid(int players){
 

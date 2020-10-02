@@ -25,7 +25,7 @@ public class MapView extends AnchorPane {
      */
     public void setUpStart(MapController mapController){
 
-        mapController.cubeHubben.setText("10");
+        //mapController.cubeHubben.setText("10");
         //texts = new Text[] { null,mapController.textHubben,mapController.textBasen,mapController.textKajsabaren,mapController.textZaloonen};
     }
 

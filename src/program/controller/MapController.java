@@ -26,6 +26,7 @@ import java.util.List;
  * the controller for karta.fxml
  */
 public class MapController extends AnchorPane {
+
     @FXML private Button cubeHubben;
     @FXML private Button cubeBasen;
     @FXML private Button cubeKajsabaren;
@@ -56,7 +57,7 @@ public class MapController extends AnchorPane {
     @FXML private Text textBasen;
     @FXML private Text textKajsaBaren;
     @FXML private Text textZaloonen;
-    @FXML public Text textWinden;
+    @FXML private Text textWinden;
     @FXML private Text textLofTDet;
     @FXML private Text textRodaRummet;
     @FXML private Text textVerum;
@@ -87,7 +88,7 @@ public class MapController extends AnchorPane {
 
     @FXML private Slider moveSlider;
 
-    @FXML Button startButton;
+    @FXML private Button startButton;
     @FXML private Button skipAttack;
     @FXML private Button doneMove;
     @FXML private Button donedeploy;
@@ -304,23 +305,28 @@ public class MapController extends AnchorPane {
 
         }
     }
+
     private void setSpaceEvent(int id) {
         view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id), allButtons);
         view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
     }
+
     private void setSpaceEvent(int id, int id2) {
         view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id), allButtons);
         view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id), allButtons);
         view.updateTextUnits(id2, modelDataHandler.findUnitsOnSpace(id2), allButtons);
         view.setColor(getCube(id2), modelDataHandler.getColorOnSpace(id2), allButtons);
     }
+
     private List<Color> getColors()
     {
         return modelDataHandler.getColorOnAllSpaces();
     }
+
     private void resetColor() {
         view.resetColor(getColors(),allButtons);
     }
+
     private void resetColor(int id) {
         List<Color> colors = getColors();
         for(int i = 1; i < allButtons.size(); i++)
@@ -332,6 +338,7 @@ public class MapController extends AnchorPane {
         }
         view.resetColor(colors,allButtons);
     }
+
     private Button getCube(int id) {
         for (Button allButton : allButtons) {
             if (allButtons.get(id) == allButton) {
@@ -354,6 +361,7 @@ public class MapController extends AnchorPane {
         view.resetDisplayCubes(firstMarked);
         view.resetDisplayCubes(secondMarked);
     }
+
     private void removeMarkedCube(Button button)
     {
         if(button == firstMarked)
@@ -380,7 +388,6 @@ public class MapController extends AnchorPane {
         }
 
     }
-
     private void displayText(Text displayText, Text cubeText){
        view.updateDisplayTexts(displayText, cubeText);
     }
@@ -389,9 +396,11 @@ public class MapController extends AnchorPane {
         view.resetDisplayTexts(firstDisplayText);
         view.resetDisplayTexts(secondDisplayText);
     }
+
     private void resetDisplayText(Text text){
         view.resetDisplayTexts(text);
     }
+
     private Text getTextFromList(int id)
     {
         for (Text allText : allTexts) {

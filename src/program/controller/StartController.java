@@ -19,21 +19,13 @@ import java.io.IOException;
  */
 public class StartController extends AnchorPane {
 
-    @FXML
-    private AnchorPane pane;
+    @FXML private AnchorPane pane;
+    @FXML private ImageView chanceImageView;
 
-    @FXML
-    private Button startButton;
+    @FXML private Button startButton;
+    @FXML private Button quitButton;
 
-    @FXML
-    private Button quitButton;
-
-    @FXML
-    private ImageView chanceImageView;
-
-    private SetUpGameController setUpGameController;// = new SetUpGameController();
-    //MapController mapController = new MapController();
-    private Parent root;// = setUpGameController;
+    private Parent root;
     private Stage stage;
 
     /**
@@ -41,9 +33,8 @@ public class StartController extends AnchorPane {
      * @param stage the main stage
      */
     public StartController(Stage stage) {
-
         this.stage = stage;
-        setUpGameController = new SetUpGameController(stage);
+        SetUpGameController setUpGameController = new SetUpGameController(stage);
         root = setUpGameController;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartMenu.fxml"));
@@ -56,7 +47,6 @@ public class StartController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         initialize();
-
     }
 
     private void initialize() {
@@ -70,19 +60,14 @@ public class StartController extends AnchorPane {
                 stage.setTitle("Chans");
                 stage.setScene(scene);
                 stage.show();
-
             }
         });
-
         quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
                 Platform.exit();
                 System.exit(0);
-
             }
         });
     }
-
 }

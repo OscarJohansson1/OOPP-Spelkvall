@@ -21,29 +21,15 @@ import java.io.IOException;
  */
 public class EndController extends AnchorPane {
 
-    @FXML
-    private Button pauseButton;
+    @FXML private ImageView winnerImageView;
+    @FXML private Label winnerLabel;
+    @FXML private Pane buttonPane;
+    @FXML private HBox winnerHBox;
 
-    @FXML
-    private ImageView winnerImageView;
-
-    @FXML
-    private Label winnerLabel;
-
-    @FXML
-    private Button newGameButton;
-
-    @FXML
-    private Button toMenuButton;
-
-    @FXML
-    private Button quitGameButton;
-
-    @FXML
-    private Pane buttonPane;
-
-    @FXML
-    private HBox winnerHBox;
+    @FXML private Button pauseButton;
+    @FXML private Button newGameButton;
+    @FXML private Button toMenuButton;
+    @FXML private Button quitGameButton;
 
     private Stage stage;
 
@@ -60,12 +46,10 @@ public class EndController extends AnchorPane {
         }
         this.stage = stage;
         initialize();
-
     }
 
     private void initialize() {
         //TODO: Här vet jag inte hur man ska koppla. Vi vill att endMenu visas då spelet är slut.
-
        /*Scene scene = new Scene(root, 1920, 1080);
 
        stage.setTitle("End");
@@ -79,25 +63,18 @@ public class EndController extends AnchorPane {
        //Kan skrivas ut efter "division" men då måste vi skriva in det som attribut. Ist. kan man använda färgen.
        //Isåfall måste den vinnande spelarens färg skickas in till endController
        switch (winnerColor) {
-           case "turquoise":
-               winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/itloggan.JPG")));
-           case "orange":
-               //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/datateknologsektionen.JPG")));
-           case "brown":
-               //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/maskinloggan.JPG")));
-           case "dark green":
-               //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/kfkbloggan.JPG")));
-
+               //           case "turquoise":
+               //               winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/itloggan.JPG")));
+               //           case "orange":
+               //               //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/datateknologsektionen.JPG")));
+               //           case "brown":
+               //               //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/maskinloggan.JPG")));
+               //           case "dark green":
+               //               //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/kfkbloggan.JPG")));
        }*/
-
-
-
-
-
     }
 
     public void newGameButtonPressed(){
-
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
@@ -107,27 +84,17 @@ public class EndController extends AnchorPane {
     }
 
     public void quitGameButtonPressed(){
-
         Platform.exit();
         System.exit(0);
     }
 
     public void toMenuButtonPressed(){
-
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
         stage.setTitle("Menu");
         stage.setScene(scene);
         stage.show();
-
     }
-
-
-
-
-
-
-
 }
 
