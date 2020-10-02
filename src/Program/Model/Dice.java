@@ -2,6 +2,10 @@ package Program.Model;
 
 import java.util.ArrayList;
 
+/**
+ * This class makes it possible to calculate an attack depending on the value of the dices.
+ */
+
 class Dice {
 
     private final int NUMBER_RANGE = 6;
