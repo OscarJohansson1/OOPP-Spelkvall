@@ -195,7 +195,7 @@
       <Button fx:id="cubeRodaRummet" layoutX="1439.0" layoutY="665.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeADammen" layoutX="1390.0" layoutY="715.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeVillan" layoutX="1544.0" layoutY="698.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
-      <Slider fx:id="moveSlider" layoutX="92.0" layoutY="260.0" max="20.0" min="1.0" showTickLabels="true" showTickMarks="true" />
+      <Slider fx:id="moveSlider" layoutX="92.0" layoutY="260.0" max="25.0" min="1.0" showTickLabels="true" showTickMarks="true" />
       <Button fx:id="firstMarked" layoutX="29.0" layoutY="250.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="secondMarked" layoutX="241.0" layoutY="251.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Text fx:id="showMoveUnitsText" layoutX="151.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />

@@ -1,11 +1,9 @@
 package program.controller;
 
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import program.model.ModelDataHandler;
-import program.view.AttackView;
 import program.view.MapView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -177,6 +175,7 @@ public class MapController extends AnchorPane {
                 resetDisplayText();
                 sliderVisibility(true);
                 addMarkedCube(secondMarked);
+                moveSlider.setMax(25);
             }
         });
         doneMove.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -192,6 +191,7 @@ public class MapController extends AnchorPane {
                 sliderVisibility(true);
                 removeMarkedCube(secondMarked);
                 view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+                donedeploy.setDisable(true);
             }
         });
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -204,7 +204,6 @@ public class MapController extends AnchorPane {
                 sliderVisibility(false);
                 addMarkedCube(firstMarked);
                 addMarkedCube(secondMarked);
-
             }
         });
         deployButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -214,6 +213,11 @@ public class MapController extends AnchorPane {
                 {
                     setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
                     view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+                    moveSlider.setMax(modelDataHandler.getDeployableUnits());
+                }
+                if (modelDataHandler.getDeployableUnits() == 0){
+                    donedeploy.setDisable(false);
+                    donedeploy.setStyle(null);
                 }
             }
         });
@@ -243,7 +247,7 @@ public class MapController extends AnchorPane {
         moveSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                modelDataHandler.getSliderAmount(newValue.intValue());
+                modelDataHandler.setSliderAmount(newValue.intValue());
                 view.updateSliderText(newValue.intValue(), showMoveUnitsText);
             }
         });
@@ -257,6 +261,8 @@ public class MapController extends AnchorPane {
         view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
         resetDisplayText();
         removeMarkedCube(secondMarked);
+        donedeploy.setDisable(true);
+        donedeploy.setStyle("-fx-background-color: #000000");
     }
     private void changeToAttackView()
     {

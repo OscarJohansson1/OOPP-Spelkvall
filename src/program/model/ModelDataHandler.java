@@ -208,15 +208,14 @@ public class ModelDataHandler {
     }
     public List<Color> getColorOnAllSpaces(){return board.getColorOnAllSpaces();}
 
-    public void getSliderAmount(int unitsToUse){
+    public void setSliderAmount(int unitsToUse){
             this.unitsToUse = unitsToUse;
     }
 
     public int getDeployableUnits(){
         return currentPlayer.getUnits();
     }
-    public List<Integer> getDiceResults()
-    {
+    public List<Integer> getDiceResults() {
         return round.diceresults();
     }
 
