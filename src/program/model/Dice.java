@@ -13,7 +13,7 @@ class Dice {
      * Method that rolls a die and returns the value of the die.
      * @return The value of the die.
      */
-    int rollADie(){
+     int rollADie(){
         int value = (int)(Math.random() * NUMBER_RANGE) + 1;
         System.out.println(value);
         return value;

@@ -1,12 +1,11 @@
 package program.model;
 
-/**
- * This class is controlling the different phases for one round.
- * StartPhase() is always called when Deploy, Attack, or Movement is called in ModelDataHandler
- */
+import java.util.List;
 
 class Round {
     private Phase currentPhase = Phase.DEPLOY;
+
+    private List<Integer> dices;
 
     /**
      * This is an enum with all the different phases in one round.
@@ -61,7 +60,8 @@ class Round {
                 {
                     case ATTACK:
                         if(Attack.DeclareAttack(selectedSpace, selectedSpace2, selectedSpace.getUnits()) ) {
-                            return Attack.calculateAttack(selectedSpace, selectedSpace2);
+                            dices = Attack.calculateAttack(selectedSpace, selectedSpace2);
+                            return true;
                         }
                         return false;
                     case MOVE:
@@ -73,6 +73,11 @@ class Round {
         }
         return false;
     }
+    public List<Integer> diceresults()
+    {
+        return dices;
+    }
+
     Phase getCurrentPhase(){
         return currentPhase;
     }
