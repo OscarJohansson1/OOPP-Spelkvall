@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import program.controller.MapController;
+import program.model.Player;
 
 import java.util.List;
 
@@ -16,14 +17,16 @@ public class MapView extends AnchorPane {
 
     /**
      * Method that updates the player and phase texts.
-     * @param playername The name of the currentPlayer.
      * @param currentPhase The current phase.
      * @param mapController The mapController used in the project.
      */
-    public void updatePhasePlayerText(String playername, String currentPhase, MapController mapController)
-    {
-        mapController.playerText.setText("Currentplayer: " + playername + "");
+    public void updatePhaseText(String currentPhase, MapController mapController) {
         mapController.phaseText.setText(currentPhase);
+    }
+
+    public void updateCurrentPlayerCube(Color currentPlayerColor, MapController mapController, String playerName){
+        mapController.showCurrentPlayer.setStyle(colorToHex(currentPlayerColor));
+        mapController.showCurrentPlayer.setText(playerName);
     }
 
     /**

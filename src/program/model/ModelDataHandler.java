@@ -150,6 +150,8 @@ public class ModelDataHandler {
         return String.valueOf(currentPlayer.getId() + 1);
     }
 
+    public Color getCurrentPlayerColor(){return currentPlayer.getColor();}
+
     /**
      * Method that returns the name of the currentPhase
      * @return the name of the currentPhase as a String

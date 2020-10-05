@@ -62,6 +62,7 @@
                   <Font size="24.0" />
                </font>
             </Text>
+            <Button fx:id="showCurrentPlayer" layoutX="96.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
          </children>
       </AnchorPane>
       <Text fx:id="textFocus" layoutX="902.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Focus">
