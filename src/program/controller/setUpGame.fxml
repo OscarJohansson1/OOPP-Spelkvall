@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.Image?>
@@ -33,84 +34,93 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="recE" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #ffff00;" text="E" textFill="WHITE" GridPane.columnIndex="3">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recD" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #ff8000;" text="D" textFill="WHITE" GridPane.columnIndex="2">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recAE" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #bfff00;" text="AE" textFill="WHITE" GridPane.columnIndex="1">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recA" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #ff0000;" text="A" textFill="WHITE">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recH" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #de3163;" text="H" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recI" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #9f00c5;" text="I" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recIT" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #09cdda;" text="IT" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recK" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #00c000;" text="K" textFill="WHITE" GridPane.rowIndex="2">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recKfKb" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #007000;" text="KfKb" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Button>
-            <Button fx:id="recM" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #964b00;" text="M" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recSjo" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #000080;" text="Sjö" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recTB" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="TB" GridPane.rowIndex="3">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recTD" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #5f021f;" text="TD" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recV" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #4141ff;" text="V" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
-            <Button fx:id="recZ" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #808080;" text="Z" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
+            <ImageView fx:id="recA" fitHeight="150.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ff0000;">
+               <image>
+                  <Image url="@../picures/logos/a_logo.png" />
+               </image>
+            </ImageView>
             <ImageView fx:id="recF" fitHeight="150.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #000000;" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../picures/logos/F-logga.png" />
+                  <Image url="@../picures/logos/f_logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="recAE" fitHeight="150.0" fitWidth="151.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #bfff00;" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@../picures/logos/ae_logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="recD" fitHeight="150.0" fitWidth="151.0" layoutX="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ff8000;" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@../picures/logos/d_logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="recE" fitHeight="150.0" fitWidth="151.0" layoutX="310.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ffff00;" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@../picures/logos/e_logo.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fx:id="recH" fitHeight="150.0" fitWidth="151.0" layoutX="470.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #de3163;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../picures/logos/h_logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="recI" fitHeight="150.0" fitWidth="151.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #9f00c5;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../picures/logos/i_logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="recIT" fitHeight="150.0" fitWidth="151.0" layoutX="310.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #09cdda;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../picures/logos/it_logo.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="recK" fitHeight="150.0" fitWidth="151.0" layoutX="460.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #00c000;" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../picures/logos/k_logo.jpg" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="7.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fx:id="recKfKb" fitHeight="150.0" fitWidth="151.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #007000;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../picures/logos/kfkb_logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="recM" fitHeight="150.0" fitWidth="151.0" layoutX="160.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #964b00;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../picures/logos/m_logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="recSjo" fitHeight="150.0" fitWidth="151.0" layoutX="160.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #000080;" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../picures/logos/sjo_logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="recTB" fitHeight="150.0" fitWidth="151.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ffffff;" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../picures/logos/tb_logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="recTD" fitHeight="150.0" fitWidth="151.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #5f021f;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../picures/logos/td_logo.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fx:id="recV" fitHeight="150.0" fitWidth="151.0" layoutX="160.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #4141ff;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../picures/logos/v_logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="recZ" fitHeight="150.0" fitWidth="151.0" layoutX="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #808080;" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../picures/logos/z_logo.png" />
                </image>
             </ImageView>
          </children>
