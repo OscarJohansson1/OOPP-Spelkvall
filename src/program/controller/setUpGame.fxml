@@ -59,7 +59,7 @@
                   <Image url="@../picures/logos/e_logo.png" />
                </image>
                <GridPane.margin>
-                  <Insets left="10.0" />
+                  <Insets />
                </GridPane.margin>
             </ImageView>
             <ImageView fx:id="recH" fitHeight="150.0" fitWidth="151.0" layoutX="470.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #de3163;" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -79,10 +79,10 @@
             </ImageView>
             <ImageView fx:id="recK" fitHeight="150.0" fitWidth="151.0" layoutX="460.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #00c000;" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../picures/logos/k_logo.jpg" />
+                  <Image url="@../picures/logos/k_logo.png" />
                </image>
                <GridPane.margin>
-                  <Insets left="7.0" />
+                  <Insets />
                </GridPane.margin>
             </ImageView>
             <ImageView fx:id="recKfKb" fitHeight="150.0" fitWidth="151.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #007000;" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -110,7 +110,7 @@
                   <Image url="@../picures/logos/td_logo.png" />
                </image>
                <GridPane.margin>
-                  <Insets left="10.0" />
+                  <Insets />
                </GridPane.margin>
             </ImageView>
             <ImageView fx:id="recV" fitHeight="150.0" fitWidth="151.0" layoutX="160.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #4141ff;" GridPane.columnIndex="2" GridPane.rowIndex="3">

@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -77,6 +78,10 @@ class SetUpGameController extends AnchorPane {
     private int amountOfPlayers = 0;
 
     private Stage stage;
+    private Object ColorAdjust;
+
+    private ColorAdjust chosen = new ColorAdjust();
+
 
     /**
      * this is the constructor for SetUpGameController
@@ -155,18 +160,19 @@ class SetUpGameController extends AnchorPane {
         }
     }
 
-    private void mouseClicked(ImageView button){
-        if(!selectedDivisions.contains(button) && nextToChoose <= amountOfPlayers) {
-            colorList.add(Color.web(button.getStyle().substring(22,29)));
+    private void mouseClicked(ImageView image){
+        if(!selectedDivisions.contains(image) && nextToChoose <= amountOfPlayers) {
+            colorList.add(Color.web(image.getStyle().substring(22,29)));
 
             Button playerButton = playerButtonList.get(nextToChoose - 1);
-            //playerButton.setText("Player " + nextToChoose + " represents " + button.getText());
-            playerButton.setStyle(button.getStyle());
+            playerButton.setText("Player " + nextToChoose + " represents " + image.getId().substring(3));
+            playerButton.setStyle(image.getStyle());
 
-            button.setStyle("-fx-background-color: #A0A0A0");
-            //button.setText(Integer.toString(nextToChoose));
+            chosen.setBrightness(-0.5);
+            chosen.setSaturation(-1.0);
+            image.setEffect(chosen);
 
-            selectedDivisions.add(button);
+            selectedDivisions.add(image);
             nextToChoose++;
         }
     }
