@@ -157,6 +157,7 @@ class SetUpGameController extends AnchorPane {
     private void mouseClicked(Button button){
         if(!selectedButtons.contains(button) && nextToChoose <= amountOfPlayers) {
             colorList.add(Color.web(button.getStyle().substring(22,29)));
+            //Här vill vi lägga till logga beroende på sektion (en Image)
 
             Button playerButton = playerButtonList.get(nextToChoose - 1);
             playerButton.setText("Player " + nextToChoose + " represents " + button.getText());

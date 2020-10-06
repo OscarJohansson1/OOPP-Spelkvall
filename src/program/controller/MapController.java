@@ -54,6 +54,8 @@ public class MapController extends AnchorPane {
     @FXML private Button cubeRunAn;
     @FXML private Button cubeTagvagnen;
     @FXML private Button cubeOrigogarden;
+    @FXML private Button cubeKalleGlader;
+    @FXML private Button cubeTvarGatan;
 
     @FXML private Text textHubben;
     @FXML private Text textBasen;
@@ -80,6 +82,8 @@ public class MapController extends AnchorPane {
     @FXML private Text textRunAn;
     @FXML private Text textTagvagnen;
     @FXML private Text textOrigogården;
+    @FXML private Text textKalleGlader;
+    @FXML private Text textTvargatan;
 
     @FXML public AnchorPane rootpane;
     @FXML AnchorPane startMenu;
@@ -131,12 +135,11 @@ public class MapController extends AnchorPane {
         }
         allButtons = new ArrayList<>(Arrays.asList(cubeHubben,cubeBasen,cubeKajsabaren,cubeZaloonen,cubeWinden,cubeLofTDet,
                 cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
-                cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden));
+                cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden, cubeKalleGlader));
 
         allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsaBaren, textZaloonen, textWijkanders, textLofTDet,
                 textRodaRummet,textVerum, textVillan, textAdammen, textFocus, textFortNox,textGTSpritis, textGoldenI, textChabo,textWijkanders,textHrum,
-                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogården));
-
+                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogården, textKalleGlader));
 
         modelDataHandler = new ModelDataHandler(allButtons.size(), colors);
         initialize();
