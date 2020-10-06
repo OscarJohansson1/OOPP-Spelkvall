@@ -150,6 +150,8 @@ public class ModelDataHandler {
         return String.valueOf(currentPlayer.getId() + 1);
     }
 
+    public Color getCurrentPlayerColor(){return currentPlayer.getColor();}
+
     /**
      * Method that returns the name of the currentPhase
      * @return the name of the currentPhase as a String
@@ -206,15 +208,14 @@ public class ModelDataHandler {
     }
     public List<Color> getColorOnAllSpaces(){return board.getColorOnAllSpaces();}
 
-    public void getSliderAmount(int unitsToUse){
+    public void setSliderAmount(int unitsToUse){
             this.unitsToUse = unitsToUse;
     }
 
     public int getDeployableUnits(){
         return currentPlayer.getUnits();
     }
-    public List<Integer> getDiceResults()
-    {
+    public List<Integer> getDiceResults() {
         return round.diceresults();
     }
 

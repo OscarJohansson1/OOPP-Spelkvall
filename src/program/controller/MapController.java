@@ -1,11 +1,9 @@
 package program.controller;
 
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import program.model.ModelDataHandler;
-import program.view.AttackView;
 import program.view.MapView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -103,6 +101,7 @@ public class MapController extends AnchorPane {
     @FXML private Button moveButton;
     @FXML private Button firstMarked;
     @FXML private Button secondMarked;
+    @FXML public Button showCurrentPlayer;
 
     @FXML private Text showMoveUnitsText;
     @FXML private Text firstDisplayText;
@@ -147,7 +146,6 @@ public class MapController extends AnchorPane {
     private void initialize() {
         //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
 
-
         for (int i = 0; i<allButtons.size(); i++){
             int var = i;
             allButtons.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -158,8 +156,7 @@ public class MapController extends AnchorPane {
             });
         }
 
-        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>
-                () {
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 
             @Override
             public void handle(KeyEvent t) {
@@ -181,6 +178,7 @@ public class MapController extends AnchorPane {
                 resetDisplayText();
                 sliderVisibility(true);
                 addMarkedCube(secondMarked);
+                moveSlider.setMax(25);
             }
         });
         doneMove.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -191,10 +189,12 @@ public class MapController extends AnchorPane {
                 resetColor();
                 resetDisplayCubes();
                 resetDisplayText();
-                view.updatePhasePlayerText(modelDataHandler.getCurrentPlayerName(), "DEPLOY",MapController.this);
+                view.updatePhaseText("DEPLOY",MapController.this);
+                view.updateCurrentPlayerCube(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
                 sliderVisibility(true);
                 removeMarkedCube(secondMarked);
                 view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+                donedeploy.setDisable(true);
             }
         });
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -207,7 +207,6 @@ public class MapController extends AnchorPane {
                 sliderVisibility(false);
                 addMarkedCube(firstMarked);
                 addMarkedCube(secondMarked);
-
             }
         });
         deployButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -217,6 +216,11 @@ public class MapController extends AnchorPane {
                 {
                     setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
                     view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+                    moveSlider.setMax(modelDataHandler.getDeployableUnits());
+                }
+                if (modelDataHandler.getDeployableUnits() == 0){
+                    donedeploy.setDisable(false);
+                    donedeploy.setStyle(null);
                 }
             }
         });
@@ -246,11 +250,12 @@ public class MapController extends AnchorPane {
         moveSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                modelDataHandler.getSliderAmount(newValue.intValue());
+                modelDataHandler.setSliderAmount(newValue.intValue());
                 view.updateSliderText(newValue.intValue(), showMoveUnitsText);
             }
         });
-        view.updatePhasePlayerText(modelDataHandler.getCurrentPlayerName(), modelDataHandler.getCurrenPhase(), this);
+        view.updatePhaseText(modelDataHandler.getCurrenPhase(), this);
+        view.updateCurrentPlayerCube(modelDataHandler.getCurrentPlayerColor(), this, modelDataHandler.getCurrentPlayerName());
         for(int i = 0; i < allButtons.size(); i++)
         {
             view.updateTextUnits(i, modelDataHandler.findUnitsOnSpace(i), allButtons);
@@ -259,6 +264,8 @@ public class MapController extends AnchorPane {
         view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
         resetDisplayText();
         removeMarkedCube(secondMarked);
+        donedeploy.setDisable(true);
+        donedeploy.setStyle("-fx-background-color: #000000");
     }
     private void changeToAttackView()
     {
@@ -344,7 +351,6 @@ public class MapController extends AnchorPane {
         for(int i = 1; i < allButtons.size(); i++)
         {
             if(i == id) {
-
                 colors.set(i,colors.get(i).darker().darker());
             }
         }
@@ -398,8 +404,12 @@ public class MapController extends AnchorPane {
             secondDisplayText.setVisible(true);
             secondMarked.setVisible(true);
         }
+    }
+
+    private void setShowCurrentPlayer(Button button, Color color){
 
     }
+
     private void displayText(Text displayText, Text cubeText){
        view.updateDisplayTexts(displayText, cubeText);
     }

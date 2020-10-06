@@ -15,7 +15,7 @@
          <children>
             <ImageView fx:id="winnerImageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../picures/itloggan.jpg" />
+                  <Image url="@../picures/logos/itloggan.jpg" />
                </image>
             </ImageView>
             <Label fx:id="winnerLabel" text=" The winner is &quot;________&quot;">
