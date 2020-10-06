@@ -15,7 +15,7 @@
             <Image url="@../picures/OOPP-Map.png" />
          </image>
       </ImageView>
-      <Text fx:id="textHubben" layoutX="1531.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hubben" wrappingWidth="99.16168203928046">
+      <Text fx:id="textHubben" layoutX="1533.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Hubben" wrappingWidth="99.16168203928046">
          <font>
             <Font size="24.0" />
          </font>
@@ -40,16 +40,16 @@
          <font>
             <Font size="24.0" />
          </font></Text>
-      <Text fx:id="textSpektrum" layoutX="411.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spektrum">
+      <Text fx:id="textSpektrum" layoutX="419.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Spektrum">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textAdammen" layoutX="1438.0" layoutY="743.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A-damen">
+      <Text fx:id="textAdammen" layoutX="1416.0" layoutY="745.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="A-dammen">
          <font>
             <Font size="24.0" />
          </font></Text>
-      <Text fx:id="textGTSpritis" layoutX="1032.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GT Spritis">
+      <Text fx:id="textGTSpritis" layoutX="1032.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="GT Spritis">
          <font>
             <Font size="24.0" />
          </font></Text>
@@ -65,121 +65,121 @@
             <Button fx:id="showCurrentPlayer" layoutX="96.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
          </children>
       </AnchorPane>
-      <Text fx:id="textFocus" layoutX="902.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Focus">
+      <Text fx:id="textFocus" layoutX="914.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Focus">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textBasen" layoutX="1615.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Basen" wrappingWidth="99.16168203928046">
+      <Text fx:id="textBasen" layoutX="1621.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Basen" wrappingWidth="71.89453125">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textKajsabaren" layoutX="1517.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kajsabaren" wrappingWidth="119.16168203928046">
+      <Text fx:id="textKajsabaren" layoutX="1519.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Kajsabaren" wrappingWidth="126.5625">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textRodaRummet" layoutX="1488.0" layoutY="693.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Röda Rummet">
+      <Text fx:id="textRodaRummet" layoutX="1507.0" layoutY="692.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Röda Rummet">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textVerum" layoutX="1582.0" layoutY="641.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Verum">
+      <Text fx:id="textVerum" layoutX="1583.0" layoutY="644.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Verum">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textVillan" layoutX="1593.0" layoutY="722.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Villan">
+      <Text fx:id="textVillan" layoutX="1600.0" layoutY="729.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Villan">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textTagvagnen" layoutX="1334.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tågvagnen">
+      <Text fx:id="textTagvagnen" layoutX="1330.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Tågvagnen">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textGasquen" layoutX="1228.0" layoutY="708.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gasquen">
+      <Text fx:id="textGasquen" layoutX="1233.0" layoutY="708.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Gasquen">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textOlgas" layoutX="1170.0" layoutY="624.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Olgas">
+      <Text fx:id="textOlgas" layoutX="1170.0" layoutY="624.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Olgas">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textChalmersplatsen" layoutX="926.0" layoutY="759.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chalmersplatsen">
+      <Text fx:id="textChalmersplatsen" layoutX="935.0" layoutY="758.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Chalmersplatsen">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textRunAn" layoutX="1091.0" layoutY="723.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RunAn">
+      <Text fx:id="textRunAn" layoutX="1091.0" layoutY="723.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="RunAn">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textFortNox" layoutX="1066.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FortNox">
+      <Text fx:id="textFortNox" layoutX="1066.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="FortNox">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textChabo" layoutX="830.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chabo">
+      <Text fx:id="textChabo" layoutX="858.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Chabo">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textWijkanders" layoutX="657.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wijkanders">
+      <Text fx:id="textWijkanders" layoutX="667.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Wijkanders">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textGoldenI" layoutX="568.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Golden I">
+      <Text fx:id="textGoldenI" layoutX="572.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Golden I">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textZaloonen" layoutX="1351.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zaloonen">
+      <Text fx:id="textZaloonen" layoutX="1406.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Zaloonen">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textWinden" layoutX="1128.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Winden">
+      <Text fx:id="textWinden" layoutX="1259.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Winden">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textLofTDet" layoutX="1302.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LofTDet">
+      <Text fx:id="textLofTDet" layoutX="1303.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="LofTDet">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textAlvan" layoutX="344.0" layoutY="783.0" strokeType="OUTSIDE" strokeWidth="0.0" text="11:an">
+      <Text fx:id="textAlvan" layoutX="346.0" layoutY="782.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="11:an">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textHrum" layoutX="481.0" layoutY="784.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H-Rum?">
+      <Text fx:id="textHrum" layoutX="484.0" layoutY="783.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="H-Rum?">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="textOrigogården" layoutX="1024.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Origogården">
+      <Text fx:id="textOrigogården" layoutX="1011.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Origogården">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
       <Button fx:id="cubeGoldenI" layoutX="516.0" layoutY="232.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeWijkanders" layoutX="607.0" layoutY="290.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
-      <Button fx:id="cubeChabo" layoutX="783.0" layoutY="304.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
+      <Button fx:id="cubeChabo" layoutX="802.0" layoutY="287.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeSpektrum" layoutX="360.0" layoutY="635.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeAlvan" layoutX="292.0" layoutY="755.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeHrum" layoutX="429.0" layoutY="755.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeFocus" layoutX="858.0" layoutY="415.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeGTSpritis" layoutX="980.0" layoutY="251.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeFortNox" layoutX="1013.0" layoutY="206.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
-      <Button fx:id="cubeOrigogarden" layoutX="971.0" layoutY="488.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
+      <Button fx:id="cubeOrigogarden" layoutX="960.0" layoutY="488.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeChalmersplatsen" layoutX="878.0" layoutY="731.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeRunAn" layoutX="1038.0" layoutY="694.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeOlgas" layoutX="1124.0" layoutY="597.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
@@ -187,13 +187,13 @@
       <Button fx:id="cubeZaloonen" layoutX="1348.0" layoutY="290.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeWinden" layoutX="1209.0" layoutY="336.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeLofTDet" layoutX="1249.0" layoutY="430.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
-      <Button fx:id="cubeTagvagnen" layoutX="1293.0" layoutY="653.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
+      <Button fx:id="cubeTagvagnen" layoutX="1283.0" layoutY="640.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeHubben" layoutX="1479.0" layoutY="352.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" text="fhem" />
       <Button fx:id="cubeKajsabaren" layoutX="1460.0" layoutY="434.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeBasen" layoutX="1564.0" layoutY="499.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeVerum" layoutX="1531.0" layoutY="617.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
-      <Button fx:id="cubeRodaRummet" layoutX="1439.0" layoutY="665.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
-      <Button fx:id="cubeADammen" layoutX="1390.0" layoutY="715.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
+      <Button fx:id="cubeRodaRummet" layoutX="1457.0" layoutY="663.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
+      <Button fx:id="cubeADammen" layoutX="1362.0" layoutY="717.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Button fx:id="cubeVillan" layoutX="1544.0" layoutY="698.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
       <Slider fx:id="moveSlider" layoutX="92.0" layoutY="260.0" max="25.0" min="1.0" showTickLabels="true" showTickMarks="true" />
       <Button fx:id="firstMarked" layoutX="29.0" layoutY="250.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
@@ -202,13 +202,13 @@
       <Text fx:id="firstDisplayText" layoutX="29.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text fx:id="secondDisplayText" layoutX="241.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Button fx:id="cubeKalleGlader" layoutX="688.0" layoutY="343.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
-      <Text fx:id="textHubben1" layoutX="737.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kalle Glader" wrappingWidth="135.3984375">
+      <Text fx:id="textHubben1" layoutX="743.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Kalle Glader" wrappingWidth="162.3984375">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Button fx:id="cubeTvargatan" layoutX="1157.0" layoutY="461.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
-      <Text fx:id="textTvargatan" layoutX="1208.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chalmers Tvärgata" wrappingWidth="197.16168203928055">
+      <Button fx:id="cubeTvargatan" layoutX="1159.0" layoutY="480.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
+      <Text fx:id="textTvargatan" layoutX="1210.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Chalmers Tvärgata" wrappingWidth="213.16168203928055">
          <font>
             <Font size="24.0" />
          </font>
