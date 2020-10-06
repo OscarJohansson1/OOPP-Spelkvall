@@ -32,22 +32,22 @@ class SetUpGameController extends AnchorPane {
 
     @FXML private Button backButton;
     @FXML private Button startGameButton;
-    @FXML private Button recA;
-    @FXML private Button recAE;
-    @FXML private Button recD;
-    @FXML private Button recE;
+    @FXML private ImageView recA;
+    @FXML private ImageView recAE;
+    @FXML private ImageView recD;
+    @FXML private ImageView recE;
     @FXML private ImageView recF;
-    @FXML private Button recH;
-    @FXML private Button recI;
-    @FXML private Button recIT;
-    @FXML private Button recK;
-    @FXML private Button recKfKb;
-    @FXML private Button recM;
-    @FXML private Button recSjo;
-    @FXML private Button recTB;
-    @FXML private Button recTD;
-    @FXML private Button recV;
-    @FXML private Button recZ;
+    @FXML private ImageView recH;
+    @FXML private ImageView recI;
+    @FXML private ImageView recIT;
+    @FXML private ImageView recK;
+    @FXML private ImageView recKfKb;
+    @FXML private ImageView recM;
+    @FXML private ImageView recSjo;
+    @FXML private ImageView recTB;
+    @FXML private ImageView recTD;
+    @FXML private ImageView recV;
+    @FXML private ImageView recZ;
 
     @FXML private Button rec1;
     @FXML private Button rec2;
@@ -67,12 +67,12 @@ class SetUpGameController extends AnchorPane {
     @FXML private Button rec16;
 
     private int nextToChoose = 1;
-    private ArrayList<Button> selectedButtons = new ArrayList<>();
+    private ArrayList<ImageView> selectedDivisions = new ArrayList<>();
     private ArrayList<Color> colorList = new ArrayList<>();
     private ArrayList<Integer> nextPlayerNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
             11, 12, 13, 14, 15, 16));
     private ArrayList<Button> playerButtonList;
-    private ArrayList<Button> divisionList;
+    private ArrayList<ImageView> divisionList;
 
     private int amountOfPlayers = 0;
 
@@ -136,10 +136,10 @@ class SetUpGameController extends AnchorPane {
                 stage.show();
             }
         });
-        for(Button button : divisionList){
-            button.setOnAction(new EventHandler<ActionEvent>() {
+        for(ImageView button : divisionList){
+            button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
-                public void handle(ActionEvent actionEvent) {
+                public void handle(MouseEvent mouseEvent) {
                     mouseClicked(button);
                 }
             });
@@ -155,18 +155,18 @@ class SetUpGameController extends AnchorPane {
         }
     }
 
-    private void mouseClicked(Button button){
-        if(!selectedButtons.contains(button) && nextToChoose <= amountOfPlayers) {
+    private void mouseClicked(ImageView button){
+        if(!selectedDivisions.contains(button) && nextToChoose <= amountOfPlayers) {
             colorList.add(Color.web(button.getStyle().substring(22,29)));
 
             Button playerButton = playerButtonList.get(nextToChoose - 1);
-            playerButton.setText("Player " + nextToChoose + " represents " + button.getText());
+            //playerButton.setText("Player " + nextToChoose + " represents " + button.getText());
             playerButton.setStyle(button.getStyle());
 
             button.setStyle("-fx-background-color: #A0A0A0");
-            button.setText(Integer.toString(nextToChoose));
+            //button.setText(Integer.toString(nextToChoose));
 
-            selectedButtons.add(button);
+            selectedDivisions.add(button);
             nextToChoose++;
         }
     }
