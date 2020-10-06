@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
  * This class creates a player
  */
 
-public class Player {
+class Player {
     private int units;
     private int id;
     private Color color;

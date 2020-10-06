@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <fx:root prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -70,8 +71,18 @@
                   </ImageView>
                </children>
             </VBox>
-            <Button fx:id="attackButton" layoutX="707.0" layoutY="817.0" mnemonicParsing="false" onMouseClicked="#attackButtonPressed" prefHeight="51.0" prefWidth="99.0" text="Attack" />
+            <Button fx:id="attackButton" layoutX="707.0" layoutY="817.0" mnemonicParsing="false" onMouseClicked="#attackButtonPressed" prefHeight="51.0" prefWidth="99.0" text="Attack again" />
             <Button fx:id="abortButton" layoutX="860.0" layoutY="817.0" mnemonicParsing="false" onMouseClicked="#abortButtonPressed" prefHeight="51.0" prefWidth="99.0" text="Abort" />
+            <Text fx:id="attackerText" layoutX="561.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AttackerText">
+               <font>
+                  <Font name="System Bold Italic" size="32.0" />
+               </font>
+            </Text>
+            <Text fx:id="defenderText" layoutX="998.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DefenderText">
+               <font>
+                  <Font name="System Bold Italic" size="32.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>

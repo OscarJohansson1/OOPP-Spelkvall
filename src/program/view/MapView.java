@@ -6,7 +6,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import program.controller.MapController;
-import program.model.Player;
 
 import java.util.List;
 
@@ -83,8 +82,9 @@ public class MapView extends AnchorPane {
      * Removes color from a map space.
      * @param button Map space to edit.
      */
-    public void resetDisplayCubes(Button button){
+    public void resetDisplayCubes(Button button, Text text){
         button.setStyle(null);
+        text.setText("");
     }
 
     /**
@@ -94,14 +94,6 @@ public class MapView extends AnchorPane {
      */
     public void updateDisplayTexts(Text displayText, Text cubeText){
         displayText.setText(cubeText.getText());
-    }
-
-    /**
-     * Sets given text to an empty string.
-     * @param text
-     */
-    public void resetDisplayTexts(Text text){
-        text.setText("");
     }
 
     /**

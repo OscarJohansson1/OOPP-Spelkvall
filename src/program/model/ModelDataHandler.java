@@ -19,12 +19,20 @@ public class ModelDataHandler {
     private Board board;
     private int unitsToUse = 1;
 
+    private ModelDataHandler(){}
+    private static class ModelDataHandlerHolder{
+        private static ModelDataHandler modelDataHandler = new ModelDataHandler();
+    }
+    public static ModelDataHandler getModelDataHandler()
+    {
+        return ModelDataHandlerHolder.modelDataHandler;
+    }
     /**
      *
      * @param amountOfSpaces This is all the spaces on the board
      * @param colors This is a list of all the colors for the players that has been chosen
      */
-    public ModelDataHandler(int amountOfSpaces, List<Color> colors)
+    public void initialize(int amountOfSpaces, List<Color> colors)
     {
         for(int i = 0; i < colors.size(); i++)
         {
@@ -35,15 +43,6 @@ public class ModelDataHandler {
         round = new Round();
     }
 
-    /**
-     * Get player color based on player id.
-     * @param id id of the player.
-     * @return the color that correspond the player.
-     */
-    public Color findPlayerColor(int id)
-    {
-        return players.get(id).getColor();
-    }
     public Space getSelectedSpace()
     {
         return  board.selectedSpace;
@@ -52,11 +51,7 @@ public class ModelDataHandler {
     {
         return  board.selectedSpace2;
     }
-    public void resetSelectedSpace()
-    {
-        board.selectedSpace = null;
-        board.selectedSpace2 = null;
-    }
+    public void resetSelectedSpaces() { board.resetSpaces(); }
 
     /**
      * Method that sets selectedSpace/selectedSpace2 to a specific space based on id.
@@ -98,11 +93,10 @@ public class ModelDataHandler {
         }
     }
 
-
     private List<Space> randomizeSpaces(int amountOfSpaces)
     {
         int player = 0;
-        Player lastrandomplayer = players.get(0);
+        Player lastRandomPlayer;
         List<Space> spaces = new ArrayList<>();
         List<Player> playerList = new ArrayList<>();
         for(int i = 0; i < amountOfSpaces; i++)
@@ -112,9 +106,9 @@ public class ModelDataHandler {
                 player = 0;
                 playerList.clear();
             }
-            lastrandomplayer = getRandomPlayer(playerList);
-            spaces.add(new Space(i,lastrandomplayer,10,i + ""));
-            playerList.add(lastrandomplayer);
+            lastRandomPlayer = getRandomPlayer(playerList);
+            spaces.add(new Space(i,lastRandomPlayer,10,i + ""));
+            playerList.add(lastRandomPlayer);
         }
         return spaces;
     }
@@ -167,7 +161,7 @@ public class ModelDataHandler {
     public void nextPhase()
     {
         round.nextPhase();
-        resetSelectedSpace();
+        resetSelectedSpaces();
         roundCount++;
         if(roundCount > 3)
         {
@@ -188,6 +182,14 @@ public class ModelDataHandler {
         }
         return false;
     }
+
+    /**
+     * check if attack is possible
+     * @return returns true if board.selectedspace or board.selectedspace2 is null
+     */
+    public boolean checkAttack() {
+        return !round.nextAttackPossible;
+    }
     /**
      * Method that returns the units on a space based on id.
      * @param id Id of the space that the amount of units should be returned.
@@ -206,6 +208,7 @@ public class ModelDataHandler {
     {
         return board.findSpace(id).getPlayer().getColor();
     }
+
     public List<Color> getColorOnAllSpaces(){return board.getColorOnAllSpaces();}
 
     public void setSliderAmount(int unitsToUse){
@@ -215,8 +218,14 @@ public class ModelDataHandler {
     public int getDeployableUnits(){
         return currentPlayer.getUnits();
     }
+
     public List<Integer> getDiceResults() {
         return round.diceresults();
+    }
+
+    public List<String> attackResult()
+    {
+        return round.attackResults();
     }
 
 }

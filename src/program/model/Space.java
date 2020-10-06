@@ -30,8 +30,8 @@ public class Space {
      * @param units The new amount of units on the space.
      */
     void updateSpace(Player player, int units) {
-        setPlayer(player);
-        setUnits(units);
+        this.player = player;
+        this.units = units;
     }
 
     /**
@@ -40,14 +40,6 @@ public class Space {
      */
     void updateSpace(int units) {
         updateSpace(this.player, units);
-    }
-
-    private void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    private void setUnits(int n) {
-        units = n;
     }
 
     public int getId() {
