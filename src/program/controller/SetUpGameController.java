@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -35,7 +36,7 @@ class SetUpGameController extends AnchorPane {
     @FXML private Button recAE;
     @FXML private Button recD;
     @FXML private Button recE;
-    @FXML private Button recF;
+    @FXML private ImageView recF;
     @FXML private Button recH;
     @FXML private Button recI;
     @FXML private Button recIT;

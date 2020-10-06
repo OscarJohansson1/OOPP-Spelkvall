@@ -53,11 +53,6 @@
                   <Font size="48.0" />
                </font>
             </Button>
-            <Button fx:id="recF" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #000000;" text="F" textFill="WHITE" GridPane.rowIndex="1">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Button>
             <Button fx:id="recH" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #de3163;" text="H" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="48.0" />
@@ -113,6 +108,11 @@
                   <Font size="48.0" />
                </font>
             </Button>
+            <ImageView fx:id="recF" fitHeight="150.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #000000;" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../picures/logos/F-logga.png" />
+               </image>
+            </ImageView>
          </children>
       </GridPane>
       <GridPane fx:id="gridPane" layoutX="886.0" layoutY="344.0" prefHeight="600.0" prefWidth="600.0">
