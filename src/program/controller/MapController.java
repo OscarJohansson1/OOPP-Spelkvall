@@ -141,7 +141,7 @@ public class MapController extends AnchorPane {
                 textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogården, textKalleGlader));
 
         modelDataHandler = ModelDataHandler.getModelDataHandler();
-        modelDataHandler.initialize(allButtons.size(), colors, logonNames);
+        modelDataHandler.initialize(allButtons.size(), colors, logoNames);
         initialize();
     }
     private void initialize() {

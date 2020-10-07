@@ -15,8 +15,8 @@ public class TestSpace {
     @Before
     public void before(){
 
-        player1 = new Player(10, 1, Color.color(1,0,0));
-        player2 = new Player(15, 2, Color.color(0,0,1));
+        //player1 = new Player(10, 1, Color.color(1,0,0));
+        //player2 = new Player(15, 2, Color.color(0,0,1));
         space1 = new Space(1, player1,10, "Space");
 
     }
