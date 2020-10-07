@@ -28,11 +28,12 @@ public class PauseController extends AnchorPane {
     @FXML private Button endGameButton;
     @FXML private Button quitGameButton;
 
-    MapController mapController;
-    Parent root = mapController;
-    Stage stage;
+    private MapController mapController;
+    private Parent root = mapController;
+    private Stage stage;
 
     public PauseController(Stage stage, MapController mapcontroller) {
+
         this.mapController = mapcontroller;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pauseMenu.fxml"));
@@ -45,21 +46,23 @@ public class PauseController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         this.stage = stage;
+        initialize();
+
+    }
+
+    public void initialize() {
+        //TODO: What now? Pause ska finnas från start av programmet och ska sedan finnas kvar i ett lager bakom kartan.
+
     }
 
     public void returnButtonPressed(){
+
        mapController.checkPauseController();
-       /*
-       //Uppdatera kartan
-       updateMap();
-       //Lägg kartan längst fram
-       map.toFront();
-       //Visa interfacen igen
-       interfacePane.setVisible(true);
-        */
+
     }
 
     public void newGameButtonPressed(){
+
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
@@ -69,6 +72,7 @@ public class PauseController extends AnchorPane {
     }
 
     public void endGameButtonPressed(){
+
         Parent root = new EndController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
@@ -78,8 +82,12 @@ public class PauseController extends AnchorPane {
     }
 
     public void quitGameButtonPressed(){
+
         Platform.exit();
         System.exit(0);
     }
+
+
+
 }
 

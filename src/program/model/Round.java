@@ -1,11 +1,17 @@
 package program.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class Round {
     private Phase currentPhase = Phase.DEPLOY;
 
     private List<Integer> dices;
+
+    private int attackerLoss;
+    private int defenderLoss;
+
+     boolean nextAttackPossible = true;
 
     /**
      * This is an enum with all the different phases in one round.
@@ -15,6 +21,8 @@ class Round {
         DEPLOY, ATTACK, MOVE, END;
 
         private Phase next;
+
+
 
         static {
             DEPLOY.next = ATTACK;
@@ -49,18 +57,32 @@ class Round {
      */
     boolean startPhase(Space selectedSpace, Space selectedSpace2, Player currentPlayer, int units)
     {
-        if(selectedSpace != null)
-        {
-            if(currentPhase == Phase.DEPLOY)
-            {
+        if(selectedSpace != null) {
+            if(currentPhase == Phase.DEPLOY) {
                 return Deployment.startDeployment(selectedSpace, currentPlayer,units);
             }
             else if(selectedSpace2 != null){
-                switch (currentPhase)
-                {
+                switch (currentPhase) {
                     case ATTACK:
                         if(Attack.DeclareAttack(selectedSpace, selectedSpace2, selectedSpace.getUnits()) ) {
+                            attackerLoss = selectedSpace.getUnits();
+                            defenderLoss = selectedSpace2.getUnits();
                             dices = Attack.calculateAttack(selectedSpace, selectedSpace2);
+                            if(selectedSpace.getUnits() == 1 && (selectedSpace.getPlayer() == selectedSpace2.getPlayer())){
+                                attackerLoss -= selectedSpace2.getUnits() + 1;
+                                defenderLoss = -1;
+                                nextAttackPossible = false;
+                            }
+                            else if(selectedSpace.getUnits() == 1){
+                                attackerLoss -= selectedSpace.getUnits();
+                                defenderLoss -= selectedSpace2.getUnits();
+                                nextAttackPossible = false;
+                            }
+                            else {
+                                attackerLoss -= selectedSpace.getUnits();
+                                defenderLoss -= selectedSpace2.getUnits();
+                                nextAttackPossible = true;
+                            }
                             return true;
                         }
                         return false;
@@ -73,11 +95,20 @@ class Round {
         }
         return false;
     }
-    public List<Integer> diceresults()
-    {
+    List<Integer> diceresults() {
         return dices;
     }
-
+    List<String> attackResults() {
+        List<String> results = new ArrayList<>();
+        results.add("Attacker lost: " + attackerLoss);
+        if(defenderLoss == -1){
+            results.add("Defender lost all remaining units! ");
+        }
+        else{
+            results.add("Defender lost: " + defenderLoss);
+        }
+        return results;
+    }
     Phase getCurrentPhase(){
         return currentPhase;
     }

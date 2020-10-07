@@ -28,40 +28,48 @@ import java.util.List;
       * @return An int with value 1 if the attack was successful and 0 if the attack was unsuccessful
       */
     static List<Integer> calculateAttack(Space mySpace, Space enemySpace) {
-        Dice dice = new Dice();
-        int myDice = (3);
-        int opponentDice = enemySpace.getUnits();
 
-            ArrayList<Integer> myResults = dice.rollNDIce(myDice);
-            ArrayList<Integer> opponentResults = dice.rollNDIce(2);
+        int myDice;
+        int enemyDice;
+        if(mySpace.getUnits() > 3)
+        {
+            myDice = 3;
+        }
+        else if(mySpace.getUnits() > 2)
+        {
+            myDice = 2;
+        }
+        else {
+            myDice = 1;
+        }
+        if(enemySpace.getUnits() > 1)
+        {
+            enemyDice = 2;
+        }
+        else {
+            enemyDice = 1;
+        }
+        ArrayList<Integer> myResults = Dice.rollNDIce(myDice);
+        ArrayList<Integer> opponentResults = Dice.rollNDIce(enemyDice);
 
-            ArrayList<Integer> allresults = new ArrayList<>();
-            allresults.addAll(myResults);
-            allresults.addAll(opponentResults);
-
+        ArrayList<Integer> allresults = new ArrayList<>();
+        allresults.addAll(myResults);
+        allresults.addAll(opponentResults);
 
         while (myResults.size() > 0 && opponentResults.size() > 0) {
             if (findHighestDie(myResults) > findHighestDie(opponentResults)) {
 
                 enemySpace.updateSpace(enemySpace.getUnits() -1);
-
-
                 if (enemySpace.getUnits() < 1){
                     enemySpace.updateSpace(mySpace.getPlayer(), mySpace.getUnits() - 1);
                     mySpace.updateSpace(1);
-
-                }
-
-                    if (enemySpace.getUnits() < 1){
-                        enemySpace.updateSpace(mySpace.getPlayer(), mySpace.getUnits() - 1);
-                        mySpace.updateSpace(1);
-
-                    }
-                } else {
-                    mySpace.updateSpace(mySpace.getUnits() -1);
-
                 }
             }
+            else {
+                mySpace.updateSpace(mySpace.getUnits() -1);
+
+            }
+        }
             return allresults;
     }
 

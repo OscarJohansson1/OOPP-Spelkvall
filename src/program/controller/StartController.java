@@ -25,7 +25,8 @@ public class StartController extends AnchorPane {
     @FXML private Button startButton;
     @FXML private Button quitButton;
 
-    private Parent root;
+    private SetUpGameController setUpGameController;// = new SetUpGameController();
+    private Parent root;// = setUpGameController;
     private Stage stage;
 
     /**
@@ -33,6 +34,7 @@ public class StartController extends AnchorPane {
      * @param stage the main stage
      */
     public StartController(Stage stage) {
+
         this.stage = stage;
         SetUpGameController setUpGameController = new SetUpGameController(stage);
         root = setUpGameController;
@@ -47,6 +49,7 @@ public class StartController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         initialize();
+
     }
 
     private void initialize() {
@@ -60,14 +63,19 @@ public class StartController extends AnchorPane {
                 stage.setTitle("Chans");
                 stage.setScene(scene);
                 stage.show();
+
             }
         });
+
         quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+
                 Platform.exit();
                 System.exit(0);
+
             }
         });
     }
+
 }

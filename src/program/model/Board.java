@@ -26,21 +26,24 @@ class Board {
      */
     Space findSpace(int id)
     {
-        for(int i = 0; i < spaces.size(); i++)
-        {
-            if(spaces.get(i).getId() == id)
-            {
-                return spaces.get(i);
+        for (Space space : spaces) {
+            if (space.getId() == id) {
+                return space;
             }
         }
         return null;
+    }
+    void resetSpaces()
+    {
+        selectedSpace = null;
+        selectedSpace2 = null;
     }
 
     /**
      * This method initialises all the colors on the spaces that the board starts with
      * @return It then returns the colors
      */
-    public List<Color> getColorOnAllSpaces()
+    List<Color> getColorOnAllSpaces()
     {
         List<Color> colors = new ArrayList<>();
         for (Space space : spaces) {

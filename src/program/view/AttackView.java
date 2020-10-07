@@ -3,6 +3,7 @@ package program.view;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import program.controller.AttackController;
 
 
@@ -19,12 +20,24 @@ public class AttackView extends AnchorPane {
             case "White":
                 image = new Image("file:src/program/picures/dice_white_"+number+".png");
                 imageView.setImage(image);
-                System.out.println(imageView.getImage().getUrl());
+                imageView.setVisible(true);
                 break;
             case "Black":
                 image = new Image("file:src/program/picures/dice_black_"+number+".png");
                 imageView.setImage(image);
+                imageView.setVisible(true);
                 break;
         }
+    }
+    public void resetImages(List<ImageView> images)
+    {
+        for(ImageView image: images)
+        {
+            image.setVisible(false);
+        }
+    }
+    public void updateText(Text text, String replacestring)
+    {
+        text.setText(replacestring);
     }
 }

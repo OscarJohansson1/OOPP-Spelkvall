@@ -52,6 +52,8 @@ public class MapController extends AnchorPane {
     @FXML private Button cubeRunAn;
     @FXML private Button cubeTagvagnen;
     @FXML private Button cubeOrigogarden;
+    @FXML private Button cubeKalleGlader;
+    @FXML private Button cubeTvarGatan;
 
     @FXML private Text textHubben;
     @FXML private Text textBasen;
@@ -78,6 +80,8 @@ public class MapController extends AnchorPane {
     @FXML private Text textRunAn;
     @FXML private Text textTagvagnen;
     @FXML private Text textOrigogården;
+    @FXML private Text textKalleGlader;
+    @FXML private Text textTvargatan;
 
     @FXML public AnchorPane rootpane;
     @FXML AnchorPane startMenu;
@@ -106,7 +110,7 @@ public class MapController extends AnchorPane {
     @FXML public Text phaseText;
     @FXML private Text deployableUnitsText;
 
-    ModelDataHandler modelDataHandler;
+    private ModelDataHandler modelDataHandler;
     private MapView view = new MapView();
     private AttackController attackController;
     private List<Button> allButtons;
@@ -130,14 +134,14 @@ public class MapController extends AnchorPane {
         }
         allButtons = new ArrayList<>(Arrays.asList(cubeHubben,cubeBasen,cubeKajsabaren,cubeZaloonen,cubeWinden,cubeLofTDet,
                 cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
-                cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden));
+                cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden, cubeKalleGlader));
 
         allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsaBaren, textZaloonen, textWijkanders, textLofTDet,
                 textRodaRummet,textVerum, textVillan, textAdammen, textFocus, textFortNox,textGTSpritis, textGoldenI, textChabo,textWijkanders,textHrum,
-                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogården));
+                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogården, textKalleGlader));
 
-
-        modelDataHandler = new ModelDataHandler(allButtons.size(), colors, logoNames);
+        modelDataHandler = ModelDataHandler.getModelDataHandler();
+        modelDataHandler.initialize(allButtons.size(), colors, logonNames);
         initialize();
     }
     private void initialize() {
@@ -164,7 +168,6 @@ public class MapController extends AnchorPane {
             }
         });
 
-
         skipAttack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -172,7 +175,6 @@ public class MapController extends AnchorPane {
                 view.updatePhase("MOVE", MapController.this);
                 resetColor();
                 resetDisplayCubes();
-                resetDisplayText();
                 sliderVisibility(true);
                 addMarkedCube(secondMarked);
                 moveSlider.setMax(25);
@@ -185,7 +187,6 @@ public class MapController extends AnchorPane {
                 view.updatePhase("DEPLOY", MapController.this);
                 resetColor();
                 resetDisplayCubes();
-                resetDisplayText();
                 view.updatePhaseText("DEPLOY",MapController.this);
                 view.updateCurrentPlayerCube(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
                 sliderVisibility(true);
@@ -200,7 +201,7 @@ public class MapController extends AnchorPane {
                 modelDataHandler.nextPhase();
                 view.updatePhase("ATTACK", MapController.this);
                 resetColor();
-                resetDisplayText();
+                resetDisplayCubes();
                 sliderVisibility(false);
                 addMarkedCube(firstMarked);
                 addMarkedCube(secondMarked);
@@ -227,7 +228,6 @@ public class MapController extends AnchorPane {
                 if(modelDataHandler.nextMove())
                 {
                     setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
-                    modelDataHandler.resetSelectedSpace();
                     changeToAttackView();
                 }
             }
@@ -238,10 +238,9 @@ public class MapController extends AnchorPane {
                 if(modelDataHandler.nextMove())
                 {
                     setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
-                    modelDataHandler.resetSelectedSpace();
+                    modelDataHandler.resetSelectedSpaces();
                 }
                 resetDisplayCubes();
-                resetDisplayText();
             }
         });
         moveSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -259,19 +258,25 @@ public class MapController extends AnchorPane {
         }
         resetColor();
         view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
-        resetDisplayText();
+        resetDisplayCubes();
         removeMarkedCube(secondMarked);
         donedeploy.setDisable(true);
         donedeploy.setStyle("-fx-background-color: #000000");
     }
-    private void changeToAttackView()
-    {
-        attackController = new AttackController(stage,this,modelDataHandler.getDiceResults());
+    private void changeToAttackView() {
+        attackController = new AttackController(this,modelDataHandler.getDiceResults());
         rootpane.getChildren().add(attackController);
     }
-    public void removeAttackView()
-    {
+    void removeAttackView() {
         rootpane.getChildren().remove(attackController);
+        for(int i = 0; i < allButtons.size(); i++)
+        {
+            view.updateTextUnits(i,modelDataHandler.findUnitsOnSpace(i),allButtons);
+            view.setColor(allButtons.get(i), modelDataHandler.getColorOnAllSpaces().get(i),allButtons);
+        }
+        modelDataHandler.resetSelectedSpaces();
+        resetDisplayCubes();
+
     }
     private void sliderVisibility(Boolean visible){
         if(visible){
@@ -288,7 +293,7 @@ public class MapController extends AnchorPane {
         }
     }
 
-    public void checkPauseController(){
+    void checkPauseController(){
         if(rootpane.getChildren().contains(pauseController)) {
             rootpane.getChildren().remove(pauseController);
         }else{
@@ -301,12 +306,12 @@ public class MapController extends AnchorPane {
         {
             if(modelDataHandler.getSelectedSpace2() == null)
             {
-                resetDisplayText();
+                resetDisplayCubes();
                 resetColor();
             }
             else {
                 resetColor(modelDataHandler.getSelectedSpace().getId());
-                resetDisplayText(secondDisplayText);
+                resetDisplayCubes(secondMarked,secondDisplayText);
             }
             view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id), allButtons);
             view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
@@ -372,9 +377,12 @@ public class MapController extends AnchorPane {
         }
     }
 
+    private void resetDisplayCubes(Button button, Text text){
+        view.resetDisplayCubes(button,text);
+    }
     private void resetDisplayCubes(){
-        view.resetDisplayCubes(firstMarked);
-        view.resetDisplayCubes(secondMarked);
+        view.resetDisplayCubes(firstMarked,firstDisplayText);
+        view.resetDisplayCubes(secondMarked,secondDisplayText);
     }
 
     private void removeMarkedCube(Button button)
@@ -403,21 +411,8 @@ public class MapController extends AnchorPane {
         }
     }
 
-    private void setShowCurrentPlayer(Button button, Color color){
-
-    }
-
     private void displayText(Text displayText, Text cubeText){
        view.updateDisplayTexts(displayText, cubeText);
-    }
-
-    private void resetDisplayText(){
-        view.resetDisplayTexts(firstDisplayText);
-        view.resetDisplayTexts(secondDisplayText);
-    }
-
-    private void resetDisplayText(Text text){
-        view.resetDisplayTexts(text);
     }
 
     private Text getTextFromList(int id)
