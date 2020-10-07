@@ -10,6 +10,7 @@ public class Player {
     private int units;
     private int id;
     private Color color;
+    private String logoUrl;
 
     /**
      * This is a constructor for the player.
@@ -17,10 +18,11 @@ public class Player {
      * @param id This is the players id, it is used to find the different player
      * @param color This is used to set different colors for all players.
      */
-    Player(int units, int id, Color color) {
+    Player(int units, int id, Color color, String logoUrl) {
         this.units = units;
         this.id = id;
         this.color = color;
+        this.logoUrl = "program/picures/logos/"+logoUrl+".png";
     }
 
     int getUnits() {
@@ -37,5 +39,9 @@ public class Player {
 
     Color getColor() {
         return color;
+    }
+
+    String getLogoUrl() {
+        return logoUrl;
     }
 }

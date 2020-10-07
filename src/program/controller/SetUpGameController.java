@@ -70,6 +70,7 @@ class SetUpGameController extends AnchorPane {
     private int nextToChoose = 1;
     private ArrayList<ImageView> selectedDivisions = new ArrayList<>();
     private ArrayList<Color> colorList = new ArrayList<>();
+    private ArrayList<String> logoNameList = new ArrayList<>();
     private ArrayList<Integer> nextPlayerNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
             11, 12, 13, 14, 15, 16));
     private ArrayList<Button> playerButtonList;
@@ -78,7 +79,6 @@ class SetUpGameController extends AnchorPane {
     private int amountOfPlayers = 0;
 
     private Stage stage;
-    private Object ColorAdjust;
 
     private ColorAdjust chosen = new ColorAdjust();
 
@@ -117,7 +117,7 @@ class SetUpGameController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(colorList.size() >= slider.getValue()) {
-                    Parent root = new MapController(colorList, stage);
+                    Parent root = new MapController(colorList, logoNameList, stage);
                     //give players to
 
                     Scene scene = new Scene(root, 1920, 1080);
@@ -163,6 +163,7 @@ class SetUpGameController extends AnchorPane {
     private void mouseClicked(ImageView image){
         if(!selectedDivisions.contains(image) && nextToChoose <= amountOfPlayers) {
             colorList.add(Color.web(image.getStyle().substring(22,29)));
+            logoNameList.add(image.getId().substring(3).toLowerCase() + "_logo");
 
             Button playerButton = playerButtonList.get(nextToChoose - 1);
             playerButton.setText("Player " + nextToChoose + " represents " + image.getId().substring(3));

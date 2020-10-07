@@ -115,7 +115,7 @@ public class MapController extends AnchorPane {
     private PauseController pauseController;
 
 
-    MapController(List<Color> colors, Stage stage) {
+    MapController(List<Color> colors, List<String> logoNames, Stage stage) {
 
         this.stage = stage;
         pauseController = new PauseController(stage, this);
@@ -137,7 +137,7 @@ public class MapController extends AnchorPane {
                 textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogården));
 
 
-        modelDataHandler = new ModelDataHandler(allButtons.size(), colors);
+        modelDataHandler = new ModelDataHandler(allButtons.size(), colors, logoNames);
         initialize();
     }
     private void initialize() {

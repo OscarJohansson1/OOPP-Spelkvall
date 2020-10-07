@@ -24,11 +24,11 @@ public class ModelDataHandler {
      * @param amountOfSpaces This is all the spaces on the board
      * @param colors This is a list of all the colors for the players that has been chosen
      */
-    public ModelDataHandler(int amountOfSpaces, List<Color> colors)
+    public ModelDataHandler(int amountOfSpaces, List<Color> colors, List<String> logoNames)
     {
         for(int i = 0; i < colors.size(); i++)
         {
-            players.add(new Player((100/colors.size()),i,colors.get(i)));
+            players.add(new Player((100/colors.size()), i, colors.get(i), logoNames.get(i)));
         }
         currentPlayer = getRandomPlayer(null);
         board = new Board(randomizeSpaces(amountOfSpaces));
