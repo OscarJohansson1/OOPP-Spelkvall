@@ -47,16 +47,21 @@ public class MapView extends AnchorPane {
      * @param id Id of space that the amount of units should be updated on.
      * @param units The new amount of units.
      */
-    public void updateTextUnits(int id, int units, List<Button> allButtons)
+    public void updateTextUnits(int id, int units, List<Button> allButtons, MapController mapController)
     {
         for (Button allButton : allButtons) {
             if (allButton == allButtons.get(id)) {
                 allButton.setText(units + "");
-                allButton.setStyle("-fx-color: #FFFFFF");
-                allButton.setTextFill(Color.WHITE);
+                //allButton.setStyle("-fx-color: #FFFFFF");
+                allButton.setTextFill(getContrastColor(mapController.getSpaceColor((id))));
                 break;
             }
         }
+    }
+
+    public static Color getContrastColor(Color color) {
+        double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000;
+        return y >= 0.5 ? Color.valueOf("#000000") : Color.valueOf("#ffffff");
     }
 
     /**
