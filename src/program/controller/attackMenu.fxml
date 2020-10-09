@@ -73,12 +73,22 @@
             </VBox>
             <Button fx:id="attackButton" layoutX="707.0" layoutY="817.0" mnemonicParsing="false" onMouseClicked="#attackButtonPressed" prefHeight="51.0" prefWidth="99.0" text="Attack again" />
             <Button fx:id="abortButton" layoutX="860.0" layoutY="817.0" mnemonicParsing="false" onMouseClicked="#abortButtonPressed" prefHeight="51.0" prefWidth="99.0" text="Abort" />
-            <Text fx:id="attackerText" layoutX="561.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AttackerText">
+            <Text fx:id="attackerText" layoutX="561.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AttackerText">
                <font>
                   <Font name="System Bold Italic" size="32.0" />
                </font>
             </Text>
-            <Text fx:id="defenderText" layoutX="998.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DefenderText">
+            <Text fx:id="defenderText" layoutX="978.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DefenderText">
+               <font>
+                  <Font name="System Bold Italic" size="32.0" />
+               </font>
+            </Text>
+            <Text fx:id="attackerUnits" layoutX="561.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Attacker units">
+               <font>
+                  <Font name="System Bold Italic" size="32.0" />
+               </font>
+            </Text>
+            <Text fx:id="defenderUnits" layoutX="978.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Defender units">
                <font>
                   <Font name="System Bold Italic" size="32.0" />
                </font>

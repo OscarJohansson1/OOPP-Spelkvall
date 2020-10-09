@@ -1,8 +1,10 @@
 package program.model;
 
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -18,6 +20,10 @@ public class ModelDataHandler {
     private Round round;
     private Board board;
     private int unitsToUse = 1;
+
+    private List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
+            "RödaRummet","Verum", "Villan", "A-dammen", "Focus", "FortNox","GTSpritis", "GoldenI", "Chabo","Wijkanders","Hrum",
+            "Alvan","Spektrum","Gasquen","Chalmersplatsen","Olgas","RunAn", "Tagvagnen","Origogarden", "KalleGlader", "Tvargatan"));
 
     private ModelDataHandler(){}
     private static class ModelDataHandlerHolder{
@@ -112,7 +118,7 @@ public class ModelDataHandler {
                 playerList.clear();
             }
             lastRandomPlayer = getRandomPlayer(playerList);
-            spaces.add(new Space(i,lastRandomPlayer,10,i + ""));
+            spaces.add(new Space(i,lastRandomPlayer,10,spaceNames.get(i)));
             playerList.add(lastRandomPlayer);
         }
         return spaces;
@@ -233,7 +239,10 @@ public class ModelDataHandler {
         return round.attackResults();
     }
 
-    public String getTeamLogo(){
+    public Image getTeamLogo(int id){
+        return board.findSpace(id).getPlayer().getLogoUrl();
+    }
+    public Image getTeamLogo(){
         return currentPlayer.getLogoUrl();
     }
 

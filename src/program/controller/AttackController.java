@@ -3,6 +3,7 @@ package program.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -29,6 +30,11 @@ public class AttackController extends AnchorPane {
     @FXML private Text attackerText;
     @FXML private Text defenderText;
 
+    @FXML private Text attackerUnits;
+    @FXML private Text defenderUnits;
+
+    @FXML private ImageView attackerImageView;
+    @FXML private ImageView defenderImageView;
 
 
     private List<ImageView> images;
@@ -58,6 +64,8 @@ public class AttackController extends AnchorPane {
         fakeImages = new ArrayList<>(images);
         this.mapController = mapController;
         this.modelDataHandler = ModelDataHandler.getModelDataHandler();
+        List<ImageView> logoImages = new ArrayList<>(Arrays.asList(attackerImageView, defenderImageView));
+        attackView.setLogoImages(modelDataHandler.getTeamLogo(modelDataHandler.getSelectedSpace().getId()),modelDataHandler.getTeamLogo(modelDataHandler.getSelectedSpace2().getId()), logoImages);
         attack();
     }
      public void attackButtonPressed() {
@@ -83,10 +91,16 @@ public class AttackController extends AnchorPane {
             attackView.updateDie(images.get(i+3),blackDices.get(i),"Black");
         }
         List<String> attackResults = modelDataHandler.attackResult();
-        attackView.updateText(attackerText,attackResults.get(0));
-        attackView.updateText(defenderText,attackResults.get(1));
+        attackView.updateText(attackerText, modelDataHandler.getSelectedSpace().getName() + attackResults.get(0));
+        attackView.updateText(defenderText,modelDataHandler.getSelectedSpace2().getName() + attackResults.get(1));
+        attackView.updateText(attackerUnits,  modelDataHandler.getSelectedSpace().getName() +" units: " + modelDataHandler.getSelectedSpace().getUnits());
+        attackView.updateText(defenderUnits, modelDataHandler.getSelectedSpace2().getName() + " units: 0");
         if(modelDataHandler.checkAttack()) {
             attackDone();
+            attackView.updateText(attackerUnits, modelDataHandler.getSelectedSpace().getName() +" units: " + modelDataHandler.getSelectedSpace2().getUnits());
+        }
+        else {
+            attackView.updateText(defenderUnits, modelDataHandler.getSelectedSpace2().getName() + " units: " + modelDataHandler.getSelectedSpace2().getUnits());
         }
     }
     private void attackDone() {

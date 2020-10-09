@@ -1,5 +1,7 @@
 package program.model;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 /**
@@ -10,7 +12,7 @@ class Player {
     private int units;
     private int id;
     private Color color;
-    private String logoUrl;
+    private Image logoUrl;
 
     /**
      * This is a constructor for the player.
@@ -22,7 +24,7 @@ class Player {
         this.units = units;
         this.id = id;
         this.color = color;
-        this.logoUrl = "file:src/program/picures/logos/"+logoUrl+".png";
+        this.logoUrl = new Image("file:src/program/picures/logos/"+logoUrl+".png");
     }
 
     int getUnits() {
@@ -41,7 +43,7 @@ class Player {
         return color;
     }
 
-    String getLogoUrl() {
+    Image getLogoUrl() {
         return logoUrl;
     }
 }

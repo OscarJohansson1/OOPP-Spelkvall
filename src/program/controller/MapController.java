@@ -1,5 +1,6 @@
 package program.controller;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -440,7 +441,10 @@ public class MapController extends AnchorPane {
         return null;
     }
 
-    public String getTeamLogo(){
+    public Image getTeamLogo(int id){
+        return modelDataHandler.getTeamLogo(id);
+    }
+    public Image getTeamLogo(){
         return modelDataHandler.getTeamLogo();
     }
 

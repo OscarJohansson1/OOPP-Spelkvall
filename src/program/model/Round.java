@@ -100,12 +100,12 @@ class Round {
     }
     List<String> attackResults() {
         List<String> results = new ArrayList<>();
-        results.add("Attacker lost: " + attackerLoss);
+        results.add(" lost: " + attackerLoss);
         if(defenderLoss == -1){
-            results.add("Defender lost all remaining units! ");
+            results.add(" lost all remaining units! ");
         }
         else{
-            results.add("Defender lost: " + defenderLoss);
+            results.add(" lost: " + defenderLoss);
         }
         return results;
     }

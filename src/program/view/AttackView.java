@@ -36,6 +36,11 @@ public class AttackView extends AnchorPane {
             image.setVisible(false);
         }
     }
+    public void setLogoImages(Image attackerImage, Image defenderImage, List<ImageView> images)
+    {
+        images.get(0).setImage(attackerImage);
+        images.get(1).setImage(defenderImage);
+    }
     public void updateText(Text text, String replacestring)
     {
         text.setText(replacestring);

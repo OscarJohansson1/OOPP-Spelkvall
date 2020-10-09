@@ -30,7 +30,7 @@ public class MapView extends AnchorPane {
     public void updateCurrentPlayer(Color currentPlayerColor, MapController mapController, String playerName){
         mapController.showCurrentPlayer.setStyle(colorToHex(currentPlayerColor));
         mapController.showCurrentPlayer.setText(playerName);
-        mapController.imageTeamLogo.setImage(new Image(mapController.getTeamLogo()));
+        mapController.imageTeamLogo.setImage(mapController.getTeamLogo());
     }
 
     /**
