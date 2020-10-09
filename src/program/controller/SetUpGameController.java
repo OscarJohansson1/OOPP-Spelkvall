@@ -164,6 +164,7 @@ class SetUpGameController extends AnchorPane {
         if(!selectedDivisions.contains(image) && nextToChoose <= amountOfPlayers) {
             colorList.add(Color.web(image.getStyle().substring(22,29)));
             logoNameList.add(image.getId().substring(3).toLowerCase() + "_logo");
+            System.out.println(image.getId().substring(3).toLowerCase() + "_logo");
 
             Button playerButton = playerButtonList.get(nextToChoose - 1);
             playerButton.setText("Player " + nextToChoose + " represents " + image.getId().substring(3));

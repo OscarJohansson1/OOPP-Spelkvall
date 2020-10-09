@@ -1,5 +1,6 @@
 package program.controller;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -114,6 +115,8 @@ public class MapController extends AnchorPane {
     @FXML public Pane phasePane;
     @FXML public Pane sliderPane;
 
+    @FXML public ImageView imageTeamLogo;
+
     ModelDataHandler modelDataHandler;
     private MapView view = new MapView();
     private AttackController attackController;
@@ -192,7 +195,7 @@ public class MapController extends AnchorPane {
                 resetColor();
                 resetDisplayCubes();
                 view.updatePhaseText("DEPLOY",MapController.this);
-                view.updateCurrentPlayerCube(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
+                view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
                 sliderVisibility(true);
                 removeMarkedCube(secondMarked);
                 view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
@@ -256,7 +259,7 @@ public class MapController extends AnchorPane {
             }
         });
         view.updatePhaseText(modelDataHandler.getCurrenPhase(), this);
-        view.updateCurrentPlayerCube(modelDataHandler.getCurrentPlayerColor(), this, modelDataHandler.getCurrentPlayerName());
+        view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), this, modelDataHandler.getCurrentPlayerName());
         for(int i = 0; i < allButtons.size(); i++)
         {
             view.updateTextUnits(i, modelDataHandler.findUnitsOnSpace(i), allButtons);
@@ -435,5 +438,9 @@ public class MapController extends AnchorPane {
             }
         }
         return null;
+    }
+
+    public String getTeamLogo(){
+        return modelDataHandler.getTeamLogo();
     }
 }

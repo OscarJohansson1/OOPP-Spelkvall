@@ -22,7 +22,7 @@ class Player {
         this.units = units;
         this.id = id;
         this.color = color;
-        this.logoUrl = "program/picures/logos/"+logoUrl+".png";
+        this.logoUrl = "file:src/program/picures/logos/"+logoUrl+".png";
     }
 
     int getUnits() {

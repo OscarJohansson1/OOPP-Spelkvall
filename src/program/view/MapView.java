@@ -2,6 +2,8 @@ package program.view;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -25,9 +27,10 @@ public class MapView extends AnchorPane {
         mapController.phaseText.setText(currentPhase);
     }
 
-    public void updateCurrentPlayerCube(Color currentPlayerColor, MapController mapController, String playerName){
+    public void updateCurrentPlayer(Color currentPlayerColor, MapController mapController, String playerName){
         mapController.showCurrentPlayer.setStyle(colorToHex(currentPlayerColor));
         mapController.showCurrentPlayer.setText(playerName);
+        mapController.imageTeamLogo.setImage(new Image(mapController.getTeamLogo()));
     }
 
     /**

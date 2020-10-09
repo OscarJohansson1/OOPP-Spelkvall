@@ -233,4 +233,8 @@ public class ModelDataHandler {
         return round.attackResults();
     }
 
+    public String getTeamLogo(){
+        return currentPlayer.getLogoUrl();
+    }
+
 }
