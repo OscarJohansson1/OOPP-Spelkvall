@@ -65,13 +65,15 @@ public class ModelDataHandler {
             return true;
         }
         else if((board.selectedSpace !=  null && round.getCurrentPhase().equals(Round.Phase.MOVE) &&
-                board.findSpace(id).getPlayer() == currentPlayer) || board.selectedSpace != null &&
-                board.findSpace(id).getPlayer() != currentPlayer && round.getCurrentPhase().equals(Round.Phase.ATTACK)){
+                board.findSpace(id).getPlayer() == currentPlayer && board.isNeighbours(board.findSpace(id))) || board.selectedSpace != null &&
+                board.findSpace(id).getPlayer() != currentPlayer && round.getCurrentPhase().equals(Round.Phase.ATTACK) && board.isNeighbours(board.findSpace(id))){
             board.selectedSpace2 = board.findSpace(id);
             return true;
         }
         return false;
     }
+
+
     /**
      * Method that changes the currentPlayer to the next player in the player list. If the player is the last player in
      * the list, the first player in the list is selected as the new currentPlayer.

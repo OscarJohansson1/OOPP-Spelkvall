@@ -80,7 +80,7 @@ public class MapController extends AnchorPane {
     @FXML private Text textOlgas;
     @FXML private Text textRunAn;
     @FXML private Text textTagvagnen;
-    @FXML private Text textOrigogården;
+    @FXML private Text textOrigogarden;
     @FXML private Text textKalleGlader;
     @FXML private Text textTvargatan;
 
@@ -142,7 +142,7 @@ public class MapController extends AnchorPane {
 
         allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsaBaren, textZaloonen, textWijkanders, textLofTDet,
                 textRodaRummet,textVerum, textVillan, textAdammen, textFocus, textFortNox,textGTSpritis, textGoldenI, textChabo,textWijkanders,textHrum,
-                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogården, textKalleGlader, textTvargatan));
+                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogarden, textKalleGlader, textTvargatan));
 
         modelDataHandler = ModelDataHandler.getModelDataHandler();
         modelDataHandler.initialize(allButtons.size(), colors);
