@@ -74,7 +74,7 @@
             </ImageView>
             <ImageView fx:id="recIT" fitHeight="150.0" fitWidth="151.0" layoutX="310.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #09cdda;" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../picures/logos/it_logo.jpg" />
+                  <Image url="@../picures/logos/ita_logo.jpg" />
                </image>
             </ImageView>
             <ImageView fx:id="recK" fitHeight="150.0" fitWidth="151.0" layoutX="460.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #00c000;" GridPane.rowIndex="2">
