@@ -141,6 +141,7 @@ public class MapView extends AnchorPane {
 
                 //mapController.rootpane.getChildren().get(mapController.getChildren().indexOf(mapController.rootpane.deployPhase)).toFront();
                 mapController.deployPhase.toFront();
+                mapController.sliderPane.toFront();
                 break;
             case "ATTACK":
                 mapController.attackPhase.toFront();

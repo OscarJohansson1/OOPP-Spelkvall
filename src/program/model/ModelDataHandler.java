@@ -64,9 +64,12 @@ public class ModelDataHandler {
             board.selectedSpace = board.findSpace(id);
             return true;
         }
+        else if(board.selectedSpace == board.findSpace(id)){
+            board.resetSpaces();
+        }
         else if((board.selectedSpace !=  null && round.getCurrentPhase().equals(Round.Phase.MOVE) &&
-                board.findSpace(id).getPlayer() == currentPlayer && board.isNeighbours(board.findSpace(id))) || board.selectedSpace != null &&
-                board.findSpace(id).getPlayer() != currentPlayer && round.getCurrentPhase().equals(Round.Phase.ATTACK) && board.isNeighbours(board.findSpace(id))){
+                board.findSpace(id).getPlayer() == currentPlayer && board.isNeighbours(board.findSpace(id))) || (board.selectedSpace != null &&
+                board.findSpace(id).getPlayer() != currentPlayer && round.getCurrentPhase().equals(Round.Phase.ATTACK) && board.isNeighbours(board.findSpace(id)))){
             board.selectedSpace2 = board.findSpace(id);
             return true;
         }

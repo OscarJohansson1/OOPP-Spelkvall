@@ -83,7 +83,7 @@ class Board {
      * @return
      */
     boolean isNeighbours(Space space){
-        if (selectedSpace != null && selectedSpace2 == null){
+        if (selectedSpace != null){
             return neighbours[selectedSpace.getId()][space.getId()] == 1;
         }
         return false;

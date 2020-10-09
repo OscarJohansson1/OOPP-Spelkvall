@@ -180,7 +180,7 @@
                 <Font size="24.0" />
             </font>
         </Text>
-        <Text fx:id="textOrigogården" layoutX="1011.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Origogården">
+        <Text fx:id="textOrigogarden" layoutX="1011.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Origogården">
             <font>
                 <Font size="24.0" />
             </font>
@@ -211,7 +211,7 @@
         <Button fx:id="cubeADammen" layoutX="1362.0" layoutY="717.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
         <Button fx:id="cubeVillan" layoutX="1544.0" layoutY="698.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
         <Button fx:id="cubeKalleGlader" layoutX="688.0" layoutY="343.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
-        <Text fx:id="textHubben1" layoutX="743.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Kalle Glader" wrappingWidth="162.3984375">
+        <Text fx:id="textKalleGlader" layoutX="743.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-shadow" text="Kalle Glader" wrappingWidth="162.3984375">
             <font>
                 <Font size="24.0" />
             </font>

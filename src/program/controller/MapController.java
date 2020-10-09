@@ -317,6 +317,8 @@ public class MapController extends AnchorPane {
             else {
                 resetColor(modelDataHandler.getSelectedSpace().getId());
                 resetDisplayCubes(secondMarked,secondDisplayText);
+                moveSlider.setMax(modelDataHandler.findUnitsOnSpace(modelDataHandler.getSelectedSpace().getId())-1);
+                moveSlider.setMin(1);
             }
             view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id), allButtons);
             view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
@@ -328,7 +330,12 @@ public class MapController extends AnchorPane {
             else if(secondDisplayText.getText().isEmpty()){
                 displayText(secondDisplayText, getTextFromList(id));
             }
-
+        }
+        else{
+            if(modelDataHandler.getSelectedSpace() == null && modelDataHandler.getSelectedSpace2() == null){
+                resetDisplayCubes();
+                resetColor();
+            }
         }
     }
 
