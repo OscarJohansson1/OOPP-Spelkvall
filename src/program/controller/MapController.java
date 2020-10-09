@@ -2,6 +2,7 @@ package program.controller;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import program.model.ModelDataHandler;
 import program.view.MapView;
@@ -53,7 +54,7 @@ public class MapController extends AnchorPane {
     @FXML private Button cubeTagvagnen;
     @FXML private Button cubeOrigogarden;
     @FXML private Button cubeKalleGlader;
-    @FXML private Button cubeTvarGatan;
+    @FXML private Button cubeTvargatan;
 
     @FXML private Text textHubben;
     @FXML private Text textBasen;
@@ -79,7 +80,7 @@ public class MapController extends AnchorPane {
     @FXML private Text textOlgas;
     @FXML private Text textRunAn;
     @FXML private Text textTagvagnen;
-    @FXML private Text textOrigogården;
+    @FXML private Text textOrigogarden;
     @FXML private Text textKalleGlader;
     @FXML private Text textTvargatan;
 
@@ -110,7 +111,10 @@ public class MapController extends AnchorPane {
     @FXML public Text phaseText;
     @FXML private Text deployableUnitsText;
 
-    private ModelDataHandler modelDataHandler;
+    @FXML public Pane phasePane;
+    @FXML public Pane sliderPane;
+
+    ModelDataHandler modelDataHandler;
     private MapView view = new MapView();
     private AttackController attackController;
     private List<Button> allButtons;
@@ -134,11 +138,11 @@ public class MapController extends AnchorPane {
         }
         allButtons = new ArrayList<>(Arrays.asList(cubeHubben,cubeBasen,cubeKajsabaren,cubeZaloonen,cubeWinden,cubeLofTDet,
                 cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
-                cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden, cubeKalleGlader));
+                cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden, cubeKalleGlader, cubeTvargatan));
 
-        allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsaBaren, textZaloonen, textWijkanders, textLofTDet,
+        allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsaBaren, textZaloonen, textWinden, textLofTDet,
                 textRodaRummet,textVerum, textVillan, textAdammen, textFocus, textFortNox,textGTSpritis, textGoldenI, textChabo,textWijkanders,textHrum,
-                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogården, textKalleGlader));
+                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogarden, textKalleGlader, textTvargatan));
 
         modelDataHandler = ModelDataHandler.getModelDataHandler();
         modelDataHandler.initialize(allButtons.size(), colors, logoNames);
@@ -193,6 +197,7 @@ public class MapController extends AnchorPane {
                 removeMarkedCube(secondMarked);
                 view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
                 donedeploy.setDisable(true);
+                donedeploy.setStyle("-fx-background-color: #000000");
             }
         });
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {

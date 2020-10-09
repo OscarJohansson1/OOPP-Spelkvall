@@ -1,5 +1,9 @@
 package program.model;
 
+import javafx.scene.control.Button;
+
+import java.util.ArrayList;
+
 /**
  * This class holds methods that´s controlling the spaces. Mostly creating them and updating them.
  */
@@ -9,6 +13,7 @@ public class Space {
     private Player player;
     private int units;
     private final String name;
+    private final ArrayList<Space> neighbours = new ArrayList<>();
 
     /**
      * This is a constructor for a space
