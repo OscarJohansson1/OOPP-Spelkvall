@@ -195,6 +195,7 @@ public class MapController extends AnchorPane {
                 removeMarkedCube(secondMarked);
                 view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
                 donedeploy.setDisable(true);
+                donedeploy.setStyle("-fx-background-color: #000000");
             }
         });
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
