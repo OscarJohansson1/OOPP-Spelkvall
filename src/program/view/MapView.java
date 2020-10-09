@@ -1,7 +1,9 @@
 package program.view;
 
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -136,13 +138,17 @@ public class MapView extends AnchorPane {
         switch (string)
         {
             case "DEPLOY":
-                mapController.rootpane.getChildren().get(mapController.getChildren().indexOf(mapController.deployPhase)).toFront();
+
+                //mapController.rootpane.getChildren().get(mapController.getChildren().indexOf(mapController.rootpane.deployPhase)).toFront();
+                mapController.deployPhase.toFront();
                 break;
             case "ATTACK":
-                mapController.rootpane.getChildren().get(mapController.getChildren().indexOf(mapController.attackPhase)).toFront();
+                mapController.attackPhase.toFront();
+                //mapController.rootpane.getChildren().get(mapController.getChildren().indexOf(mapController.attackPhase)).toFront();
                 break;
             case "MOVE":
-                mapController.rootpane.getChildren().get(mapController.getChildren().indexOf(mapController.movePhase)).toFront();
+                mapController.movePhase.toFront();
+                mapController.sliderPane.toFront();
                 break;
             case "END":
                 break;
