@@ -37,7 +37,7 @@ public class AttackController extends AnchorPane {
     private List<Integer> dices;
     private AttackView attackView = new AttackView();
     private MapController mapController;
-    private ModelDataHandler modelDataHandler ;
+    private ModelDataHandler modelDataHandler;
 
     AttackController(MapController mapController, List<Integer> dices) {
 
