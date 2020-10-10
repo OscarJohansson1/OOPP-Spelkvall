@@ -77,10 +77,17 @@ class Board {
             {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0},
     };
 
+
+
+    Board(List<Space> spaces)
+    {
+        this.spaces = spaces;
+    }
+
     /**
-     * Should be called whnen selevtedSPace2 is not set...
-     * @param space
-     * @return
+     * Checks if the a space is a neighbour to the current selected space.
+     * @param space A space that is not selectedSpace.
+     * @return If the space is a neighbour.
      */
     boolean isNeighbours(Space space){
         if (selectedSpace != null){
@@ -89,10 +96,19 @@ class Board {
         return false;
     }
 
-    Board(List<Space> spaces)
-    {
-        this.spaces = spaces;
+    /**
+     * Get amount of neighbours of a space. Mainly used for tests.
+     * @param id Which space to get amount of neighbours from.
+     * @return Amount of neighbours
+     */
+    int getNumberOfNeighbours(int id){
+        int count = 0;
+        for(int i = 0; i < neighbours[id].length; i++){
+            count += neighbours[id][i];
+        }
+        return count;
     }
+
 
     /**
      * Method that finds a space on the board based on id.

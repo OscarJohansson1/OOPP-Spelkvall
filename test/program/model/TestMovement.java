@@ -1,6 +1,8 @@
 package program.model;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.paint.Color;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,20 +21,27 @@ public class TestMovement {
     @Before
     public void before(){
 
-        //player1 = new Player(10,1, Color.color(1, 0, 0));
-        //player2 = new Player(10,2, Color.color(0, 0, 1));
+        JFXPanel jfxPanel = new JFXPanel(); // This is magic if I have ever seen it. Comment this away and errors will fly.
 
-        space1 = new Space(1, player1, 5, "Test");
-        space2 = new Space(2, player1, 3, "Test");
+        player1 = new Player(10,1, Color.color(1, 0, 0), "");
+        player2 = new Player(10,2, Color.color(0, 0, 1), "");
 
-        movement = new Movement();
+        space1 = new Space(1, player1, 10, "Test");
+        space2 = new Space(2, player1, 2, "Test");
     }
 
     @Test
     public void testMovement() {
-        // Rewrite test when movement has been implemented correctly
-        movement.MoveUnits(space1, space2, 10);
-        assertEquals(3, space1.getUnits(), "Didn't switch units with space2");
+        Movement.MoveUnits(space1, space2, 5);
+        assertEquals(5, space1.getUnits(), "space1 has the wrong amount of units after move");
+        assertEquals(7, space2.getUnits(), "space2 has the wrong amount of units after move");
+    }
+
+    @Test
+    public void testMovementWithIllegalUnits() {
+        Movement.MoveUnits(space1, space2, 15);
+        assertEquals(10, space1.getUnits(), "Units where moved when they shouldn't have been");
+        assertEquals(2, space2.getUnits(), "Units where moved when they shouldn't have been");
     }
 
 }
