@@ -2,7 +2,6 @@ package program.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.paint.Color;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,10 +20,8 @@ public class TestMovement {
     @Before
     public void before(){
 
-        JFXPanel jfxPanel = new JFXPanel(); // This is magic if I have ever seen it. Comment this away and errors will fly.
-
-        player1 = new Player(10,1, Color.color(1, 0, 0), "");
-        player2 = new Player(10,2, Color.color(0, 0, 1), "");
+        player1 = new Player(10,1, Color.color(1, 0, 0));
+        player2 = new Player(10,2, Color.color(0, 0, 1));
 
         space1 = new Space(1, player1, 10, "Test");
         space2 = new Space(2, player1, 2, "Test");
