@@ -1,9 +1,12 @@
 package program.model;
 import static org.junit.jupiter.api.Assertions.*;
 
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.paint.Color;
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TestModelDataHandler {
 
