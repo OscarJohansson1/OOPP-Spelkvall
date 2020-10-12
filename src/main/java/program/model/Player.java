@@ -27,6 +27,13 @@ public class Player {
         this.logoUrl = new Image("file:src/program/picures/logos/"+logoUrl+".png");
     }
 
+    //TODO: for tests right now
+    Player(int units, int id, Color color){
+        this.units = units;
+        this.id = id;
+        this.color = color;
+    }
+
     int getUnits() {
         return units;
     }

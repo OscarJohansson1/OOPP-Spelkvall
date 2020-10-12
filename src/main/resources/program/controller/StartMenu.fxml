@@ -10,7 +10,7 @@
    <children>
       <ImageView fx:id="chanceImageView" fitHeight="1080.0" fitWidth="1080.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../picures/ChalmersChance.png" />
+            <Image url="@../../pictures/ChalmersChance.png" />
          </image>
       </ImageView>
       <Button fx:id="startButton" layoutX="1204.0" layoutY="215.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="600.0" text="Start Game" AnchorPane.rightAnchor="116.0" AnchorPane.topAnchor="400.0">

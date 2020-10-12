@@ -14,7 +14,7 @@
     <children>
         <ImageView fx:id="yes" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../picures/OOPP-Map.png" />
+                <Image url="@../../pictures/OOPP-Map.png" />
             </image>
         </ImageView>
         <QuadCurve controlX="18.0" controlY="-59.0" endX="-2.0" endY="-131.0" fill="#ffffff00" layoutX="529.0" layoutY="377.0" opacity="0.9" startX="107.0" startY="-59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />

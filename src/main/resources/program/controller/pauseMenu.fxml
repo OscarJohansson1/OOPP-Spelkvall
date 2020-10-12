@@ -18,7 +18,7 @@
                      <children>
                         <ImageView fx:id="chanceImageView" fitHeight="450.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../picures/ChalmersChance.png" />
+                              <Image url="@../../pictures/ChalmersChance.png" />
                            </image>
                         </ImageView>
                      </children>

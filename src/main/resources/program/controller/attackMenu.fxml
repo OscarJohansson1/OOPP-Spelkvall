@@ -16,7 +16,7 @@
          <children>
             <ImageView fx:id="attackBackgruondImage" fitHeight="930.0" fitWidth="1658.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-38.0" AnchorPane.topAnchor="0.0">
                <image>
-                  <Image url="@../picures/soldiers-French-front-line-Battle-of-Verdun-1916.jpg" />
+                  <Image url="@../../pictures/soldiers-French-front-line-Battle-of-Verdun-1916.jpg" />
                </image>
             </ImageView>
             <HBox fx:id="attackHBox" alignment="CENTER" prefHeight="200.0" prefWidth="1874.0" spacing="75.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0">
@@ -42,17 +42,17 @@
                <children>
                   <ImageView fx:id="attackerDieImage1" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../picures/dice_white_1.PNG" />
+                        <Image url="@../../pictures/dice_white_1.PNG" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="attackerDieImage2" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../picures/dice_white_2.PNG" />
+                        <Image url="@../../pictures/dice_white_2.PNG" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="attackerDieImage3" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../picures/dice_white_3.PNG" />
+                        <Image url="@../../pictures/dice_white_3.PNG" />
                      </image>
                   </ImageView>
                </children>
@@ -61,12 +61,12 @@
                <children>
                   <ImageView fx:id="defenderDieImage1" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../picures/dice_black_4.PNG" />
+                        <Image url="@../../pictures/dice_black_4.PNG" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="defenderDieImage2" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../picures/dice_black_5.PNG" />
+                        <Image url="@../../pictures/dice_black_5.PNG" />
                      </image>
                   </ImageView>
                </children>

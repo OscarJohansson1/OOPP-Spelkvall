@@ -2,7 +2,6 @@ package program.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.junit.Before;
@@ -24,13 +23,11 @@ public class TestDeployment {
     @Before
     public void before(){
 
-        JFXPanel jfxPanel = new JFXPanel(); // This is magic if I have ever seen it. Comment this away and errors will fly.
-
         rec1 = new Rectangle();
         rec2 = new Rectangle();
 
-        player1 = new Player(10,1, Color.color(1, 0, 0), "");
-        player2 = new Player(10,2, Color.color(0, 0, 1), "");
+        player1 = new Player(10,1, Color.color(1, 0, 0));
+        player2 = new Player(10,2, Color.color(0, 0, 1));
 
         space1 = new Space(0, player1, 5, "Test");
         space2 = new Space(1, player2, 5, "Test");
