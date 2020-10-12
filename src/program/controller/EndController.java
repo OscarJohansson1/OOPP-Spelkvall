@@ -74,7 +74,7 @@ public class EndController extends AnchorPane {
        }*/
     }
 
-    public void newGameButtonPressed(){
+    public void newGameButtonPressed() throws IOException, ClassNotFoundException {
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
@@ -88,7 +88,7 @@ public class EndController extends AnchorPane {
         System.exit(0);
     }
 
-    public void toMenuButtonPressed(){
+    public void toMenuButtonPressed() throws IOException, ClassNotFoundException {
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 

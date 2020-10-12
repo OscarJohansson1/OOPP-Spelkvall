@@ -117,7 +117,12 @@ class SetUpGameController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(colorList.size() >= slider.getValue()) {
-                    Parent root = new MapController(colorList, logoNameList, stage);
+                    Parent root = null;
+                    try {
+                        root = new MapController(colorList, logoNameList, stage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     //give players to
 
                     Scene scene = new Scene(root, 1920, 1080);
@@ -133,7 +138,12 @@ class SetUpGameController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                Parent root = new StartController(stage);
+                Parent root = null;
+                try {
+                    root = new StartController(stage);
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 Scene scene = new Scene(root, 1920, 1080);
 
                 stage.setTitle("Chans");
