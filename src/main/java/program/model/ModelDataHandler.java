@@ -247,6 +247,10 @@ public class ModelDataHandler {
         return currentPlayer.getLogoUrl();
     }
 
+    /**
+     * Winner
+     * @return
+     */
     public boolean isWinner() {
         return board.isWinner();
     }
