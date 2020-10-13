@@ -4,11 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../../main/resources/Chans.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controller.LobbySelect">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../../Chans.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controller.LobbySelect">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="1080.0" prefWidth="1920.0" styleClass="lightbox-shadow" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -42,7 +42,10 @@
                   </Pane>
                   <ScrollPane hbarPolicy="NEVER" layoutX="30.0" layoutY="140.0" prefHeight="710.0" prefWidth="900.0" vbarPolicy="ALWAYS" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="590.0" AnchorPane.topAnchor="140.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="710.0" prefWidth="900.0">
+                           <children>
+                              <FlowPane fx:id="LobbyFlow" prefHeight="710.0" prefWidth="900.0" />
+                           </children></AnchorPane>
                     </content>
                   </ScrollPane>
                </children>

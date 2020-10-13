@@ -70,3 +70,8 @@
     -fx-font-weight: bold;
 
 }
+
+.border-line{
+    -fx-border-width:  0 0 1 0;
+    -fx-border-color:  #CCCCCC
+}

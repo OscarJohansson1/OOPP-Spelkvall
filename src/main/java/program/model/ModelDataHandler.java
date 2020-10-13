@@ -1,5 +1,6 @@
 package program.model;
 
+import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 

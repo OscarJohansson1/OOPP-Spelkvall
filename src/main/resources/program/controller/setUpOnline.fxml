@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controller.SetUpOnline">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../../main/resources/Chans.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../../Chans.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="1080.0" prefWidth="1920.0" styleClass="lightbox-shadow" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -37,27 +37,27 @@
                            <children>
                               <ImageView fx:id="recA" fitHeight="150.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ff0000;">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/a_logo.png" />
+                                    <Image url="@../../pictures/logos/a_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recF" fitHeight="150.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #000000;" GridPane.rowIndex="1">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/f_logo.png" />
+                                    <Image url="@../../pictures/logos/f_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recAE" fitHeight="150.0" fitWidth="151.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #bfff00;" GridPane.columnIndex="1">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/ae_logo.png" />
+                                    <Image url="@../../pictures/logos/ae_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recD" fitHeight="150.0" fitWidth="151.0" layoutX="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ff8000;" GridPane.columnIndex="2">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/d_logo.png" />
+                                    <Image url="@../../pictures/logos/d_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recE" fitHeight="150.0" fitWidth="151.0" layoutX="310.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ffff00;" GridPane.columnIndex="3">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/e_logo.png" />
+                                    <Image url="@../../pictures/logos/e_logo.png" />
                                  </image>
                                  <GridPane.margin>
                                     <Insets />
@@ -65,22 +65,22 @@
                               </ImageView>
                               <ImageView fx:id="recH" fitHeight="150.0" fitWidth="151.0" layoutX="470.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #de3163;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/h_logo.png" />
+                                    <Image url="@../../pictures/logos/h_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recI" fitHeight="150.0" fitWidth="151.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #9f00c5;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/i_logo.png" />
+                                    <Image url="@../../pictures/logos/i_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recIT" fitHeight="150.0" fitWidth="151.0" layoutX="310.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #09cdda;" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/it_logo.png" />
+                                    <Image url="@../../pictures/logos/it_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recK" fitHeight="150.0" fitWidth="151.0" layoutX="460.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #00c000;" GridPane.rowIndex="2">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/k_logo.png" />
+                                    <Image url="@../../pictures/logos/k_logo.png" />
                                  </image>
                                  <GridPane.margin>
                                     <Insets />
@@ -88,27 +88,27 @@
                               </ImageView>
                               <ImageView fx:id="recKfKb" fitHeight="150.0" fitWidth="151.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #007000;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/kfkb_logo.png" />
+                                    <Image url="@../../pictures/logos/kfkb_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recM" fitHeight="150.0" fitWidth="151.0" layoutX="160.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #964b00;" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/m_logo.png" />
+                                    <Image url="@../../pictures/logos/m_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recSjo" fitHeight="150.0" fitWidth="151.0" layoutX="160.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #000080;" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/sjo_logo.png" />
+                                    <Image url="@../../pictures/logos/sjo_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recTB" fitHeight="150.0" fitWidth="151.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ffffff;" GridPane.rowIndex="3">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/tb_logo.png" />
+                                    <Image url="@../../pictures/logos/tb_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recTD" fitHeight="150.0" fitWidth="151.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #5f021f;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/td_logo.png" />
+                                    <Image url="@../../pictures/logos/td_logo.png" />
                                  </image>
                                  <GridPane.margin>
                                     <Insets />
@@ -116,12 +116,12 @@
                               </ImageView>
                               <ImageView fx:id="recV" fitHeight="150.0" fitWidth="151.0" layoutX="160.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #4141ff;" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/v_logo.png" />
+                                    <Image url="@../../pictures/logos/v_logo.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="recZ" fitHeight="150.0" fitWidth="151.0" layoutX="160.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #808080;" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                  <image>
-                                    <Image url="@../../main/resources/pictures/logos/z_logo.png" />
+                                    <Image url="@../../pictures/logos/z_logo.png" />
                                  </image>
                               </ImageView>
                            </children>
