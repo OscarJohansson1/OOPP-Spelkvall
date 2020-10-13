@@ -11,6 +11,7 @@ class Round {
     private int attackerLoss;
     private int defenderLoss;
 
+
      boolean nextAttackPossible = true;
 
     /**
@@ -21,8 +22,6 @@ class Round {
         DEPLOY, ATTACK, MOVE, END;
 
         private Phase next;
-
-
 
         static {
             DEPLOY.next = ATTACK;
