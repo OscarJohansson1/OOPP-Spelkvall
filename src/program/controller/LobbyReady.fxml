@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controller.SetUpOnline">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../../main/resources/Chans.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="1080.0" prefWidth="1920.0" styleClass="lightbox-shadow" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="880.0" prefWidth="1520.0" style="-fx-background-color: #FFFFFF;" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="100.0">
+                     <children>
+                        <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="258.0" styleClass="standard-button" text="Back to team select" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
+                        <Button layoutX="1229.0" layoutY="697.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="200.0" styleClass="standard-button" text="Join lobby" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+                        <Pane layoutX="983.0" layoutY="141.0" prefHeight="530.0" prefWidth="530.0" style="-fx-border-color: black;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="140.0">
+                           <children>
+                              <ImageView fitHeight="530.0" fitWidth="530.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../main/resources/pictures/ChalmersChance.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <ScrollPane hbarPolicy="NEVER" layoutX="30.0" layoutY="140.0" prefHeight="710.0" prefWidth="900.0" vbarPolicy="ALWAYS" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="590.0" AnchorPane.topAnchor="140.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
