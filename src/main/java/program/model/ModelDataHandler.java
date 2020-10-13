@@ -247,7 +247,7 @@ public class ModelDataHandler {
     }
 
     /**
-     * Winner
+     * Winner 2
      * @return
      */
     public boolean isWinner() {
