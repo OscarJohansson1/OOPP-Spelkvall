@@ -24,7 +24,7 @@ public class Player {
         this.units = units;
         this.id = id;
         this.color = color;
-        this.logoUrl = new Image("file:src/program/picures/logos/"+logoUrl+".png");
+        this.logoUrl = new Image("file:src/main/resources/pictures/logos/"+logoUrl+".png");
     }
 
     //TODO: for tests right now

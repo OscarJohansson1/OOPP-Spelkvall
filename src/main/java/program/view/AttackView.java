@@ -18,12 +18,12 @@ public class AttackView extends AnchorPane {
         Image image;
         switch (dicecolor) {
             case "White":
-                image = new Image("file:src/program/picures/dice_white_"+number+".png");
+                image = new Image("file:src/main/resources/pictures/dice_white_"+number+".png");
                 imageView.setImage(image);
                 imageView.setVisible(true);
                 break;
             case "Black":
-                image = new Image("file:src/program/picures/dice_black_"+number+".png");
+                image = new Image("file:src/main/resources/pictures/dice_black_"+number+".png");
                 imageView.setImage(image);
                 imageView.setVisible(true);
                 break;
