@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.QuadCurve?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -17,14 +18,19 @@
                 <Image url="@../../pictures/OOPP-Map.png" />
             </image>
         </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c31fff40" height="341.0" layoutX="496.0" layoutY="141.0" stroke="TRANSPARENT" strokeType="INSIDE" width="356.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#21ff2740" height="435.0" layoutX="852.0" layoutY="146.0" stroke="TRANSPARENT" strokeType="INSIDE" width="300.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#865e0040" height="435.0" layoutX="1152.0" layoutY="143.0" stroke="TRANSPARENT" strokeType="INSIDE" width="284.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#21d1ff40" height="378.0" layoutX="1436.0" layoutY="200.0" stroke="TRANSPARENT" strokeType="INSIDE" width="265.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff212140" height="266.0" layoutX="1345.0" layoutY="577.0" stroke="TRANSPARENT" strokeType="INSIDE" width="356.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9ff2140" height="266.0" layoutX="851.0" layoutY="577.0" stroke="TRANSPARENT" strokeType="INSIDE" width="494.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b21ff40" height="328.0" layoutX="230.0" layoutY="553.0" stroke="TRANSPARENT" strokeType="INSIDE" width="364.0" />
         <QuadCurve controlX="18.0" controlY="-59.0" endX="-2.0" endY="-131.0" fill="#ffffff00" layoutX="529.0" layoutY="377.0" opacity="0.9" startX="107.0" startY="-59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="102.0" controlY="-18.0" endX="83.0" endY="-84.0" fill="#ffffff00" layoutX="539.0" layoutY="387.0" opacity="0.9" startX="177.0" startY="-18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="277.0" controlY="-62.0" endX="148.0" endY="-28.0" fill="#ffffff00" layoutX="549.0" layoutY="397.0" opacity="0.9" startX="277.0" startY="-96.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="159.0" controlY="-174.0" endX="63.0" endY="-94.0" fill="#ffffff00" layoutX="559.0" layoutY="407.0" opacity="0.9" startX="276.0" startY="-94.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="184.0" controlY="45.0" endX="131.0" endY="-58.0" fill="#ffffff00" layoutX="569.0" layoutY="417.0" opacity="0.9" startX="320.0" startY="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
-        <QuadCurve controlX="353.0" controlY="-92.0" endX="247.0" endY="-127.0" fill="#ffffff00" layoutX="579.0" layoutY="427.0" opacity="0.9" startX="295.0" startY="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="281.0" controlY="75.0" endX="396.0" endY="75.0" fill="#ffffff00" layoutX="592.0" layoutY="437.0" opacity="0.9" startX="281.0" startY="-7.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
-        <QuadCurve controlX="289.0" controlY="-230.0" endX="226.0" endY="-128.0" fill="#ffffff00" layoutX="589.0" layoutY="437.0" opacity="0.9" startX="452.0" startY="-215.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="298.0" controlY="-218.0" endX="215.0" endY="-137.0" fill="#ffffff00" layoutX="599.0" layoutY="447.0" opacity="0.9" startX="410.0" startY="-175.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="316.0" controlY="-150.0" endX="266.0" endY="-17.0" fill="#ffffff00" layoutX="609.0" layoutY="457.0" opacity="0.9" startX="399.0" startY="-189.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="378.0" controlY="-222.0" endX="390.0" endY="-194.0" fill="#ffffff00" layoutX="620.0" layoutY="467.0" opacity="0.9" startX="423.0" startY="-252.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
@@ -47,7 +53,6 @@
         <QuadCurve controlX="767.0" controlY="-48.0" endX="748.0" endY="-127.0" fill="#ffffff00" layoutX="729.0" layoutY="577.0" opacity="0.9" startX="857.0" startY="-59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="1080.0" controlY="-281.0" endX="756.0" endY="-229.0" fill="#ffffff00" layoutX="739.0" layoutY="587.0" opacity="0.9" startX="850.0" startY="-60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="781.0" controlY="-162.0" endX="757.0" endY="-217.0" fill="#ffffff00" layoutX="739.0" layoutY="587.0" opacity="0.9" startX="735.0" startY="-127.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
-        <QuadCurve controlX="595.0" controlY="-94.0" endX="744.0" endY="-137.0" fill="#ffffff00" layoutX="749.0" layoutY="597.0" opacity="0.9" startX="512.0" startY="-146.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="650.0" controlY="-217.0" endX="743.0" endY="-233.0" fill="#ffffff00" layoutX="759.0" layoutY="607.0" opacity="0.9" startX="606.0" startY="-299.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="630.0" controlY="-219.0" endX="601.0" endY="-314.0" fill="#ffffff00" layoutX="769.0" layoutY="617.0" opacity="0.9" startX="496.0" startY="-162.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="466.0" controlY="-335.0" endX="601.0" endY="-314.0" fill="#ffffff00" layoutX="779.0" layoutY="627.0" opacity="0.9" startX="448.0" startY="-274.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
@@ -55,7 +60,6 @@
         <QuadCurve controlX="422.0" controlY="-218.0" endX="378.0" endY="-145.0" fill="#ffffff00" layoutX="799.0" layoutY="647.0" opacity="0.9" startX="478.0" startY="-199.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="348.0" controlY="-258.0" endX="372.0" endY="-158.0" fill="#ffffff00" layoutX="809.0" layoutY="657.0" opacity="0.9" startX="422.0" startY="-307.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="193.0" controlY="-232.0" endX="364.0" endY="-161.0" fill="#ffffff00" layoutX="819.0" layoutY="667.0" opacity="0.9" startX="179.0" startY="-404.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
-        <QuadCurve controlX="237.0" controlY="-267.0" endX="410.0" endY="-319.0" fill="#ffffff00" layoutX="829.0" layoutY="677.0" opacity="0.9" startX="173.0" startY="-407.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="376.0" controlY="-583.0" endX="398.0" endY="-333.0" fill="#ffffff00" layoutX="839.0" layoutY="687.0" opacity="0.9" startX="195.0" startY="-468.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="-23.0" controlY="487.0" endX="-193.0" endY="283.0" fill="#ffffff00" layoutX="639.0" layoutY="487.0" opacity="0.9" startX="267.0" startY="267.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="-179.0" controlY="211.0" endX="-203.0" endY="277.0" fill="#ffffff00" layoutX="649.0" layoutY="497.0" opacity="0.9" startX="-265.0" startY="153.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
@@ -271,5 +275,45 @@
                 </Pane>
             </children>
         </Pane>
+      <ImageView fitHeight="341.0" fitWidth="344.0" layoutX="12.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../pictures/ChalmersChance.png" />
+         </image>
+      </ImageView>
+      <Text fill="#c021ffbf" layoutX="499.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vasa">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#008d02bf" layoutX="857.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kemigården">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#865e00bf" layoutX="1213.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maskinhuset" wrappingWidth="233.576171875">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#0186a8bf" layoutX="1614.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT" wrappingWidth="87.8203125">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#ff2121bf" layoutX="1352.0" layoutY="835.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SB" wrappingWidth="55.8775634765625">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#9ea100bf" layoutX="1043.0" layoutY="835.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kårhuset" wrappingWidth="162.3984375">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#3b21ffbf" layoutX="235.0" layoutY="594.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lindholmen">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
     </children>
 </fx:root>

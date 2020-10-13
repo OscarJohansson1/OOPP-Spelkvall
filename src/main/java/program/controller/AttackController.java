@@ -2,10 +2,13 @@ package program.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import program.model.ModelDataHandler;
 import program.view.AttackView;
 
@@ -35,16 +38,12 @@ public class AttackController extends AnchorPane {
     @FXML private ImageView attackerImageView;
     @FXML private ImageView defenderImageView;
 
-
-    private List<ImageView> images;
-    private List<ImageView> fakeImages;
-    private Timer timer = new Timer();
-    private List<Integer> dices;
-    private AttackView attackView = new AttackView();
+    private AttackView attackView;
     private MapController mapController;
     private ModelDataHandler modelDataHandler;
+    private Stage stage;
 
-    AttackController(MapController mapController, List<Integer> dices) {
+    AttackController(MapController mapController, List<Integer> dices, Stage stage) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("attackMenu.fxml"));
         fxmlLoader.setRoot(this);
@@ -56,97 +55,38 @@ public class AttackController extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-
-        this.dices = dices;
-
-        images = new ArrayList<>(Arrays.asList(attackerDieImage1,attackerDieImage2,attackerDieImage3, defenderDieImage1,defenderDieImage2));
-        fakeImages = new ArrayList<>(images);
         this.mapController = mapController;
+        this.stage = stage;
         this.modelDataHandler = ModelDataHandler.getModelDataHandler();
-        List<ImageView> logoImages = new ArrayList<>(Arrays.asList(attackerImageView, defenderImageView));
-        attackView.setLogoImages(modelDataHandler.getTeamLogo(modelDataHandler.getSelectedSpace().getId()),modelDataHandler.getTeamLogo(modelDataHandler.getSelectedSpace2().getId()), logoImages);
+        this.attackView = new AttackView(new ArrayList<>(Arrays.asList(attackerDieImage1,attackerDieImage2,attackerDieImage3, defenderDieImage1,defenderDieImage2)),
+                new ArrayList<>(Arrays.asList(attackerImageView, defenderImageView)));
         attack();
     }
-     public void attackButtonPressed() {
+
+    private void attack() {
+        attackView.updateDice();
+        attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton);
+    }
+
+    @FXML
+    public void attackButtonPressed() {
         if(!modelDataHandler.nextMove()){
-            attackDone();
+            attackView.attackDone(attackButton, abortButton);
             return;
         }
-        dices = modelDataHandler.getDiceResults();
         attack();
     }
-    private void attack() {
-        attackView.resetImages(images);
-        List<Integer> whiteDices = dices.subList(0,dices.size()-2);
-        List<Integer> blackDices = dices.subList(dices.size()-2,dices.size());
-        sortList(whiteDices);
-        sortList(blackDices);
-        for(int i = 0; i < whiteDices.size(); i++)
-        {
-            attackView.updateDie(images.get(i),whiteDices.get(i),"White");
-        }
-        for(int i = 0; i < blackDices.size(); i++)
-        {
-            attackView.updateDie(images.get(i+3),blackDices.get(i),"Black");
-        }
-        List<String> attackResults = modelDataHandler.attackResult();
-        attackView.updateText(attackerText, modelDataHandler.getSelectedSpace().getName() + attackResults.get(0));
-        attackView.updateText(defenderText,modelDataHandler.getSelectedSpace2().getName() + attackResults.get(1));
-        attackView.updateText(attackerUnits,  modelDataHandler.getSelectedSpace().getName() +" units: " + modelDataHandler.getSelectedSpace().getUnits());
-        attackView.updateText(defenderUnits, modelDataHandler.getSelectedSpace2().getName() + " units: 0");
-        if(modelDataHandler.checkAttack()) {
-            attackDone();
-            attackView.updateText(attackerUnits, modelDataHandler.getSelectedSpace().getName() +" units: " + modelDataHandler.getSelectedSpace2().getUnits());
-        }
-        else {
-            attackView.updateText(defenderUnits, modelDataHandler.getSelectedSpace2().getName() + " units: " + modelDataHandler.getSelectedSpace2().getUnits());
-        }
-    }
-    private void attackDone() {
-        attackButton.setVisible(false);
-        abortButton.setLayoutX(attackButton.getLayoutX());
-        abortButton.setLayoutY(attackButton.getLayoutY());
-        abortButton.setText("Done");
-    }
-    private void sortList(List<Integer> list) {
-        int temp;
-        boolean sorted = false;
-        while (!sorted) {
-            sorted = true;
-            for (int i = 0; i < list.size()-1; i++) {
-                if (list.get(i).compareTo(list.get(i + 1)) < 0) {
-                    temp = list.get(i);
-                    list.set(i, list.get(i + 1));
-                    list.set(i + 1, temp);
-                    sorted = false;
-                }
-            }
-        }
-    }
 
-     private void spinDices() {
-        int timer = 0;
-         while(true)
-         {
-             if(fakeImages.size() != 0)
-             {
-                 for (ImageView fakeImage : fakeImages) {
-                     attackView.updateDie(fakeImage, new Random().nextInt(7), "White");
-                 }
-             }
-             else {
-                 break;
-             }
-             timer++;
-             if(timer > 2000)
-             {
-                 fakeImages.remove(0);
-                 timer = 0;
-                 break;
-             }
-         }
-     }
+    @FXML
      public void abortButtonPressed() {
          mapController.removeAttackView();
+         if(modelDataHandler.isWinner()){
+             Parent root = new EndController(stage);
+             Scene scene = new Scene(root, 1920, 1080);
+
+             stage.setTitle("End");
+             stage.setScene(scene);
+             stage.show();
+         }
      }
 }
