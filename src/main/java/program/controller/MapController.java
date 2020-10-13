@@ -206,18 +206,34 @@ public class MapController extends AnchorPane {
                 view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
                 donedeploy.setDisable(true);
                 donedeploy.setStyle("-fx-background-color: #000000");
+                modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits());
+                view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+                moveSlider.setMax(modelDataHandler.getDeployableUnits());
             }
         });
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                modelDataHandler.nextPhase();
-                view.updatePhase("ATTACK", MapController.this);
-                resetColor();
-                resetDisplayCubes();
-                sliderVisibility(false);
-                addMarkedCube(firstMarked);
-                addMarkedCube(secondMarked);
+
+                if (modelDataHandler.firstDeployment){
+                    modelDataHandler.nextPlayer();
+                    view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
+                    view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+                    moveSlider.setMax(modelDataHandler.getDeployableUnits());
+                    resetDisplayCubes();
+                    resetColor();
+                }
+                else{
+                    modelDataHandler.nextPhase();
+                    //modelDataHandler.nextPlayer();
+                    view.updatePhase("ATTACK", MapController.this);
+                    view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
+                    resetColor();
+                    resetDisplayCubes();
+                    sliderVisibility(false);
+                    addMarkedCube(firstMarked);
+                    addMarkedCube(secondMarked);
+                }
             }
         });
         deployButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -257,6 +273,7 @@ public class MapController extends AnchorPane {
         removeMarkedCube(secondMarked);
         donedeploy.setDisable(true);
         donedeploy.setStyle("-fx-background-color: #000000");
+        moveSlider.setMax(modelDataHandler.getDeployableUnits());
     }
     public void deploy(){
         if(modelDataHandler.nextMove())

@@ -20,6 +20,7 @@ public class ModelDataHandler {
     private Round round;
     private Board board;
     private int unitsToUse = 1;
+    public boolean firstDeployment = true;
 
     private List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
             "RödaRummet","Verum", "Villan", "A-dammen", "Focus", "FortNox","GTSpritis", "GoldenI", "Chabo","Wijkanders","Hrum",
@@ -42,7 +43,7 @@ public class ModelDataHandler {
     {
         for(int i = 0; i < colors.size(); i++)
         {
-            players.add(new Player((100/colors.size()), i, colors.get(i), logoNames.get(i)));
+            players.add(new Player((50/colors.size()), i, colors.get(i), logoNames.get(i)));
         }
         currentPlayer = getRandomPlayer(null);
         board = new Board(randomizeSpaces(amountOfSpaces));
@@ -86,19 +87,19 @@ public class ModelDataHandler {
     /**
      * Method that changes the currentPlayer to the next player in the player list. If the player is the last player in
      * the list, the first player in the list is selected as the new currentPlayer.
-     * @param player The currentPlayer.
      */
-    private void nextPlayer(Player player)
+    public void nextPlayer()
     {
         for(int i = 0; i < players.size(); i++)
         {
-            if(player == players.get(i) && i + 1 <  players.size())
+            if(currentPlayer == players.get(i) && i + 1 <  players.size())
             {
                 currentPlayer = players.get(i+1);
                 break;
             }
-            else if(player == players.get(i)){
+            else if(currentPlayer == players.get(i)){
                 currentPlayer = players.get(0);
+                firstDeployment = false;
                 break;
             }
         }
@@ -118,7 +119,7 @@ public class ModelDataHandler {
                 playerList.clear();
             }
             lastRandomPlayer = getRandomPlayer(playerList);
-            spaces.add(new Space(i,lastRandomPlayer,10,spaceNames.get(i)));
+            spaces.add(new Space(i,lastRandomPlayer,1,spaceNames.get(i)));
             playerList.add(lastRandomPlayer);
         }
         return spaces;
@@ -176,7 +177,7 @@ public class ModelDataHandler {
         roundCount++;
         if(roundCount > 3)
         {
-            nextPlayer(currentPlayer);
+            nextPlayer();
             roundCount = 1;
         }
     }
@@ -230,8 +231,18 @@ public class ModelDataHandler {
         return currentPlayer.getUnits();
     }
 
+    public void setDeployableUnits(int units){ currentPlayer.setUnits(units);}
+
     public List<Integer> getDiceResults() {
         return round.diceresults();
+    }
+
+    /**
+     *
+     * @return Should return the calculated amount. Is hard coded right now and needs to be fixed
+     */
+    public int calculateDeployableUnits(){
+        return 5;
     }
 
     public List<String> attackResult()
@@ -259,3 +270,4 @@ public class ModelDataHandler {
     }
 
 }
+
