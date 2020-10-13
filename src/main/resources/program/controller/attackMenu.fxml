@@ -23,7 +23,7 @@
                <children>
                   <ImageView fx:id="attackerImageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../picures/itloggan.jpg" />
+                        <Image url="@../../pictures/logos/it_logo.png" />
                      </image>
                   </ImageView>
                   <Label text="VS" textAlignment="CENTER">
@@ -33,7 +33,7 @@
                   </Label>
                   <ImageView fx:id="defenderImageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../picures/itloggan.jpg" />
+                        <Image url="@../../pictures/logos/it_logo.png" />
                      </image>
                   </ImageView>
                </children>
