@@ -33,11 +33,11 @@ public class StartController extends AnchorPane {
      *
      * @param stage the main stage
      */
-    public StartController(Stage stage) {
+    public StartController(Stage stage) throws IOException, ClassNotFoundException {
+
 
         this.stage = stage;
-        SetUpGameController setUpGameController = new SetUpGameController(stage);
-        root = setUpGameController;
+        root = new SetUpGameController(stage);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartMenu.fxml"));
         fxmlLoader.setRoot(this);

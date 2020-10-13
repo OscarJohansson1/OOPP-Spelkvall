@@ -127,7 +127,7 @@ public class MapController extends AnchorPane {
     private PauseController pauseController;
 
 
-    MapController(List<Color> colors, List<String> logoNames, Stage stage) {
+    MapController(List<Color> colors, List<String> logoNames, Stage stage) throws IOException {
 
         this.stage = stage;
         pauseController = new PauseController(stage, this);
@@ -151,10 +151,14 @@ public class MapController extends AnchorPane {
         modelDataHandler = ModelDataHandler.getModelDataHandler();
         modelDataHandler.initialize(allButtons.size(), colors, logoNames);
         initialize();
-    }
-    private void initialize() {
-        //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
 
+    }
+    private void initialize() throws IOException {
+        //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
+        /*EchoClient.getEchoClient().recieveController(this);
+        EchoClient client = EchoClient.getEchoClient();
+        client.startConnection("127.0.0.1", 6666);
+        client.deploy();*/
         for (int i = 0; i<allButtons.size(); i++){
             int var = i;
             allButtons.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -219,37 +223,19 @@ public class MapController extends AnchorPane {
         deployButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(modelDataHandler.nextMove())
-                {
-                    setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
-                    view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
-                    moveSlider.setMax(modelDataHandler.getDeployableUnits());
-                }
-                if (modelDataHandler.getDeployableUnits() == 0){
-                    donedeploy.setDisable(false);
-                    donedeploy.setStyle(null);
-                }
+                deploy();
             }
         });
         attackButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(modelDataHandler.nextMove())
-                {
-                    setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
-                    changeToAttackView();
-                }
+                attack();
             }
         });
         moveButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(modelDataHandler.nextMove())
-                {
-                    setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
-                    modelDataHandler.resetSelectedSpaces();
-                }
-                resetDisplayCubes();
+                move();
             }
         });
         moveSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -271,6 +257,35 @@ public class MapController extends AnchorPane {
         removeMarkedCube(secondMarked);
         donedeploy.setDisable(true);
         donedeploy.setStyle("-fx-background-color: #000000");
+    }
+    public void deploy(){
+        if(modelDataHandler.nextMove())
+        {
+            setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
+            view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+            moveSlider.setMax(modelDataHandler.getDeployableUnits());
+        }
+        if (modelDataHandler.getDeployableUnits() == 0){
+            donedeploy.setDisable(false);
+            donedeploy.setStyle(null);
+        }
+    }
+    public void attack() {
+        System.out.println("Attacking");
+        view.updatePhase("ATTACK",this);
+        if(modelDataHandler.nextMove())
+        {
+            setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
+            changeToAttackView();
+        }
+    }
+    public void move(){
+        if(modelDataHandler.nextMove())
+        {
+            setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
+            modelDataHandler.resetSelectedSpaces();
+        }
+        resetDisplayCubes();
     }
     private void changeToAttackView() {
         attackController = new AttackController(this,modelDataHandler.getDiceResults());

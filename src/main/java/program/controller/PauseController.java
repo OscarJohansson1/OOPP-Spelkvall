@@ -61,7 +61,7 @@ public class PauseController extends AnchorPane {
 
     }
 
-    public void newGameButtonPressed(){
+    public void newGameButtonPressed() throws IOException, ClassNotFoundException {
 
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
