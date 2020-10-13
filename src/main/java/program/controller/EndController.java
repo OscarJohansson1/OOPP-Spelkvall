@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import program.model.ModelDataHandler;
 
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class EndController extends AnchorPane {
     @FXML private Button quitGameButton;
 
     private Stage stage;
+    private ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
 
     EndController(Stage stage) {
 
@@ -50,6 +52,13 @@ public class EndController extends AnchorPane {
 
     private void initialize() {
         //TODO: Här vet jag inte hur man ska koppla. Vi vill att endMenu visas då spelet är slut.
+        if(modelDataHandler.isWinner()){
+            winnerLabel.setText("Congratulations to the winner");
+            winnerImageView.setImage(modelDataHandler.getWinnerLogo());
+        } else {
+            winnerLabel.setText("No winner this time");
+        }
+
        /*Scene scene = new Scene(root, 1920, 1080);
 
        stage.setTitle("End");

@@ -1,19 +1,51 @@
 package program.model;
 
+import javafx.scene.paint.Color;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class TestWin {
 
-    // Tror inte den här kommer behövas i slutändan
+    Player player1;
+    Player player2;
 
-    //@Test
-    //public void testWin() {
-        //Program.View.View.Model.Player p1 = new Program.View.View.Model.Player(10, 1, Color.color(20, 20, 20));
-        //Program.View.View.Model.Player p2 = new Program.View.View.Model.Player(10, 2, Color.color(100, 0, 20));
+    Space space1;
+    Space space2;
+    Space space3;
+    Space space4;
+    Space space5;
+    Space space6;
 
-        //Program.View.View.Model.Deployment dp = new Program.View.View.Model.Deployment();
-        //dp.startDeployment(p1, 5);
+    List<Space> spaces;
 
+    @Before
+    public void before(){
 
-    //}
+        player1 = new Player(10,1, Color.color(1, 0, 0));
+        player2 = new Player(10,2, Color.color(0, 0, 1));
+
+        space1 = new Space(0, player1, 10, "Test");
+        space2 = new Space(1, player1, 2, "Test");
+        space3 = new Space(2, player1, 10, "Test");
+        space4 = new Space(3, player1, 2, "Test");
+        space5 = new Space(4, player1, 10, "Test");
+        space6 = new Space(5, player1, 2, "Test");
+
+        spaces = new ArrayList<>(Arrays.asList(space1, space2, space3, space4, space5, space6));
+    }
+
+    @Test
+    public void testWin() {
+        Board board = new Board(spaces);
+
+        assertTrue(board.isWinner());
+    }
 
     //@Test(expected = IllegalArgumentException.class)
     //public void testGetBadIndex() {

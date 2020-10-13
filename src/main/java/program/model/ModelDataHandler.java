@@ -246,4 +246,12 @@ public class ModelDataHandler {
         return currentPlayer.getLogoUrl();
     }
 
+    public boolean isWinner() {
+        return board.isWinner();
+    }
+
+    public Image getWinnerLogo() {
+        return board.getSpace(0).getPlayer().getLogoUrl();
+    }
+
 }

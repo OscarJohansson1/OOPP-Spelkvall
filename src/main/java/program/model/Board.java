@@ -84,6 +84,16 @@ class Board {
         this.spaces = spaces;
     }
 
+    boolean isWinner() {
+        Player winner = spaces.get(0).getPlayer();
+        for(Space space : spaces){
+            if(!(space.getPlayer() == winner)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Checks if the a space is a neighbour to the current selected space.
      * @param space A space that is not selectedSpace.
@@ -141,5 +151,9 @@ class Board {
             colors.add(space.getPlayer().getColor());
         }
         return colors;
+    }
+
+    Space getSpace(int id){
+        return spaces.get(id);
     }
 }

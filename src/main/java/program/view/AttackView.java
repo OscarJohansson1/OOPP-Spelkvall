@@ -32,7 +32,7 @@ public class AttackView extends AnchorPane {
 
     }
 
-    public void updateAttackView() {
+    public void updateDice() {
         List<Integer> dices = model.getDiceResults();
         resetImages(images);
         List<Integer> whiteDices = dices.subList(0, dices.size() - 2);
