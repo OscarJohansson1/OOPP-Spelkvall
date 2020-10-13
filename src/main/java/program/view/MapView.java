@@ -1,5 +1,6 @@
 package program.view;
 
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -148,16 +149,32 @@ public class MapView extends AnchorPane {
             case "DEPLOY":
 
                 //mapController.rootpane.getChildren().get(mapController.getChildren().indexOf(mapController.rootpane.deployPhase)).toFront();
-                mapController.deployPhase.toFront();
-                mapController.sliderPane.toFront();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        mapController.deployPhase.toFront();
+                        mapController.sliderPane.toFront();
+                    }
+                });
                 break;
             case "ATTACK":
-                mapController.attackPhase.toFront();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        mapController.attackPhase.toFront();
+                    }
+                });
                 //mapController.rootpane.getChildren().get(mapController.getChildren().indexOf(mapController.attackPhase)).toFront();
                 break;
             case "MOVE":
-                mapController.movePhase.toFront();
-                mapController.sliderPane.toFront();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        mapController.movePhase.toFront();
+                        mapController.sliderPane.toFront();
+                    }
+                });
+
                 break;
             case "END":
                 break;

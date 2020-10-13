@@ -1,5 +1,6 @@
 package program.controller;
 
+import javafx.application.Platform;
 import program.model.Player;
 
 import java.io.*;
@@ -24,8 +25,8 @@ public class EchoClient {
         server = new ConnectionToServer(new Socket(ip,port));
         messages = new LinkedBlockingQueue<>();
 
-
-        Thread messageHandling = new Thread() {
+        Platform.setImplicitExit(false);
+        Thread messageHandling = new Thread(){
             public void run(){
                 while(true){
                     try{

@@ -48,6 +48,7 @@ public class StartController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        Platform.setImplicitExit(false);
         initialize();
 
     }
