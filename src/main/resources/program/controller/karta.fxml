@@ -18,13 +18,13 @@
                 <Image url="@../../pictures/OOPP-Map.png" />
             </image>
         </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c31fff40" height="304.0" layoutX="496.0" layoutY="178.0" stroke="TRANSPARENT" strokeType="INSIDE" width="356.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#21ff2740" height="402.0" layoutX="852.0" layoutY="179.0" stroke="TRANSPARENT" strokeType="INSIDE" width="300.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#865e0040" height="402.0" layoutX="1152.0" layoutY="176.0" stroke="TRANSPARENT" strokeType="INSIDE" width="284.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#21d1ff40" height="402.0" layoutX="1436.0" layoutY="176.0" stroke="TRANSPARENT" strokeType="INSIDE" width="265.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff212140" height="232.0" layoutX="1345.0" layoutY="577.0" stroke="TRANSPARENT" strokeType="INSIDE" width="356.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9ff2140" height="232.0" layoutX="851.0" layoutY="577.0" stroke="TRANSPARENT" strokeType="INSIDE" width="494.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b21ff40" height="304.0" layoutX="230.0" layoutY="577.0" stroke="TRANSPARENT" strokeType="INSIDE" width="364.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c31fff40" height="341.0" layoutX="496.0" layoutY="141.0" stroke="TRANSPARENT" strokeType="INSIDE" width="356.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#21ff2740" height="435.0" layoutX="852.0" layoutY="146.0" stroke="TRANSPARENT" strokeType="INSIDE" width="300.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#865e0040" height="435.0" layoutX="1152.0" layoutY="143.0" stroke="TRANSPARENT" strokeType="INSIDE" width="284.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#21d1ff40" height="378.0" layoutX="1436.0" layoutY="200.0" stroke="TRANSPARENT" strokeType="INSIDE" width="265.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff212140" height="266.0" layoutX="1345.0" layoutY="577.0" stroke="TRANSPARENT" strokeType="INSIDE" width="356.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f9ff2140" height="266.0" layoutX="851.0" layoutY="577.0" stroke="TRANSPARENT" strokeType="INSIDE" width="494.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b21ff40" height="328.0" layoutX="230.0" layoutY="553.0" stroke="TRANSPARENT" strokeType="INSIDE" width="364.0" />
         <QuadCurve controlX="18.0" controlY="-59.0" endX="-2.0" endY="-131.0" fill="#ffffff00" layoutX="529.0" layoutY="377.0" opacity="0.9" startX="107.0" startY="-59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="102.0" controlY="-18.0" endX="83.0" endY="-84.0" fill="#ffffff00" layoutX="539.0" layoutY="387.0" opacity="0.9" startX="177.0" startY="-18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
         <QuadCurve controlX="277.0" controlY="-62.0" endX="148.0" endY="-28.0" fill="#ffffff00" layoutX="549.0" layoutY="397.0" opacity="0.9" startX="277.0" startY="-96.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="10.0" />
@@ -280,5 +280,40 @@
             <Image url="@../../pictures/ChalmersChance.png" />
          </image>
       </ImageView>
+      <Text fill="#c021ffbf" layoutX="499.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vasa">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#008d02bf" layoutX="857.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kemigården">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#865e00bf" layoutX="1213.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maskinhuset" wrappingWidth="233.576171875">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#0186a8bf" layoutX="1614.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT" wrappingWidth="87.8203125">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#ff2121bf" layoutX="1352.0" layoutY="835.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SB" wrappingWidth="55.8775634765625">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#9ea100bf" layoutX="1043.0" layoutY="835.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kårhuset" wrappingWidth="162.3984375">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="#3b21ffbf" layoutX="235.0" layoutY="594.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lindholmen">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
     </children>
 </fx:root>
