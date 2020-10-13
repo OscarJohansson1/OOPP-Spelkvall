@@ -64,7 +64,6 @@ public class StartController extends AnchorPane {
                 stage.setTitle("Chans");
                 stage.setScene(scene);
                 stage.show();
-
             }
         });
 

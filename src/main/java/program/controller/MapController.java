@@ -155,10 +155,10 @@ public class MapController extends AnchorPane {
     }
     private void initialize() throws IOException {
         //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
-        /*EchoClient.getEchoClient().recieveController(this);
+        EchoClient.getEchoClient().recieveController(this);
         EchoClient client = EchoClient.getEchoClient();
         client.startConnection("95.80.61.51", 6666);
-        client.deploy();*/
+        client.deploy();
         for (int i = 0; i<allButtons.size(); i++){
             int var = i;
             allButtons.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
