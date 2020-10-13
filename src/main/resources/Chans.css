@@ -63,3 +63,10 @@
     -fx-text-fill: #000000;
 
 }
+
+.standard-button{
+
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+
+}
