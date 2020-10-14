@@ -1,6 +1,7 @@
 package program.controller;
 
 import program.model.Lobby;
+import program.model.User;
 
 import java.io.*;
 import java.net.Socket;
@@ -12,9 +13,6 @@ public class Client {
     private ClientController clientController;
     private boolean wait = true;
 
-    public Client(){
-
-    }
     public void startConnection(String ip, int port, ClientController clientController) throws IOException {
         server = new ConnectionToServer(new Socket(ip,port));
         messages = new LinkedBlockingQueue<>();
@@ -30,27 +28,26 @@ public class Client {
         }));
         Thread messageHandling = new Thread(){
             public void run(){
-                while(true){
-                    try{
-                        Object message = messages.take();
-                        wait = false;
-                        if(message instanceof String) {
-                            System.out.println("Received string");
-                            Client.this.clientController.lobby = new Lobby("yes");
-                            System.out.println("Lobby is created");
-                        }
-                        else if(message instanceof Integer) {
-                            clientController.showSelectedSpace((int)message);
-
-                        }
-                        else if(message instanceof Lobby){
-                            clientController.lobby = (Lobby) message;
-                            System.out.println("Recieved lobby");
-                        }
-                        System.out.println("Message Received: " + message);
+            while(true){
+                try{
+                    Object message = messages.take();
+                    wait = false;
+                    if(message instanceof String) {
+                        System.out.println("Received string");
                     }
-                    catch(InterruptedException ignored){ }
+                    else if(message instanceof Integer) {
+                        clientController.showSelectedSpace((int)message);
+
+                    }
+                    else if(message instanceof Lobby){
+                        clientController.lobby = (Lobby) message;
+                        System.out.println("Recieved lobby named " + clientController.lobby.getLobbyName());
+
+                    }
+                    System.out.println("Message Received: " + message);
                 }
+                catch(InterruptedException ignored){ }
+            }
             }
         };
         messageHandling.setDaemon(true);
@@ -118,10 +115,12 @@ public class Client {
     public void startGame() throws IOException {
         server.write("Start");
     }
-    public Lobby getLobbys(ClientController clientController) throws IOException, ClassNotFoundException {
+    public void getLobbys() throws IOException, ClassNotFoundException {
         sendObject(new Lobby("yes"));
         System.out.println("Sending a new lobby object to server");
-        return clientController.lobby;
+    }
+    public void updateLobby(Lobby lobby) throws IOException {
+        sendObject(lobby);
     }
 
     public String getString() throws IOException, ClassNotFoundException {

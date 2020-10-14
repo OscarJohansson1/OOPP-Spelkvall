@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 
 public class LobbyItem extends AnchorPane {
 
-    private MapController mapController;
+    private StartController startController;
 
     @FXML private Label timeLabel;
     @FXML private Label capacityLabel;
@@ -19,11 +19,11 @@ public class LobbyItem extends AnchorPane {
     Lobby lobby;
 
 
-    public LobbyItem( Lobby lobby){
+    public LobbyItem( Lobby lobby, StartController startController){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LobbyItem.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
+        this.startController = startController;
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
@@ -34,10 +34,13 @@ public class LobbyItem extends AnchorPane {
         this.lobby = lobby;
 
         DateFormat date = new SimpleDateFormat("yyyy/MM/dd - HH:mm");
-        this.timeLabel.setText(date.format(lobby.getLobbyTime()));
+        this.timeLabel.setText((lobby.getLobbyTime()));
         this.nameLabel.setText("Lobby name:" + lobby.getLobbyName());
         this.capacityLabel.setText("Users: " + lobby.getLobbyCapacity() + "/16");
 
+    }
+    public void onClick() throws IOException {
+        startController.lobbySelectController.chosenLobby = lobby;
     }
 
 

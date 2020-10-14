@@ -7,12 +7,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import program.model.Lobby;
+import program.model.Player;
+import program.model.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The controller for the StartMenu.fxml
@@ -30,7 +36,8 @@ public class StartController extends AnchorPane {
     private Parent root;// = setUpGameController;
     private Stage stage;
 
-    private LobbySelectController lobbySelectController;
+    LobbySelectController lobbySelectController;
+    LobbyReadyController lobbyReadyController;
     private SetUpMultiplayer setUpMultiplayer;
     ClientController clientController;
     Client client;
@@ -53,8 +60,7 @@ public class StartController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         Platform.setImplicitExit(false);
-        client = new Client();
-        clientController = new ClientController(client);
+
 
 
         initialize();
@@ -99,14 +105,24 @@ public class StartController extends AnchorPane {
         });
     }
     public void goToLobbySelect() throws IOException, ClassNotFoundException {
-        lobbySelectController = new LobbySelectController(this);
+        client = new Client();
+        clientController = new ClientController(client);
+        clientController.getLobbys();
+        lobbySelectController = new LobbySelectController(StartController.this);
         rootpane.getChildren().add(lobbySelectController);
 
     }
-    public void goToLobbyReady(){
-
+    public void goToLobbyReady(User user, Lobby lobby) throws IOException, ClassNotFoundException {
+        List<UserCard> userCards = new ArrayList<>();
+        UserCard userCard = new UserCard(user);
+        userCards.add(userCard);
+        lobby.addPlayer(user);
+        clientController.updateLobby(lobby);
+        lobbyReadyController = new LobbyReadyController(userCards, stage);
+        rootpane.getChildren().add(lobbyReadyController);
     }
-    public void goToSetup() {
+    public void goToSetup(Lobby lobby) throws IOException {
+        setUpMultiplayer = new SetUpMultiplayer(clientController, this, lobby);
         rootpane.getChildren().add(setUpMultiplayer);
     }
     public void removeSetUp() {

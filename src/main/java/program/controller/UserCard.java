@@ -9,16 +9,16 @@ import javafx.scene.layout.AnchorPane;
 import program.model.User;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class UserCard extends AnchorPane {
+public class UserCard extends AnchorPane implements Serializable {
 
     @FXML private Label cardNameLabel;
     @FXML private ImageView cardImageView;
 
     User user;
-    LobbyReadyController lobbyReadyController;
 
-    public UserCard(LobbyReadyController lobbyReadyController, User user){
+    public UserCard( User user){
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("userCard.fxml"));
         fxmlLoader.setRoot(this);
@@ -30,7 +30,6 @@ public class UserCard extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        this.lobbyReadyController = lobbyReadyController;
         this.user = user;
 
         this.cardImageView.setImage(new Image(user.getImageUrl()));

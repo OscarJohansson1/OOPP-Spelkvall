@@ -1,8 +1,6 @@
 package server;
 
-import program.model.*;
 import program.model.ModelDataHandler;
-import program.model.Player;
 import server.code.model.ServerModel;
 
 import java.io.*;
@@ -10,7 +8,7 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Server {
+public class ServerAnvändInte {
     private ServerSocket serverSocket;
     public final List<ClientHandler> clients = new ArrayList<>();
     private Socket socket;
@@ -61,6 +59,7 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             while (true) {
                 try {
                     if(checkInput(inObject.readObject())) break;
@@ -111,7 +110,7 @@ public class Server {
         }
     }
     public static void main(String[] args) throws IOException {
-        Server server = new Server();
+        ServerAnvändInte server = new ServerAnvändInte();
         server.start(6666);
 
     }

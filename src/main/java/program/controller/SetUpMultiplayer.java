@@ -3,10 +3,13 @@ package program.controller;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import program.model.Lobby;
 import program.model.Player;
+import program.model.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import java.util.Arrays;
 public class SetUpMultiplayer extends AnchorPane {
 
     @FXML private ImageView logoImage;
+    @FXML private TextField playerNameTextField;
 
     @FXML private ImageView recA;
     @FXML private ImageView recAE;
@@ -35,10 +39,12 @@ public class SetUpMultiplayer extends AnchorPane {
 
     private ArrayList<ImageView> divisionList;
     private ClientController clientController;
-    private Player player;
     private StartController startController;
+    private Lobby lobby;
+    private String playerName;
 
-    public SetUpMultiplayer(ClientController clientController, Player player, StartController startController) throws IOException {
+
+    public SetUpMultiplayer(ClientController clientController,  StartController startController, Lobby lobby) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("setUpOnline.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -49,19 +55,20 @@ public class SetUpMultiplayer extends AnchorPane {
             throw new RuntimeException(exception);
         }
         this.clientController = clientController;
-        this.player = player;
         this.startController = startController;
+        this.lobby = lobby;
         initialize();
     }
     private void initialize() throws IOException {
         clientController.echoClient.startConnection("95.80.61.51", 6666, clientController);
+
         divisionList = new ArrayList<>(Arrays.asList(recA, recAE, recD, recE, recF, recH, recI, recIT, recK,
                 recKfKb, recM, recSjo, recTB, recTD, recV, recZ));
         for(ImageView button : divisionList){
             button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    logoImage = button;
+                    logoImage.setImage(button.getImage());
                     /*try {
                         clientController.addPlayerToLobby(player);
                     } catch (IOException | ClassNotFoundException e) {
@@ -75,6 +82,9 @@ public class SetUpMultiplayer extends AnchorPane {
     }
     public void backToLobbyList() {
         startController.removeSetUp();
+    }
+    public void choose() throws IOException, ClassNotFoundException {
+        startController.goToLobbyReady(new User(playerNameTextField.getCharacters().toString(),logoImage.getImage().getUrl()), lobby);
     }
 
 

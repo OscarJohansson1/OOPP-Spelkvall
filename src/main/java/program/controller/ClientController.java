@@ -2,6 +2,7 @@ package program.controller;
 
 import program.model.Lobby;
 import program.model.Player;
+import program.model.User;
 
 import java.io.IOException;
 
@@ -12,7 +13,11 @@ public class ClientController {
     Lobby lobby;
     public ClientController(Client client) throws IOException {
         this.echoClient = client;
-        echoClient.startConnection("95.80.61.51", 6666, this);
+        try {
+            echoClient.startConnection("95.80.61.51", 6666, this);
+        } catch (IOException e) {
+            System.out.println("Could not connect to server");
+        }
     }
     public void setMapController(MapController mapController) {
         this.mapController = mapController;
@@ -31,10 +36,10 @@ public class ClientController {
         mapController.modelDataHandler.setCurrentPlayer(player);
         mapController.view.updateCurrentPlayer(player.getColor(),mapController,player.getName());
     }
-    /*public void addPlayerToLobby(Player player) throws IOException, ClassNotFoundException {
-        echoClient.joinLobby(player);
-    }*/
-    public Lobby getLobbys() throws IOException, ClassNotFoundException {
-        return echoClient.getLobbys(this);
+    public void updateLobby(Lobby lobby) throws IOException, ClassNotFoundException {
+        echoClient.updateLobby(lobby);
+    }
+    public void getLobbys() throws IOException, ClassNotFoundException {
+        echoClient.getLobbys();
     }
 }

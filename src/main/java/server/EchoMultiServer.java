@@ -3,17 +3,26 @@ package server;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+
 import program.model.*;
+import server.code.model.ServerModel;
 
 public class EchoMultiServer {
 
     private ServerSocket serverSocket;
+    public final List<ClientHandler> clients = new ArrayList<>();
 
     public void start(int port) {
         try {
             serverSocket = new ServerSocket(port);
-            while (true)
-                new EchoClientHandler(serverSocket.accept()).start();
+            while (true) {
+                ClientHandler clientHandler = new ClientHandler(serverSocket.accept());
+                clientHandler.start();
+                clients.add(clientHandler);
+                clients.removeIf(ClientHandler -> !ClientHandler.isAlive());
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,14 +42,15 @@ public class EchoMultiServer {
 
     }
 
-    private static class EchoClientHandler extends Thread {
+    private class ClientHandler extends Thread {
         private Socket clientSocket;
         private PrintWriter out;
         private BufferedReader in;
         private ObjectOutputStream outObject;
         private ObjectInputStream inObject;
+        private final ServerModel serverModel = ServerModel.getModelDataHandler();
 
-        public EchoClientHandler(Socket socket) { this.clientSocket = socket; }
+        public ClientHandler(Socket socket) { this.clientSocket = socket; }
 
         public void run() {
             try {
@@ -49,12 +59,13 @@ public class EchoMultiServer {
                 outObject = new ObjectOutputStream(clientSocket.getOutputStream());
                 inObject = new ObjectInputStream(clientSocket.getInputStream());
                 Object inputLine;
+                writeToAll(serverModel.getLobbys());
                 while ((inputLine = inObject.readObject()) != null) {
-
+                    if(inputLine instanceof Lobby){
+                        writeToAll(inputLine);
+                    }
                     System.out.println("Recieved: " + inputLine);
                     outObject.writeObject(inputLine);
-
-
                 }
 
                 in.close();
@@ -63,6 +74,12 @@ public class EchoMultiServer {
 
             } catch (IOException | ClassNotFoundException e) {
 
+            }
+        }
+
+        private void writeToAll(Object input) throws IOException {
+            for(ClientHandler client: clients) {
+                client.outObject.writeObject(input);
             }
         }
     }

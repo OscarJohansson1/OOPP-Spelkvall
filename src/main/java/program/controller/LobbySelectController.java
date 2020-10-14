@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import program.model.Lobby;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 public class LobbySelectController extends AnchorPane {
 
     @FXML public FlowPane lobbyFlow;
+    Lobby chosenLobby;
 
     List<LobbyItem> lobbys = new ArrayList<>();
 
@@ -28,25 +30,14 @@ public class LobbySelectController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         this.startController = startController;
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                LobbyItem lobbyItem = null;
-                try {
-                    lobbyItem = new LobbyItem(startController.clientController.getLobbys());
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                lobbys.add(lobbyItem);
-                lobbyFlow.getChildren().addAll(lobbyItem);
-            }
-        });
 
-
+        LobbyItem lobbyItem = new LobbyItem(startController.clientController.lobby,startController);
+        lobbys.add(lobbyItem);
+        lobbyFlow.getChildren().addAll(lobbyItem);
     }
 
-    public void joinLobby() {
-        startController.goToSetup();
+    public void joinLobby() throws IOException {
+        startController.goToSetup(chosenLobby);
     }
 
 

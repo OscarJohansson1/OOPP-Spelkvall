@@ -4,29 +4,32 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class LobbyReadyController {
+public class LobbyReadyController extends AnchorPane {
 
     @FXML public FlowPane playerFlow;
     @FXML private Button backButton;
     @FXML private Button joinLobbyButton;
 
     private StartController root;
-    Stage stage;
+    private List<UserCard> userCards = new ArrayList<>();
+    private Stage stage;
 
-    public LobbyReadyController(Stage stage) throws IOException, ClassNotFoundException {
+    public LobbyReadyController(List<UserCard> userCards, Stage stage) throws IOException, ClassNotFoundException {
 
-        this.stage = stage;
-        root = new StartController(stage);
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartMenu.fxml"));
+        this.userCards = userCards;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LobbyReady.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -36,6 +39,7 @@ public class LobbyReadyController {
             throw new RuntimeException(exception);
         }
         Platform.setImplicitExit(false);
+        playerFlow.getChildren().addAll(userCards);
         initialize();
 
     }
@@ -55,6 +59,12 @@ public class LobbyReadyController {
             }
 
         });
+    }
+    public void ready(){
+
+    }
+    public void startGame(){
+
     }
 
 }
