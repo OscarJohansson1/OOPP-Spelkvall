@@ -5,23 +5,9 @@ package program.model;
  * by the current player and that player has any units left to deploy.
  */
 
-class Deployment {
-    /**
-     * Method that adds one unit to a space if the player controls the space.
-     * @param space The space which should be increased with one unit.
-     * @param currentplayer The player that plays the current turn.
-     * @return If the deployment was successful.
-     */
-    static boolean startDeployment(Space space, Player currentplayer, int amount) {
-        if(space.getPlayer() == currentplayer && currentplayer.getUnits() >= amount) {
-            deployUnit(space,amount);
-            currentplayer.setUnits(currentplayer.getUnits() - amount);
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+class Deployment implements IPhase {
+
+    private IPhase nextPhase;
 
     /**
      * This method checks if the current player has any units left to deploy.
@@ -35,5 +21,33 @@ class Deployment {
         else {
             System.out.println("No Units Remaining");
         }
+    }
+
+    @Override
+    public IPhase nextPhase() {
+        return nextPhase;
+    }
+
+    @Override
+    public void setNextPhase(IPhase phase) {
+        nextPhase = phase;
+    }
+
+    @Override
+    public void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
+        if(selectedSpace != null) {
+            if(player.getUnits() == 0){
+
+            }
+            if (selectedSpace.getPlayer() == player && player.getUnits() >= amount) {
+                deployUnit(selectedSpace, amount);
+                player.setUnits(player.getUnits() - amount);
+            }
+        }
+    }
+
+    @Override
+    public String getPhaseName() {
+        return "DEPLOY";
     }
 }

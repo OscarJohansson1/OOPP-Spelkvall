@@ -8,8 +8,58 @@ import java.util.List;
  * and if all units on the other players space dies then it moves all units except one.
  */
 
- class Attack {
-     /**
+class Attack implements IPhase {
+
+    private IPhase nextPhase;
+
+    private List<Integer> dices;
+
+    private int attackerLoss;
+    private int defenderLoss;
+
+    boolean nextAttackPossible = true;
+
+
+    @Override
+    public IPhase nextPhase() {
+        return nextPhase;
+    }
+
+    @Override
+    public void setNextPhase(IPhase phase) {
+        nextPhase = phase;
+    }
+
+    @Override
+    public void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
+        if(selectedSpace != null && selectedSpace2 != null) {
+            if (Attack.DeclareAttack(selectedSpace, selectedSpace2, selectedSpace.getUnits())) {
+                attackerLoss = selectedSpace.getUnits();
+                defenderLoss = selectedSpace2.getUnits();
+                dices = Attack.calculateAttack(selectedSpace, selectedSpace2);
+                if (selectedSpace.getUnits() == 1 && (selectedSpace.getPlayer() == selectedSpace2.getPlayer())) {
+                    attackerLoss -= selectedSpace2.getUnits() + 1;
+                    defenderLoss = -1;
+                    nextAttackPossible = false;
+                } else if (selectedSpace.getUnits() == 1) {
+                    attackerLoss -= selectedSpace.getUnits();
+                    defenderLoss -= selectedSpace2.getUnits();
+                    nextAttackPossible = false;
+                } else {
+                    attackerLoss -= selectedSpace.getUnits();
+                    defenderLoss -= selectedSpace2.getUnits();
+                    nextAttackPossible = true;
+                }
+            }
+        }
+    }
+
+    @Override
+    public String getPhaseName() {
+        return "ATTACK";
+    }
+
+    /**
       * Method that returns if an attack is possible, based on if the spaces are neighbours and there's more than
       * one attacking unit.
       * @param mySpace The space which the attacker attacks from.
@@ -113,6 +163,24 @@ import java.util.List;
         }
         rolls.remove(index);
         return value;
+    }
+
+
+
+
+    List<Integer> diceresults() {
+        return dices;
+    }
+    List<String> attackResults() {
+        List<String> results = new ArrayList<>();
+        results.add(" lost: " + attackerLoss);
+        if(defenderLoss == -1){
+            results.add(" lost all remaining units! ");
+        }
+        else{
+            results.add(" lost: " + defenderLoss);
+        }
+        return results;
     }
 }
 

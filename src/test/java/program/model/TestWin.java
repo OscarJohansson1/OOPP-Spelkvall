@@ -47,6 +47,14 @@ public class TestWin {
         assertTrue(board.isWinner());
     }
 
+    @Test
+    public void testRemovePlayer() {
+        Board board = new Board(spaces);
+
+        assertTrue(board.isPlayerOut(player2));
+
+    }
+
     //@Test(expected = IllegalArgumentException.class)
     //public void testGetBadIndex() {
         // Test

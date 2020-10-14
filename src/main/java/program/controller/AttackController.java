@@ -89,15 +89,15 @@ public class AttackController extends AnchorPane {
      * When done the player is returned to the map
      */
     @FXML
-     public void abortButtonPressed() {
-         mapController.removeAttackView();
-         if(modelDataHandler.isWinner()){
-             Parent root = new EndController(stage);
-             Scene scene = new Scene(root, 1920, 1080);
+    public void abortButtonPressed() {
+        mapController.removeAttackView();
+        if(modelDataHandler.isWinner()){
+            Parent root = new EndController(stage);
+            Scene scene = new Scene(root, 1920, 1080);
 
-             stage.setTitle("End");
-             stage.setScene(scene);
-             stage.show();
-         }
-     }
+            stage.setTitle("End");
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
 }

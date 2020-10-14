@@ -14,6 +14,8 @@ class Board {
 
 
     private List<Space> spaces;
+    private List<Area> areas;
+
     Space selectedSpace;
     Space selectedSpace2;
 
@@ -84,10 +86,67 @@ class Board {
         this.spaces = spaces;
     }
 
+    /**
+     * Hardcoded as of now
+     */
+    void createAreas(){
+
+        Area karhuset = new Area("Kårhuset", 7,
+                Arrays.asList(spaces.get(19), spaces.get(20), spaces.get(21), spaces.get(22), spaces.get(23)));
+        Area maskinhuset = new Area("Maskinhuset", 5,
+                Arrays.asList(spaces.get(3), spaces.get(4), spaces.get(5), spaces.get(26)));
+        Area edit = new Area("EDIT", 3,
+                Arrays.asList(spaces.get(0), spaces.get(1), spaces.get(2)));
+        Area vasa = new Area("Vasa", 5,
+                Arrays.asList(spaces.get(13), spaces.get(14), spaces.get(15), spaces.get(25)));
+        Area lindholmen = new Area("Lindholmen", 3,
+                Arrays.asList(spaces.get(16), spaces.get(17), spaces.get(18)));
+        Area kemigarden = new Area("Kemigården", 5,
+                Arrays.asList(spaces.get(10), spaces.get(11), spaces.get(12), spaces.get(24)));
+        Area sb = new Area("SB", 5,
+                Arrays.asList(spaces.get(6), spaces.get(7), spaces.get(8), spaces.get(9)));
+
+        areas = Arrays.asList(karhuset, maskinhuset, edit, vasa, lindholmen, kemigarden, sb);
+    }
+
+    /**
+     * Insert a player and get the amount of extra units they should get from holding "areas".
+     * @param player
+     * @return
+     */
+    int getUnitsFromAreas(Player player) {
+        int count = 0;
+        for(Area area : areas){
+            if(area.checkArea(player)){
+                count += area.getWorth();
+            }
+        }
+        return count;
+    }
+
+    int getUnitsForSpacesHold(Player player){
+        int count = 0;
+        for(Space space : spaces){
+            if(space.getPlayer() == player){
+                count++;
+            }
+        }
+        return 1 + (count / 2);
+    }
+
     boolean isWinner() {
         Player winner = spaces.get(0).getPlayer();
         for(Space space : spaces){
             if(!(space.getPlayer() == winner)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    boolean isPlayerOut(Player player){
+        for(Space space : spaces){
+            if(space.getPlayer() == player){
                 return false;
             }
         }

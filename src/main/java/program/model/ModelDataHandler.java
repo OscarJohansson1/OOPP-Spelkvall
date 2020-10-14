@@ -17,6 +17,7 @@ public class ModelDataHandler {
     private List<Player> players = new ArrayList<>();
     private Player currentPlayer;
     private int roundCount = 1;
+    private int phaseCount = 1;
     private Round round;
     private Board board;
     private int unitsToUse = 1;
@@ -47,6 +48,7 @@ public class ModelDataHandler {
         }
         currentPlayer = getRandomPlayer(null);
         board = new Board(randomizeSpaces(amountOfSpaces));
+        board.createAreas();
         round = new Round();
     }
 
@@ -67,16 +69,16 @@ public class ModelDataHandler {
      */
     public boolean receiveSelectedSpace(int id)
     {
-        if(board.findSpace(id).getPlayer() == currentPlayer && (board.selectedSpace == null || round.getCurrentPhase().equals(Round.Phase.DEPLOY))) {
+        if(board.findSpace(id).getPlayer() == currentPlayer && (board.selectedSpace == null || round.getCurrentPhase().equals("DEPLOY"))) {
             board.selectedSpace = board.findSpace(id);
             return true;
         }
         else if(board.selectedSpace == board.findSpace(id)){
             board.resetSpaces();
         }
-        else if((board.selectedSpace !=  null && round.getCurrentPhase().equals(Round.Phase.MOVE) &&
+        else if((board.selectedSpace !=  null && round.getCurrentPhase().equals("MOVE") &&
                 board.findSpace(id).getPlayer() == currentPlayer && board.isNeighbours(board.findSpace(id))) || (board.selectedSpace != null &&
-                board.findSpace(id).getPlayer() != currentPlayer && round.getCurrentPhase().equals(Round.Phase.ATTACK) && board.isNeighbours(board.findSpace(id)))){
+                board.findSpace(id).getPlayer() != currentPlayer && round.getCurrentPhase().equals("ATTACK") && board.isNeighbours(board.findSpace(id)))){
             board.selectedSpace2 = board.findSpace(id);
             return true;
         }
@@ -99,7 +101,6 @@ public class ModelDataHandler {
             }
             else if(currentPlayer == players.get(i)){
                 currentPlayer = players.get(0);
-                firstDeployment = false;
                 break;
             }
         }
@@ -164,7 +165,7 @@ public class ModelDataHandler {
      */
     public String getCurrenPhase()
     {
-        return round.getCurrentPhase().name();
+        return round.getCurrentPhase();
     }
 
     /**
@@ -174,11 +175,20 @@ public class ModelDataHandler {
     {
         round.nextPhase();
         resetSelectedSpaces();
-        roundCount++;
-        if(roundCount > 3)
+        phaseCount++;
+        if(phaseCount > 3)
         {
             nextPlayer();
-            roundCount = 1;
+            phaseCount = 1;
+        }
+    }
+
+    public void firstPhaseNextPhase(){
+        resetSelectedSpaces();
+        nextPlayer();
+        roundCount++;
+        if(roundCount > players.size()){
+            firstDeployment = false;
         }
     }
 
@@ -188,7 +198,7 @@ public class ModelDataHandler {
      */
     public boolean nextMove()
     {
-        if((board.selectedSpace != null && round.getCurrentPhase().equals(Round.Phase.DEPLOY)) || board.selectedSpace2 != null)
+        if((board.selectedSpace != null && round.getCurrentPhase().equals("DEPLOY")) || board.selectedSpace2 != null)
         {
             return round.startPhase(board.selectedSpace, board.selectedSpace2, currentPlayer, unitsToUse);
         }
@@ -200,7 +210,7 @@ public class ModelDataHandler {
      * @return returns true if board.selectedspace or board.selectedspace2 is null
      */
     public boolean checkAttack() {
-        return !round.nextAttackPossible;
+        return !round.isNextAttackPossible();
     }
     /**
      * Method that returns the units on a space based on id.
@@ -242,7 +252,10 @@ public class ModelDataHandler {
      * @return Should return the calculated amount. Is hard coded right now and needs to be fixed
      */
     public int calculateDeployableUnits(){
-        return 5;
+        if(currentPlayer.getUnits() != 0){
+            return currentPlayer.getUnits();
+        }
+        return board.getUnitsForSpacesHold(currentPlayer) + board.getUnitsFromAreas(currentPlayer);
     }
 
     public List<String> attackResult()
@@ -269,5 +282,18 @@ public class ModelDataHandler {
         return board.getSpace(0).getPlayer().getLogoUrl();
     }
 
+    public boolean isAttackedPlayerOut(){
+        return board.isPlayerOut(getSelectedSpace2().getPlayer());
+    }
+
+    //TODO Can this be optimized?
+    public void removePlayersWithoutSpaces(){
+        List<Player> tempPlayers = players;
+        for(Player player : tempPlayers){
+            if(board.isPlayerOut(player)){
+                players.remove(player);
+            }
+        }
+    }
 }
 

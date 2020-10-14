@@ -60,7 +60,7 @@ public class MapController extends AnchorPane {
 
     @FXML private Text textHubben;
     @FXML private Text textBasen;
-    @FXML private Text textKajsaBaren;
+    @FXML private Text textKajsabaren;
     @FXML private Text textZaloonen;
     @FXML private Text textWinden;
     @FXML private Text textLofTDet;
@@ -144,7 +144,7 @@ public class MapController extends AnchorPane {
                 cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
                 cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden, cubeKalleGlader, cubeTvargatan));
 
-        allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsaBaren, textZaloonen, textWinden, textLofTDet,
+        allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsabaren, textZaloonen, textWinden, textLofTDet,
                 textRodaRummet,textVerum, textVillan, textAdammen, textFocus, textFortNox,textGTSpritis, textGoldenI, textChabo,textWijkanders,textHrum,
                 textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogarden, textKalleGlader, textTvargatan));
 
@@ -155,10 +155,10 @@ public class MapController extends AnchorPane {
     }
     private void initialize() throws IOException {
         //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
-        //EchoClient.getEchoClient().recieveController(this);
-        //EchoClient client = EchoClient.getEchoClient();
-        //client.startConnection("95.80.61.51", 6666);
-        //client.deploy();
+        /*EchoClient.getEchoClient().recieveController(this);
+        EchoClient client = EchoClient.getEchoClient();
+        client.startConnection("95.80.61.51", 6666);
+        client.deploy();*/
         for (int i = 0; i<allButtons.size(); i++){
             int var = i;
             allButtons.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -183,6 +183,7 @@ public class MapController extends AnchorPane {
         skipAttack.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                modelDataHandler.removePlayersWithoutSpaces();
                 modelDataHandler.nextPhase();
                 view.updatePhase("MOVE", MapController.this);
                 resetColor();
@@ -216,8 +217,9 @@ public class MapController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
 
                 if (modelDataHandler.firstDeployment){
-                    modelDataHandler.nextPlayer();
+                    modelDataHandler.firstPhaseNextPhase();
                     view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
+                    modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits());
                     view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
                     moveSlider.setMax(modelDataHandler.getDeployableUnits());
                     resetDisplayCubes();
