@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="200.0" prefWidth="160.0" stylesheets="@../../Chans.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controller.UserCard">
+   <children>
+      <ImageView fx:id="cardImageView" fitHeight="160.0" fitWidth="160.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Line endX="160.0" layoutY="160.0" />
+      <Label fx:id="cardNameLabel" layoutY="170.0" prefHeight="0.0" prefWidth="160.0" style="-fx-alignment: center;" text="User Name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
