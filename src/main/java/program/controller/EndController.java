@@ -50,39 +50,23 @@ public class EndController extends AnchorPane {
         initialize();
     }
 
+    /**
+     * This checks win condition and shows the endView if a player has won
+     * If the end game button is pressed there is no winner
+     */
     private void initialize() {
-        //TODO: Här vet jag inte hur man ska koppla. Vi vill att endMenu visas då spelet är slut.
         if(modelDataHandler.isWinner()){
             winnerLabel.setText("Congratulations to the winner");
             winnerImageView.setImage(modelDataHandler.getWinnerLogo());
         } else {
             winnerLabel.setText("No winner this time");
         }
-
-       /*Scene scene = new Scene(root, 1920, 1080);
-
-       stage.setTitle("End");
-       stage.setScene(scene);
-       stage.show();*/
-
-       /*
-       //Skriva ut vem som vann i winnerLabel, måste veta vem som vann --> deras namnattribut
-       /*winnerLabel.setText(" The winner is: " + winnerName);
-
-       //Kan skrivas ut efter "division" men då måste vi skriva in det som attribut. Ist. kan man använda färgen.
-       //Isåfall måste den vinnande spelarens färg skickas in till endController
-       switch (winnerColor) {
-               //           case "turquoise":
-               //               winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/itloggan.JPG")));
-               //           case "orange":
-               //               //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/datateknologsektionen.JPG")));
-               //           case "brown":
-               //               //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/maskinloggan.JPG")));
-               //           case "dark green":
-               //               //winnerImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("picures/kfkbloggan.JPG")));
-       }*/
     }
 
+    /**
+     * When the new game button is clicked the player is taken back to the
+     * start view and gets to play the game from the beginning again
+     */
     public void newGameButtonPressed() throws IOException, ClassNotFoundException {
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
@@ -92,11 +76,17 @@ public class EndController extends AnchorPane {
         stage.show();
     }
 
+    /**
+     * Quits the game when the button is pressed
+     */
     public void quitGameButtonPressed(){
         Platform.exit();
         System.exit(0);
     }
 
+    /**
+     *Taken back to the menu when the button is pressed
+     */
     public void toMenuButtonPressed() throws IOException, ClassNotFoundException {
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);

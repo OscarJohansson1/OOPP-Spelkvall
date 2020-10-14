@@ -155,10 +155,10 @@ public class MapController extends AnchorPane {
     }
     private void initialize() throws IOException {
         //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
-        EchoClient.getEchoClient().recieveController(this);
-        EchoClient client = EchoClient.getEchoClient();
-        client.startConnection("95.80.61.51", 6666);
-        client.deploy();
+        //EchoClient.getEchoClient().recieveController(this);
+        //EchoClient client = EchoClient.getEchoClient();
+        //client.startConnection("95.80.61.51", 6666);
+        //client.deploy();
         for (int i = 0; i<allButtons.size(); i++){
             int var = i;
             allButtons.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -225,7 +225,6 @@ public class MapController extends AnchorPane {
                 }
                 else{
                     modelDataHandler.nextPhase();
-                    //modelDataHandler.nextPlayer();
                     view.updatePhase("ATTACK", MapController.this);
                     view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
                     resetColor();
@@ -305,7 +304,7 @@ public class MapController extends AnchorPane {
         resetDisplayCubes();
     }
     private void changeToAttackView() {
-        attackController = new AttackController(this,modelDataHandler.getDiceResults(), stage);
+        attackController = new AttackController(this, stage);
         rootpane.getChildren().add(attackController);
     }
     void removeAttackView() {
