@@ -77,7 +77,7 @@ public class EndController extends AnchorPane {
     }
 
     /**
-     * Quits the game when the button is pressed
+     * Quits the application when the button is pressed
      */
     public void quitGameButtonPressed(){
         Platform.exit();

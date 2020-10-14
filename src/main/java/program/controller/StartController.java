@@ -34,8 +34,6 @@ public class StartController extends AnchorPane {
      * @param stage the main stage
      */
     public StartController(Stage stage) throws IOException, ClassNotFoundException {
-
-
         this.stage = stage;
         root = new SetUpGameController(stage);
 
@@ -50,15 +48,12 @@ public class StartController extends AnchorPane {
         }
         Platform.setImplicitExit(false);
         initialize();
-
     }
 
     private void initialize() {
         startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
-                //Skapar setUpGameController
                 Scene scene = new Scene(root, 1920, 1080);
 
                 stage.setTitle("Chans");
@@ -70,12 +65,9 @@ public class StartController extends AnchorPane {
         quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
                 Platform.exit();
                 System.exit(0);
-
             }
         });
     }
-
 }

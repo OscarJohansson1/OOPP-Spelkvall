@@ -46,23 +46,19 @@ public class PauseController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         this.stage = stage;
-        initialize();
-
     }
 
-    public void initialize() {
-        //TODO: What now? Pause ska finnas från start av programmet och ska sedan finnas kvar i ett lager bakom kartan.
-
-    }
-
+    /**
+     * Closes the pauseMenu
+     */
     public void returnButtonPressed(){
-
        mapController.checkPauseController();
-
     }
 
+    /**
+     * Creates a new game when the button is pressed
+     */
     public void newGameButtonPressed() throws IOException, ClassNotFoundException {
-
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
@@ -71,8 +67,10 @@ public class PauseController extends AnchorPane {
         stage.show();
     }
 
+    /**
+     * Ends the game when the button is pressed
+     */
     public void endGameButtonPressed(){
-
         Parent root = new EndController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
@@ -81,8 +79,10 @@ public class PauseController extends AnchorPane {
         stage.show();
     }
 
+    /**
+     * Quits the application when the button is pressed
+     */
     public void quitGameButtonPressed(){
-
         Platform.exit();
         System.exit(0);
     }

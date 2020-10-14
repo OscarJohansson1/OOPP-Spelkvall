@@ -123,7 +123,6 @@ class SetUpGameController extends AnchorPane {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    //give players to
 
                     Scene scene = new Scene(root, 1920, 1080);
 
@@ -131,7 +130,6 @@ class SetUpGameController extends AnchorPane {
                     stage.setScene(scene);
                     stage.show();
                 }
-
             }
         });
         backButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
