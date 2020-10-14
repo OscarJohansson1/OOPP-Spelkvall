@@ -16,6 +16,9 @@ import program.view.AttackView;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * This class is the controller for the attackView. It holds all the logic for the buttons in that view.
+ */
 
 public class AttackController extends AnchorPane {
 
@@ -43,7 +46,7 @@ public class AttackController extends AnchorPane {
     private ModelDataHandler modelDataHandler;
     private Stage stage;
 
-    AttackController(MapController mapController, List<Integer> dices, Stage stage) {
+    AttackController(MapController mapController, Stage stage) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("attackMenu.fxml"));
         fxmlLoader.setRoot(this);
@@ -68,6 +71,10 @@ public class AttackController extends AnchorPane {
         attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton);
     }
 
+    /**
+     * When the attack button is pressed in the attackView, an attack is done.
+     * If the defender doesn't have any units left the abort button is changed to done
+     */
     @FXML
     public void attackButtonPressed() {
         if(!modelDataHandler.nextMove()){
@@ -77,6 +84,10 @@ public class AttackController extends AnchorPane {
         attack();
     }
 
+    /**
+     * The player can abort an attack by clicking this button.
+     * When done the player is returned to the map
+     */
     @FXML
      public void abortButtonPressed() {
          mapController.removeAttackView();
