@@ -28,6 +28,11 @@ public class ModelDataHandler {
             "Alvan","Spektrum","Gasquen","Chalmersplatsen","Olgas","RunAn", "Tagvagnen","Origogarden", "KalleGlader", "Tvargatan"));
 
     private ModelDataHandler(){}
+
+    public void setCurrentPlayer(Player player) {
+        currentPlayer = player;
+    }
+
     private static class ModelDataHandlerHolder{
         private static ModelDataHandler modelDataHandler = new ModelDataHandler();
     }
@@ -44,7 +49,7 @@ public class ModelDataHandler {
     {
         for(int i = 0; i < colors.size(); i++)
         {
-            players.add(new Player((50/colors.size()), i, colors.get(i), logoNames.get(i)));
+            players.add(new Player((50/colors.size()), i, colors.get(i), logoNames.get(i),i+""));
         }
         currentPlayer = getRandomPlayer(null);
         board = new Board(randomizeSpaces(amountOfSpaces));

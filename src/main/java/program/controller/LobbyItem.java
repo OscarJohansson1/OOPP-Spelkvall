@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import program.controller.MapController;
 import program.model.Lobby;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -18,9 +17,9 @@ public class LobbyItem extends AnchorPane {
     @FXML private Label capacityLabel;
     @FXML private Label nameLabel;
     Lobby lobby;
-    LobbySelectController lobbySelectController;
 
-    public LobbyItem(LobbySelectController lobbySelectController, Lobby lobby){
+
+    public LobbyItem( Lobby lobby){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LobbyItem.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -31,7 +30,7 @@ public class LobbyItem extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        this.lobbySelectController = lobbySelectController;
+
         this.lobby = lobby;
 
         DateFormat date = new SimpleDateFormat("yyyy/MM/dd - HH:mm");

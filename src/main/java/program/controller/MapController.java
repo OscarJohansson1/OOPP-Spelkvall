@@ -119,9 +119,9 @@ public class MapController extends AnchorPane {
     @FXML public ImageView imageTeamLogo;
 
     ModelDataHandler modelDataHandler;
-    private MapView view = new MapView();
+    MapView view = new MapView();
     private AttackController attackController;
-    private List<Button> allButtons;
+    List<Button> allButtons;
     private List<Text> allTexts;
     private Stage stage;
     private PauseController pauseController;
@@ -408,7 +408,7 @@ public class MapController extends AnchorPane {
         view.resetColor(colors,allButtons);
     }
 
-    private Button getCube(int id) {
+    Button getCube(int id) {
         for (Button allButton : allButtons) {
             if (allButtons.get(id) == allButton) {
                 return allButton;

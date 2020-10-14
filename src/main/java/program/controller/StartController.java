@@ -19,55 +19,98 @@ import java.io.IOException;
  */
 public class StartController extends AnchorPane {
 
-    @FXML private AnchorPane pane;
+    @FXML private AnchorPane rootpane;
     @FXML private ImageView chanceImageView;
 
     @FXML private Button startButton;
+    @FXML private Button startButton2;
     @FXML private Button quitButton;
 
     private SetUpGameController setUpGameController;// = new SetUpGameController();
     private Parent root;// = setUpGameController;
     private Stage stage;
 
+    private LobbySelectController lobbySelectController;
+    private SetUpMultiplayer setUpMultiplayer;
+    ClientController clientController;
+    Client client;
+
     /**
      *
      * @param stage the main stage
      */
     public StartController(Stage stage) throws IOException, ClassNotFoundException {
+
         this.stage = stage;
         root = new SetUpGameController(stage);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartMenu.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
         Platform.setImplicitExit(false);
+        client = new Client();
+        clientController = new ClientController(client);
+
+
         initialize();
+
     }
 
     private void initialize() {
         startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+
+                //Skapar setUpGameController
                 Scene scene = new Scene(root, 1920, 1080);
 
-                stage.setTitle("Chans");
+                stage.setTitle("program.Chans");
                 stage.setScene(scene);
                 stage.show();
+
             }
         });
 
         quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+
                 Platform.exit();
                 System.exit(0);
+
+            }
+        });
+        startButton2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    goToLobbySelect();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
+    public void goToLobbySelect() throws IOException, ClassNotFoundException {
+        lobbySelectController = new LobbySelectController(this);
+        rootpane.getChildren().add(lobbySelectController);
+
+    }
+    public void goToLobbyReady(){
+
+    }
+    public void goToSetup() {
+        rootpane.getChildren().add(setUpMultiplayer);
+    }
+    public void removeSetUp() {
+        rootpane.getChildren().remove(setUpMultiplayer);
+    }
+
 }

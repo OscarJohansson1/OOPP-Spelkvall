@@ -13,6 +13,7 @@ public class Player {
     private int id;
     private Color color;
     private Image logoUrl;
+    private String name;
 
     /**
      * This is a constructor for the player.
@@ -20,11 +21,12 @@ public class Player {
      * @param id This is the players id, it is used to find the different player
      * @param color This is used to set different colors for all players.
      */
-    Player(int units, int id, Color color, String logoUrl) {
+    Player(int units, int id, Color color, String logoUrl, String name) {
         this.units = units;
         this.id = id;
         this.color = color;
         this.logoUrl = new Image("file:src/main/resources/pictures/logos/"+logoUrl+".png");
+        this.name = name;
     }
 
     //TODO: for tests right now
@@ -46,11 +48,14 @@ public class Player {
         return id;
     }
 
-    Color getColor() {
+    public Color getColor() {
         return color;
     }
 
     Image getLogoUrl() {
         return logoUrl;
+    }
+    public String getName(){
+        return name;
     }
 }

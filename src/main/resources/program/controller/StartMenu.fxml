@@ -6,19 +6,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="chanceImageView" fitHeight="1080.0" fitWidth="1080.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../../pictures/ChalmersChance.png" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" layoutX="1204.0" layoutY="215.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="600.0" text="Start Game" AnchorPane.rightAnchor="116.0" AnchorPane.topAnchor="400.0">
+      <Button fx:id="startButton" layoutX="1200.0" layoutY="291.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="600.0" text="Start Local Game" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="291.0">
          <font>
             <Font size="37.0" />
          </font>
       </Button>
       <Button fx:id="quitButton" layoutX="1235.0" layoutY="371.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="600.0" text="Quit Game" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="550.0">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Button>
+      <Button fx:id="startButton2" layoutX="1200.0" layoutY="414.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="600.0" text="Start Online Game">
          <font>
             <Font size="37.0" />
          </font>

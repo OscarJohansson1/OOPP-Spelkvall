@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="558.0" styleClass="border-line" stylesheets="@../../Chans.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="558.0" styleClass="border-line" stylesheets="@../../Chans.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="nameLabel" layoutX="14.0" layoutY="18.0" styleClass="text-larger-bold" text="Lobby name" AnchorPane.bottomAnchor="19.0" AnchorPane.topAnchor="18.0">
          <font>
@@ -23,4 +23,4 @@
             <Font name="System Bold" size="14.0" />
          </font></Label>
    </children>
-</AnchorPane>
+</fx:root>

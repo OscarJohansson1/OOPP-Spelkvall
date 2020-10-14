@@ -5,12 +5,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import program.controller.AttackController;
 import program.facade.ModelAttackViewFacade;
 
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 public class AttackView extends AnchorPane {

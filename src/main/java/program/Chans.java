@@ -1,3 +1,5 @@
+package program;
+
 import program.controller.StartController;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -7,8 +9,7 @@ import javafx.stage.Stage;
 public class Chans extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        StartController startController = new StartController(stage);
-        Parent start = startController;
+        Parent start = new StartController(stage);
 
         Scene menu = new Scene(start, 1920, 1080);
 
