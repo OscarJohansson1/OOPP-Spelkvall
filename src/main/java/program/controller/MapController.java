@@ -355,7 +355,8 @@ public class MapController extends AnchorPane {
                 resetColor(modelDataHandler.getSelectedSpace().getId());
                 resetDisplayCubes(secondMarked,secondDisplayText);
                 moveSlider.setMax(modelDataHandler.getUnitsOnSpace(modelDataHandler.getSelectedSpace().getId())-1);
-                moveSlider.setMin(1);
+                moveSlider.setMin(0);
+                moveSlider.setDisable(false);
             }
             view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
             view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
