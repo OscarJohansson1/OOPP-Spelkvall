@@ -77,7 +77,7 @@ public class AttackController extends AnchorPane {
      */
     @FXML
     public void attackButtonPressed() {
-        if(!modelDataHandler.nextMove()){
+        if(!modelDataHandler.startPhase()){
             attackView.attackDone(attackButton, abortButton);
             return;
         }

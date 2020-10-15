@@ -7,13 +7,13 @@ import java.util.ArrayList;
 /**
  * This class holds methods that´s controlling the spaces. Mostly creating them and updating them.
  */
-
+//TODO Remove public when controllers don't use getId() directly anymore
 public class Space {
+
     private final int id;
     private Player player;
     private int units;
     private final String name;
-    private final ArrayList<Space> neighbours = new ArrayList<>();
 
     /**
      * This is a constructor for a space
@@ -22,7 +22,7 @@ public class Space {
      * @param units This is the amount of units in a space
      * @param name This is the name of the space
      */
-    public Space(int id, Player player, int units, String name){
+    public Space(int id, Player player, int units, String name) {
         this.id = id;
         this.player = player;
         this.units = units;

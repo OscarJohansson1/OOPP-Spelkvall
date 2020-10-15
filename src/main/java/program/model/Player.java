@@ -1,14 +1,14 @@
 package program.model;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 /**
- * This class creates a player
+ * The Player class creates players and hold information about a player.
  */
 
 public class Player {
+
     private int units;
     private int id;
     private Color color;
@@ -25,23 +25,24 @@ public class Player {
         this.units = units;
         this.id = id;
         this.color = color;
+        //TODO Remove dependency to JavaFX (Image)
         this.logoUrl = new Image("file:src/main/resources/pictures/logos/"+logoUrl+".png");
         this.name = name;
     }
 
     //TODO: for tests right now
-    Player(int units, int id, Color color){
+    Player(int units, int id, Color color) {
         this.units = units;
         this.id = id;
         this.color = color;
     }
 
-    int getUnits() {
-        return units;
-    }
-
     void setUnits(int units) {
         this.units = units;
+    }
+
+    int getUnits() {
+        return units;
     }
 
     int getId() {
@@ -55,7 +56,8 @@ public class Player {
     Image getLogoUrl() {
         return logoUrl;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
 }

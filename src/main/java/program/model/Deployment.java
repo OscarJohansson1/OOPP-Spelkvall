@@ -10,11 +10,24 @@ class Deployment implements IPhase {
     private IPhase nextPhase;
 
     /**
-     * This method checks if the current player has any units left to deploy.
-     * @param space The space which should be increased with one unit.
-     * @param unitsToDeploy The amount of units that can be deployed.
+     * The main method describing what should happen during the Deployment-phase. The method add units to a space if the
+     * player is matching the player holding the space.
+     * @param selectedSpace The first selected space.
+     * @param selectedSpace2 Not used in this phase.
+     * @param player The active player during the phase.
+     * @param amount The amount of units that should be added to the space.
      */
-    private static void deployUnit(Space space, int unitsToDeploy){
+    @Override
+    public void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
+        if(selectedSpace != null) {
+            if (selectedSpace.getPlayer() == player && player.getUnits() >= amount) {
+                deployUnit(selectedSpace, amount);
+                player.setUnits(player.getUnits() - amount);
+            }
+        }
+    }
+
+    private static void deployUnit(Space space, int unitsToDeploy) {
         if(unitsToDeploy > 0) {
             space.updateSpace(space.getUnits() + unitsToDeploy);
         }
@@ -23,27 +36,19 @@ class Deployment implements IPhase {
         }
     }
 
+    /**
+     * Method that returns the phase that follows this phase.
+     * @return The following phase.
+     */
     @Override
     public IPhase nextPhase() {
         return nextPhase;
     }
 
+
     @Override
     public void setNextPhase(IPhase phase) {
         nextPhase = phase;
-    }
-
-    @Override
-    public void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
-        if(selectedSpace != null) {
-            if(player.getUnits() == 0){
-
-            }
-            if (selectedSpace.getPlayer() == player && player.getUnits() >= amount) {
-                deployUnit(selectedSpace, amount);
-                player.setUnits(player.getUnits() - amount);
-            }
-        }
     }
 
     @Override

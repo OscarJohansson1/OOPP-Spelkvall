@@ -217,7 +217,7 @@ public class MapController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
 
                 if (modelDataHandler.firstDeployment){
-                    modelDataHandler.firstPhaseNextPhase();
+                    modelDataHandler.firstRoundNextPhase();
                     view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
                     modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits());
                     view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
@@ -262,11 +262,11 @@ public class MapController extends AnchorPane {
                 view.updateSliderText(newValue.intValue(), showMoveUnitsText);
             }
         });
-        view.updatePhaseText(modelDataHandler.getCurrenPhase(), this);
+        view.updatePhaseText(modelDataHandler.getCurrentPhase(), this);
         view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), this, modelDataHandler.getCurrentPlayerName());
         for(int i = 0; i < allButtons.size(); i++)
         {
-            view.updateTextUnits(i, modelDataHandler.findUnitsOnSpace(i), allButtons, this);
+            view.updateTextUnits(i, modelDataHandler.getUnitsOnSpace(i), allButtons, this);
         }
         resetColor();
         view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
@@ -277,7 +277,7 @@ public class MapController extends AnchorPane {
         moveSlider.setMax(modelDataHandler.getDeployableUnits());
     }
     public void deploy(){
-        if(modelDataHandler.nextMove())
+        if(modelDataHandler.startPhase())
         {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
@@ -291,14 +291,14 @@ public class MapController extends AnchorPane {
     public void attack() {
         System.out.println("Attacking");
         view.updatePhase("ATTACK",this);
-        if(modelDataHandler.nextMove())
+        if(modelDataHandler.startPhase())
         {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
             changeToAttackView();
         }
     }
     public void move(){
-        if(modelDataHandler.nextMove())
+        if(modelDataHandler.startPhase())
         {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
             modelDataHandler.resetSelectedSpaces();
@@ -313,7 +313,7 @@ public class MapController extends AnchorPane {
         rootpane.getChildren().remove(attackController);
         for(int i = 0; i < allButtons.size(); i++)
         {
-            view.updateTextUnits(i,modelDataHandler.findUnitsOnSpace(i),allButtons, this);
+            view.updateTextUnits(i,modelDataHandler.getUnitsOnSpace(i),allButtons, this);
             view.setColor(allButtons.get(i), modelDataHandler.getColorOnAllSpaces().get(i),allButtons);
         }
         modelDataHandler.resetSelectedSpaces();
@@ -354,10 +354,10 @@ public class MapController extends AnchorPane {
             else {
                 resetColor(modelDataHandler.getSelectedSpace().getId());
                 resetDisplayCubes(secondMarked,secondDisplayText);
-                moveSlider.setMax(modelDataHandler.findUnitsOnSpace(modelDataHandler.getSelectedSpace().getId())-1);
+                moveSlider.setMax(modelDataHandler.getUnitsOnSpace(modelDataHandler.getSelectedSpace().getId())-1);
                 moveSlider.setMin(1);
             }
-            view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id), allButtons, this);
+            view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
             view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
             displayCubes(id);
             if(firstDisplayText.getText().isEmpty())
@@ -377,14 +377,14 @@ public class MapController extends AnchorPane {
     }
 
     private void setSpaceEvent(int id) {
-        view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id), allButtons, this);
+        view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
         view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
     }
 
     private void setSpaceEvent(int id, int id2) {
-        view.updateTextUnits(id, modelDataHandler.findUnitsOnSpace(id), allButtons, this);
+        view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
         view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id), allButtons);
-        view.updateTextUnits(id2, modelDataHandler.findUnitsOnSpace(id2), allButtons, this);
+        view.updateTextUnits(id2, modelDataHandler.getUnitsOnSpace(id2), allButtons, this);
         view.setColor(getCube(id2), modelDataHandler.getColorOnSpace(id2), allButtons);
     }
 

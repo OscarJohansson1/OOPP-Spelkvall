@@ -13,8 +13,8 @@ public class ModelAttackViewFacade {
         return modelDataHandler.getTeamLogo(i);
     }
 
-    public boolean checkAttack(){
-        return modelDataHandler.checkAttack();
+    public boolean isAttackDone(){
+        return modelDataHandler.isAttackDone();
     }
 
     public List<Integer> getDiceResults() {

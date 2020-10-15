@@ -50,7 +50,7 @@ public class AttackView extends AnchorPane {
         updateText(defenderText,model.getSelectedSpaceName(2) + attackResults.get(1));
         updateText(attackerUnits,  model.getSelectedSpaceName(1) +" units: " + model.getSelectedSpaceUnits(1));
         updateText(defenderUnits, model.getSelectedSpaceName(2) + " units: 0");
-        if(model.checkAttack()) {
+        if(model.isAttackDone()) {
             attackDone(attackButton, abortButton);
             updateText(attackerUnits, model.getSelectedSpaceName(1) +" units: " + model.getSelectedSpaceUnits(2));
         }

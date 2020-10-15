@@ -1,15 +1,16 @@
 package program.model;
 
-import javafx.scene.image.Image;
-
 import java.io.Serializable;
 
+/**
+ * A class representing a User, with a corresponding name and image.
+ */
 public class User implements Serializable {
 
-    String imageUrl;
-    String userName;
+    private String imageUrl;
+    private String userName;
 
-    public User(String  userName, String imageUrl){
+    public User(String  userName, String imageUrl) {
         this.userName = userName;
         this.imageUrl = imageUrl;
     }
