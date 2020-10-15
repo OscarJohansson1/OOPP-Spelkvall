@@ -45,8 +45,7 @@ public class EchoMultiServer {
 
     private class ClientHandler extends Thread {
         private Socket clientSocket;
-        private PrintWriter out;
-        private BufferedReader in;
+
         private ObjectOutputStream outObject;
         private ObjectInputStream inObject;
 
@@ -55,8 +54,6 @@ public class EchoMultiServer {
 
         public void run() {
             try {
-                out = new PrintWriter(clientSocket.getOutputStream(), true);
-                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 outObject = new ObjectOutputStream(clientSocket.getOutputStream());
                 inObject = new ObjectInputStream(clientSocket.getInputStream());
                 Object inputLine;
@@ -73,12 +70,7 @@ public class EchoMultiServer {
                     }
                     System.out.println("Recieved: " + inputLine);
                 }
-
-                in.close();
-                out.close();
-                clientSocket.close();
-
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException ignored) {
 
             }
         }

@@ -13,8 +13,8 @@ import java.util.List;
 
 public class Lobby implements Serializable{
 
-    String lobbyName;
-    String lobbyTime;
+    final String lobbyName;
+    final String lobbyTime;
     int lobbyCapacity;
     int lobbyCurrentUsers;
     final int lobbyId;
@@ -34,11 +34,9 @@ public class Lobby implements Serializable{
         lobbyCurrentUsers = users.size();
     }
     public void updateLobby(Lobby lobby){
-        System.out.println("Updating lobby in lobby class");
         lobbyCapacity = lobby.lobbyCapacity;
         lobbyCurrentUsers = lobby.lobbyCurrentUsers;
         users = lobby.users;
-        System.out.println("Lobby users is " + users.size());
     }
     public String getLobbyTime() { return lobbyTime; }
 

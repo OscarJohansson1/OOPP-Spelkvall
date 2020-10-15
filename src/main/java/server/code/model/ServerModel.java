@@ -15,9 +15,6 @@ public class ServerModel {
         return lobbys.get(id);
     }
     public List<Lobby> getLobbys() {
-        for(Lobby lobby: lobbys){
-            System.out.println("Each lobby has " + lobby.users.size() + " users");
-        }
         return lobbys;
     }
     public void createNewLobby() {
@@ -29,8 +26,6 @@ public class ServerModel {
     public Lobby updateLobby(Lobby lobby){
         for (Lobby value : lobbys) {
             if (value.getLobbyId() == lobby.getLobbyId()) {
-                System.out.println("Received: existing lobby from client");
-                System.out.println("Lobby has " + lobby.users.size() + " users");
                 value.updateLobby(lobby);
                 return value;
             }

@@ -40,7 +40,6 @@ public class Client {
                     }
                     else if(message instanceof Lobby){
                         if(((Lobby)message).getLobbyId() == clientController.startController.lobbyReadyController.chosenLobby.getLobbyId()){
-                            System.out.println("Lobby received has same id as choosenLobby");
                             clientController.startController.lobbyReadyController.chosenLobby.updateLobby((Lobby) message);
                             clientController.startController.lobbyReadyController.updateUserCards(clientController.startController.lobbyReadyController.chosenLobby);
                         }
