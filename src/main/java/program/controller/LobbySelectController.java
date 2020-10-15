@@ -16,7 +16,7 @@ public class LobbySelectController extends AnchorPane {
     @FXML public FlowPane lobbyFlow;
     Lobby chosenLobby;
 
-    List<LobbyItem> lobbys = new ArrayList<>();
+    List<Lobby> lobbys = new ArrayList<>();
 
     private final StartController startController;
 
@@ -35,16 +35,28 @@ public class LobbySelectController extends AnchorPane {
     public void joinLobby() throws IOException {
         startController.goToSetup(chosenLobby);
     }
+    public void updateChoosenLobby(List<Lobby> lobbies) {
+
+        if(chosenLobby != null){
+            for (Lobby lobby : lobbies) {
+                if (lobby.getLobbyId() == chosenLobby.getLobbyId()) {
+                    chosenLobby = lobby;
+                }
+            }
+        }
+
+    }
     public void updateLobbys(List<Lobby> lobbies){
         Platform.runLater(new Runnable() {
         @Override
         public void run() {
             System.out.println("Updating lobbys in LobbyselectController");
-            lobbys.clear();
-            for(Lobby lobby: lobbies){
-                lobbys.add(new LobbyItem(lobby, startController));
+            lobbyFlow.getChildren().clear();
+            lobbys = lobbies;
+            for(Lobby lobby: lobbys){
+                lobbyFlow.getChildren().add(new LobbyItem(lobby, startController));
             }
-            lobbyFlow.getChildren().setAll(lobbys);
+            System.out.println("Lobby size is " + lobbys.size());
         }});
 
 

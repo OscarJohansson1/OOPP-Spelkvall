@@ -48,7 +48,7 @@ public class EchoMultiServer {
         private BufferedReader in;
         private ObjectOutputStream outObject;
         private ObjectInputStream inObject;
-        private final ServerModel serverModel = ServerModel.getModelDataHandler();
+        private final ServerModel serverModel = new ServerModel();
 
         public ClientHandler(Socket socket) { this.clientSocket = socket; }
 
@@ -59,7 +59,6 @@ public class EchoMultiServer {
                 outObject = new ObjectOutputStream(clientSocket.getOutputStream());
                 inObject = new ObjectInputStream(clientSocket.getInputStream());
                 Object inputLine;
-                writeToAll(serverModel.getLobbys());
                 while ((inputLine = inObject.readObject()) != null) {
                     if(inputLine instanceof Lobby){
                         serverModel.updateLobby((Lobby)inputLine);
@@ -71,7 +70,6 @@ public class EchoMultiServer {
                         }
                     }
                     System.out.println("Recieved: " + inputLine);
-                    outObject.writeObject(inputLine);
                 }
 
                 in.close();

@@ -96,9 +96,7 @@ public class StartController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
                 try {
                     goToLobbySelect();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
@@ -112,12 +110,8 @@ public class StartController extends AnchorPane {
 
     }
     public void goToLobbyReady(User user, Lobby lobby) throws IOException, ClassNotFoundException {
-        List<UserCard> userCards = new ArrayList<>();
-        UserCard userCard = new UserCard(user);
-        userCards.add(userCard);
         lobby.addPlayer(user);
         clientController.updateLobby(lobby);
-
         rootpane.getChildren().add(lobbyReadyController);
     }
     public void goToSetup(Lobby lobby) throws IOException {

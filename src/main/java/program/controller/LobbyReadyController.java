@@ -30,7 +30,6 @@ public class LobbyReadyController extends AnchorPane {
 
     public LobbyReadyController(Stage stage) throws IOException, ClassNotFoundException {
 
-        this.userCards = userCards;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LobbyReady.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -67,21 +66,17 @@ public class LobbyReadyController extends AnchorPane {
     public void startGame(){
 
     }
+
     public void updateUserCards(Lobby lobby){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                List<User> users = new ArrayList<>();
                 userCards.clear();
-                for(int i = 0; i < userCards.size(); i++){
-                    users.add(userCards.get(i).user);
-                }
                 for(int i = 0; i < lobby.users.size(); i++){
-                    if(!users.contains(lobby.users.get(i))){
-                        userCards.add(new UserCard(lobby.users.get(i)));
-                    }
+                    userCards.add(new UserCard(lobby.users.get(i)));
                 }
                 playerFlow.getChildren().setAll(userCards);
+                System.out.println("Usercards are " + userCards.size());
             }
         });
 

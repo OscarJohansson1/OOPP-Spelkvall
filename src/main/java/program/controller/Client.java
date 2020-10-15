@@ -45,10 +45,10 @@ public class Client {
 
                     }
                     else if(message instanceof List){
+                        clientController.startController.lobbySelectController.updateChoosenLobby((List<Lobby>) message);
                         clientController.startController.lobbySelectController.updateLobbys((List<Lobby>) message);
                         clientController.startController.lobbyReadyController.updateUserCards(clientController.startController.lobbySelectController.chosenLobby);
                     }
-                    System.out.println("Message Received: " + message);
                 }
                 catch(InterruptedException ignored){ }
             }
@@ -121,7 +121,7 @@ public class Client {
     }
     public void getLobbys() throws IOException, ClassNotFoundException {
         sendObject("LOBBYS");
-        System.out.println("Sending a new lobby object to server");
+        System.out.println("Sending LOBBYS to server");
     }
 
     public void updateLobby(Lobby lobby) throws IOException {

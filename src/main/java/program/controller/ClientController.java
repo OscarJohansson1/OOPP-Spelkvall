@@ -38,7 +38,7 @@ public class ClientController {
         mapController.modelDataHandler.setCurrentPlayer(player);
         mapController.view.updateCurrentPlayer(player.getColor(),mapController,player.getName());
     }
-    public void updateLobby(Lobby lobby) throws IOException, ClassNotFoundException {
+    public void updateLobby(Lobby lobby) throws IOException {
         echoClient.updateLobby(lobby);
     }
     public void getLobbys() throws IOException, ClassNotFoundException {
