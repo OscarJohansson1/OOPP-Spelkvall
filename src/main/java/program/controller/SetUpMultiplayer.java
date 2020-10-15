@@ -40,12 +40,11 @@ public class SetUpMultiplayer extends AnchorPane {
     private ArrayList<ImageView> divisionList;
     private ClientController clientController;
     private StartController startController;
-    private Lobby lobby;
     private String playerName;
     private ImageView selectedbutton;
 
 
-    public SetUpMultiplayer(ClientController clientController,  StartController startController, Lobby lobby) throws IOException {
+    public SetUpMultiplayer(ClientController clientController,  StartController startController) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("setUpOnline.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -57,7 +56,6 @@ public class SetUpMultiplayer extends AnchorPane {
         }
         this.clientController = clientController;
         this.startController = startController;
-        this.lobby = lobby;
         initialize();
     }
     private void initialize() throws IOException {
@@ -86,7 +84,7 @@ public class SetUpMultiplayer extends AnchorPane {
         startController.removeSetUp();
     }
     public void choose() throws IOException, ClassNotFoundException {
-        startController.goToLobbyReady(new User(playerNameTextField.getCharacters().toString(),selectedbutton.getId().substring(3).toLowerCase() + "_logo"), lobby);
+        startController.goToLobbyReady(new User(playerNameTextField.getCharacters().toString(),selectedbutton.getId().substring(3).toLowerCase() + "_logo"), startController.lobbyReadyController.chosenLobby);
     }
 
 

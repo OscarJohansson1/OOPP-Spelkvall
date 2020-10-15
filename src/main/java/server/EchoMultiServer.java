@@ -13,6 +13,7 @@ public class EchoMultiServer {
 
     private ServerSocket serverSocket;
     public final List<ClientHandler> clients = new ArrayList<>();
+    private final ServerModel serverModel = new ServerModel();
 
     public void start(int port) {
         try {
@@ -48,7 +49,7 @@ public class EchoMultiServer {
         private BufferedReader in;
         private ObjectOutputStream outObject;
         private ObjectInputStream inObject;
-        private final ServerModel serverModel = new ServerModel();
+
 
         public ClientHandler(Socket socket) { this.clientSocket = socket; }
 
@@ -61,12 +62,13 @@ public class EchoMultiServer {
                 Object inputLine;
                 while ((inputLine = inObject.readObject()) != null) {
                     if(inputLine instanceof Lobby){
-                        serverModel.updateLobby((Lobby)inputLine);
-                        writeToAll(serverModel.getLobbys());
+                        Lobby lobby = serverModel.updateLobby((Lobby)inputLine);
+                        System.out.println("Returning lobby with " + lobby.users.size() + " users");
+                        writeToAll(lobby);
                     }
                     else if(inputLine instanceof String){
                         if(((String) inputLine).equals("LOBBYS")){
-                            writeToAll(serverModel.getLobbys());
+                            outObject.writeObject(serverModel.getLobbys());
                         }
                     }
                     System.out.println("Recieved: " + inputLine);

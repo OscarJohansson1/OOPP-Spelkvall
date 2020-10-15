@@ -39,15 +39,18 @@ public class Client {
 
                     }
                     else if(message instanceof Lobby){
-                        clientController.lobby = (Lobby) message;
-                        clientController.startController.lobbyReadyController.updateUserCards(clientController.lobby);
-                        System.out.println("Recieved lobby named " + clientController.lobby.getLobbyName());
+                        if(((Lobby)message).getLobbyId() == clientController.startController.lobbyReadyController.chosenLobby.getLobbyId()){
+                            System.out.println("Lobby received has same id as choosenLobby");
+                            clientController.startController.lobbyReadyController.chosenLobby.updateLobby((Lobby) message);
+                            clientController.startController.lobbyReadyController.updateUserCards(clientController.startController.lobbyReadyController.chosenLobby);
+                        }
+                        System.out.println("Recieved lobby with " + ((Lobby) message).users.size() + " users");
 
                     }
                     else if(message instanceof List){
-                        clientController.startController.lobbySelectController.updateChoosenLobby((List<Lobby>) message);
+                        clientController.startController.lobbyReadyController.updateChoosenLobby((List<Lobby>) message);
                         clientController.startController.lobbySelectController.updateLobbys((List<Lobby>) message);
-                        clientController.startController.lobbyReadyController.updateUserCards(clientController.startController.lobbySelectController.chosenLobby);
+                        clientController.startController.lobbyReadyController.updateUserCards(clientController.startController.lobbyReadyController.chosenLobby);
                     }
                 }
                 catch(InterruptedException ignored){ }
@@ -125,6 +128,7 @@ public class Client {
     }
 
     public void updateLobby(Lobby lobby) throws IOException {
+        System.out.println("Sending " + lobby + " to server");
         sendObject(lobby);
     }
 

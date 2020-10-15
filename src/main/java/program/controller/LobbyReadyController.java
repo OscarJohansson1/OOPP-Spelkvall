@@ -27,6 +27,7 @@ public class LobbyReadyController extends AnchorPane {
     private StartController root;
     private List<UserCard> userCards = new ArrayList<>();
     private Stage stage;
+    Lobby chosenLobby;
 
     public LobbyReadyController(Stage stage) throws IOException, ClassNotFoundException {
 
@@ -66,7 +67,17 @@ public class LobbyReadyController extends AnchorPane {
     public void startGame(){
 
     }
+    public void updateChoosenLobby(List<Lobby> lobbies) {
 
+        if(chosenLobby != null){
+            for (Lobby lobby : lobbies) {
+                if (lobby.getLobbyId() == chosenLobby.getLobbyId()) {
+                    chosenLobby = lobby;
+                }
+            }
+        }
+
+    }
     public void updateUserCards(Lobby lobby){
         Platform.runLater(new Runnable() {
             @Override

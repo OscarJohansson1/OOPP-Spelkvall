@@ -14,7 +14,6 @@ import java.util.List;
 public class LobbySelectController extends AnchorPane {
 
     @FXML public FlowPane lobbyFlow;
-    Lobby chosenLobby;
 
     List<Lobby> lobbys = new ArrayList<>();
 
@@ -33,19 +32,9 @@ public class LobbySelectController extends AnchorPane {
     }
 
     public void joinLobby() throws IOException {
-        startController.goToSetup(chosenLobby);
+        startController.goToSetup();
     }
-    public void updateChoosenLobby(List<Lobby> lobbies) {
 
-        if(chosenLobby != null){
-            for (Lobby lobby : lobbies) {
-                if (lobby.getLobbyId() == chosenLobby.getLobbyId()) {
-                    chosenLobby = lobby;
-                }
-            }
-        }
-
-    }
     public void updateLobbys(List<Lobby> lobbies){
         Platform.runLater(new Runnable() {
         @Override
@@ -55,8 +44,9 @@ public class LobbySelectController extends AnchorPane {
             lobbys = lobbies;
             for(Lobby lobby: lobbys){
                 lobbyFlow.getChildren().add(new LobbyItem(lobby, startController));
+                System.out.println("Each Lobby has "+lobby.users.size() + " users");
             }
-            System.out.println("Lobby size is " + lobbys.size());
+            System.out.println("Lobbies: " + lobbys.size());
         }});
 
 

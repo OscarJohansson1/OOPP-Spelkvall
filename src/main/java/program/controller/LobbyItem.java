@@ -40,7 +40,7 @@ public class LobbyItem extends AnchorPane {
 
     }
     public void onClick() throws IOException {
-        startController.lobbySelectController.chosenLobby = lobby;
+        startController.lobbyReadyController.chosenLobby = lobby;
     }
 
 

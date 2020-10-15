@@ -114,8 +114,8 @@ public class StartController extends AnchorPane {
         clientController.updateLobby(lobby);
         rootpane.getChildren().add(lobbyReadyController);
     }
-    public void goToSetup(Lobby lobby) throws IOException {
-        setUpMultiplayer = new SetUpMultiplayer(clientController, this, lobby);
+    public void goToSetup() throws IOException {
+        setUpMultiplayer = new SetUpMultiplayer(clientController, this);
         rootpane.getChildren().add(setUpMultiplayer);
     }
     public void removeSetUp() {
