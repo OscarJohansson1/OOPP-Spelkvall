@@ -42,6 +42,8 @@ class Attack implements IPhase {
         }
     }
 
+    //TODO Redo so that you can get one list with one players dice-throw and another list with the other players dice.
+    // Right now they are the same and it makes it hard for the attackView to know what to show.
     /**
      * Method that calculates the attack and updates the state of the spaces involved in the attack.
      * @param mySpace The space which the attacker attacks from.
