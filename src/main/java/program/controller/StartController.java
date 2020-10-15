@@ -61,8 +61,8 @@ public class StartController extends AnchorPane {
         }
         Platform.setImplicitExit(false);
 
-
-
+        lobbySelectController = new LobbySelectController(StartController.this);
+        lobbyReadyController = new LobbyReadyController( stage);
         initialize();
 
     }
@@ -106,9 +106,8 @@ public class StartController extends AnchorPane {
     }
     public void goToLobbySelect() throws IOException, ClassNotFoundException {
         client = new Client();
-        clientController = new ClientController(client);
+        clientController = new ClientController(client, this);
         clientController.getLobbys();
-        lobbySelectController = new LobbySelectController(StartController.this);
         rootpane.getChildren().add(lobbySelectController);
 
     }
@@ -118,7 +117,7 @@ public class StartController extends AnchorPane {
         userCards.add(userCard);
         lobby.addPlayer(user);
         clientController.updateLobby(lobby);
-        lobbyReadyController = new LobbyReadyController(userCards, stage);
+
         rootpane.getChildren().add(lobbyReadyController);
     }
     public void goToSetup(Lobby lobby) throws IOException {

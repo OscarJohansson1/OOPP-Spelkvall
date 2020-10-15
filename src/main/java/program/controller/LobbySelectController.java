@@ -30,14 +30,24 @@ public class LobbySelectController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         this.startController = startController;
-
-        LobbyItem lobbyItem = new LobbyItem(startController.clientController.lobby,startController);
-        lobbys.add(lobbyItem);
-        lobbyFlow.getChildren().addAll(lobbyItem);
     }
 
     public void joinLobby() throws IOException {
         startController.goToSetup(chosenLobby);
+    }
+    public void updateLobbys(List<Lobby> lobbies){
+        Platform.runLater(new Runnable() {
+        @Override
+        public void run() {
+            System.out.println("Updating lobbys in LobbyselectController");
+            lobbys.clear();
+            for(Lobby lobby: lobbies){
+                lobbys.add(new LobbyItem(lobby, startController));
+            }
+            lobbyFlow.getChildren().setAll(lobbys);
+        }});
+
+
     }
 
 

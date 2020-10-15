@@ -5,13 +5,13 @@ import program.model.User;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Client {
     private LinkedBlockingQueue<Object> messages;
     private ConnectionToServer server;
     private ClientController clientController;
-    private boolean wait = true;
 
     public void startConnection(String ip, int port, ClientController clientController) throws IOException {
         server = new ConnectionToServer(new Socket(ip,port));
@@ -31,7 +31,6 @@ public class Client {
             while(true){
                 try{
                     Object message = messages.take();
-                    wait = false;
                     if(message instanceof String) {
                         System.out.println("Received string");
                     }
@@ -41,8 +40,13 @@ public class Client {
                     }
                     else if(message instanceof Lobby){
                         clientController.lobby = (Lobby) message;
+                        clientController.startController.lobbyReadyController.updateUserCards(clientController.lobby);
                         System.out.println("Recieved lobby named " + clientController.lobby.getLobbyName());
 
+                    }
+                    else if(message instanceof List){
+                        clientController.startController.lobbySelectController.updateLobbys((List<Lobby>) message);
+                        clientController.startController.lobbyReadyController.updateUserCards(clientController.lobby);
                     }
                     System.out.println("Message Received: " + message);
                 }
@@ -119,6 +123,7 @@ public class Client {
         sendObject(new Lobby("yes"));
         System.out.println("Sending a new lobby object to server");
     }
+
     public void updateLobby(Lobby lobby) throws IOException {
         sendObject(lobby);
     }

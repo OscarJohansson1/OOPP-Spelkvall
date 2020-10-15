@@ -17,7 +17,7 @@ public class Lobby implements Serializable{
     String lobbyTime;
     String lobbyCapacity;
     String lobbyCurrentUsers;
-    private final List<User> users = new ArrayList<>();
+    public final List<User> users = new ArrayList<>();
 
     public Lobby(String name){
         DateFormat date = new SimpleDateFormat("yyyy/MM/dd - HH:mm");

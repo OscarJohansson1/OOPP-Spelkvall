@@ -21,17 +21,14 @@ public class ServerModel {
     public Lobby getLobbyHandler(int id) {
         return lobbys.get(id);
     }
-    public Lobby getLobbys() {
-        return lobbys.get(0);
+    public List<Lobby> getLobbys() {
+        return lobbys;
     }
     public void createNewLobby() {
         lobbys.add(new Lobby("yes"));
     }
-    public void createNewLobby(Player player) {
-    }
-    public void checkInput()
-    {
-
+    public void addLobby(Lobby lobby){
+        lobbys.add(lobby);
     }
 
 }

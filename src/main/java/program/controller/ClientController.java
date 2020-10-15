@@ -10,9 +10,11 @@ public class ClientController {
 
     Client echoClient;
     private MapController mapController;
+    StartController startController;
     Lobby lobby;
-    public ClientController(Client client) throws IOException {
+    public ClientController(Client client, StartController startController) throws IOException {
         this.echoClient = client;
+        this.startController = startController;
         try {
             echoClient.startConnection("95.80.61.51", 6666, this);
         } catch (IOException e) {
@@ -41,5 +43,9 @@ public class ClientController {
     }
     public void getLobbys() throws IOException, ClassNotFoundException {
         echoClient.getLobbys();
+    }
+    public void setLobby(Lobby lobby){
+        this.lobby = lobby;
+        startController.lobbyReadyController.updateUserCards(lobby);
     }
 }

@@ -62,7 +62,8 @@ public class EchoMultiServer {
                 writeToAll(serverModel.getLobbys());
                 while ((inputLine = inObject.readObject()) != null) {
                     if(inputLine instanceof Lobby){
-                        writeToAll(inputLine);
+                        serverModel.addLobby((Lobby) inputLine);
+                        writeToAll(serverModel.getLobbys());
                     }
                     System.out.println("Recieved: " + inputLine);
                     outObject.writeObject(inputLine);

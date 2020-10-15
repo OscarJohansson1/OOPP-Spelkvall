@@ -36,7 +36,7 @@ public class LobbyItem extends AnchorPane {
         DateFormat date = new SimpleDateFormat("yyyy/MM/dd - HH:mm");
         this.timeLabel.setText((lobby.getLobbyTime()));
         this.nameLabel.setText("Lobby name:" + lobby.getLobbyName());
-        this.capacityLabel.setText("Users: " + lobby.getLobbyCapacity() + "/16");
+        this.capacityLabel.setText("Users: " + lobby.getLobbyUsers() + "/16");
 
     }
     public void onClick() throws IOException {
