@@ -15,22 +15,28 @@ public class Lobby implements Serializable{
 
     String lobbyName;
     String lobbyTime;
-    String lobbyCapacity;
-    String lobbyCurrentUsers;
-    public final List<User> users = new ArrayList<>();
+    int lobbyCapacity;
+    int lobbyCurrentUsers;
+    final int lobbyId;
+    public List<User> users = new ArrayList<>();
 
     public Lobby(String name){
         DateFormat date = new SimpleDateFormat("yyyy/MM/dd - HH:mm");
         Date realDate = new Date();
         lobbyName = name;
         lobbyTime = date.format(new Timestamp(realDate.getTime()));
-        lobbyCapacity = "16";
-        lobbyCurrentUsers = "0";
+        lobbyCapacity = 16;
+        lobbyCurrentUsers = 0;
+        lobbyId = 1;
     }
     public void addPlayer(User user){
-
-        lobbyCurrentUsers = (Integer.parseInt(lobbyCurrentUsers) + 1) +"";
         users.add(user);
+        lobbyCurrentUsers = users.size();
+    }
+    public void updateLobby(Lobby lobby){
+        lobbyCapacity = lobby.lobbyCapacity;
+        lobbyCurrentUsers = lobby.lobbyCurrentUsers;
+        users = lobby.users;
     }
     public String getLobbyTime() { return lobbyTime; }
 
@@ -38,11 +44,13 @@ public class Lobby implements Serializable{
         return lobbyName;
     }
 
-    public String getLobbyCapacity() {
+    public int getLobbyCapacity() {
         return lobbyCapacity;
     }
-    public String getLobbyUsers() {
+    public int getLobbyUsers() {
         return lobbyCurrentUsers;
     }
+    public int getLobbyId(){return lobbyId;}
+
 
 }

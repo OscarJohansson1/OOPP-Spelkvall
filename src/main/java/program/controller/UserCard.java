@@ -32,7 +32,7 @@ public class UserCard extends AnchorPane implements Serializable {
 
         this.user = user;
 
-        this.cardImageView.setImage(new Image(user.getImageUrl()));
+        this.cardImageView.setImage(new Image("file:src/main/resources/pictures/logos/"+user.getImageUrl()+".png"));
         this.cardNameLabel.setText(user.getUserName());
     }
 

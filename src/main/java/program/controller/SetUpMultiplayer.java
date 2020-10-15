@@ -42,6 +42,7 @@ public class SetUpMultiplayer extends AnchorPane {
     private StartController startController;
     private Lobby lobby;
     private String playerName;
+    private ImageView selectedbutton;
 
 
     public SetUpMultiplayer(ClientController clientController,  StartController startController, Lobby lobby) throws IOException {
@@ -69,6 +70,7 @@ public class SetUpMultiplayer extends AnchorPane {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     logoImage.setImage(button.getImage());
+                    selectedbutton = button;
                     /*try {
                         clientController.addPlayerToLobby(player);
                     } catch (IOException | ClassNotFoundException e) {
@@ -84,7 +86,7 @@ public class SetUpMultiplayer extends AnchorPane {
         startController.removeSetUp();
     }
     public void choose() throws IOException, ClassNotFoundException {
-        startController.goToLobbyReady(new User(playerNameTextField.getCharacters().toString(),logoImage.getImage().getUrl()), lobby);
+        startController.goToLobbyReady(new User(playerNameTextField.getCharacters().toString(),selectedbutton.getId().substring(3).toLowerCase() + "_logo"), lobby);
     }
 
 

@@ -72,6 +72,7 @@ public class LobbyReadyController extends AnchorPane {
             @Override
             public void run() {
                 List<User> users = new ArrayList<>();
+                userCards.clear();
                 for(int i = 0; i < userCards.size(); i++){
                     users.add(userCards.get(i).user);
                 }

@@ -8,7 +8,6 @@ import java.util.List;
 
 public class ServerModel {
     private final List<Lobby> lobbys = new ArrayList<>();
-    private List<Player> players;
     private ServerModel(){initialize();}
     private static class ServerModelHolder{
         private static final ServerModel serverModel = new ServerModel();
@@ -28,6 +27,16 @@ public class ServerModel {
         lobbys.add(new Lobby("yes"));
     }
     public void addLobby(Lobby lobby){
+        lobbys.add(lobby);
+    }
+    public void updateLobby(Lobby lobby){
+        for(Lobby lobby1: lobbys) {
+            if (lobby1.getLobbyId() == lobby.getLobbyId()) {
+                System.out.println("Received existing lobby from client");
+                lobby1.updateLobby(lobby);
+                return;
+            }
+        }
         lobbys.add(lobby);
     }
 
