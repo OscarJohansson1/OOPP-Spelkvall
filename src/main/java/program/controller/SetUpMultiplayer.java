@@ -59,7 +59,6 @@ public class SetUpMultiplayer extends AnchorPane {
         initialize();
     }
     private void initialize() throws IOException {
-        clientController.echoClient.startConnection("95.80.61.51", 6666, clientController);
 
         divisionList = new ArrayList<>(Arrays.asList(recA, recAE, recD, recE, recF, recH, recI, recIT, recK,
                 recKfKb, recM, recSjo, recTB, recTD, recV, recZ));

@@ -39,17 +39,16 @@ public class Client {
 
                     }
                     else if(message instanceof Lobby){
+                        System.out.println("Recieved lobby with " + ((Lobby) message).users.size() + " users");
                         if(((Lobby)message).getLobbyId() == clientController.startController.lobbyReadyController.chosenLobby.getLobbyId()){
                             clientController.startController.lobbyReadyController.chosenLobby.updateLobby((Lobby) message);
-                            clientController.startController.lobbyReadyController.updateUserCards(clientController.startController.lobbyReadyController.chosenLobby);
+                            clientController.startController.lobbyReadyController.updateUserCards();
                         }
-                        System.out.println("Recieved lobby with " + ((Lobby) message).users.size() + " users");
-
                     }
                     else if(message instanceof List){
                         clientController.startController.lobbyReadyController.updateChoosenLobby((List<Lobby>) message);
                         clientController.startController.lobbySelectController.updateLobbys((List<Lobby>) message);
-                        clientController.startController.lobbyReadyController.updateUserCards(clientController.startController.lobbyReadyController.chosenLobby);
+                        clientController.startController.lobbyReadyController.updateUserCards();
                     }
                 }
                 catch(InterruptedException ignored){ }
@@ -60,16 +59,12 @@ public class Client {
         messageHandling.start();
     }
     private class ConnectionToServer {
-        BufferedReader in;
-        PrintWriter out;
         private final ObjectOutputStream outObject;
         private final ObjectInputStream inObject;
         Socket socket;
 
         ConnectionToServer(Socket socket) throws IOException {
             this.socket = socket;
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
             outObject = new ObjectOutputStream(socket.getOutputStream());
             inObject = new ObjectInputStream(socket.getInputStream());
 
@@ -90,26 +85,16 @@ public class Client {
             read.start();
         }
 
-
         private void write(Object obj) throws IOException {
             outObject.writeObject(obj);
         }
-
-
     }
 
-    /*public List<Player> joinLobby(Player player) throws IOException, ClassNotFoundException {
-        server.out.writeObject(player);
-        List<Player> players = (List<Player>) server.in.readObject();
-        System.out.println(players);
-        return players;
-    }*/
     public void selectSpace(int id) throws IOException {
         server.write(id);
     }
     public void deploy() throws IOException {
         server.write("deploy");
-        server.out.flush();
 
     }
     public void attack() throws IOException {
@@ -131,10 +116,6 @@ public class Client {
         sendObject(lobby);
     }
 
-    public String getString() throws IOException, ClassNotFoundException {
-        server.out.println("LOBBYS");
-        return (String) server.in.readLine();
-    }
     public void sendObject(Object object) throws IOException {
         server.outObject.writeObject(object);
     }

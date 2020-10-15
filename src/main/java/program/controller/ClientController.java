@@ -46,6 +46,6 @@ public class ClientController {
     }
     public void setLobby(Lobby lobby){
         this.lobby = lobby;
-        startController.lobbyReadyController.updateUserCards(lobby);
+        startController.lobbyReadyController.updateUserCards();
     }
 }

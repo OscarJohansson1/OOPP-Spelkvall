@@ -12,7 +12,7 @@ import server.code.model.ServerModel;
 public class EchoMultiServer {
 
     private ServerSocket serverSocket;
-    public final List<ClientHandler> clients = new ArrayList<>();
+    private final List<ClientHandler> clients = new ArrayList<>();
     private final ServerModel serverModel = new ServerModel();
 
     public void start(int port) {
@@ -22,6 +22,7 @@ public class EchoMultiServer {
                 ClientHandler clientHandler = new ClientHandler(serverSocket.accept());
                 clientHandler.start();
                 clients.add(clientHandler);
+                System.out.println("Adding " + clientHandler + " to client list");
                 clients.removeIf(ClientHandler -> !ClientHandler.isAlive());
             }
 
@@ -35,7 +36,6 @@ public class EchoMultiServer {
 
     public void stop() {
         try {
-
             serverSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -44,40 +44,39 @@ public class EchoMultiServer {
     }
 
     private class ClientHandler extends Thread {
-        private Socket clientSocket;
-
-        private ObjectOutputStream outObject;
-        private ObjectInputStream inObject;
-
+        private final Socket clientSocket;
 
         public ClientHandler(Socket socket) { this.clientSocket = socket; }
 
         public void run() {
             try {
-                outObject = new ObjectOutputStream(clientSocket.getOutputStream());
-                inObject = new ObjectInputStream(clientSocket.getInputStream());
+                ObjectOutputStream outObject = new ObjectOutputStream(clientSocket.getOutputStream());
+                ObjectInputStream inObject = new ObjectInputStream(clientSocket.getInputStream());
                 Object inputLine;
                 while ((inputLine = inObject.readObject()) != null) {
+                    System.out.println("Recieved: " + inputLine);
                     if(inputLine instanceof Lobby){
                         Lobby lobby = serverModel.updateLobby((Lobby)inputLine);
-                        System.out.println("Returning lobby with " + lobby.users.size() + " users");
-                        writeToAll(lobby);
+                        System.out.println("Returning "+lobby+" with " + lobby.users.size() + " users");
+                        writeToAll(lobby, outObject);
                     }
                     else if(inputLine instanceof String){
-                        if(((String) inputLine).equals("LOBBYS")){
+                        if(inputLine.equals("LOBBYS")){
+                            System.out.println("Returning: " + serverModel.getLobbys());
                             outObject.writeObject(serverModel.getLobbys());
                         }
                     }
-                    System.out.println("Recieved: " + inputLine);
+
                 }
             } catch (IOException | ClassNotFoundException ignored) {
 
             }
         }
 
-        private void writeToAll(Object input) throws IOException {
+        private void writeToAll(Object input, ObjectOutputStream outObject) throws IOException {
             for(ClientHandler client: clients) {
-                client.outObject.writeObject(input);
+                System.out.println("Sending " + input +" to client" + client);
+                outObject.writeObject(input);
             }
         }
     }

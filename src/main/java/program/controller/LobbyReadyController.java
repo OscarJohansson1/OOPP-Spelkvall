@@ -73,18 +73,20 @@ public class LobbyReadyController extends AnchorPane {
             for (Lobby lobby : lobbies) {
                 if (lobby.getLobbyId() == chosenLobby.getLobbyId()) {
                     chosenLobby = lobby;
+                    return;
                 }
             }
         }
 
     }
-    public void updateUserCards(Lobby lobby){
+    public void updateUserCards(){
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 userCards.clear();
-                for(int i = 0; i < lobby.users.size(); i++){
-                    userCards.add(new UserCard(lobby.users.get(i)));
+                for(int i = 0; i < chosenLobby.users.size(); i++){
+                    userCards.add(new UserCard(chosenLobby.users.get(i)));
                 }
                 playerFlow.getChildren().setAll(userCards);
                 System.out.println("Usercards are " + userCards.size());
