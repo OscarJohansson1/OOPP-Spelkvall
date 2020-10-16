@@ -1,5 +1,6 @@
 package program.controller;
 
+import javafx.scene.paint.Color;
 import program.model.Lobby;
 import program.model.ModelDataHandler;
 import program.model.Player;
@@ -31,10 +32,10 @@ public class ClientController {
 
     }
     public void showSelectedSpace(int id) {
-        mapController.view.setColor(mapController.getCube(id), mapController.modelDataHandler.getColorOnSpace(id).darker().darker(), mapController.allButtons);
+        mapController.view.setColor(mapController.getCube(id), Color.web(mapController.modelDataHandler.getColorOnSpace(id)).darker().darker(), mapController.allButtons);
     }
     public void removeSelectedSpace(int id) {
-        mapController.view.setColor(mapController.getCube(id), mapController.modelDataHandler.getColorOnSpace(id), mapController.allButtons);
+        mapController.view.setColor(mapController.getCube(id), Color.web(mapController.modelDataHandler.getColorOnSpace(id)), mapController.allButtons);
     }
     public void showCurrentPlayer(Player player) {
         mapController.modelDataHandler.setCurrentPlayer(player);

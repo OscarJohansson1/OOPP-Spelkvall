@@ -1,8 +1,5 @@
 package program.model;
 
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +51,7 @@ public class ModelDataHandler {
      * @param colors A list of colors that should represent each player.
      * @param logoNames A list of Strings with the logotypes that should represent each player.
      */
-    public void initialize(int amountOfSpaces, List<Color> colors, List<String> logoNames) {
+    public void initialize(int amountOfSpaces, List<String> colors, List<String> logoNames) {
         for(int i = 0; i < colors.size(); i++)
         {
             players.add(new Player((50/colors.size()), i, colors.get(i), logoNames.get(i),i+""));
@@ -250,7 +247,7 @@ public class ModelDataHandler {
      * @param id Id of the space that the color should be returned.
      * @return Color of the space, based on id
      */
-    public Color getColorOnSpace(int id) {
+    public String getColorOnSpace(int id) {
         return board.findSpace(id).getPlayer().getColor();
     }
 
@@ -262,7 +259,7 @@ public class ModelDataHandler {
         return String.valueOf(currentPlayer.getId() + 1);
     }
 
-    public Color getCurrentPlayerColor() {
+    public String getCurrentPlayerColor() {
         return currentPlayer.getColor();
     }
 
@@ -270,7 +267,7 @@ public class ModelDataHandler {
         return round.getCurrentPhase();
     }
 
-    public List<Color> getColorOnAllSpaces() {
+    public List<String> getColorOnAllSpaces() {
         return board.getColorOnAllSpaces();
     }
 

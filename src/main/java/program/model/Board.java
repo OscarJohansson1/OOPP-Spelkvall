@@ -1,7 +1,5 @@
 package program.model;
 
-import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -215,8 +213,8 @@ public class Board {
      * Method that initialises all the colors on the spaces that the board starts with
      * @return It then returns the colors
      */
-    List<Color> getColorOnAllSpaces() {
-        List<Color> colors = new ArrayList<>();
+    List<String> getColorOnAllSpaces() {
+        List<String> colors = new ArrayList<>();
         for (Space space : spaces) {
             colors.add(space.getPlayer().getColor());
         }

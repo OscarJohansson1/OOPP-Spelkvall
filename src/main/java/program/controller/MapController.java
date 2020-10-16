@@ -127,7 +127,7 @@ public class MapController extends AnchorPane {
     private ClientController clientController;
 
 
-    MapController(List<Color> colors, List<String> logoNames, Stage stage) throws IOException {
+    MapController(List<String> colors, List<String> logoNames, Stage stage) throws IOException {
 
         this.stage = stage;
         pauseController = new PauseController(stage, this);
@@ -323,7 +323,7 @@ public class MapController extends AnchorPane {
         for(int i = 0; i < allButtons.size(); i++)
         {
             view.updateTextUnits(i,modelDataHandler.getUnitsOnSpace(i),allButtons, this);
-            view.setColor(allButtons.get(i), modelDataHandler.getColorOnAllSpaces().get(i),allButtons);
+            view.setColor(allButtons.get(i), Color.web(modelDataHandler.getColorOnAllSpaces().get(i)),allButtons);
         }
         modelDataHandler.resetSelectedSpaces();
         resetDisplayCubes();
@@ -368,7 +368,7 @@ public class MapController extends AnchorPane {
                 moveSlider.setDisable(false);
             }
             view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
-            view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
+            view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
             displayCubes(id);
             if(firstDisplayText.getText().isEmpty())
             {
@@ -389,20 +389,24 @@ public class MapController extends AnchorPane {
 
     private void setSpaceEvent(int id) {
         view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
-        view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
+        view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
 
     }
 
     private void setSpaceEvent(int id, int id2) {
         view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
-        view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id), allButtons);
+        view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)), allButtons);
         view.updateTextUnits(id2, modelDataHandler.getUnitsOnSpace(id2), allButtons, this);
-        view.setColor(getCube(id2), modelDataHandler.getColorOnSpace(id2), allButtons);
+        view.setColor(getCube(id2), Color.web(modelDataHandler.getColorOnSpace(id2)), allButtons);
     }
 
     private List<Color> getColors()
     {
-        return modelDataHandler.getColorOnAllSpaces();
+        List<Color> colors = new ArrayList<>();
+        for(String color : modelDataHandler.getColorOnAllSpaces()){
+            colors.add(Color.web(color));
+        }
+        return colors;
     }
 
     private void resetColor() {
@@ -414,7 +418,7 @@ public class MapController extends AnchorPane {
         for(int i = 1; i < allButtons.size(); i++)
         {
             if(i == id) {
-                colors.set(i,colors.get(i).darker().darker());
+                colors.set(i,(colors.get(i).darker().darker()));
             }
         }
         view.resetColor(colors,allButtons);
@@ -493,7 +497,7 @@ public class MapController extends AnchorPane {
         return modelDataHandler.getTeamLogo();
     }
 
-    public Color getSpaceColor(int id){
+    public String getSpaceColor(int id){
         return modelDataHandler.getColorOnSpace(id);
     }
 }

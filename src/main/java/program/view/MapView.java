@@ -26,8 +26,8 @@ public class MapView extends AnchorPane {
         mapController.phaseText.setText(currentPhase);
     }
 
-    public void updateCurrentPlayer(Color currentPlayerColor, MapController mapController, String playerName){
-        mapController.showCurrentPlayer.setStyle(colorToHex(currentPlayerColor));
+    public void updateCurrentPlayer(String currentPlayerColor, MapController mapController, String playerName){
+        mapController.showCurrentPlayer.setStyle("-fx-background-color: " +  currentPlayerColor + ";");
         mapController.showCurrentPlayer.setText(playerName);
         mapController.imageTeamLogo.setImage(new Image(mapController.getTeamLogo()));
     }
@@ -52,7 +52,7 @@ public class MapView extends AnchorPane {
             if (allButton == allButtons.get(id)) {
                 allButton.setText(units + "");
                 //allButton.setStyle("-fx-color: #FFFFFF");
-                allButton.setTextFill(getContrastColor(mapController.getSpaceColor((id))));
+                allButton.setTextFill(getContrastColor(Color.web(mapController.getSpaceColor((id)))));
                 break;
             }
         }
@@ -83,8 +83,8 @@ public class MapView extends AnchorPane {
      * @param button Map space to be changed.
      * @param color Desired color.
      */
-    public void updateDisplayCubes(Button button, Color color){
-        button.setStyle(colorToHex(color));
+    public void updateDisplayCubes(Button button, String color){
+        button.setStyle("-fx-background-color: " +  color + ";");
     }
 
     /**

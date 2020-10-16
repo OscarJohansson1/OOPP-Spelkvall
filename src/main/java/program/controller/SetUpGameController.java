@@ -69,7 +69,7 @@ class SetUpGameController extends AnchorPane {
 
     private int nextToChoose = 1;
     private ArrayList<ImageView> selectedDivisions = new ArrayList<>();
-    private ArrayList<Color> colorList = new ArrayList<>();
+    private ArrayList<String> colorList = new ArrayList<>();
     private ArrayList<String> logoNameList = new ArrayList<>();
     private ArrayList<Integer> nextPlayerNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
             11, 12, 13, 14, 15, 16));
@@ -170,7 +170,7 @@ class SetUpGameController extends AnchorPane {
 
     private void mouseClicked(ImageView image){
         if(!selectedDivisions.contains(image) && nextToChoose <= amountOfPlayers) {
-            colorList.add(Color.web(image.getStyle().substring(22,29)));
+            colorList.add(image.getStyle().substring(22,29));
             logoNameList.add(image.getId().substring(3).toLowerCase() + "_logo");
             System.out.println(image.getId().substring(3).toLowerCase() + "_logo");
 

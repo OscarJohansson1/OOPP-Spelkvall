@@ -1,8 +1,5 @@
 package program.model;
 
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-
 import java.io.Serializable;
 
 /**
@@ -13,7 +10,7 @@ public class Player implements Serializable {
 
     private int units;
     private int id;
-    private Color color;
+    private String color;
     private String logoUrl;
     private String name;
     private boolean myTurn = false;
@@ -24,7 +21,7 @@ public class Player implements Serializable {
      * @param id This is the players id, it is used to find the different player
      * @param color This is used to set different colors for all players.
      */
-    Player(int units, int id, Color color, String logoUrl, String name) {
+    Player(int units, int id, String color, String logoUrl, String name) {
         this.units = units;
         this.id = id;
         this.color = color;
@@ -34,7 +31,7 @@ public class Player implements Serializable {
     }
 
     //TODO: for tests right now
-    Player(int units, int id, Color color) {
+    Player(int units, int id, String color) {
         this.units = units;
         this.id = id;
         this.color = color;
@@ -52,7 +49,7 @@ public class Player implements Serializable {
         return id;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 

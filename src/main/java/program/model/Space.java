@@ -1,7 +1,5 @@
 package program.model;
 
-import javafx.scene.control.Button;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
