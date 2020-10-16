@@ -6,6 +6,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import program.model.ModelDataHandler;
+import program.model.Player;
 import program.view.MapView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -154,7 +155,7 @@ public class MapController extends AnchorPane {
 
 
     }
-    MapController(ClientController clientController, Stage stage){
+    MapController(ClientController clientController, Stage stage) throws IOException {
         this.stage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
         fxmlLoader.setRoot(this);
@@ -165,12 +166,17 @@ public class MapController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         this.clientController = clientController;
+        allButtons = new ArrayList<>(Arrays.asList(cubeHubben,cubeBasen,cubeKajsabaren,cubeZaloonen,cubeWinden,cubeLofTDet,
+                cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
+                cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden, cubeKalleGlader, cubeTvargatan));
+
+        allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsabaren, textZaloonen, textWinden, textLofTDet,
+                textRodaRummet,textVerum, textVillan, textAdammen, textFocus, textFortNox,textGTSpritis, textGoldenI, textChabo,textWijkanders,textHrum,
+                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogarden, textKalleGlader, textTvargatan));
+        modelDataHandler = ModelDataHandler.getModelDataHandler();
+        initialize();
     }
     private void initialize() throws IOException {
-        /*EchoClient.getEchoClient().recieveController(this);
-        EchoClient client = EchoClient.getEchoClient();
-        client.startConnection("95.80.61.51", 6666);
-        client.deploy();*/
         for (int i = 0; i<allButtons.size(); i++){
             int var = i;
             allButtons.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -391,7 +397,7 @@ public class MapController extends AnchorPane {
             else if(secondDisplayText.getText().isEmpty()){
                 displayText(secondDisplayText, getTextFromList(id));
             }
-            if(clientController != null) clientController.sendObject(modelDataHandler.getSpaceFromId(id));
+
         }
         else{
             if(modelDataHandler.getSelectedSpace() == null && modelDataHandler.getSelectedSpace2() == null){
@@ -399,6 +405,7 @@ public class MapController extends AnchorPane {
                 resetColor();
             }
         }
+        if(clientController != null) clientController.sendObject(modelDataHandler.getSpaceFromId(id));
 
     }
 

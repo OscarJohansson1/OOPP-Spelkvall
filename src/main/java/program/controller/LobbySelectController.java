@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import program.model.Lobby;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,8 +14,7 @@ public class LobbySelectController extends AnchorPane {
 
     @FXML public FlowPane lobbyFlow;
 
-    List<Lobby> lobbys = new ArrayList<>();
-    List<LobbyItem> lobbyitems = new ArrayList<>();
+    List<LobbyItem> lobbyItems = new ArrayList<>();
 
     private final StartController startController;
 
@@ -41,35 +39,17 @@ public class LobbySelectController extends AnchorPane {
         startController.backToMainMenu();
 
     }
-
-    public void resetChosen(){
-
-        for(LobbyItem lobbyitem : lobbyitems){
-
-            lobbyitem.setStyle("-fx-background-color: #FFFFFF");
-
+    public void resetLobbyItems(){
+        for(LobbyItem lobbyItem: lobbyItems)
+        {
+            lobbyItem.marked = false;
         }
-
     }
-    public void updateLobbys(List<Lobby> lobbies){
+    public void updateLobbys(){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                System.out.println("Updating lobbys in LobbyselectController");
-                lobbyFlow.getChildren().clear();
-                lobbys = lobbies;
-                for(Lobby lobby: lobbys){
-                    lobbyitems.add (new LobbyItem(lobby, startController));
-                }
-                lobbyFlow.getChildren().addAll(lobbyitems);
-                System.out.println("Lobby size is " + lobbys.size());
+                lobbyFlow.getChildren().addAll(lobbyItems);
             }});
-
-
     }
-
-
-
-
-
 }

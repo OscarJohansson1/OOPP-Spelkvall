@@ -4,18 +4,23 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import javafx.scene.control.Menu;
 import program.model.*;
-import server.code.ServerController;
+import server.code.controller.LobbyController;
+import server.code.controller.GameController;
+import server.code.model.GameLobby;
+import server.code.model.Lobby;
+import server.code.model.MenuLobby;
 
 public class EchoMultiServer {
 
     private ServerSocket serverSocket;
     private final List<ClientHandler> clients = new ArrayList<>();
-    private final ServerController serverController = new ServerController();
+    private final LobbyController lobbyController = new LobbyController();
+    private final GameController serverBoardController = new GameController();
 
     public void start(int port) {
         try {
@@ -47,9 +52,11 @@ public class EchoMultiServer {
 
     public class ClientHandler extends Thread {
         private final Socket clientSocket;
-        private Lobby lobby;
+        private GameLobby gameLobby;
+        private MenuLobby menuLobby;
         ObjectOutputStream outObject;
         ObjectInputStream inObject;
+        private Player player;
 
         public ClientHandler(Socket socket) { this.clientSocket = socket; }
 
@@ -60,25 +67,54 @@ public class EchoMultiServer {
                 Object inputLine;
                 while ((inputLine = inObject.readObject()) != null) {
                     System.out.println("Recieved: " + inputLine);
-                    if(inputLine instanceof Lobby){
-                        lobby = (Lobby) inputLine;
-                        writeToAll(serverController.updateLobby((Lobby)inputLine), outObject,lobby);
-                    }
-                    else if(inputLine instanceof String){
+                    if(inputLine instanceof String){
 
                         if(inputLine.equals("LOBBYS")){
-                            System.out.println("Returning: " + serverController.getLobbys());
-                            outObject.writeObject(serverController.getLobbys());
+                            System.out.println("Returning: " + lobbyController.getMenuLobbies());
+                            for(MenuLobby menuLobby: lobbyController.getMenuLobbies()){
+                                outObject.writeObject(menuLobby.getLobbyName());
+                                outObject.writeObject(menuLobby.getLobbyTime());
+                                outObject.writeObject(menuLobby.getLobbyCapacity());
+                            }
+
+                        }
+                        else if(inputLine.equals("LOBBYLEADER")){
+                            if(menuLobby.getLobbyPlayers().size() == 1){
+                                outObject.writeObject(true);
+                            }
                         }
                         else if(inputLine.equals("startGame")){
-                            writeToAll(lobby.getLobbyUsers(),outObject,lobby);
-                            serverController.initializeServerBoardController(lobby);
-                            writeToAll(serverController.getGameBoard(), outObject, lobby);
-                            writeToRandomClientInLobby(lobby);
+                            lobbyController.createNewGameLobby(menuLobby.getLobbyName());
+                            gameLobby = lobbyController.getGameLobbies().get(lobbyController.getGameLobbies().size() - 1);
+                            addClientsToGameLobby(gameLobby);
+                            serverBoardController.initializeGame(gameLobby.getLobbyPlayers());
+                            writeToAllInLobby(serverBoardController.getBoard(), gameLobby);
+                            writeToAllInLobby(0, gameLobby);
+                            writeToAllInLobby("StartGame", gameLobby);
+                        }
+                        else if(inputLine.equals("unmark1")){
+
+                        }
+                        else if(inputLine.equals("unmark2")){
+
                         }
                     }
                     else if(inputLine instanceof Space){
-                        writeToAll(inputLine, outObject, lobby);
+                        writeToAllInLobby(inputLine, gameLobby);
+                    }
+                    else if(inputLine instanceof Boolean){
+                        player.setReady((Boolean) inputLine);
+                        if(menuLobby.checkIfAllPlayersReady()){
+                            writeToSpecificClientInLobby(menuLobby, 0);
+                        }
+                    }
+                    else if(inputLine instanceof Player){
+                        if(player == null)player = (Player) inputLine;
+                        menuLobby.addPlayer(player);
+                        writeToAllInLobby(menuLobby.getLobbyPlayers(), menuLobby);
+                    }
+                    else if(inputLine instanceof  Integer){
+                        menuLobby = lobbyController.getMenuLobbies().get((Integer) inputLine);
                     }
 
                 }
@@ -87,23 +123,45 @@ public class EchoMultiServer {
             }
         }
 
-        private void writeToAll(Object input, ObjectOutputStream outObject, Lobby lobby) throws IOException {
-            for(ClientHandler client: clients) {
-                if(client.lobby.getLobbyName().equals(lobby.getLobbyName())){
-                    System.out.println("Sending " + input +" to client" + client + " in lobby " + lobby.getLobbyName());
-                    outObject.writeObject(input);
-                    outObject.flush();
+        public void addClientsToGameLobby(GameLobby gameLobby){
+            for(ClientHandler clientHandler: clients){
+                if(clientHandler.menuLobby.getLobbyName().equals(gameLobby.getLobbyName())){
+                    clientHandler.gameLobby = lobbyController.getGameLobbies().get(lobbyController.getGameLobbies().size() - 1);
                 }
+            }
+            lobbyController.addMenuLobbyPlayersToGameLobby(menuLobby,gameLobby);
+        }
+
+        private void writeToAllInLobby(Object input, Lobby lobby) throws IOException {
+            for(ClientHandler client: findClientsInLobby(lobby)) {
+                outObject.writeObject(input);
             }
         }
+
         private void writeToRandomClientInLobby( Lobby lobby) throws IOException {
+            List<ClientHandler> clientHandlers = findClientsInLobby(lobby);
+            clientHandlers.get(new Random().nextInt(clientHandlers.size())).outObject.writeObject(true);
+        }
+
+        private void writeToSpecificClientInLobby(Lobby lobby, int id) throws IOException {
+            findClientsInLobby(lobby).get(id).outObject.writeObject("startClear");
+        }
+
+        private List<ClientHandler> findClientsInLobby(Lobby lobby){
             List<ClientHandler> clientHandlers = new ArrayList<>();
             for(ClientHandler clientHandler: clients){
-                if(clientHandler.lobby.getLobbyName().equals(lobby.getLobbyName())){
-                    clientHandlers.add(clientHandler);
+                if(lobby instanceof GameLobby){
+                    if(clientHandler.gameLobby.getLobbyName().equals(lobby.getLobbyName())){
+                        clientHandlers.add(clientHandler);
+                    }
+                }
+                else if(lobby instanceof MenuLobby){
+                    if(clientHandler.menuLobby.getLobbyName().equals(lobby.getLobbyName())){
+                        clientHandlers.add(clientHandler);
+                    }
                 }
             }
-            clientHandlers.get(new Random().nextInt(clientHandlers.size())).outObject.writeObject(true);
+            return clientHandlers;
         }
     }
 

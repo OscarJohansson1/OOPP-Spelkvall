@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Board implements Serializable {
 
-    private List<Space> spaces;
+    private final List<Space> spaces;
     private List<Area> areas;
 
     private Space selectedSpace;
@@ -248,5 +248,8 @@ public class Board implements Serializable {
             return new Space(space);
         }
         return null;
+    }
+    public List<Space> getSpaces(){
+        return spaces;
     }
 }

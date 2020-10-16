@@ -1,6 +1,8 @@
 package program.model;
 
 
+import program.controller.ClientController;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,11 +13,11 @@ import java.util.Random;
  */
 public class ModelDataHandler {
 
-    private final List<Player> players = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
     private Player currentPlayer;
     private int roundCount = 1;
     private int phaseCount = 1;
-    private Round round;
+    private final Round round = new Round();
     private Board board;
     private int unitsToUse = 1;
     public boolean firstDeployment = true;
@@ -62,19 +64,13 @@ public class ModelDataHandler {
         currentPlayer = getRandomPlayer(null, players);
         board = new Board(randomizeSpaces(amountOfSpaces));
         board.createAreas();
-        round = new Round();
     }
 
     public List<Space> randomizeSpaces(int amountOfSpaces) {
         return randomSpaces(amountOfSpaces, players);
     }
 
-    public List<Space> randomizeSpaces(int amountOfSpace, List<User> users) {
-        List<Player> players = new ArrayList<>();
-        for (int i = 0; i < users.size(); i++) {
-            System.out.println("Adding new player to list based of user");
-            players.add(new Player(50 / users.size(), i, users.get(i).getColor(), users.get(i).getImageUrl(), users.get(i).getUserName()));
-        }
+    public List<Space> randomizeSpaces(int amountOfSpace, List<Player> players) {
         return randomSpaces(amountOfSpace, players);
     }
 
@@ -149,7 +145,7 @@ public class ModelDataHandler {
         resetSelectedSpaces();
         phaseCount++;
         if (phaseCount > 3) {
-            nextPlayer();
+            nextPlayer(players,currentPlayer);
             phaseCount = 1;
         }
     }
@@ -160,23 +156,27 @@ public class ModelDataHandler {
      */
     public void firstRoundNextPhase() {
         resetSelectedSpaces();
-        nextPlayer();
+        nextPlayer(players, currentPlayer);
         roundCount++;
         if (roundCount > players.size()) {
             firstDeployment = false;
         }
     }
 
-    private void nextPlayer() {
+    public static Player nextPlayer(List<Player> players, Player currentPlayer) {
         for (int i = 0; i < players.size(); i++) {
+            players.get(i).setMyTurn(false);
             if (currentPlayer == players.get(i) && i + 1 < players.size()) {
                 currentPlayer = players.get(i + 1);
-                break;
+                players.get(i + 1).setMyTurn(true);
+                return currentPlayer;
             } else if (currentPlayer == players.get(i)) {
                 currentPlayer = players.get(0);
-                break;
+                players.get(0).setMyTurn(true);
+                return currentPlayer;
             }
         }
+        return null;
     }
 
     /**
@@ -323,8 +323,21 @@ public class ModelDataHandler {
         this.board = board;
     }
 
-    public void setUsers(List<User> users) {
-
+    public void setPlayers(List<Player> players){
+        this.players = players;
     }
+
+    public List<Player> getPlayers(){
+        return players;
+    }
+    public void setSpace(Space receivedSpace){
+        for(Space space: board.getSpaces()){
+            if(receivedSpace.getId() == space.getId()){
+                space.updateSpace(receivedSpace);
+                break;
+            }
+        }
+    }
+
 }
 

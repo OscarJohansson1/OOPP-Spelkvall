@@ -7,10 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import program.model.Lobby;
 import program.model.Player;
-import program.model.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -87,12 +84,12 @@ public class MultiplayerLogoController extends AnchorPane {
 
         if (!(playerNameTextField.getText().trim().isEmpty())){
 
-            startController.goToLobbyReady(new User(playerNameTextField.getCharacters().toString(),selectedbutton.getId().substring(3).toLowerCase() + "_logo",selectedbutton.getStyle().substring(22,29)), startController.lobbyReadyController.chosenLobby);
+            startController.goToLobbyReady(new Player(0,1,selectedbutton.getStyle().substring(22,29),selectedbutton.getId().substring(3).toLowerCase() + "_logo",playerNameTextField.getCharacters().toString()));
 
         }
 
     }
-    public void toLobbySelect() {  startController.toLobbySelect(); }
+    public void toLobbySelect() throws IOException {  startController.toLobbySelect(); }
 
 
 

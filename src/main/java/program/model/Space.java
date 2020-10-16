@@ -9,10 +9,10 @@ import java.util.ArrayList;
 //TODO Remove public when controllers don't use getId() directly anymore
 public class Space implements Serializable {
 
-    private final int id;
+    private int id;
     private Player player;
     private int units;
-    private final String name;
+    private String name;
 
     /**
      * This is a constructor for a space
@@ -51,6 +51,13 @@ public class Space implements Serializable {
      */
     void updateSpace(int units) {
         updateSpace(this.player, units);
+    }
+
+    void updateSpace(Space space){
+        id = space.id;
+        player = space.player;
+        units = space.units;
+        name = space.name;
     }
 
     public int getId() {

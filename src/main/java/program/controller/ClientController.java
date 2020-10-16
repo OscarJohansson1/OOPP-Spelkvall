@@ -1,12 +1,12 @@
 package program.controller;
 
 import javafx.scene.paint.Color;
-import program.model.Lobby;
 import program.model.ModelDataHandler;
 import program.model.Player;
-import program.model.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientController {
 
@@ -14,8 +14,9 @@ public class ClientController {
     private MapController mapController;
     StartController startController;
     ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
-    Lobby lobby;
-    User user;
+    Player player;
+    Player currentPlayer;
+    boolean lobbyLeader = false;
 
     public ClientController(Client client, StartController startController) throws IOException {
         this.echoClient = client;
@@ -45,20 +46,20 @@ public class ClientController {
         mapController.modelDataHandler.setCurrentPlayer(player);
         mapController.view.updateCurrentPlayer(player.getColor(),mapController,player.getName());
     }
-    public void updateLobby(Lobby lobby) throws IOException {
-        echoClient.updateLobby(lobby);
-    }
-    public void getLobbys() throws IOException, ClassNotFoundException {
-        echoClient.getLobbys();
-    }
-    public void setLobby(Lobby lobby){
-        this.lobby = lobby;
-        startController.lobbyReadyController.updateUserCards();
+    public void getLobbies() throws IOException, ClassNotFoundException {
+        echoClient.sendObject("LOBBYS");
     }
     public void startGame() throws IOException {
-        echoClient.startGame();
+        echoClient.sendObject("startGame");
     }
     public void sendObject(Object object) throws IOException {
         echoClient.sendObject(object);
+    }
+    public void addPlayerToLobby(Player player) throws IOException {
+        echoClient.sendObject(player);
+    }
+    public boolean checkIfLobbyLeader() throws IOException {
+        echoClient.sendObject("LOBBYLEADER");
+        return false;
     }
 }

@@ -14,6 +14,7 @@ public class Player implements Serializable {
     private String logoUrl;
     private String name;
     private boolean myTurn = false;
+    private boolean ready = false;
 
     /**
      * This is a constructor for the player.
@@ -21,7 +22,7 @@ public class Player implements Serializable {
      * @param id This is the players id, it is used to find the different player
      * @param color This is used to set different colors for all players.
      */
-    Player(int units, int id, String color, String logoUrl, String name) {
+    public Player(int units, int id, String color, String logoUrl, String name) {
         this.units = units;
         this.id = id;
         this.color = color;
@@ -29,7 +30,7 @@ public class Player implements Serializable {
         this.name = name;
     }
 
-    Player(Player player){
+    public Player(Player player){
         units = player.units;
         id = player.id;
         color = player.color;
@@ -39,7 +40,7 @@ public class Player implements Serializable {
     }
 
     //TODO: for tests right now
-    Player(int units, int id, String color) {
+    public Player(int units, int id, String color) {
         this.units = units;
         this.id = id;
         this.color = color;
@@ -61,7 +62,7 @@ public class Player implements Serializable {
         return color;
     }
 
-    String getLogoUrl() {
+    public String getLogoUrl() {
         return logoUrl;
     }
 
@@ -72,4 +73,11 @@ public class Player implements Serializable {
     public boolean getMyTurn(){
         return myTurn;
     }
+    public boolean setReady(boolean ready){
+        return this.ready = ready;
+    }
+    public boolean isReady(){
+        return ready;
+    }
+
 }

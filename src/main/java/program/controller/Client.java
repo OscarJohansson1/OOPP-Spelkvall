@@ -1,9 +1,11 @@
 package program.controller;
 
-import program.model.Board;
-import program.model.Lobby;
-import program.model.Player;
-import program.model.User;
+import javafx.application.Platform;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import program.model.*;
+import server.code.model.MenuLobby;
 
 import java.io.*;
 import java.net.Socket;
@@ -14,6 +16,7 @@ public class Client {
     private LinkedBlockingQueue<Object> messages;
     private ConnectionToServer server;
     private ClientController clientController;
+    private final LobbyItemCreator lobbyItemCreator = new LobbyItemCreator();
 
     public void startConnection(String ip, int port, ClientController clientController) throws IOException {
         server = new ConnectionToServer(new Socket(ip,port));
@@ -34,43 +37,77 @@ public class Client {
                 try{
                     Object message = messages.take();
                     if(message instanceof String) {
-                        System.out.println("Received string");
+                        if(message.equals("startClear")){
+                            clientController.startController.lobbyReadyController.startButton.setDisable(false);
+                        }
+                        else if(message.equals("StartGame")){
+                            Stage stage = clientController.startController.stage;
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Parent value = null;
+                                    try {
+                                        value = new MapController(clientController,stage);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    Scene scene = new Scene(value, 1920, 1080);
+
+                                    stage.setTitle("program.Chans");
+                                    stage.setScene(scene);
+                                    stage.show();
+                                }
+                            });
+
+                        }
+                        else if(message.equals("unmark1")){
+
+                        }
+                        else if(message.equals("unmark2")){
+
+                        }
+                        else {
+                            if(lobbyItemCreator.getName() == null){
+                                lobbyItemCreator.setName((String) message);
+                            }
+                            else if(lobbyItemCreator.getTime() == null){
+                                lobbyItemCreator.setTime((String) message);
+                            }
+                            else if(lobbyItemCreator.getCapacity() == null){
+                                lobbyItemCreator.setCapacity((String)message);
+                                clientController.startController.lobbySelectController.lobbyItems.add(lobbyItemCreator.createLobbyItem(clientController.startController));
+                                lobbyItemCreator.resetVariables();
+                                clientController.startController.lobbySelectController.updateLobbys();
+                            }
+                        }
                     }
                     else if(message instanceof Integer) {
-                        clientController.showSelectedSpace((int)message);
+                        ModelDataHandler.getModelDataHandler().setCurrentPlayer(ModelDataHandler.getModelDataHandler().getPlayers().get((Integer)message));
 
-                    }
-                    else if(message instanceof Lobby){
-                        System.out.println("Recieved lobby with " + ((Lobby) message).users.size() + " users");
-                        if(((Lobby) message).getLobbyName().equals(clientController.startController.lobbyReadyController.chosenLobby.getLobbyName())){
-                            clientController.startController.lobbyReadyController.chosenLobby.updateLobby((Lobby) message);
-                            clientController.startController.lobbyReadyController.updateUserCards();
-                        }
                     }
                     else if(message instanceof List){
                         for (Object object : (List<?>) message) {
-                            if (object instanceof Lobby) {
-                                clientController.startController.lobbyReadyController.updateChosenLobby((List<Lobby>) message);
-                                clientController.startController.lobbySelectController.updateLobbys((List<Lobby>) message);
-                                clientController.startController.lobbyReadyController.updateUserCards();
+                            if (object instanceof LobbyItem) {
+                                clientController.startController.lobbySelectController.updateLobbys();
                                 break;
                             }
-                            else if(object instanceof User){
-                                for(User user : clientController.startController.lobbyReadyController.chosenLobby.users ){
-                                    if(user.equals((User)object)) {
-                                        user.setReady(((User)object).isReady());
-                                        clientController.startController.lobbyReadyController.checkIfReady();
-                                        break;
-                                    }
-                                }
-
+                            else if(object instanceof Player){
+                                List<Player> playerList = (List<Player>)message;
+                                ModelDataHandler.getModelDataHandler().setPlayers(playerList);
+                                clientController.startController.lobbyReadyController.updateUserCards(playerList);
                             }
+
                         }
                     }
                     else if(message instanceof Board){
                         clientController.modelDataHandler.setBoard((Board) message);
                     }
-
+                    else if(message instanceof Boolean){
+                        if((Boolean) message) clientController.startController.lobbyReadyController.startButton.setVisible(true);
+                    }
+                    else if(message instanceof Space){
+                        ModelDataHandler.getModelDataHandler().setSpace((Space)message);
+                    }
                 }
                 catch(InterruptedException ignored){ }
             }
@@ -111,35 +148,10 @@ public class Client {
         }
     }
 
-    public void selectSpace(int id) throws IOException {
-        server.write(id);
-    }
-    public void deploy() throws IOException {
-        server.write("deploy");
-
-    }
-    public void attack() throws IOException {
-        server.write("attack");
-    }
-    public void move() throws IOException {
-        server.write("move");
-    }
-    public void startGame() throws IOException {
-        server.write("startGame");
-    }
-    public void getLobbys() throws IOException, ClassNotFoundException {
-        sendObject("LOBBYS");
-        System.out.println("Sending LOBBYS to server");
-    }
-
-    public void updateLobby(Lobby lobby) throws IOException {
-        System.out.println("Sending " + lobby + " to server");
-        sendObject(lobby);
-    }
-
     public void sendObject(Object object) throws IOException {
         server.outObject.writeObject(object);
     }
+
     public void stopConnection() throws IOException {
         System.out.println("Terminating connection to server");
         server.socket.close();

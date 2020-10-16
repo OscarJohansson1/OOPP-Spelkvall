@@ -12,8 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-import program.model.Lobby;
-import program.model.User;
+import program.model.Player;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,10 +26,8 @@ public class LobbyReadyController extends AnchorPane {
     @FXML public Button startButton;
 
     private final StartController startController;
-    private final List<UserCard> userCards = new ArrayList<>();
-    private Stage stage;
-    Lobby chosenLobby;
-    User lobbyLeader;
+    private final List<PlayerCard> userCards = new ArrayList<>();
+    private final Stage stage;
 
     public LobbyReadyController(Stage stage, StartController startController) throws IOException, ClassNotFoundException {
 
@@ -68,49 +65,22 @@ public class LobbyReadyController extends AnchorPane {
 
         });
     }
-    public void ready(){
-
+    public void ready() throws IOException {
+        startController.clientController.player.setReady(!startController.clientController.player.isReady());
+        startController.clientController.sendObject(startController.clientController.player.isReady());
     }
     public void startGame() throws IOException {
-        MapController mapController = new MapController(startController.clientController,stage);
-        Parent value = mapController;
         startController.clientController.startGame();
-        Scene scene = new Scene(value, 1920, 1080);
-
-        stage.setTitle("program.Chans");
-        stage.setScene(scene);
-        stage.show();
     }
 
-    public void checkIfReady(){
-        for(User user : chosenLobby.users){
-            if(!(user.isReady())){
-                return;
-            }
-        }
-        startButton.setDisable(false);
-    }
-    
-    public void updateChosenLobby(List<Lobby> lobbies) {
-
-        if(chosenLobby != null){
-            for (Lobby lobby : lobbies) {
-                if (lobby.getLobbyName().equals(chosenLobby.getLobbyName())) {
-                    chosenLobby = lobby;
-                    return;
-                }
-            }
-        }
-    }
-
-    public void updateUserCards(){
+    public void updateUserCards(List<Player> players){
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 userCards.clear();
-                for(int i = 0; i < chosenLobby.users.size(); i++){
-                    userCards.add(new UserCard(chosenLobby.users.get(i)));
+                for (Player player : players) {
+                    userCards.add(new PlayerCard(player));
                 }
                 userFlow.getChildren().setAll(userCards);
                 System.out.println("Usercards are " + userCards.size());

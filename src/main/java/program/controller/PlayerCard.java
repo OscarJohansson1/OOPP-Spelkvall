@@ -6,19 +6,19 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import program.model.User;
+import program.model.Player;
 
 import java.io.IOException;
 import java.io.Serializable;
 
-public class UserCard extends AnchorPane implements Serializable {
+public class PlayerCard extends AnchorPane implements Serializable {
 
     @FXML private Label cardNameLabel;
     @FXML private ImageView cardImageView;
 
-    User user;
+    Player player;
 
-    public UserCard( User user){
+    public PlayerCard(Player player){
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("userCard.fxml"));
         fxmlLoader.setRoot(this);
@@ -30,10 +30,10 @@ public class UserCard extends AnchorPane implements Serializable {
             throw new RuntimeException(exception);
         }
 
-        this.user = user;
+        this.player = player;
 
-        this.cardImageView.setImage(new Image("file:src/main/resources/pictures/logos/"+user.getImageUrl()+".png"));
-        this.cardNameLabel.setText(user.getUserName());
+        this.cardImageView.setImage(new Image(player.getLogoUrl()));
+        this.cardNameLabel.setText(player.getName());
     }
 
 

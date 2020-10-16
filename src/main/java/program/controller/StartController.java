@@ -11,8 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import program.model.Lobby;
-import program.model.User;
+import program.model.Player;
 
 import java.awt.*;
 import java.io.IOException;
@@ -31,7 +30,7 @@ public class StartController extends AnchorPane {
 
     private SetUpGameController setUpGameController;// = new SetUpGameController();
     private Parent root;// = setUpGameController;
-    private Stage stage;
+    Stage stage;
 
 
     LobbySelectController lobbySelectController;
@@ -104,20 +103,26 @@ public class StartController extends AnchorPane {
     public void goToLobbySelect() throws IOException, ClassNotFoundException {
         client = new Client();
         clientController = new ClientController(client, this);
-        clientController.getLobbys();
+        clientController.getLobbies();
         rootpane.getChildren().add(lobbySelectController);
 
     }
-    public void goToLobbyReady(User user, Lobby lobby) throws IOException, ClassNotFoundException {
-        lobby.addPlayer(user);
-        clientController.user = user;
-        clientController.updateLobby(lobby);
-        if(lobbyReadyController.chosenLobby.lobbyLeader != user){
-            lobbyReadyController.startButton.setVisible(false);
-        }
+    public void goToLobbyReady(Player player) throws IOException, ClassNotFoundException {
+        clientController.player = player;
+        clientController.addPlayerToLobby(player);
+        clientController.checkIfLobbyLeader();
+        lobbyReadyController.startButton.setVisible(false);
+        lobbyReadyController.startButton.setDisable(true);
+
         rootpane.getChildren().add(lobbyReadyController);
     }
     public void goToSetup() throws IOException {
+        for(int i = 0; i < lobbySelectController.lobbyItems.size(); i++){
+            if(lobbySelectController.lobbyItems.get(i).marked){
+                clientController.sendObject(i);
+                break;
+            }
+        }
         setUpMultiplayer = new MultiplayerLogoController(clientController, this);
         rootpane.getChildren().add(setUpMultiplayer);
     }
@@ -129,7 +134,8 @@ public class StartController extends AnchorPane {
         rootpane.getChildren().remove(lobbySelectController);
 
     }
-    public void toLobbySelect() {
+    public void toLobbySelect() throws IOException {
+
         rootpane.getChildren().remove(setUpMultiplayer);
         rootpane.getChildren().add(lobbySelectController);
     }
