@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class Lobby implements Serializable{
+public class Lobby implements Serializable {
 
     final String lobbyName;
     final String lobbyTime;
@@ -20,7 +20,7 @@ public class Lobby implements Serializable{
     public List<User> users = new ArrayList<>();
     public User lobbyLeader;
 
-    public Lobby(String name){
+    public Lobby(String name) {
         DateFormat date = new SimpleDateFormat("yyyy/MM/dd - HH:mm");
         Date realDate = new Date();
         lobbyName = name;
@@ -28,17 +28,22 @@ public class Lobby implements Serializable{
         lobbyCapacity = 16;
         lobbyId = 1;
     }
-    public void addPlayer(User user){
-        if(users.size() == 0){
+
+    public void addPlayer(User user) {
+        if (users.size() == 0) {
             lobbyLeader = user;
         }
         users.add(user);
     }
-    public void updateLobby(Lobby lobby){
+
+    public void updateLobby(Lobby lobby) {
         lobbyCapacity = lobby.lobbyCapacity;
         users = lobby.users;
     }
-    public String getLobbyTime() { return lobbyTime; }
+
+    public String getLobbyTime() {
+        return lobbyTime;
+    }
 
     public String getLobbyName() {
         return lobbyName;
@@ -47,10 +52,14 @@ public class Lobby implements Serializable{
     public int getLobbyCapacity() {
         return lobbyCapacity;
     }
+
     public List<User> getLobbyUsers() {
         return users;
     }
-    public int getLobbyId(){return lobbyId;}
+
+    public int getLobbyId() {
+        return lobbyId;
+    }
 
 
 }
