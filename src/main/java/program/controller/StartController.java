@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import program.model.Lobby;
 import program.model.User;
 
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -47,6 +48,7 @@ public class StartController extends AnchorPane {
         this.stage = stage;
         root = new SetUpGameController(stage);
 
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartMenu.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -68,13 +70,13 @@ public class StartController extends AnchorPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                //Skapar setUpGameController
-                Scene scene = new Scene(root, 1920, 1080);
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                Scene scene = new Scene(root, screenSize.width, screenSize.height);
 
+                stage.setFullScreen(true);
                 stage.setTitle("program.Chans");
                 stage.setScene(scene);
                 stage.show();
-
             }
         });
 

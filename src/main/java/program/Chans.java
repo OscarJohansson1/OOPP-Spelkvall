@@ -17,6 +17,8 @@ public class Chans extends Application {
         stage.setMaxHeight(screenSize.height);
         Scene menu = new Scene(start, screenSize.width, screenSize.height);
 
+        stage.setFullScreen(true);
+
         stage.setTitle("Menu");
         stage.setScene(menu);
         stage.show();
