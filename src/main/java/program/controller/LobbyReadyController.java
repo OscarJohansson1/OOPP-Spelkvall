@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class LobbyReadyController extends AnchorPane {
 
-    @FXML public FlowPane playerFlow;
+    @FXML public FlowPane userFlow;
     @FXML private Button backButton;
     @FXML private Button joinLobbyButton;
     @FXML public Button startButton;
@@ -34,6 +35,7 @@ public class LobbyReadyController extends AnchorPane {
     public LobbyReadyController(Stage stage, StartController startController) throws IOException, ClassNotFoundException {
 
         this.startController = startController;
+        this.stage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LobbyReady.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -49,7 +51,9 @@ public class LobbyReadyController extends AnchorPane {
     }
 
     public void initialize(){
-
+        userFlow.setVgap(10);
+        userFlow.setHgap(52);
+        userFlow.setPadding(new Insets(10,0,10,52));
         backButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -68,8 +72,9 @@ public class LobbyReadyController extends AnchorPane {
 
     }
     public void startGame() throws IOException {
+        MapController mapController = new MapController(startController.clientController,stage);
+        Parent value = mapController;
         startController.clientController.startGame();
-        Parent value = new MapController(startController.clientController);
         Scene scene = new Scene(value, 1920, 1080);
 
         stage.setTitle("program.Chans");
@@ -80,13 +85,14 @@ public class LobbyReadyController extends AnchorPane {
 
         if(chosenLobby != null){
             for (Lobby lobby : lobbies) {
-                if (lobby.getLobbyId() == chosenLobby.getLobbyId()) {
+                if (lobby.getLobbyName().equals(chosenLobby.getLobbyName())) {
                     chosenLobby = lobby;
                     return;
                 }
             }
         }
     }
+
     public void updateUserCards(){
 
         Platform.runLater(new Runnable() {
@@ -96,7 +102,7 @@ public class LobbyReadyController extends AnchorPane {
                 for(int i = 0; i < chosenLobby.users.size(); i++){
                     userCards.add(new UserCard(chosenLobby.users.get(i)));
                 }
-                playerFlow.getChildren().setAll(userCards);
+                userFlow.getChildren().setAll(userCards);
                 System.out.println("Usercards are " + userCards.size());
             }
         });

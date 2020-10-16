@@ -21,7 +21,7 @@
                <children>
                   <AnchorPane prefHeight="880.0" prefWidth="1520.0" style="-fx-background-color: #FFFFFF;" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="100.0">
                      <children>
-                        <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="258.0" styleClass="standard-button" text="Back to lobby select" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
+                        <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#toLobbySelect" prefHeight="80.0" prefWidth="258.0" styleClass="standard-button" text="Back to lobby select" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
                         <Button layoutX="1229.0" layoutY="697.0" mnemonicParsing="false" onAction="#choose" prefHeight="80.0" prefWidth="200.0" styleClass="standard-button" text="Choose" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0" />
                         <Pane layoutX="673.0" layoutY="195.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="660.0">
                            <children>

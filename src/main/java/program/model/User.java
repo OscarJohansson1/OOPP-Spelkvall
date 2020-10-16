@@ -9,11 +9,13 @@ public class User implements Serializable {
 
     private String imageUrl;
     private String userName;
+    private String color;
     private boolean ready = false;
 
-    public User(String  userName, String imageUrl) {
+    public User(String  userName, String imageUrl, String color) {
         this.userName = userName;
         this.imageUrl = imageUrl;
+        this.color = color;
     }
 
     public String getImageUrl() {
@@ -25,5 +27,8 @@ public class User implements Serializable {
     }
     public boolean setReady(){
         return ready = true;
+    }
+    public String getColor(){
+        return color;
     }
 }

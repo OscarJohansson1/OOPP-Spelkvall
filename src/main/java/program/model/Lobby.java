@@ -16,7 +16,6 @@ public class Lobby implements Serializable{
     final String lobbyName;
     final String lobbyTime;
     int lobbyCapacity;
-    int lobbyCurrentUsers;
     final int lobbyId;
     public List<User> users = new ArrayList<>();
     public User lobbyLeader;
@@ -27,7 +26,6 @@ public class Lobby implements Serializable{
         lobbyName = name;
         lobbyTime = date.format(new Timestamp(realDate.getTime()));
         lobbyCapacity = 16;
-        lobbyCurrentUsers = 0;
         lobbyId = 1;
     }
     public void addPlayer(User user){
@@ -35,11 +33,9 @@ public class Lobby implements Serializable{
             lobbyLeader = user;
         }
         users.add(user);
-        lobbyCurrentUsers = users.size();
     }
     public void updateLobby(Lobby lobby){
         lobbyCapacity = lobby.lobbyCapacity;
-        lobbyCurrentUsers = lobby.lobbyCurrentUsers;
         users = lobby.users;
     }
     public String getLobbyTime() { return lobbyTime; }
@@ -51,8 +47,8 @@ public class Lobby implements Serializable{
     public int getLobbyCapacity() {
         return lobbyCapacity;
     }
-    public int getLobbyUsers() {
-        return lobbyCurrentUsers;
+    public List<User> getLobbyUsers() {
+        return users;
     }
     public int getLobbyId(){return lobbyId;}
 

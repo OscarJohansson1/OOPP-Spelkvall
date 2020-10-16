@@ -12,16 +12,6 @@
 
  }
 
-.button-like {
-  -fx-background-color:
-       -fx-shadow-highlight-color,
-       -fx-outer-border,
-       -fx-inner-border,
-       -fx-body-color;
-  -fx-background-insets: 0 0 -1 0, 0, 1, 2;
-  -fx-background-radius: 3px, 3px, 2px, 1px;
-}
-
 .lightbox-shadow{
     -fx-background-color: rgba(0,0,0,0.75);
 }
@@ -56,11 +46,12 @@
 }
 
 .card{
-    /*-fx-effect: dropshadow(gaussian, #000000, 10, 0.1, 3, 6);*/
-    -fx-background-color: FFFFFF;
+    -fx-effect: dropshadow(gaussian, #999999, 10, 0.1, 3, 6);
+    -fx-background-color: #FFFFFF;
     -fx-border-width: 1;
     -fx-border-color: #999999;
-    -fx-text-fill: #000000;
+    -fx-text-fill: #999999;
+    -fx-font-size: 32px;
 
 }
 
@@ -72,6 +63,15 @@
 }
 
 .border-line{
-    -fx-border-width:  0 0 1 0;
-    -fx-border-color:  #CCCCCC
+
+}
+
+.lobby-item{
+
+    -fx-border-width:  0 1 1 0;
+    -fx-border-color:  #999999;
+    -fx-text-fill: #999999;
+    -fx-font-weight: bold;
+    -fx-font-size: 32px;
+
 }

@@ -13,6 +13,8 @@ public class Chans extends Application {
     public void start(Stage stage) throws Exception {
         Parent start = new StartController(stage);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        stage.setMaxWidth(screenSize.width);
+        stage.setMaxHeight(screenSize.height);
         Scene menu = new Scene(start, screenSize.width, screenSize.height);
 
         stage.setTitle("Menu");

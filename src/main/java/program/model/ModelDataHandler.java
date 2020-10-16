@@ -1,5 +1,6 @@
 package program.model;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,10 +9,9 @@ import java.util.Random;
 /**
  * This class controls everything at the moment. //TODO Make the class smaller
  */
-
 public class ModelDataHandler {
 
-    private List<Player> players = new ArrayList<>();
+    private final List<Player> players = new ArrayList<>();
     private Player currentPlayer;
     private int roundCount = 1;
     private int phaseCount = 1;
@@ -21,23 +21,25 @@ public class ModelDataHandler {
     public boolean firstDeployment = true;
 
     public List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
-            "RödaRummet","Verum", "Villan", "A-dammen", "Focus", "FortNox","GTSpritis", "GoldenI", "Chabo","Wijkanders","Hrum",
-            "Alvan","Spektrum","Gasquen","Chalmersplatsen","Olgas","RunAn", "Tagvagnen","Origogarden", "KalleGlader", "Tvargatan"));
+            "RödaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hrum",
+            "Alvan", "Spektrum", "Gasquen", "Chalmersplatsen", "Olgas", "RunAn", "Tagvagnen", "Origogarden", "KalleGlader", "Tvargatan"));
 
     /**
      * Overrides the default constructor to prevent other classes from creating new ModelDataHandlers.
      */
-    private ModelDataHandler(){}
+    private ModelDataHandler() {
+    }
 
     /**
      * Private class that holds a single ModelDataHandler and is later used to implement the Singleton Pattern.
      */
     private static class ModelDataHandlerHolder {
-        private static ModelDataHandler modelDataHandler = new ModelDataHandler();
+        private static final ModelDataHandler modelDataHandler = new ModelDataHandler();
     }
 
     /**
      * Get the one ModelDataHandler that ModelDataHandlerHolder holds.
+     *
      * @return The ModelDataHandler.
      */
     public static ModelDataHandler getModelDataHandler() {
@@ -47,49 +49,62 @@ public class ModelDataHandler {
     /**
      * Method that initialize the game board and add players to a list of players. Players are also given spaces that
      * they hold in the beginning of the game.
+     *
      * @param amountOfSpaces The amount of spaces on the game board
-     * @param colors A list of colors that should represent each player.
-     * @param logoNames A list of Strings with the logotypes that should represent each player.
+     * @param colors         A list of colors that should represent each player.
+     * @param logoNames      A list of Strings with the logotypes that should represent each player.
      */
     public void initialize(int amountOfSpaces, List<String> colors, List<String> logoNames) {
         for(int i = 0; i < colors.size(); i++)
         {
             players.add(new Player((50/colors.size()), i, colors.get(i), logoNames.get(i),i+""));
         }
-        currentPlayer = getRandomPlayer(null);
+        currentPlayer = getRandomPlayer(null, players);
         board = new Board(randomizeSpaces(amountOfSpaces));
         board.createAreas();
         round = new Round();
     }
 
-     public List<Space> randomizeSpaces(int amountOfSpaces) {
+    public List<Space> randomizeSpaces(int amountOfSpaces) {
+        return randomSpaces(amountOfSpaces, players);
+    }
+
+    public List<Space> randomizeSpaces(int amountOfSpace, List<User> users) {
+        List<Player> players = new ArrayList<>();
+        for (int i = 0; i < users.size(); i++) {
+            System.out.println("Adding new player to list based of user");
+            players.add(new Player(50 / users.size(), i, users.get(i).getColor(), users.get(i).getImageUrl(), users.get(i).getUserName()));
+        }
+        return randomSpaces(amountOfSpace, players);
+    }
+
+    private List<Space> randomSpaces(int amountOfSpaces, List<Player> players) {
+        List<Space> spaces = new ArrayList<>();
         int player = 0;
         Player lastRandomPlayer;
-        List<Space> spaces = new ArrayList<>();
         List<Player> playerList = new ArrayList<>();
-        for(int i = 0; i < amountOfSpaces; i++)
-        {
+        for (int i = 0; i < amountOfSpaces; i++) {
             player++;
-            if(player > players.size() - 1){
+            if (player > players.size() - 1) {
                 player = 0;
                 playerList.clear();
             }
-            lastRandomPlayer = getRandomPlayer(playerList);
-            spaces.add(new Space(i,lastRandomPlayer,1,spaceNames.get(i)));
+            lastRandomPlayer = getRandomPlayer(playerList, players);
+            spaces.add(new Space(i, lastRandomPlayer, 1, spaceNames.get(i)));
             playerList.add(lastRandomPlayer);
         }
         return spaces;
     }
 
-    public Player getRandomPlayer(List<Player> lastPickedPlayers) {
+    public Player getRandomPlayer(List<Player> lastPickedPlayers, List<Player> players) {
         Random random = new Random();
         Player player;
-        while(true)
-        {
+        while (true) {
+            System.out.println(players.size());
             player = players.get(random.nextInt(players.size()));
-            if(lastPickedPlayers == null) {
+            if (lastPickedPlayers == null) {
                 return player;
-            } else if(!lastPickedPlayers.contains(player)){
+            } else if (!lastPickedPlayers.contains(player)) {
                 return player;
             }
         }
@@ -98,6 +113,7 @@ public class ModelDataHandler {
     /**
      * Method that sets selectedSpace/selectedSpace2 to a specific space based on id.
      * //TODO Add better description/make method clearer.
+     *
      * @param id The id of the space to add as a selectedSpace
      * @return True if a the space was added to a selectedSpace, false if unsuccessful
      */
@@ -133,7 +149,7 @@ public class ModelDataHandler {
         round.nextPhase();
         resetSelectedSpaces();
         phaseCount++;
-        if(phaseCount > 3) {
+        if (phaseCount > 3) {
             nextPlayer();
             phaseCount = 1;
         }
@@ -147,18 +163,17 @@ public class ModelDataHandler {
         resetSelectedSpaces();
         nextPlayer();
         roundCount++;
-        if(roundCount > players.size()) {
+        if (roundCount > players.size()) {
             firstDeployment = false;
         }
     }
 
     private void nextPlayer() {
-        for(int i = 0; i < players.size(); i++)
-        {
-            if(currentPlayer == players.get(i) && i + 1 <  players.size()) {
-                currentPlayer = players.get(i+1);
+        for (int i = 0; i < players.size(); i++) {
+            if (currentPlayer == players.get(i) && i + 1 < players.size()) {
+                currentPlayer = players.get(i + 1);
                 break;
-            } else if(currentPlayer == players.get(i)) {
+            } else if (currentPlayer == players.get(i)) {
                 currentPlayer = players.get(0);
                 break;
             }
@@ -167,6 +182,7 @@ public class ModelDataHandler {
 
     /**
      * Method that checks if the selectedSpaces aren't null and initiates the phase if that is the case.
+     *
      * @return If the phase could start successfully.
      */
     public boolean startPhase() {
@@ -177,44 +193,38 @@ public class ModelDataHandler {
     }
 
     /**
-     *
      * @return Should return the calculated amount. Is hard coded right now and needs to be fixed
      */
-    public int calculateDeployableUnits(){
-        if(currentPlayer.getUnits() != 0){
+    public int calculateDeployableUnits() {
+        if (currentPlayer.getUnits() != 0) {
             return currentPlayer.getUnits();
         }
         return board.getUnitsForSpacesHold(currentPlayer) + board.getUnitsFromAreas(currentPlayer);
     }
 
-    public List<String> attackResult()
-    {
+    public List<String> attackResult() {
         return round.attackResults();
     }
 
     /**
      * Winner 2
-     * @return
      */
     public boolean isWinner() {
         return board.isWinner();
     }
 
-    public boolean isAttackedPlayerOut(){
+    public boolean isAttackedPlayerOut() {
         return board.isPlayerOut(getSelectedSpace2().getPlayer());
     }
 
     //TODO Can this be optimized?
-    public void removePlayersWithoutSpaces(){
-        List<Player> tempPlayers = players;
-        for(Player player : tempPlayers){
-            if(board.isPlayerOut(player)){
-                players.remove(player);
-            }
-        }
+    public void removePlayersWithoutSpaces() {
+        players.removeIf(player -> board.isPlayerOut(player));
     }
+
     /**
      * Check if the attack is done by checking if a next attack is possible or not.
+     *
      * @return Returns true if a next attack isn't possible.
      */
     public boolean isAttackDone() {
@@ -235,6 +245,7 @@ public class ModelDataHandler {
 
     /**
      * Method that returns the amount of units on a space based on id.
+     *
      * @param id Id of the space that the amount of units should be returned.
      * @return Number of units on a space, based on id.
      */
@@ -244,6 +255,7 @@ public class ModelDataHandler {
 
     /**
      * Method that returns the color on a space based on id.
+     *
      * @param id Id of the space that the color should be returned.
      * @return Color of the space, based on id
      */
@@ -253,6 +265,7 @@ public class ModelDataHandler {
 
     /**
      * Method that returns the id of a player as a String
+     *
      * @return the id of a player as a String.
      */
     public String getCurrentPlayerName() {
@@ -287,8 +300,7 @@ public class ModelDataHandler {
         return board.getSelectedSpace2();
     }
 
-    //TODO make new Space(...) depending on what they will do with the method on the other side of the server
-    public Space getSpaceFromId(int id){
+    public Space getSpaceFromId(int id) {
         return board.getSpace(id);
     }
 
@@ -308,8 +320,8 @@ public class ModelDataHandler {
         this.board = board;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
+    public void setUsers(List<User> users) {
+
     }
 }
 

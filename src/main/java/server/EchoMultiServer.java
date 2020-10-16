@@ -71,8 +71,9 @@ public class EchoMultiServer {
                             outObject.writeObject(serverController.getLobbys());
                         }
                         else if(inputLine.equals("startGame")){
+                            writeToAll(lobby.getLobbyUsers(),outObject,lobby);
+                            serverController.initializeServerBoardController(lobby);
                             writeToAll(serverController.getGameBoard(), outObject, lobby);
-                            Random random = new Random();
                             writeToRandomClientInLobby(lobby);
                         }
                     }
@@ -88,16 +89,17 @@ public class EchoMultiServer {
 
         private void writeToAll(Object input, ObjectOutputStream outObject, Lobby lobby) throws IOException {
             for(ClientHandler client: clients) {
-                if(client.lobby == lobby){
+                if(client.lobby.getLobbyName().equals(lobby.getLobbyName())){
                     System.out.println("Sending " + input +" to client" + client + " in lobby " + lobby.getLobbyName());
                     outObject.writeObject(input);
+                    outObject.flush();
                 }
             }
         }
         private void writeToRandomClientInLobby( Lobby lobby) throws IOException {
             List<ClientHandler> clientHandlers = new ArrayList<>();
             for(ClientHandler clientHandler: clients){
-                if(clientHandler.lobby == lobby){
+                if(clientHandler.lobby.getLobbyName().equals(lobby.getLobbyName())){
                     clientHandlers.add(clientHandler);
                 }
             }

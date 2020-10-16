@@ -1,4 +1,9 @@
 
 .idea/libraries/bin.xml
-*.xml
 *.iml
+*.xml
+!pom.xml
+!encofings.xml
+!.idea/jarRepositories.xml
+!.idea/encodings.xml
+!.idea/compiler.xml

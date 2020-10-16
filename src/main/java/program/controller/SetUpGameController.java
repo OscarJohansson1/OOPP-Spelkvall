@@ -25,7 +25,7 @@ import java.util.Arrays;
 /**
  * the controller for StartMenu.fxml
  */
-class SetUpGameController extends AnchorPane {
+public class SetUpGameController extends AnchorPane {
 
     @FXML private Slider slider;
     @FXML private AnchorPane pane;
@@ -176,6 +176,8 @@ class SetUpGameController extends AnchorPane {
 
             Button playerButton = playerButtonList.get(nextToChoose - 1);
             playerButton.setText("Player " + nextToChoose + " represents " + image.getId().substring(3));
+            Color color = (Color)playerButton.getBackground().getFills().get(0).getFill();
+            setTextContrastColor(playerButton,color);
             playerButton.setStyle(image.getStyle());
 
             chosen.setBrightness(-0.5);
@@ -186,7 +188,15 @@ class SetUpGameController extends AnchorPane {
             nextToChoose++;
         }
     }
+    public static void setTextContrastColor(Button button,Color color){
 
+        button.setTextFill(getContrastColor(color));
+
+    }
+    public static Color getContrastColor(Color color) {
+        double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000;
+        return y >= 0.5 ? Color.valueOf("#000000") : Color.valueOf("#ffffff");
+    }
     private void makeSelected(Button button){
         //Going to implement at a later stage
     }

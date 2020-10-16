@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import program.model.Lobby;
 import program.model.Player;
 import program.model.User;
@@ -83,8 +84,15 @@ public class MultiplayerLogoController extends AnchorPane {
         startController.removeSetUp();
     }
     public void choose() throws IOException, ClassNotFoundException {
-        startController.goToLobbyReady(new User(playerNameTextField.getCharacters().toString(),selectedbutton.getId().substring(3).toLowerCase() + "_logo"), startController.lobbyReadyController.chosenLobby);
+
+        if (!(playerNameTextField.getText().trim().isEmpty())){
+
+            startController.goToLobbyReady(new User(playerNameTextField.getCharacters().toString(),selectedbutton.getId().substring(3).toLowerCase() + "_logo",selectedbutton.getStyle().substring(22,29)), startController.lobbyReadyController.chosenLobby);
+
+        }
+
     }
+    public void toLobbySelect() {  startController.toLobbySelect(); }
 
 
 

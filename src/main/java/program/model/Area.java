@@ -1,11 +1,12 @@
 package program.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * This class hold information about an area.
  */
-class Area {
+class Area implements Serializable {
 
     private final String name;
     private final int worth;

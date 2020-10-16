@@ -8,14 +8,14 @@ import server.EchoMultiServer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LobbyController {
+public class LobbyListController {
     private final List<Lobby> lobbies = new ArrayList<>();
     public List<Lobby> getLobbies(){
         return lobbies;
     }
     public Lobby updateLobby(Lobby lobby){
         for (Lobby value : lobbies) {
-            if (value.getLobbyId() == lobby.getLobbyId()) {
+            if (value.getLobbyName().equals(lobby.getLobbyName())) {
                 value.updateLobby(lobby);
                 return value;
             }
@@ -23,4 +23,5 @@ public class LobbyController {
         lobbies.add(lobby);
         return lobby;
     }
+
 }

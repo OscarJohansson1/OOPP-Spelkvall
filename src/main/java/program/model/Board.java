@@ -1,5 +1,6 @@
 package program.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * This class represents the board and is keeping track of the board.
  */
-public class Board {
+public class Board implements Serializable {
 
     private List<Space> spaces;
     private List<Area> areas;

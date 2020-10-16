@@ -3,6 +3,7 @@ package program.controller;
 import program.model.Board;
 import program.model.Lobby;
 import program.model.Player;
+import program.model.User;
 
 import java.io.*;
 import java.net.Socket;
@@ -41,7 +42,7 @@ public class Client {
                     }
                     else if(message instanceof Lobby){
                         System.out.println("Recieved lobby with " + ((Lobby) message).users.size() + " users");
-                        if(((Lobby)message).getLobbyId() == clientController.startController.lobbyReadyController.chosenLobby.getLobbyId()){
+                        if(((Lobby) message).getLobbyName().equals(clientController.startController.lobbyReadyController.chosenLobby.getLobbyName())){
                             clientController.startController.lobbyReadyController.chosenLobby.updateLobby((Lobby) message);
                             clientController.startController.lobbyReadyController.updateUserCards();
                         }
@@ -54,8 +55,8 @@ public class Client {
                                 clientController.startController.lobbyReadyController.updateUserCards();
                                 break;
                             }
-                            else if(object instanceof Player){
-                                clientController.modelDataHandler.setPlayers((List<Player>) message);
+                            else if(object instanceof User){
+                                clientController.modelDataHandler.setUsers((List<User>) message);
                                 break;
                             }
                         }
@@ -118,7 +119,7 @@ public class Client {
         server.write("move");
     }
     public void startGame() throws IOException {
-        server.write("Start");
+        server.write("startGame");
     }
     public void getLobbys() throws IOException, ClassNotFoundException {
         sendObject("LOBBYS");

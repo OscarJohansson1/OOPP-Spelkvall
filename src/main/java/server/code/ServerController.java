@@ -4,11 +4,10 @@ import program.model.Board;
 import program.model.Player;
 import program.model.Lobby;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ServerController {
-    private LobbyController lobbyController = new LobbyController();
+    private LobbyListController lobbyController = new LobbyListController();
     private ServerBoardController serverBoardController = new ServerBoardController();
     private PlayerController playerController = new PlayerController();
 
@@ -37,6 +36,14 @@ public class ServerController {
     }
     public Board getGameBoard(){
         return serverBoardController.getBoard();
+    }
+    public void initializeServerBoardController(Lobby lobby){
+        serverBoardController.initialize(lobby.users);
+    }
+    public void initializeGame(Lobby lobby){
+        if(lobbyController.getLobbies().contains(lobby)){
+
+        }
     }
 
     public List<Lobby> getLobbys() {

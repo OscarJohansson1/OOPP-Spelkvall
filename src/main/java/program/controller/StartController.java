@@ -120,5 +120,14 @@ public class StartController extends AnchorPane {
     public void removeSetUp() {
         rootpane.getChildren().remove(setUpMultiplayer);
     }
+    public void backToMainMenu(){
+
+        rootpane.getChildren().remove(lobbySelectController);
+
+    }
+    public void toLobbySelect() {
+        rootpane.getChildren().remove(setUpMultiplayer);
+        rootpane.getChildren().add(lobbySelectController);
+    }
 
 }

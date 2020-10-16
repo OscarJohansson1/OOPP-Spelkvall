@@ -117,7 +117,7 @@ public class MapController extends AnchorPane {
 
     @FXML public ImageView imageTeamLogo;
 
-    ModelDataHandler modelDataHandler;
+    ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
     MapView view = new MapView();
     private AttackController attackController;
     List<Button> allButtons;
@@ -151,9 +151,17 @@ public class MapController extends AnchorPane {
         initialize();
 
     }
-    MapController(ClientController clientController){
+    MapController(ClientController clientController, Stage stage){
+        this.stage = stage;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
         this.clientController = clientController;
-        modelDataHandler = ModelDataHandler.getModelDataHandler();
     }
     private void initialize() throws IOException {
 
@@ -390,6 +398,7 @@ public class MapController extends AnchorPane {
                 resetColor();
             }
         }
+
     }
 
     private void setSpaceEvent(int id) {

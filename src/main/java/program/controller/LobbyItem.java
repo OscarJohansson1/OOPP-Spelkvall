@@ -40,7 +40,11 @@ public class LobbyItem extends AnchorPane {
 
     }
     public void onClick() throws IOException {
+
         startController.lobbyReadyController.chosenLobby = lobby;
+        startController.lobbySelectController.resetChosen();
+        this.setStyle("-fx-background-color: cornflowerblue");
+
     }
 
 
