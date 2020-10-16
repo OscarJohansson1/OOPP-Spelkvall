@@ -31,5 +31,4 @@ public interface IPhase {
      * @return The name of the phase.
      */
     String getPhaseName();
-
 }

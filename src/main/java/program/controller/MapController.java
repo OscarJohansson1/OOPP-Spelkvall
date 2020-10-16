@@ -224,8 +224,8 @@ public class MapController extends AnchorPane {
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
                 if (modelDataHandler.firstDeployment){
+                    view.updatePhase("DEPLOY", MapController.this);
                     modelDataHandler.firstRoundNextPhase();
                     view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
                     modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits());
@@ -233,6 +233,8 @@ public class MapController extends AnchorPane {
                     moveSlider.setMax(modelDataHandler.getDeployableUnits());
                     resetDisplayCubes();
                     resetColor();
+                    donedeploy.setDisable(true);
+                    donedeploy.setStyle("-fx-background-color: #000000");
                 }
                 else{
                     modelDataHandler.nextPhase();
@@ -243,6 +245,7 @@ public class MapController extends AnchorPane {
                     sliderVisibility(false);
                     addMarkedCube(firstMarked);
                     addMarkedCube(secondMarked);
+                    skipAttack.setVisible(true);
                 }
             }
         });
@@ -284,6 +287,7 @@ public class MapController extends AnchorPane {
         donedeploy.setDisable(true);
         donedeploy.setStyle("-fx-background-color: #000000");
         moveSlider.setMax(modelDataHandler.getDeployableUnits());
+        skipAttack.setVisible(false);
     }
     public void deploy(){
         if(modelDataHandler.startPhase())
@@ -291,6 +295,9 @@ public class MapController extends AnchorPane {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
             moveSlider.setMax(modelDataHandler.getDeployableUnits());
+            //donedeploy.setDisable(true);
+            //donedeploy.setStyle("-fx-background-color: #000000");
+
         }
         if (modelDataHandler.getDeployableUnits() == 0){
             donedeploy.setDisable(false);
