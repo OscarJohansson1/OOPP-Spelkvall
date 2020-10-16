@@ -1,6 +1,7 @@
 package program.controller;
 
 import program.model.Lobby;
+import program.model.ModelDataHandler;
 import program.model.Player;
 import program.model.User;
 
@@ -11,6 +12,7 @@ public class ClientController {
     Client echoClient;
     private MapController mapController;
     StartController startController;
+    ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
     Lobby lobby;
     public ClientController(Client client, StartController startController) throws IOException {
         this.echoClient = client;
@@ -47,5 +49,11 @@ public class ClientController {
     public void setLobby(Lobby lobby){
         this.lobby = lobby;
         startController.lobbyReadyController.updateUserCards();
+    }
+    public void startGame() throws IOException {
+        echoClient.startGame();
+    }
+    public void sendObject(Object object) throws IOException {
+        echoClient.sendObject(object);
     }
 }

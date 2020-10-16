@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -57,7 +58,7 @@ public class EndController extends AnchorPane {
     private void initialize() {
         if(modelDataHandler.isWinner()){
             winnerLabel.setText("Congratulations to the winner");
-            winnerImageView.setImage(modelDataHandler.getWinnerLogo());
+            winnerImageView.setImage(new Image(modelDataHandler.getWinnerLogo()));
         } else {
             winnerLabel.setText("No winner this time");
         }

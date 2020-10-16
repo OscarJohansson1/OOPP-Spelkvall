@@ -2,13 +2,14 @@ package program.model;
 
 import javafx.scene.control.Button;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * This class holds methods that´s controlling the spaces. Mostly creating them and updating them.
  */
 //TODO Remove public when controllers don't use getId() directly anymore
-public class Space {
+public class Space implements Serializable {
 
     private final int id;
     private Player player;

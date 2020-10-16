@@ -7,18 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import program.model.Lobby;
-import program.model.Player;
 import program.model.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The controller for the StartMenu.fxml
@@ -38,7 +34,7 @@ public class StartController extends AnchorPane {
 
     LobbySelectController lobbySelectController;
     LobbyReadyController lobbyReadyController;
-    private SetUpMultiplayer setUpMultiplayer;
+    private MultiplayerLogoController setUpMultiplayer;
     ClientController clientController;
     Client client;
 
@@ -62,7 +58,7 @@ public class StartController extends AnchorPane {
         Platform.setImplicitExit(false);
 
         lobbySelectController = new LobbySelectController(StartController.this);
-        lobbyReadyController = new LobbyReadyController( stage);
+        lobbyReadyController = new LobbyReadyController( stage,this);
         initialize();
 
     }
@@ -112,10 +108,13 @@ public class StartController extends AnchorPane {
     public void goToLobbyReady(User user, Lobby lobby) throws IOException, ClassNotFoundException {
         lobby.addPlayer(user);
         clientController.updateLobby(lobby);
+        if(lobbyReadyController.chosenLobby.lobbyLeader != user){
+            lobbyReadyController.startButton.setVisible(false);
+        }
         rootpane.getChildren().add(lobbyReadyController);
     }
     public void goToSetup() throws IOException {
-        setUpMultiplayer = new SetUpMultiplayer(clientController, this);
+        setUpMultiplayer = new MultiplayerLogoController(clientController, this);
         rootpane.getChildren().add(setUpMultiplayer);
     }
     public void removeSetUp() {

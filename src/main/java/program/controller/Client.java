@@ -1,7 +1,8 @@
 package program.controller;
 
+import program.model.Board;
 import program.model.Lobby;
-import program.model.User;
+import program.model.Player;
 
 import java.io.*;
 import java.net.Socket;
@@ -46,10 +47,23 @@ public class Client {
                         }
                     }
                     else if(message instanceof List){
-                        clientController.startController.lobbyReadyController.updateChoosenLobby((List<Lobby>) message);
-                        clientController.startController.lobbySelectController.updateLobbys((List<Lobby>) message);
-                        clientController.startController.lobbyReadyController.updateUserCards();
+                        for (Object object : (List<?>) message) {
+                            if (object instanceof Lobby) {
+                                clientController.startController.lobbyReadyController.updateChosenLobby((List<Lobby>) message);
+                                clientController.startController.lobbySelectController.updateLobbys((List<Lobby>) message);
+                                clientController.startController.lobbyReadyController.updateUserCards();
+                                break;
+                            }
+                            else if(object instanceof Player){
+                                clientController.modelDataHandler.setPlayers((List<Player>) message);
+                                break;
+                            }
+                        }
                     }
+                    else if(message instanceof Board){
+                        clientController.modelDataHandler.setBoard((Board) message);
+                    }
+
                 }
                 catch(InterruptedException ignored){ }
             }
@@ -123,4 +137,5 @@ public class Client {
         System.out.println("Terminating connection to server");
         server.socket.close();
     }
+
 }

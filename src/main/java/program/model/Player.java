@@ -3,17 +3,20 @@ package program.model;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.io.Serializable;
+
 /**
  * The Player class creates players and hold information about a player.
  */
 
-public class Player {
+public class Player implements Serializable {
 
     private int units;
     private int id;
     private Color color;
-    private Image logoUrl;
+    private String logoUrl;
     private String name;
+    private boolean myTurn = false;
 
     /**
      * This is a constructor for the player.
@@ -26,7 +29,7 @@ public class Player {
         this.id = id;
         this.color = color;
         //TODO Remove dependency to JavaFX (Image)
-        this.logoUrl = new Image("file:src/main/resources/pictures/logos/"+logoUrl+".png");
+        this.logoUrl = "file:src/main/resources/pictures/logos/"+logoUrl+".png";
         this.name = name;
     }
 
@@ -53,11 +56,15 @@ public class Player {
         return color;
     }
 
-    Image getLogoUrl() {
+    String getLogoUrl() {
         return logoUrl;
     }
 
     public String getName() {
         return name;
+    }
+    public void setMyTurn(boolean myTurn){ this.myTurn = myTurn;}
+    public boolean getMyTurn(){
+        return myTurn;
     }
 }

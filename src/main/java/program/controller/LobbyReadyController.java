@@ -4,7 +4,7 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -23,14 +23,17 @@ public class LobbyReadyController extends AnchorPane {
     @FXML public FlowPane playerFlow;
     @FXML private Button backButton;
     @FXML private Button joinLobbyButton;
+    @FXML public Button startButton;
 
-    private StartController root;
-    private List<UserCard> userCards = new ArrayList<>();
+    private final StartController startController;
+    private final List<UserCard> userCards = new ArrayList<>();
     private Stage stage;
     Lobby chosenLobby;
+    User lobbyLeader;
 
-    public LobbyReadyController(Stage stage) throws IOException, ClassNotFoundException {
+    public LobbyReadyController(Stage stage, StartController startController) throws IOException, ClassNotFoundException {
 
+        this.startController = startController;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LobbyReady.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -52,7 +55,7 @@ public class LobbyReadyController extends AnchorPane {
             public void handle(MouseEvent mouseEvent) {
 
                 //Skapar setUpGameController
-                Scene scene = new Scene(root, 1920, 1080);
+                Scene scene = new Scene(startController, 1920, 1080);
 
                 stage.setTitle("program.Chans");
                 stage.setScene(scene);
@@ -64,10 +67,16 @@ public class LobbyReadyController extends AnchorPane {
     public void ready(){
 
     }
-    public void startGame(){
+    public void startGame() throws IOException {
+        startController.clientController.startGame();
+        Parent value = new MapController(startController.clientController);
+        Scene scene = new Scene(value, 1920, 1080);
 
+        stage.setTitle("program.Chans");
+        stage.setScene(scene);
+        stage.show();
     }
-    public void updateChoosenLobby(List<Lobby> lobbies) {
+    public void updateChosenLobby(List<Lobby> lobbies) {
 
         if(chosenLobby != null){
             for (Lobby lobby : lobbies) {
@@ -77,7 +86,6 @@ public class LobbyReadyController extends AnchorPane {
                 }
             }
         }
-
     }
     public void updateUserCards(){
 

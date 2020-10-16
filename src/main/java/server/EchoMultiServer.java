@@ -4,16 +4,18 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import program.model.*;
-import server.code.model.ServerModel;
+import server.code.ServerController;
 
 public class EchoMultiServer {
 
     private ServerSocket serverSocket;
     private final List<ClientHandler> clients = new ArrayList<>();
-    private final ServerModel serverModel = new ServerModel();
+    private final ServerController serverController = new ServerController();
 
     public void start(int port) {
         try {
@@ -43,28 +45,39 @@ public class EchoMultiServer {
 
     }
 
-    private class ClientHandler extends Thread {
+    public class ClientHandler extends Thread {
         private final Socket clientSocket;
+        private Lobby lobby;
+        ObjectOutputStream outObject;
+        ObjectInputStream inObject;
 
         public ClientHandler(Socket socket) { this.clientSocket = socket; }
 
         public void run() {
             try {
-                ObjectOutputStream outObject = new ObjectOutputStream(clientSocket.getOutputStream());
-                ObjectInputStream inObject = new ObjectInputStream(clientSocket.getInputStream());
+                outObject = new ObjectOutputStream(clientSocket.getOutputStream());
+                inObject = new ObjectInputStream(clientSocket.getInputStream());
                 Object inputLine;
                 while ((inputLine = inObject.readObject()) != null) {
                     System.out.println("Recieved: " + inputLine);
                     if(inputLine instanceof Lobby){
-                        Lobby lobby = serverModel.updateLobby((Lobby)inputLine);
-                        System.out.println("Returning "+lobby+" with " + lobby.users.size() + " users");
-                        writeToAll(lobby, outObject);
+                        lobby = (Lobby) inputLine;
+                        writeToAll(serverController.updateLobby((Lobby)inputLine), outObject,lobby);
                     }
                     else if(inputLine instanceof String){
+
                         if(inputLine.equals("LOBBYS")){
-                            System.out.println("Returning: " + serverModel.getLobbys());
-                            outObject.writeObject(serverModel.getLobbys());
+                            System.out.println("Returning: " + serverController.getLobbys());
+                            outObject.writeObject(serverController.getLobbys());
                         }
+                        else if(inputLine.equals("startGame")){
+                            writeToAll(serverController.getGameBoard(), outObject, lobby);
+                            Random random = new Random();
+                            writeToRandomClientInLobby(lobby);
+                        }
+                    }
+                    else if(inputLine instanceof Space){
+                        writeToAll(inputLine, outObject, lobby);
                     }
 
                 }
@@ -73,11 +86,22 @@ public class EchoMultiServer {
             }
         }
 
-        private void writeToAll(Object input, ObjectOutputStream outObject) throws IOException {
+        private void writeToAll(Object input, ObjectOutputStream outObject, Lobby lobby) throws IOException {
             for(ClientHandler client: clients) {
-                System.out.println("Sending " + input +" to client" + client);
-                outObject.writeObject(input);
+                if(client.lobby == lobby){
+                    System.out.println("Sending " + input +" to client" + client + " in lobby " + lobby.getLobbyName());
+                    outObject.writeObject(input);
+                }
             }
+        }
+        private void writeToRandomClientInLobby( Lobby lobby) throws IOException {
+            List<ClientHandler> clientHandlers = new ArrayList<>();
+            for(ClientHandler clientHandler: clients){
+                if(clientHandler.lobby == lobby){
+                    clientHandlers.add(clientHandler);
+                }
+            }
+            clientHandlers.get(new Random().nextInt(clientHandlers.size())).outObject.writeObject(true);
         }
     }
 

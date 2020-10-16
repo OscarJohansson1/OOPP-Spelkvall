@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SetUpMultiplayer extends AnchorPane {
+public class MultiplayerLogoController extends AnchorPane {
 
     @FXML private ImageView logoImage;
     @FXML private TextField playerNameTextField;
@@ -44,7 +44,7 @@ public class SetUpMultiplayer extends AnchorPane {
     private ImageView selectedbutton;
 
 
-    public SetUpMultiplayer(ClientController clientController,  StartController startController) throws IOException {
+    public MultiplayerLogoController(ClientController clientController, StartController startController) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("setUpOnline.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

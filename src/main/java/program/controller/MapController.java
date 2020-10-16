@@ -1,6 +1,5 @@
 package program.controller;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -125,13 +124,13 @@ public class MapController extends AnchorPane {
     private List<Text> allTexts;
     private Stage stage;
     private PauseController pauseController;
+    private ClientController clientController;
 
 
     MapController(List<Color> colors, List<String> logoNames, Stage stage) throws IOException {
 
         this.stage = stage;
         pauseController = new PauseController(stage, this);
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -147,13 +146,19 @@ public class MapController extends AnchorPane {
         allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsabaren, textZaloonen, textWinden, textLofTDet,
                 textRodaRummet,textVerum, textVillan, textAdammen, textFocus, textFortNox,textGTSpritis, textGoldenI, textChabo,textWijkanders,textHrum,
                 textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogarden, textKalleGlader, textTvargatan));
-
         modelDataHandler = ModelDataHandler.getModelDataHandler();
         modelDataHandler.initialize(allButtons.size(), colors, logoNames);
         initialize();
 
     }
+    MapController(ClientController clientController){
+        this.clientController = clientController;
+        modelDataHandler = ModelDataHandler.getModelDataHandler();
+    }
     private void initialize() throws IOException {
+
+
+
         //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
         /*EchoClient.getEchoClient().recieveController(this);
         EchoClient client = EchoClient.getEchoClient();
@@ -164,7 +169,11 @@ public class MapController extends AnchorPane {
             allButtons.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    setSpace(var);
+                    try {
+                        setSpace(var);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         }
@@ -343,7 +352,7 @@ public class MapController extends AnchorPane {
         }
     }
 
-    private void setSpace(int id) {
+    private void setSpace(int id) throws IOException {
         if(modelDataHandler.receiveSelectedSpace(id))
         {
             if(modelDataHandler.getSelectedSpace2() == null)
@@ -368,6 +377,7 @@ public class MapController extends AnchorPane {
             else if(secondDisplayText.getText().isEmpty()){
                 displayText(secondDisplayText, getTextFromList(id));
             }
+            if(clientController != null) clientController.sendObject(modelDataHandler.getSpaceFromId(id));
         }
         else{
             if(modelDataHandler.getSelectedSpace() == null && modelDataHandler.getSelectedSpace2() == null){
@@ -380,6 +390,7 @@ public class MapController extends AnchorPane {
     private void setSpaceEvent(int id) {
         view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
         view.setColor(getCube(id), modelDataHandler.getColorOnSpace(id).darker().darker(), allButtons);
+
     }
 
     private void setSpaceEvent(int id, int id2) {
@@ -475,10 +486,10 @@ public class MapController extends AnchorPane {
         return null;
     }
 
-    public Image getTeamLogo(int id){
+    public String getTeamLogo(int id){
         return modelDataHandler.getTeamLogo(id);
     }
-    public Image getTeamLogo(){
+    public String getTeamLogo(){
         return modelDataHandler.getTeamLogo();
     }
 

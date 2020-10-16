@@ -23,7 +23,7 @@ public class ModelDataHandler {
     private int unitsToUse = 1;
     public boolean firstDeployment = true;
 
-    private List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
+    public List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
             "RödaRummet","Verum", "Villan", "A-dammen", "Focus", "FortNox","GTSpritis", "GoldenI", "Chabo","Wijkanders","Hrum",
             "Alvan","Spektrum","Gasquen","Chalmersplatsen","Olgas","RunAn", "Tagvagnen","Origogarden", "KalleGlader", "Tvargatan"));
 
@@ -65,7 +65,7 @@ public class ModelDataHandler {
         round = new Round();
     }
 
-    private List<Space> randomizeSpaces(int amountOfSpaces) {
+     public List<Space> randomizeSpaces(int amountOfSpaces) {
         int player = 0;
         Player lastRandomPlayer;
         List<Space> spaces = new ArrayList<>();
@@ -84,7 +84,7 @@ public class ModelDataHandler {
         return spaces;
     }
 
-    private Player getRandomPlayer(List<Player> lastPickedPlayers) {
+    public Player getRandomPlayer(List<Player> lastPickedPlayers) {
         Random random = new Random();
         Player player;
         while(true)
@@ -290,16 +290,27 @@ public class ModelDataHandler {
         return  board.selectedSpace2;
     }
 
-    public Image getTeamLogo(int id) {
+    public Space getSpaceFromId(int id){
+        return board.getSpace(id);
+    }
+
+    public String getTeamLogo(int id) {
         return board.findSpace(id).getPlayer().getLogoUrl();
     }
 
-    public Image getTeamLogo() {
+    public String getTeamLogo() {
         return currentPlayer.getLogoUrl();
     }
 
-    public Image getWinnerLogo() {
+    public String getWinnerLogo() {
         return board.getSpace(0).getPlayer().getLogoUrl();
+    }
+
+    public void setBoard(Board board){
+        this.board = board;
+    }
+    public void setPlayers(List<Player> players){
+        this.players = players;
     }
 }
 

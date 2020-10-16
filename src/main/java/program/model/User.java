@@ -9,6 +9,7 @@ public class User implements Serializable {
 
     private String imageUrl;
     private String userName;
+    private boolean ready = false;
 
     public User(String  userName, String imageUrl) {
         this.userName = userName;
@@ -21,5 +22,8 @@ public class User implements Serializable {
 
     public String getUserName() {
         return userName;
+    }
+    public boolean setReady(){
+        return ready = true;
     }
 }

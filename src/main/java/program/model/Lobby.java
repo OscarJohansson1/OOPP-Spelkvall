@@ -19,6 +19,7 @@ public class Lobby implements Serializable{
     int lobbyCurrentUsers;
     final int lobbyId;
     public List<User> users = new ArrayList<>();
+    public User lobbyLeader;
 
     public Lobby(String name){
         DateFormat date = new SimpleDateFormat("yyyy/MM/dd - HH:mm");
@@ -30,6 +31,9 @@ public class Lobby implements Serializable{
         lobbyId = 1;
     }
     public void addPlayer(User user){
+        if(users.size() == 0){
+            lobbyLeader = user;
+        }
         users.add(user);
         lobbyCurrentUsers = users.size();
     }

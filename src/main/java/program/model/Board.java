@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * This class represents the board and is keeping track of the board.
  */
-class Board {
+public class Board {
 
     private List<Space> spaces;
     private List<Area> areas;
@@ -77,14 +77,14 @@ class Board {
             {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0},
     };
 
-    Board(List<Space> spaces) {
+    public Board(List<Space> spaces) {
         this.spaces = spaces;
     }
 
     /**
      * Hardcoded as of now
      */
-    void createAreas() {
+    public void createAreas() {
 
         Area karhuset = new Area("Kårhuset", 7,
                 Arrays.asList(spaces.get(19), spaces.get(20), spaces.get(21), spaces.get(22), spaces.get(23)));

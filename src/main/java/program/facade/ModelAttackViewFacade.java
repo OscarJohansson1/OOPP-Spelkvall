@@ -10,7 +10,7 @@ public class ModelAttackViewFacade {
     private ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
 
     public Image getTeamLogo(int i) {
-        return modelDataHandler.getTeamLogo(i);
+        return new Image(modelDataHandler.getTeamLogo(i));
     }
 
     public boolean isAttackDone(){
