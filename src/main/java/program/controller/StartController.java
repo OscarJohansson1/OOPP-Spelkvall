@@ -33,6 +33,7 @@ public class StartController extends AnchorPane {
     private Parent root;// = setUpGameController;
     private Stage stage;
 
+
     LobbySelectController lobbySelectController;
     LobbyReadyController lobbyReadyController;
     private MultiplayerLogoController setUpMultiplayer;
@@ -109,6 +110,7 @@ public class StartController extends AnchorPane {
     }
     public void goToLobbyReady(User user, Lobby lobby) throws IOException, ClassNotFoundException {
         lobby.addPlayer(user);
+        clientController.user = user;
         clientController.updateLobby(lobby);
         if(lobbyReadyController.chosenLobby.lobbyLeader != user){
             lobbyReadyController.startButton.setVisible(false);

@@ -13,7 +13,7 @@ public class User implements Serializable {
     private boolean ready = false;
     private boolean myTurn = false;
 
-    public User(String  userName, String imageUrl, String color) {
+    public User(String userName, String imageUrl, String color) {
         this.userName = userName;
         this.imageUrl = imageUrl;
         this.color = color;
@@ -26,13 +26,21 @@ public class User implements Serializable {
     public String getUserName() {
         return userName;
     }
-    public boolean setReady(){
-        return ready = true;
+
+    public void setReady(boolean b) {
+        ready = b;
     }
-    public String getColor(){
+
+    public String getColor() {
         return color;
     }
-    public void setMyTurn(boolean myTurn){
+
+    public void setMyTurn(boolean myTurn) {
         this.myTurn = myTurn;
     }
+
+    public boolean isReady() {
+        return ready;
+    }
+
 }

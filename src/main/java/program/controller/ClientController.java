@@ -15,6 +15,8 @@ public class ClientController {
     StartController startController;
     ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
     Lobby lobby;
+    User user;
+
     public ClientController(Client client, StartController startController) throws IOException {
         this.echoClient = client;
         this.startController = startController;
@@ -24,9 +26,11 @@ public class ClientController {
             System.out.println("Could not connect to server");
         }
     }
+
     public void setMapController(MapController mapController) {
         this.mapController = mapController;
     }
+
     public void showPhase(String string) {
         mapController.view.updatePhase(string,mapController);
 

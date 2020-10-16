@@ -35,6 +35,13 @@ public class LobbySelectController extends AnchorPane {
     public void joinLobby() throws IOException {
         startController.goToSetup();
     }
+
+    public void toMenu() throws IOException {
+
+        startController.backToMainMenu();
+
+    }
+
     public void resetChosen(){
 
         for(LobbyItem lobbyitem : lobbyitems){

@@ -81,6 +81,16 @@ public class LobbyReadyController extends AnchorPane {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void checkIfReady(){
+        for(User user : chosenLobby.users){
+            if(!(user.isReady())){
+                return;
+            }
+        }
+        startButton.setDisable(false);
+    }
+    
     public void updateChosenLobby(List<Lobby> lobbies) {
 
         if(chosenLobby != null){

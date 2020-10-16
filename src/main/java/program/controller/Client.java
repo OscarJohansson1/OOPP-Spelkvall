@@ -56,8 +56,14 @@ public class Client {
                                 break;
                             }
                             else if(object instanceof User){
-                                clientController.modelDataHandler.setUsers((List<User>) message);
-                                break;
+                                for(User user : clientController.startController.lobbyReadyController.chosenLobby.users ){
+                                    if(user.equals((User)object)) {
+                                        user.setReady(((User)object).isReady());
+                                        clientController.startController.lobbyReadyController.checkIfReady();
+                                        break;
+                                    }
+                                }
+
                             }
                         }
                     }
