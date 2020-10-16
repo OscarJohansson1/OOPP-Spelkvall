@@ -128,10 +128,10 @@ public class MapController extends AnchorPane {
 
 
     MapController(List<String> colors, List<String> logoNames, Stage stage) throws IOException {
-
         this.stage = stage;
         pauseController = new PauseController(stage, this);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
+        //stage.setFullScreen(true);
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {
@@ -139,6 +139,8 @@ public class MapController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+
         allButtons = new ArrayList<>(Arrays.asList(cubeHubben,cubeBasen,cubeKajsabaren,cubeZaloonen,cubeWinden,cubeLofTDet,
                 cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
                 cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden, cubeKalleGlader, cubeTvargatan));
@@ -150,14 +152,13 @@ public class MapController extends AnchorPane {
         modelDataHandler.initialize(allButtons.size(), colors, logoNames);
         initialize();
 
+
     }
     MapController(ClientController clientController){
         this.clientController = clientController;
         modelDataHandler = ModelDataHandler.getModelDataHandler();
     }
     private void initialize() throws IOException {
-
-        //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
         /*EchoClient.getEchoClient().recieveController(this);
         EchoClient client = EchoClient.getEchoClient();
         client.startConnection("95.80.61.51", 6666);
@@ -176,7 +177,7 @@ public class MapController extends AnchorPane {
             });
         }
 
-        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+             stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 
             @Override
             public void handle(KeyEvent t) {
