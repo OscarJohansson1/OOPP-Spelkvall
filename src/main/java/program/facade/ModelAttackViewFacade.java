@@ -17,8 +17,12 @@ public class ModelAttackViewFacade {
         return modelDataHandler.isAttackDone();
     }
 
-    public List<Integer> getDiceResults() {
-        return modelDataHandler.getDiceResults();
+    public List<Integer> getAttackerDiceResults() {
+        return modelDataHandler.getAttackerDiceResults();
+    }
+
+    public List<Integer> getDefenderDiceResults() {
+        return modelDataHandler.getDefenderDiceResults();
     }
 
     public List<String> getAttackResults() {

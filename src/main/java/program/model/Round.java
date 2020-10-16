@@ -47,9 +47,12 @@ class Round {
         return true;
     }
 
-    //TODO Look over these methods.
-    List<Integer> diceresults() {
-        return attack.diceresults();
+    List<Integer> attackerDiceResults() {
+        return attack.attackerDiceResults();
+    }
+
+    List<Integer> defenderDiceResults() {
+        return attack.defenderDiceResults();
     }
 
     List<String> attackResults() {

@@ -96,11 +96,10 @@ public class ModelDataHandler {
         return spaces;
     }
 
-    public Player getRandomPlayer(List<Player> lastPickedPlayers, List<Player> players) {
+    private Player getRandomPlayer(List<Player> lastPickedPlayers, List<Player> players) {
         Random random = new Random();
         Player player;
         while (true) {
-            System.out.println(players.size());
             player = players.get(random.nextInt(players.size()));
             if (lastPickedPlayers == null) {
                 return player;
@@ -288,8 +287,12 @@ public class ModelDataHandler {
         return currentPlayer.getUnits();
     }
 
-    public List<Integer> getDiceResults() {
-        return round.diceresults();
+    public List<Integer> getAttackerDiceResults() {
+        return round.attackerDiceResults();
+    }
+
+    public List<Integer> getDefenderDiceResults() {
+        return round.defenderDiceResults();
     }
 
     public Space getSelectedSpace() {

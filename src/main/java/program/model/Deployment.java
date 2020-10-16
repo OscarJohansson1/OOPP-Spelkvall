@@ -26,12 +26,9 @@ class Deployment implements IPhase {
         }
     }
 
-    private static void deployUnit(Space space, int unitsToDeploy) {
+    private void deployUnit(Space space, int unitsToDeploy) {
         if(unitsToDeploy > 0) {
             space.updateSpace(space.getUnits() + unitsToDeploy);
-        }
-        else {
-            System.out.println("No Units Remaining");
         }
     }
 

@@ -11,88 +11,96 @@ class Attack implements IPhase {
 
     private IPhase nextPhase;
 
-    private List<Integer> dices;
+    private List<Integer> attackerDice;
+    private List<Integer> defenderDice;
 
     private int attackerLoss;
     private int defenderLoss;
 
     boolean nextAttackPossible = true;
 
+    /**
+     * Method that calculates the attack and updates the state of the spaces involved in the attack.
+     *
+     * @param selectedSpace     The space which the attacker attacks from.
+     * @param selectedSpace2    The space which is the defender.
+     * @param player            Not used.
+     * @param amount            Not used.
+     */
     @Override
     public void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
-        if(selectedSpace != null && selectedSpace2 != null) {
-            if (Attack.DeclareAttack(selectedSpace, selectedSpace2, selectedSpace.getUnits())) {
-                attackerLoss = selectedSpace.getUnits();
-                defenderLoss = selectedSpace2.getUnits();
-                dices = calculateAttack(selectedSpace, selectedSpace2);
-                if (selectedSpace.getUnits() == 1 && (selectedSpace.getPlayerId() == selectedSpace2.getPlayerId())) {
-                    attackerLoss -= selectedSpace2.getUnits() + 1;
-                    defenderLoss = -1;
-                    nextAttackPossible = false;
-                } else if (selectedSpace.getUnits() == 1) {
-                    attackerLoss -= selectedSpace.getUnits();
-                    defenderLoss -= selectedSpace2.getUnits();
-                    nextAttackPossible = false;
-                } else {
-                    attackerLoss -= selectedSpace.getUnits();
-                    defenderLoss -= selectedSpace2.getUnits();
-                    nextAttackPossible = true;
-                }
+        if (selectedSpace != null && selectedSpace2 != null) {
+            if (isAttackPossible(selectedSpace.getUnits())) {
+                savePreAttackState(selectedSpace, selectedSpace2);
+                calculateAttack(selectedSpace, selectedSpace2);
+                updateCasualties(selectedSpace, selectedSpace2);
             }
         }
     }
 
-    //TODO Redo so that you can get one list with one players dice-throw and another list with the other players dice.
-    // Right now they are the same and it makes it hard for the attackView to know what to show.
-    /**
-     * Method that calculates the attack and updates the state of the spaces involved in the attack.
-     * @param mySpace The space which the attacker attacks from.
-     * @param enemySpace The space which is attacked.
-     * @return An int with value 1 if the attack was successful and 0 if the attack was unsuccessful
-     */
-    List<Integer> calculateAttack(Space mySpace, Space enemySpace) {
+    private void savePreAttackState(Space attacker, Space defender) {
+        attackerLoss = attacker.getUnits();
+        defenderLoss = defender.getUnits();
+    }
 
+    private void updateCasualties(Space attacker, Space defender) {
+        if (attacker.getUnits() == 1 && (attacker.getPlayerId() == defender.getPlayerId())) {
+            attackerLoss -= defender.getUnits() + 1;
+            defenderLoss = -1;
+            nextAttackPossible = false;
+        } else if (attacker.getUnits() == 1) {
+            attackerLoss -= attacker.getUnits();
+            defenderLoss -= defender.getUnits();
+            nextAttackPossible = false;
+        } else {
+            attackerLoss -= attacker.getUnits();
+            defenderLoss -= defender.getUnits();
+            nextAttackPossible = true;
+        }
+    }
+
+    private void calculateAttack(Space attacker, Space defender) {
+        throwDice(attacker, defender);
+        List<Integer> tempAttacker = new ArrayList<>(attackerDice);
+        List<Integer> tempDefender = new ArrayList<>(defenderDice);
+        while (tempAttacker.size() > 0 && tempDefender.size() > 0) {
+            if (findHighestDie(tempAttacker) > findHighestDie(tempDefender)) {
+                defender.updateSpace(defender.getUnits() - 1);
+                if (defender.getUnits() < 1) {
+                    defender.updateSpace(attacker.getPlayer(), attacker.getUnits() - 1);
+                    attacker.updateSpace(1);
+                }
+            } else {
+                attacker.updateSpace(attacker.getUnits() - 1);
+            }
+        }
+    }
+
+    private void throwDice(Space attacker, Space defender) {
         int myDice;
         int enemyDice;
-        if(mySpace.getUnits() > 3) {
+        if (attacker.getUnits() > 3) {
             myDice = 3;
-        } else if(mySpace.getUnits() > 2) {
+        } else if (attacker.getUnits() > 2) {
             myDice = 2;
         } else {
             myDice = 1;
         }
-        if(enemySpace.getUnits() > 1) {
+        if (defender.getUnits() > 1) {
             enemyDice = 2;
         } else {
             enemyDice = 1;
         }
-        ArrayList<Integer> myResults = Dice.rollNDIce(myDice);
-        sortList(myResults);
-        ArrayList<Integer> opponentResults = Dice.rollNDIce(enemyDice);
-        sortList(opponentResults);
-        ArrayList<Integer> allresults = new ArrayList<>();
-        allresults.addAll(myResults);
-        allresults.addAll(opponentResults);
-        while (myResults.size() > 0 && opponentResults.size() > 0) {
-            if (findHighestDie(myResults) > findHighestDie(opponentResults)) {
-                enemySpace.updateSpace(enemySpace.getUnits() -1);
-                if (enemySpace.getUnits() < 1) {
-                    enemySpace.updateSpace(mySpace.getPlayer(), mySpace.getUnits() - 1);
-                    mySpace.updateSpace(1);
-                }
-            } else {
-                mySpace.updateSpace(mySpace.getUnits() -1);
-            }
-        }
-        return allresults;
+        attackerDice = sortList(Dice.rollNDIce(myDice));
+        defenderDice = sortList(Dice.rollNDIce(enemyDice));
     }
 
-    private void sortList(List<Integer> list) {
+    private List<Integer> sortList(List<Integer> list) {
         int temp;
         boolean sorted = false;
         while (!sorted) {
             sorted = true;
-            for (int i = 0; i < list.size()-1; i++) {
+            for (int i = 0; i < list.size() - 1; i++) {
                 if (list.get(i).compareTo(list.get(i + 1)) < 0) {
                     temp = list.get(i);
                     list.set(i, list.get(i + 1));
@@ -101,22 +109,20 @@ class Attack implements IPhase {
                 }
             }
         }
+        return list;
     }
 
-    private static boolean DeclareAttack(Space mySpace, Space opponentSpace, int myUnits) {
-        return isAttackPossible(myUnits);
-    }
-
-    private static boolean isAttackPossible(int myUnits) {
+    private boolean isAttackPossible(int myUnits) {
         return myUnits > 1;
     }
 
     /**
      * Method that finds the die with the highest value in an ArrayList of Integers (Dice) and removes it.
+     *
      * @param rolls An ArrayList with Integer-values of a dice-roll.
      * @return The value of the die with the highest value.
      */
-    static Integer findHighestDie(ArrayList<Integer> rolls) {
+    private Integer findHighestDie(List<Integer> rolls) {
         int value = 0;
         int index = 0;
         for (int i = 0; i < rolls.size(); i++) {
@@ -129,14 +135,18 @@ class Attack implements IPhase {
         return value;
     }
 
-    List<Integer> diceresults() {
-        return List.copyOf(dices);
+    List<Integer> attackerDiceResults() {
+        return new ArrayList<>(attackerDice);
+    }
+
+    List<Integer> defenderDiceResults() {
+        return new ArrayList<>(defenderDice);
     }
 
     List<String> attackResults() {
         List<String> results = new ArrayList<>();
         results.add(" lost: " + attackerLoss);
-        if(defenderLoss == -1) {
+        if (defenderLoss == -1) {
             results.add(" lost all remaining units! ");
         } else {
             results.add(" lost: " + defenderLoss);
