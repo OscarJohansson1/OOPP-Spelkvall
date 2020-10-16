@@ -156,9 +156,6 @@ public class MapController extends AnchorPane {
         modelDataHandler = ModelDataHandler.getModelDataHandler();
     }
     private void initialize() throws IOException {
-
-
-
         //TODO: Hänvisa till Program.View.View.Program.View.View för att göra en setup av map
         /*EchoClient.getEchoClient().recieveController(this);
         EchoClient client = EchoClient.getEchoClient();
