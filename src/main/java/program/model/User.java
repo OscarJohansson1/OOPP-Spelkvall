@@ -11,6 +11,7 @@ public class User implements Serializable {
     private String userName;
     private String color;
     private boolean ready = false;
+    private boolean myTurn = false;
 
     public User(String  userName, String imageUrl, String color) {
         this.userName = userName;
@@ -30,5 +31,8 @@ public class User implements Serializable {
     }
     public String getColor(){
         return color;
+    }
+    public void setMyTurn(boolean myTurn){
+        this.myTurn = myTurn;
     }
 }
