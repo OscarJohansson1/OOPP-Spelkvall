@@ -29,13 +29,16 @@ public class AttackView extends AnchorPane {
 
     }
 
+    //TODO If you win the first attack the dice should still be of correct amount. Now they show 2-2 if direct win.
     public void updateDice() {
+        int opponentDice = 2;
+        if(model.getSelectedSpaceUnits(2) <= 1) {
+            opponentDice = 1;
+        }
         List<Integer> dices = model.getDiceResults();
         resetImages(images);
-        List<Integer> whiteDices = dices.subList(0, dices.size() - 2);
-        List<Integer> blackDices = dices.subList(dices.size() - 2, dices.size());
-        sortList(whiteDices);
-        sortList(blackDices);
+        List<Integer> whiteDices = dices.subList(0, dices.size() - opponentDice);
+        List<Integer> blackDices = dices.subList(dices.size() - opponentDice, dices.size());
         for (int i = 0; i < whiteDices.size(); i++) {
             updateDie(images.get(i), whiteDices.get(i), "White");
         }
@@ -105,21 +108,7 @@ public class AttackView extends AnchorPane {
         }
     }
 
-    private void sortList(List<Integer> list) {
-        int temp;
-        boolean sorted = false;
-        while (!sorted) {
-            sorted = true;
-            for (int i = 0; i < list.size()-1; i++) {
-                if (list.get(i).compareTo(list.get(i + 1)) < 0) {
-                    temp = list.get(i);
-                    list.set(i, list.get(i + 1));
-                    list.set(i + 1, temp);
-                    sorted = false;
-                }
-            }
-        }
-    }
+
 
     private void resetImages(List<ImageView> images)
     {

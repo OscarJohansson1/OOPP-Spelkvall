@@ -25,9 +25,17 @@ public class Player implements Serializable {
         this.units = units;
         this.id = id;
         this.color = color;
-        //TODO Remove dependency to JavaFX (Image)
         this.logoUrl = "file:src/main/resources/pictures/logos/"+logoUrl+".png";
         this.name = name;
+    }
+
+    Player(Player player){
+        units = player.units;
+        id = player.id;
+        color = player.color;
+        logoUrl = player.logoUrl;
+        name = player.name;
+        myTurn = player.myTurn;
     }
 
     //TODO: for tests right now

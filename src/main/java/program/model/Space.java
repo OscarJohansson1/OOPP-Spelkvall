@@ -28,6 +28,13 @@ public class Space implements Serializable {
         this.name = name;
     }
 
+    public Space(Space space) {
+        id = space.id;
+        player = space.player;
+        units = space.units;
+        name = space.name;
+    }
+
     /**
      * Method that updates the state of a space.
      * @param player The new player that controls the space.
@@ -51,7 +58,11 @@ public class Space implements Serializable {
     }
 
     public Player getPlayer() {
-        return player;
+        return new Player(player);
+    }
+
+    int getPlayerId() {
+        return player.getId();
     }
 
     public int getUnits() {

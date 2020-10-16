@@ -20,7 +20,7 @@ class Deployment implements IPhase {
     @Override
     public void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
         if(selectedSpace != null) {
-            if (selectedSpace.getPlayer() == player && player.getUnits() >= amount) {
+            if (selectedSpace.getPlayerId() == player.getId() && player.getUnits() >= amount) {
                 deployUnit(selectedSpace, amount);
                 player.setUnits(player.getUnits() - amount);
             }

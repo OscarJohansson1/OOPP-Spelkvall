@@ -102,17 +102,17 @@ public class ModelDataHandler {
      * @return True if a the space was added to a selectedSpace, false if unsuccessful
      */
     public boolean receiveSelectedSpace(int id) {
-        if(board.findSpace(id).getPlayer() == currentPlayer && (board.selectedSpace == null || round.getCurrentPhase().equals("DEPLOY"))) {
-            board.selectedSpace = board.findSpace(id);
+        if(board.findSpace(id).getPlayerId() == currentPlayer.getId() && (board.getSelectedSpace() == null || round.getCurrentPhase().equals("DEPLOY"))) {
+            board.setSelectedSpace(board.findSpace(id));
             return true;
         }
-        else if(board.selectedSpace == board.findSpace(id)){
+        else if(board.getSelectedSpace() == board.findSpace(id)){
             board.resetSpaces();
         }
-        else if((board.selectedSpace !=  null && round.getCurrentPhase().equals("MOVE") &&
-                board.findSpace(id).getPlayer() == currentPlayer && board.isNeighbours(board.findSpace(id))) || (board.selectedSpace != null &&
-                board.findSpace(id).getPlayer() != currentPlayer && round.getCurrentPhase().equals("ATTACK") && board.isNeighbours(board.findSpace(id)))){
-            board.selectedSpace2 = board.findSpace(id);
+        else if((board.getSelectedSpace() !=  null && round.getCurrentPhase().equals("MOVE") &&
+                board.findSpace(id).getPlayerId() == currentPlayer.getId() && board.isNeighbours(board.findSpace(id))) || (board.getSelectedSpace() != null &&
+                board.findSpace(id).getPlayerId() != currentPlayer.getId() && round.getCurrentPhase().equals("ATTACK") && board.isNeighbours(board.findSpace(id)))){
+            board.setSelectedSpace2(board.findSpace(id));
             return true;
         }
         return false;
@@ -170,8 +170,8 @@ public class ModelDataHandler {
      * @return If the phase could start successfully.
      */
     public boolean startPhase() {
-        if((board.selectedSpace != null && round.getCurrentPhase().equals("DEPLOY")) || board.selectedSpace2 != null) {
-            return round.startPhase(board.selectedSpace, board.selectedSpace2, currentPlayer, unitsToUse);
+        if((board.getSelectedSpace() != null && round.getCurrentPhase().equals("DEPLOY")) || board.getSelectedSpace2() != null) {
+            return round.startPhase(board.getSelectedSpace(), board.getSelectedSpace2(), currentPlayer, unitsToUse);
         }
         return false;
     }
@@ -280,13 +280,14 @@ public class ModelDataHandler {
     }
 
     public Space getSelectedSpace() {
-        return  board.selectedSpace;
+        return board.getSelectedSpace();
     }
 
     public Space getSelectedSpace2() {
-        return  board.selectedSpace2;
+        return board.getSelectedSpace2();
     }
 
+    //TODO make new Space(...) depending on what they will do with the method on the other side of the server
     public Space getSpaceFromId(int id){
         return board.getSpace(id);
     }
@@ -303,10 +304,11 @@ public class ModelDataHandler {
         return board.getSpace(0).getPlayer().getLogoUrl();
     }
 
-    public void setBoard(Board board){
+    public void setBoard(Board board) {
         this.board = board;
     }
-    public void setPlayers(List<Player> players){
+
+    public void setPlayers(List<Player> players) {
         this.players = players;
     }
 }

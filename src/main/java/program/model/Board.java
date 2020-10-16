@@ -12,8 +12,8 @@ public class Board {
     private List<Space> spaces;
     private List<Area> areas;
 
-    Space selectedSpace;
-    Space selectedSpace2;
+    private Space selectedSpace;
+    private Space selectedSpace2;
 
     /**
      * Indexes in the neighbours-matrix represent the following spaces:
@@ -127,7 +127,7 @@ public class Board {
     int getUnitsForSpacesHold(Player player) {
         int count = 0;
         for(Space space : spaces){
-            if(space.getPlayer() == player) {
+            if(space.getPlayerId() == player.getId()) {
                 count++;
             }
         }
@@ -141,7 +141,7 @@ public class Board {
     boolean isWinner() {
         Player winner = spaces.get(0).getPlayer();
         for(Space space : spaces){
-            if(!(space.getPlayer() == winner)) {
+            if(!(space.getPlayerId() == winner.getId())) {
                 return false;
             }
         }
@@ -155,7 +155,7 @@ public class Board {
      */
     boolean isPlayerOut(Player player) {
         for(Space space : spaces){
-            if(space.getPlayer() == player) {
+            if(space.getPlayerId() == player.getId()) {
                 return false;
             }
         }
@@ -221,7 +221,31 @@ public class Board {
         return colors;
     }
 
+    //TODO Change later to new Space(...)
     Space getSpace(int id) {
         return spaces.get(id);
+    }
+
+    void setSelectedSpace(Space space){
+        selectedSpace = space;
+    }
+
+    void setSelectedSpace2(Space space){
+        selectedSpace2 = space;
+    }
+
+    Space getSelectedSpace() {
+        return selectedSpace;
+    }
+
+    Space getSelectedSpace2() {
+        return selectedSpace2;
+    }
+
+    private Space getCopyOfSpace(Space space) {
+        if(space != null) {
+            return new Space(space);
+        }
+        return null;
     }
 }

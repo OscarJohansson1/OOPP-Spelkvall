@@ -24,8 +24,8 @@ class Attack implements IPhase {
             if (Attack.DeclareAttack(selectedSpace, selectedSpace2, selectedSpace.getUnits())) {
                 attackerLoss = selectedSpace.getUnits();
                 defenderLoss = selectedSpace2.getUnits();
-                dices = Attack.calculateAttack(selectedSpace, selectedSpace2);
-                if (selectedSpace.getUnits() == 1 && (selectedSpace.getPlayer() == selectedSpace2.getPlayer())) {
+                dices = calculateAttack(selectedSpace, selectedSpace2);
+                if (selectedSpace.getUnits() == 1 && (selectedSpace.getPlayerId() == selectedSpace2.getPlayerId())) {
                     attackerLoss -= selectedSpace2.getUnits() + 1;
                     defenderLoss = -1;
                     nextAttackPossible = false;
@@ -50,7 +50,7 @@ class Attack implements IPhase {
      * @param enemySpace The space which is attacked.
      * @return An int with value 1 if the attack was successful and 0 if the attack was unsuccessful
      */
-    static List<Integer> calculateAttack(Space mySpace, Space enemySpace) {
+    List<Integer> calculateAttack(Space mySpace, Space enemySpace) {
 
         int myDice;
         int enemyDice;
@@ -67,7 +67,9 @@ class Attack implements IPhase {
             enemyDice = 1;
         }
         ArrayList<Integer> myResults = Dice.rollNDIce(myDice);
+        sortList(myResults);
         ArrayList<Integer> opponentResults = Dice.rollNDIce(enemyDice);
+        sortList(opponentResults);
         ArrayList<Integer> allresults = new ArrayList<>();
         allresults.addAll(myResults);
         allresults.addAll(opponentResults);
@@ -83,6 +85,22 @@ class Attack implements IPhase {
             }
         }
         return allresults;
+    }
+
+    private void sortList(List<Integer> list) {
+        int temp;
+        boolean sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < list.size()-1; i++) {
+                if (list.get(i).compareTo(list.get(i + 1)) < 0) {
+                    temp = list.get(i);
+                    list.set(i, list.get(i + 1));
+                    list.set(i + 1, temp);
+                    sorted = false;
+                }
+            }
+        }
     }
 
     private static boolean DeclareAttack(Space mySpace, Space opponentSpace, int myUnits) {
@@ -112,7 +130,7 @@ class Attack implements IPhase {
     }
 
     List<Integer> diceresults() {
-        return dices;
+        return List.copyOf(dices);
     }
 
     List<String> attackResults() {

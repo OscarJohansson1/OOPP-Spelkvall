@@ -24,7 +24,7 @@ class Area {
      */
     boolean checkArea(Player player) {
         for(Space space : spaces){
-            if(!(player == space.getPlayer())){
+            if(!(player.getId() == space.getPlayerId())){
                 return false;
             }
         }
