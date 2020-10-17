@@ -11,41 +11,42 @@ import java.util.List;
 public class LobbyController {
     private final List<GameLobby> gameLobbies = new ArrayList<>();
     private final List<MenuLobby> menuLobbies = new ArrayList<>();
-    private final List<Integer> gridPane = new ArrayList<>();
 
-    public LobbyController(){
+
+    public LobbyController() {
         createNewMenuLobby("yes");
     }
+
     public List<GameLobby> getGameLobbies() {
         return gameLobbies;
     }
+
     public List<MenuLobby> getMenuLobbies() {
         return menuLobbies;
     }
-    private void addLobby(Lobby lobby){
-        if(lobby instanceof GameLobby){
+
+    private void addLobby(Lobby lobby) {
+        if (lobby instanceof GameLobby) {
             gameLobbies.add((GameLobby) lobby);
-        }
-        else if(lobby instanceof MenuLobby){
+        } else if (lobby instanceof MenuLobby) {
             menuLobbies.add((MenuLobby) lobby);
         }
     }
+
     public void createNewMenuLobby(String name) {
         addLobby(new MenuLobby(name));
     }
-    public void createNewGameLobby(String name){
+
+    public void createNewGameLobby(String name) {
         addLobby(new GameLobby(name));
 
 
     }
-    public void addMenuLobbyPlayersToGameLobby(MenuLobby menuLobby, GameLobby gameLobby){
-        for(Player player: menuLobby.getLobbyPlayers()){
+
+    public void addMenuLobbyPlayersToGameLobby(MenuLobby menuLobby, GameLobby gameLobby) {
+        for (Player player : menuLobby.getLobbyPlayers()) {
             gameLobby.getLobbyPlayers().add(player);
-            player.setUnits(50/gameLobbies.size());
         }
-    }
-    public List<Integer> getGridPane(){
-        return gridPane;
     }
 
 

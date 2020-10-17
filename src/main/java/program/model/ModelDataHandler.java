@@ -3,6 +3,7 @@ package program.model;
 
 import program.controller.ClientController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +19,7 @@ public class ModelDataHandler {
     private Player currentPlayer;
     private int roundCount = 1;
     private int phaseCount = 1;
-    private final Round round = new Round();
+    public final Round round = new Round();
     private Board board;
     private int unitsToUse = 1;
     public boolean firstDeployment = true;
@@ -120,6 +121,16 @@ public class ModelDataHandler {
         return false;
     }
 
+    public void receiveOnlineSelectedSpace(Space space) {
+        if (board.getSelectedSpace() != null && !round.getCurrentPhase().equals("DEPLOY")) {
+            board.setSelectedSpace2(board.findSpace(space.getId()));
+        } else {
+            board.setSelectedSpace(board.findSpace(space.getId()));
+        }
+        board.getSpaces().get(space.getId()).updateSpace(space);
+
+    }
+
     /**
      * Method that resets the current selected spaces.
      */
@@ -131,13 +142,22 @@ public class ModelDataHandler {
      * Method that change the phase to the next one and reset the selectedSpaces. If the round is over the method
      * change the current player to the next player and change the phase to the first phase.
      */
-    public void nextPhase() {
-        round.nextPhase();
+    public void nextPhase() throws IOException {
+
+        if (clientController != null) {
+            clientController.sendObject("nextPhase");
+        } else {
+            round.nextPhase();
+        }
         resetSelectedSpaces();
         phaseCount++;
         if (phaseCount > 3) {
-            nextPlayer(players, currentPlayer);
-            clientController.player.setMyTurn(currentPlayer.getId() == clientController.player.getId());
+            currentPlayer = nextPlayer(players, currentPlayer);
+            if (clientController != null) {
+                clientController.player.setMyTurn(currentPlayer.getId() == clientController.player.getId());
+                clientController.nextPlayer(new Player(currentPlayer));
+            }
+
             phaseCount = 1;
         }
     }
@@ -147,31 +167,30 @@ public class ModelDataHandler {
      * Method that controls the phase changes during the first round-robin. During the first round the players takes
      * turn deploying units, and does not attack and move.
      */
-    public void firstRoundNextPhase() {
+    public void firstRoundNextPhase() throws IOException {
         resetSelectedSpaces();
-        nextPlayer(players, currentPlayer);
-        clientController.player.setMyTurn(currentPlayer.getId() == clientController.player.getId());
+        currentPlayer = nextPlayer(players, currentPlayer);
+        if (clientController != null) {
+            clientController.player.setMyTurn(currentPlayer.getId() == clientController.player.getId());
+            clientController.nextPlayer(new Player(currentPlayer));
+        }
         roundCount++;
         if (roundCount > players.size()) {
             firstDeployment = false;
         }
     }
 
-    public void firstRoundNextPhaseOnline() {
-
-    }
-
     public static Player nextPlayer(List<Player> players, Player currentPlayer) {
         for (int i = 0; i < players.size(); i++) {
-            if (currentPlayer == players.get(i) && i + 1 < players.size()) {
-                currentPlayer = players.get(i + 1);
+            if (currentPlayer.getId() == players.get(i).getId() && i + 1 < players.size()) {
+                currentPlayer = new Player(players.get(i + 1));
                 return currentPlayer;
-            } else if (currentPlayer == players.get(i)) {
-                currentPlayer = players.get(0);
+            } else if (currentPlayer.getId() == players.get(i).getId()) {
+                currentPlayer = new Player(players.get(0));
                 return currentPlayer;
             }
         }
-        return null;
+        return currentPlayer;
     }
 
     /**
@@ -324,7 +343,9 @@ public class ModelDataHandler {
 
     public void setPlayers(List<Player> players) {
         this.players = players;
-        System.out.println(players);
+        for (Player player : players) {
+            player.setUnits(50 / players.size());
+        }
     }
 
     public List<Player> getPlayers() {
@@ -341,7 +362,11 @@ public class ModelDataHandler {
     }
 
     public void setClientController(ClientController clientController) {
+        this.clientController = clientController;
+    }
 
+    public List<Space> getSpaces() {
+        return board.getSpaces();
     }
 
 }

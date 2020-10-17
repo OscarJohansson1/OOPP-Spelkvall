@@ -11,14 +11,17 @@ import java.text.SimpleDateFormat;
 
 public class LobbyItem extends AnchorPane {
 
-    @FXML private Label timeLabel;
-    @FXML private Label capacityLabel;
-    @FXML private Label nameLabel;
+    @FXML
+    private Label timeLabel;
+    @FXML
+    private Label capacityLabel;
+    @FXML
+    private Label nameLabel;
     boolean marked = false;
     private StartController startController;
 
 
-    public LobbyItem( String name, String time, String capacity, StartController startController){
+    public LobbyItem(String name, String time, String capacity, String players, StartController startController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LobbyItem.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -30,17 +33,16 @@ public class LobbyItem extends AnchorPane {
         this.startController = startController;
         this.timeLabel.setText(time);
         this.nameLabel.setText("Lobby name:" + name);
-        this.capacityLabel.setText("Users:0/" +  capacity);
+        this.capacityLabel.setText("Users:" + players + "/" + capacity);
 
     }
+
     public void onClick() throws IOException {
         startController.lobbySelectController.resetLobbyItems();
         marked = true;
         this.setStyle("-fx-background-color: cornflowerblue");
 
     }
-
-
 
 
 }

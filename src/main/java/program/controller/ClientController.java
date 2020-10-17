@@ -28,27 +28,35 @@ public class ClientController {
     public void getLobbies() throws IOException, ClassNotFoundException {
         echoClient.sendObject("LOBBYS");
     }
+
     public void startGame() throws IOException {
         echoClient.sendObject("startGame");
     }
+
     public void sendObject(Object object) throws IOException {
         echoClient.sendObject(object);
     }
+
     public void addPlayerToLobby(Player player) throws IOException {
         echoClient.sendObject(player);
     }
+
     public void checkIfLobbyLeader() throws IOException {
         echoClient.sendObject("LOBBYLEADER");
     }
+
     public void resetColor() throws IOException {
         echoClient.sendObject("resetColor");
     }
-    public void nextPlayer() throws IOException {
-        echoClient.sendObject("nextPlayer");
+
+    public void nextPlayer(Player player) throws IOException {
+        echoClient.sendObject(player);
     }
+
     public void getGridPane() throws IOException {
         echoClient.sendObject("gridPane");
     }
+
     public void updateGridPane(int number) throws IOException {
         echoClient.sendObject(number);
     }

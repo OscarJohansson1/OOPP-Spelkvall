@@ -98,8 +98,6 @@ public class MultiplayerLogoController extends AnchorPane {
                 }
             });
         }
-
-
     }
 
     public void updateGridPane(List<Integer> integers) {

@@ -1,6 +1,6 @@
 package program.controller;
 
-import  javafx.application.Platform;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,15 +23,23 @@ import java.io.IOException;
  */
 public class EndController extends AnchorPane {
 
-    @FXML private ImageView winnerImageView;
-    @FXML private Label winnerLabel;
-    @FXML private Pane buttonPane;
-    @FXML private HBox winnerHBox;
+    @FXML
+    private ImageView winnerImageView;
+    @FXML
+    private Label winnerLabel;
+    @FXML
+    private Pane buttonPane;
+    @FXML
+    private HBox winnerHBox;
 
-    @FXML private Button pauseButton;
-    @FXML private Button newGameButton;
-    @FXML private Button toMenuButton;
-    @FXML private Button quitGameButton;
+    @FXML
+    private Button pauseButton;
+    @FXML
+    private Button newGameButton;
+    @FXML
+    private Button toMenuButton;
+    @FXML
+    private Button quitGameButton;
 
     private Stage stage;
     private ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
@@ -56,7 +64,7 @@ public class EndController extends AnchorPane {
      * If the end game button is pressed there is no winner
      */
     private void initialize() {
-        if(modelDataHandler.isWinner()){
+        if (modelDataHandler.isWinner()) {
             winnerLabel.setText("Congratulations to the winner");
             winnerImageView.setImage(new Image(modelDataHandler.getWinnerLogo()));
         } else {
@@ -80,13 +88,13 @@ public class EndController extends AnchorPane {
     /**
      * Quits the application when the button is pressed
      */
-    public void quitGameButtonPressed(){
+    public void quitGameButtonPressed() {
         Platform.exit();
         System.exit(0);
     }
 
     /**
-     *Taken back to the menu when the button is pressed
+     * Taken back to the menu when the button is pressed
      */
     public void toMenuButtonPressed() throws IOException, ClassNotFoundException {
         Parent root = new StartController(stage);

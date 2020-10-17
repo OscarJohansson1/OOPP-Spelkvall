@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Round controls the start of each phase and the navigation between phases during a round.
  */
-class Round {
+public class Round {
 
     //TODO Inte hårdkoda
     private Deployment deploy;
@@ -28,7 +28,7 @@ class Round {
     /**
      * Method that switch to the next phase. If the current phase is Move, switch to Deploy instead.
      */
-    void nextPhase() {
+    public void nextPhase() {
         currentPhaseNew = currentPhaseNew.nextPhase();
     }
 
@@ -65,5 +65,9 @@ class Round {
 
     boolean isNextAttackPossible() {
         return attack.nextAttackPossible;
+    }
+
+    public Attack getAttack(){
+        return attack;
     }
 }

@@ -20,10 +20,16 @@ import java.util.List;
 
 public class LobbyReadyController extends AnchorPane {
 
-    @FXML public FlowPane userFlow;
-    @FXML private Button backButton;
-    @FXML private Button joinLobbyButton;
-    @FXML public Button startButton;
+    @FXML
+    public FlowPane userFlow;
+    @FXML
+    private Button backButton;
+    @FXML
+    private Button joinLobbyButton;
+    @FXML
+    public Button startButton;
+
+    @FXML Button readyButton;
 
     private final StartController startController;
     private final List<PlayerCard> userCards = new ArrayList<>();
@@ -47,10 +53,10 @@ public class LobbyReadyController extends AnchorPane {
 
     }
 
-    public void initialize(){
+    public void initialize() {
         userFlow.setVgap(10);
         userFlow.setHgap(52);
-        userFlow.setPadding(new Insets(10,0,10,52));
+        userFlow.setPadding(new Insets(10, 0, 10, 52));
         backButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -65,15 +71,25 @@ public class LobbyReadyController extends AnchorPane {
 
         });
     }
+
     public void ready() throws IOException {
         startController.clientController.player.setReady(!startController.clientController.player.isReady());
+        if(startController.clientController.player.isReady()){
+            readyButton.setStyle("-fx-background-color: #5DFF00;");
+        }
+        else {
+            readyButton.setStyle(null);
+        }
         startController.clientController.sendObject(startController.clientController.player.isReady());
+
+
     }
+
     public void startGame() throws IOException {
         startController.clientController.startGame();
     }
 
-    public void updateUserCards(List<Player> players){
+    public void updateUserCards(List<Player> players) {
 
         Platform.runLater(new Runnable() {
             @Override

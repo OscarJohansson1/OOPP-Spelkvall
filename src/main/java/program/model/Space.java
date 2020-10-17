@@ -13,14 +13,14 @@ public class Space implements Serializable {
     private Player player;
     private int units;
     private String name;
-    private boolean marked = false;
 
     /**
      * This is a constructor for a space
-     * @param id This is the id for a space, it is used to find a space
+     *
+     * @param id     This is the id for a space, it is used to find a space
      * @param player This is the player that owns the space
-     * @param units This is the amount of units in a space
-     * @param name This is the name of the space
+     * @param units  This is the amount of units in a space
+     * @param name   This is the name of the space
      */
     public Space(int id, Player player, int units, String name) {
         this.id = id;
@@ -38,8 +38,9 @@ public class Space implements Serializable {
 
     /**
      * Method that updates the state of a space.
+     *
      * @param player The new player that controls the space.
-     * @param units The new amount of units on the space.
+     * @param units  The new amount of units on the space.
      */
     void updateSpace(Player player, int units) {
         this.player = player;
@@ -48,13 +49,14 @@ public class Space implements Serializable {
 
     /**
      * Method that updates the amount of units on a space, but the player that controls the space stays the same.
+     *
      * @param units The new amount of units on the space.
      */
     void updateSpace(int units) {
         updateSpace(this.player, units);
     }
 
-    void updateSpace(Space space){
+    public void updateSpace(Space space) {
         id = space.id;
         player = space.player;
         units = space.units;
@@ -81,10 +83,4 @@ public class Space implements Serializable {
         return name;
     }
 
-    public boolean getMarked(){
-        return marked;
-    }
-    public void setMarked(boolean marked){
-        this.marked = marked;
-    }
 }

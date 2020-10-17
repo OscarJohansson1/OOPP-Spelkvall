@@ -3,11 +3,13 @@ package program.controller;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import program.model.*;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -17,6 +19,7 @@ public class Client {
     private ClientController clientController;
     private MapController mapController;
     private final LobbyItemCreator lobbyItemCreator = new LobbyItemCreator();
+    private List<Integer> templist;
 
     public void startConnection(String ip, int port, ClientController clientController) throws IOException {
         server = new ConnectionToServer(new Socket(ip, port));
@@ -61,12 +64,20 @@ public class Client {
                                     }
                                 });
 
+                            } else if (message.equals("startNotClear")) {
+                                clientController.startController.lobbyReadyController.startButton.setDisable(true);
                             } else if (message.equals("unmark1")) {
 
                             } else if (message.equals("unmark2")) {
 
                             } else if (message.equals("resetColor")) {
                                 mapController.resetColor();
+                            } else if (message.equals("nextPhase")) {
+                                ModelDataHandler.getModelDataHandler().round.nextPhase();
+                            } else if (message.equals("removeAttackView")) {
+                                mapController.removeOnlineAttackView();
+                            } else if (message.equals("winner")) {
+
                             } else {
                                 if (lobbyItemCreator.getName() == null) {
                                     lobbyItemCreator.setName((String) message);
@@ -74,6 +85,8 @@ public class Client {
                                     lobbyItemCreator.setTime((String) message);
                                 } else if (lobbyItemCreator.getCapacity() == null) {
                                     lobbyItemCreator.setCapacity((String) message);
+                                } else if (lobbyItemCreator.getPlayers() == null) {
+                                    lobbyItemCreator.setPlayers((String) message);
                                     clientController.startController.lobbySelectController.lobbyItems.add(lobbyItemCreator.createLobbyItem(clientController.startController));
                                     lobbyItemCreator.resetVariables();
                                     clientController.startController.lobbySelectController.updateLobbys();
@@ -82,8 +95,12 @@ public class Client {
                         } else if (message instanceof Integer) {
                             if (ModelDataHandler.getModelDataHandler().getCurrentPlayer() == null) {
                                 ModelDataHandler.getModelDataHandler().setCurrentPlayer(ModelDataHandler.getModelDataHandler().getPlayers().get((Integer) message));
+                                clientController.player.setId((Integer) message);
+                            } else if ((Integer) message > ModelDataHandler.getModelDataHandler().getPlayers().size() - 1) {
+
+                            } else {
+                                clientController.player.setId((Integer) message);
                             }
-                            clientController.player.setId((Integer) message);
 
                         } else if (message instanceof List) {
                             for (Object object : (List<?>) message) {
@@ -94,9 +111,10 @@ public class Client {
                                     List<Player> playerList = (List<Player>) message;
                                     ModelDataHandler.getModelDataHandler().setPlayers(playerList);
                                     clientController.startController.lobbyReadyController.updateUserCards(playerList);
-                                }
-                                else if(object instanceof Integer){
-                                    clientController.startController.multiplayerLogoController.updateGridPane((List<Integer>) message);
+                                } else if (object instanceof Integer) {
+                                    if (mapController == null) {
+                                        clientController.startController.multiplayerLogoController.updateGridPane((List<Integer>) message);
+                                    }
                                 }
 
                             }
@@ -106,16 +124,51 @@ public class Client {
                             if ((Boolean) message)
                                 clientController.startController.lobbyReadyController.startButton.setVisible(true);
                         } else if (message instanceof Space) {
-                            mapController.setSpaceEvent(((Space) message).getId());
+                            Space space = (Space) message;
+                            ModelDataHandler.getModelDataHandler().receiveOnlineSelectedSpace(space);
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mapController.view.updateTextUnits(space.getId(), space.getUnits(), mapController.allButtons, mapController);
+                                    mapController.view.setColor(mapController.getCube(space.getId()), Color.web(ModelDataHandler.getModelDataHandler().getColorOnSpace(space.getId())).darker().darker(), mapController.allButtons);
+                                }
+                            });
                         } else if (message instanceof Player) {
-                            if (clientController.player.getMyTurn()) {
-                                mapController.view.myturn(mapController);
-                            } else {
-                                mapController.view.otherPlayerPlaying(mapController);
-                            }
+                            System.out.println("Received player has id: " + ((Player) message).getId());
                             ModelDataHandler.getModelDataHandler().setCurrentPlayer((Player) message);
+                            ModelDataHandler.getModelDataHandler().setDeployableUnits(((Player) message).getUnits());
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Player player = ModelDataHandler.getModelDataHandler().getCurrentPlayer();
+                                    mapController.view.updateCurrentPlayer(player.getColor(), mapController, player.getName());
+                                    mapController.view.updateDeployableUnits(mapController.deployableUnitsText, ((Player) message).getUnits());
+                                }
+                            });
+                            if (clientController.player.getId() == ((Player) message).getId()) {
+                                clientController.player.setMyTurn(true);
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mapController.view.myturn(mapController);
+                                    }
+                                });
+
+                            } else {
+                                clientController.player.setMyTurn(false);
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mapController.view.otherPlayerPlaying(mapController);
+                                    }
+                                });
+                            }
+
+                        } else if (message instanceof Attack) {
+                            mapController.changeToOnlineAttackView();
+                            mapController.attackController.attack((Attack) message);
                         }
-                    } catch (InterruptedException ignored) {
+                    } catch (InterruptedException | IOException ignored) {
                     }
                 }
             }

@@ -1,9 +1,11 @@
 package program.model;
 
+import java.io.Serializable;
+
 /**
  * This class makes it possible for a player to move units from one space to another.
  */
-class Movement implements IPhase {
+class Movement implements IPhase, Serializable {
 
     private IPhase nextPhase;
 

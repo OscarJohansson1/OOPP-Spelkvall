@@ -17,6 +17,7 @@ public abstract class Lobby {
         lobbyName = name;
 
     }
+
     public void addPlayer(Player player) {
         players.add(player);
     }
@@ -29,11 +30,11 @@ public abstract class Lobby {
         return players;
     }
 
-    public boolean checkIfAllPlayersReady(){
-        for(Player player: players){
-             if(!player.isReady()){
-                 return false;
-             }
+    public boolean checkIfAllPlayersReady() {
+        for (Player player : players) {
+            if (!player.isReady()) {
+                return false;
+            }
         }
         return true;
     }

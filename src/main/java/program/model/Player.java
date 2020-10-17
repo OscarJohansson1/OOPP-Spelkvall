@@ -50,7 +50,7 @@ public class Player implements Serializable {
         this.units = units;
     }
 
-    int getUnits() {
+    public int getUnits() {
         return units;
     }
 

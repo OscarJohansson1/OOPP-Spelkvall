@@ -1,5 +1,6 @@
 package program.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * This class makes it possible for the current player to attack another players space. It then calculates the results of the attack
  * and if all units on the other players space dies then it moves all units except one.
  */
-class Attack implements IPhase {
+public class Attack implements IPhase, Serializable {
 
     private IPhase nextPhase;
 
@@ -17,7 +18,20 @@ class Attack implements IPhase {
     private int attackerLoss;
     private int defenderLoss;
 
-    boolean nextAttackPossible = true;
+    public boolean nextAttackPossible = true;
+
+
+    public Attack(){
+
+    }
+    public Attack(Attack attack) {
+        nextPhase = attack.nextPhase;
+        attackerDice = attack.attackerDice;
+        defenderDice = attack.defenderDice;
+        attackerLoss = attack.attackerLoss;
+        defenderLoss = attack.defenderLoss;
+        nextAttackPossible = attack.nextAttackPossible;
+    }
 
     /**
      * Method that calculates the attack and updates the state of the spaces involved in the attack.
@@ -135,15 +149,15 @@ class Attack implements IPhase {
         return value;
     }
 
-    List<Integer> attackerDiceResults() {
+    public List<Integer> attackerDiceResults() {
         return new ArrayList<>(attackerDice);
     }
 
-    List<Integer> defenderDiceResults() {
+    public List<Integer> defenderDiceResults() {
         return new ArrayList<>(defenderDice);
     }
 
-    List<String> attackResults() {
+    public List<String> attackResults() {
         List<String> results = new ArrayList<>();
         results.add(" lost: " + attackerLoss);
         if (defenderLoss == -1) {
@@ -154,6 +168,12 @@ class Attack implements IPhase {
         return results;
     }
 
+    public int getAttackerLoss(){
+        return attackerLoss;
+    }
+    public int getDefenderLoss(){
+        return defenderLoss;
+    }
     @Override
     public IPhase nextPhase() {
         return nextPhase;

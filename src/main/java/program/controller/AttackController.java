@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import program.model.Attack;
 import program.model.ModelDataHandler;
 import program.view.AttackView;
 
@@ -22,31 +23,44 @@ import java.util.*;
 
 public class AttackController extends AnchorPane {
 
-    @FXML private ImageView attackerDieImage1;
-    @FXML private ImageView attackerDieImage2;
-    @FXML private ImageView attackerDieImage3;
+    @FXML
+    private ImageView attackerDieImage1;
+    @FXML
+    private ImageView attackerDieImage2;
+    @FXML
+    private ImageView attackerDieImage3;
 
-    @FXML private ImageView defenderDieImage1;
-    @FXML private ImageView defenderDieImage2;
+    @FXML
+    private ImageView defenderDieImage1;
+    @FXML
+    private ImageView defenderDieImage2;
 
-    @FXML private Button attackButton;
-    @FXML private Button abortButton;
+    @FXML
+    Button attackButton;
+    @FXML
+    Button abortButton;
 
-    @FXML private Text attackerText;
-    @FXML private Text defenderText;
+    @FXML
+    private Text attackerText;
+    @FXML
+    private Text defenderText;
 
-    @FXML private Text attackerUnits;
-    @FXML private Text defenderUnits;
+    @FXML
+    private Text attackerUnits;
+    @FXML
+    private Text defenderUnits;
 
-    @FXML private ImageView attackerImageView;
-    @FXML private ImageView defenderImageView;
+    @FXML
+    private ImageView attackerImageView;
+    @FXML
+    private ImageView defenderImageView;
 
     private AttackView attackView;
     private MapController mapController;
     private ModelDataHandler modelDataHandler;
     private Stage stage;
 
-    AttackController(MapController mapController, Stage stage) {
+    AttackController(MapController mapController, Stage stage, ClientController clientController) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("attackMenu.fxml"));
         fxmlLoader.setRoot(this);
@@ -61,14 +75,19 @@ public class AttackController extends AnchorPane {
         this.mapController = mapController;
         this.stage = stage;
         this.modelDataHandler = ModelDataHandler.getModelDataHandler();
-        this.attackView = new AttackView(new ArrayList<>(Arrays.asList(attackerDieImage1,attackerDieImage2,attackerDieImage3, defenderDieImage1,defenderDieImage2)),
+        this.attackView = new AttackView(new ArrayList<>(Arrays.asList(attackerDieImage1, attackerDieImage2, attackerDieImage3, defenderDieImage1, defenderDieImage2)),
                 new ArrayList<>(Arrays.asList(attackerImageView, defenderImageView)));
-        attack();
+        if (clientController == null) attack();
     }
 
-    private void attack() {
-        attackView.updateDice();
+    void attack() throws IOException {
+        attackView.updateDice(mapController.clientController);
         attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton);
+    }
+
+    void attack(Attack attack) {
+        attackView.updateDice(attack);
+        attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton, attack);
     }
 
     /**
@@ -76,8 +95,8 @@ public class AttackController extends AnchorPane {
      * If the defender doesn't have any units left the abort button is changed to done
      */
     @FXML
-    public void attackButtonPressed() {
-        if(!modelDataHandler.startPhase()){
+    public void attackButtonPressed() throws IOException {
+        if (!modelDataHandler.startPhase()) {
             attackView.attackDone(attackButton, abortButton);
             return;
         }
@@ -89,15 +108,8 @@ public class AttackController extends AnchorPane {
      * When done the player is returned to the map
      */
     @FXML
-    public void abortButtonPressed() {
+    public void abortButtonPressed() throws IOException {
         mapController.removeAttackView();
-        if(modelDataHandler.isWinner()){
-            Parent root = new EndController(stage);
-            Scene scene = new Scene(root, 1920, 1080);
 
-            stage.setTitle("End");
-            stage.setScene(scene);
-            stage.show();
-        }
     }
 }
