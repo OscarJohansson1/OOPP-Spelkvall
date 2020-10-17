@@ -13,6 +13,7 @@ import java.util.Random;
  */
 public class ModelDataHandler {
 
+
     private List<Player> players = new ArrayList<>();
     private Player currentPlayer;
     private int roundCount = 1;
@@ -21,6 +22,7 @@ public class ModelDataHandler {
     private Board board;
     private int unitsToUse = 1;
     public boolean firstDeployment = true;
+    private ClientController clientController;
 
     public List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
             "RödaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hrum",
@@ -57,24 +59,15 @@ public class ModelDataHandler {
      * @param logoNames      A list of Strings with the logotypes that should represent each player.
      */
     public void initialize(int amountOfSpaces, List<String> colors, List<String> logoNames) {
-        for(int i = 0; i < colors.size(); i++)
-        {
-            players.add(new Player((50/colors.size()), i, colors.get(i), logoNames.get(i),i+""));
+        for (int i = 0; i < colors.size(); i++) {
+            players.add(new Player((50 / colors.size()), i, colors.get(i), logoNames.get(i), i + ""));
         }
         currentPlayer = getRandomPlayer(null, players);
-        board = new Board(randomizeSpaces(amountOfSpaces));
+        board = new Board(randomizeSpaces(amountOfSpaces, players));
         board.createAreas();
     }
 
-    public List<Space> randomizeSpaces(int amountOfSpaces) {
-        return randomSpaces(amountOfSpaces, players);
-    }
-
-    public List<Space> randomizeSpaces(int amountOfSpace, List<Player> players) {
-        return randomSpaces(amountOfSpace, players);
-    }
-
-    private List<Space> randomSpaces(int amountOfSpaces, List<Player> players) {
+    public List<Space> randomizeSpaces(int amountOfSpaces, List<Player> players) {
         List<Space> spaces = new ArrayList<>();
         int player = 0;
         Player lastRandomPlayer;
@@ -113,16 +106,14 @@ public class ModelDataHandler {
      * @return True if a the space was added to a selectedSpace, false if unsuccessful
      */
     public boolean receiveSelectedSpace(int id) {
-        if(board.findSpace(id).getPlayerId() == currentPlayer.getId() && (board.getSelectedSpace() == null || round.getCurrentPhase().equals("DEPLOY"))) {
+        if (board.findSpace(id).getPlayerId() == currentPlayer.getId() && (board.getSelectedSpace() == null || round.getCurrentPhase().equals("DEPLOY"))) {
             board.setSelectedSpace(board.findSpace(id));
             return true;
-        }
-        else if(board.getSelectedSpace() == board.findSpace(id)){
+        } else if (board.getSelectedSpace() == board.findSpace(id)) {
             board.resetSpaces();
-        }
-        else if((board.getSelectedSpace() !=  null && round.getCurrentPhase().equals("MOVE") &&
+        } else if ((board.getSelectedSpace() != null && round.getCurrentPhase().equals("MOVE") &&
                 board.findSpace(id).getPlayerId() == currentPlayer.getId() && board.isNeighbours(board.findSpace(id))) || (board.getSelectedSpace() != null &&
-                board.findSpace(id).getPlayerId() != currentPlayer.getId() && round.getCurrentPhase().equals("ATTACK") && board.isNeighbours(board.findSpace(id)))){
+                board.findSpace(id).getPlayerId() != currentPlayer.getId() && round.getCurrentPhase().equals("ATTACK") && board.isNeighbours(board.findSpace(id)))) {
             board.setSelectedSpace2(board.findSpace(id));
             return true;
         }
@@ -145,10 +136,12 @@ public class ModelDataHandler {
         resetSelectedSpaces();
         phaseCount++;
         if (phaseCount > 3) {
-            nextPlayer(players,currentPlayer);
+            nextPlayer(players, currentPlayer);
+            clientController.player.setMyTurn(currentPlayer.getId() == clientController.player.getId());
             phaseCount = 1;
         }
     }
+
 
     /**
      * Method that controls the phase changes during the first round-robin. During the first round the players takes
@@ -157,22 +150,24 @@ public class ModelDataHandler {
     public void firstRoundNextPhase() {
         resetSelectedSpaces();
         nextPlayer(players, currentPlayer);
+        clientController.player.setMyTurn(currentPlayer.getId() == clientController.player.getId());
         roundCount++;
         if (roundCount > players.size()) {
             firstDeployment = false;
         }
     }
 
+    public void firstRoundNextPhaseOnline() {
+
+    }
+
     public static Player nextPlayer(List<Player> players, Player currentPlayer) {
         for (int i = 0; i < players.size(); i++) {
-            players.get(i).setMyTurn(false);
             if (currentPlayer == players.get(i) && i + 1 < players.size()) {
                 currentPlayer = players.get(i + 1);
-                players.get(i + 1).setMyTurn(true);
                 return currentPlayer;
             } else if (currentPlayer == players.get(i)) {
                 currentPlayer = players.get(0);
-                players.get(0).setMyTurn(true);
                 return currentPlayer;
             }
         }
@@ -185,7 +180,7 @@ public class ModelDataHandler {
      * @return If the phase could start successfully.
      */
     public boolean startPhase() {
-        if((board.getSelectedSpace() != null && round.getCurrentPhase().equals("DEPLOY")) || board.getSelectedSpace2() != null) {
+        if ((board.getSelectedSpace() != null && round.getCurrentPhase().equals("DEPLOY")) || board.getSelectedSpace2() != null) {
             return round.startPhase(board.getSelectedSpace(), board.getSelectedSpace2(), currentPlayer, unitsToUse);
         }
         return false;
@@ -319,24 +314,34 @@ public class ModelDataHandler {
         return board.getSpace(0).getPlayer().getLogoUrl();
     }
 
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     public void setBoard(Board board) {
         this.board = board;
     }
 
-    public void setPlayers(List<Player> players){
+    public void setPlayers(List<Player> players) {
         this.players = players;
+        System.out.println(players);
     }
 
-    public List<Player> getPlayers(){
+    public List<Player> getPlayers() {
         return players;
     }
-    public void setSpace(Space receivedSpace){
-        for(Space space: board.getSpaces()){
-            if(receivedSpace.getId() == space.getId()){
+
+    public void setSpace(Space receivedSpace) {
+        for (Space space : board.getSpaces()) {
+            if (receivedSpace.getId() == space.getId()) {
                 space.updateSpace(receivedSpace);
                 break;
             }
         }
+    }
+
+    public void setClientController(ClientController clientController) {
+
     }
 
 }

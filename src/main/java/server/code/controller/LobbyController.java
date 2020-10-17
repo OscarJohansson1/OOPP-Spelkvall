@@ -11,6 +11,7 @@ import java.util.List;
 public class LobbyController {
     private final List<GameLobby> gameLobbies = new ArrayList<>();
     private final List<MenuLobby> menuLobbies = new ArrayList<>();
+    private final List<Integer> gridPane = new ArrayList<>();
 
     public LobbyController(){
         createNewMenuLobby("yes");
@@ -34,12 +35,17 @@ public class LobbyController {
     }
     public void createNewGameLobby(String name){
         addLobby(new GameLobby(name));
+
+
     }
     public void addMenuLobbyPlayersToGameLobby(MenuLobby menuLobby, GameLobby gameLobby){
         for(Player player: menuLobby.getLobbyPlayers()){
             gameLobby.getLobbyPlayers().add(player);
+            player.setUnits(50/gameLobbies.size());
         }
-
+    }
+    public List<Integer> getGridPane(){
+        return gridPane;
     }
 
 

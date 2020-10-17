@@ -46,7 +46,7 @@ public class Player implements Serializable {
         this.color = color;
     }
 
-    void setUnits(int units) {
+    public void setUnits(int units) {
         this.units = units;
     }
 
@@ -54,9 +54,11 @@ public class Player implements Serializable {
         return units;
     }
 
-    int getId() {
+    public int getId() {
         return id;
     }
+
+    public void setId(int id){ this.id = id;}
 
     public String getColor() {
         return color;

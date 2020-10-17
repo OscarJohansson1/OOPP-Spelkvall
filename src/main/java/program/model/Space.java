@@ -13,6 +13,7 @@ public class Space implements Serializable {
     private Player player;
     private int units;
     private String name;
+    private boolean marked = false;
 
     /**
      * This is a constructor for a space
@@ -78,5 +79,12 @@ public class Space implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public boolean getMarked(){
+        return marked;
+    }
+    public void setMarked(boolean marked){
+        this.marked = marked;
     }
 }

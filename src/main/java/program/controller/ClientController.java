@@ -11,12 +11,9 @@ import java.util.List;
 public class ClientController {
 
     Client echoClient;
-    private MapController mapController;
     StartController startController;
     ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
-    Player player;
-    Player currentPlayer;
-    boolean lobbyLeader = false;
+    public Player player;
 
     public ClientController(Client client, StartController startController) throws IOException {
         this.echoClient = client;
@@ -28,24 +25,6 @@ public class ClientController {
         }
     }
 
-    public void setMapController(MapController mapController) {
-        this.mapController = mapController;
-    }
-
-    public void showPhase(String string) {
-        mapController.view.updatePhase(string,mapController);
-
-    }
-    public void showSelectedSpace(int id) {
-        mapController.view.setColor(mapController.getCube(id), Color.web(mapController.modelDataHandler.getColorOnSpace(id)).darker().darker(), mapController.allButtons);
-    }
-    public void removeSelectedSpace(int id) {
-        mapController.view.setColor(mapController.getCube(id), Color.web(mapController.modelDataHandler.getColorOnSpace(id)), mapController.allButtons);
-    }
-    public void showCurrentPlayer(Player player) {
-        mapController.modelDataHandler.setCurrentPlayer(player);
-        mapController.view.updateCurrentPlayer(player.getColor(),mapController,player.getName());
-    }
     public void getLobbies() throws IOException, ClassNotFoundException {
         echoClient.sendObject("LOBBYS");
     }
@@ -58,8 +37,19 @@ public class ClientController {
     public void addPlayerToLobby(Player player) throws IOException {
         echoClient.sendObject(player);
     }
-    public boolean checkIfLobbyLeader() throws IOException {
+    public void checkIfLobbyLeader() throws IOException {
         echoClient.sendObject("LOBBYLEADER");
-        return false;
+    }
+    public void resetColor() throws IOException {
+        echoClient.sendObject("resetColor");
+    }
+    public void nextPlayer() throws IOException {
+        echoClient.sendObject("nextPlayer");
+    }
+    public void getGridPane() throws IOException {
+        echoClient.sendObject("gridPane");
+    }
+    public void updateGridPane(int number) throws IOException {
+        echoClient.sendObject(number);
     }
 }

@@ -6,7 +6,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import program.model.ModelDataHandler;
-import program.model.Player;
 import program.view.MapView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,93 +29,172 @@ import java.util.List;
  */
 public class MapController extends AnchorPane {
 
-    @FXML private Button cubeHubben;
-    @FXML private Button cubeBasen;
-    @FXML private Button cubeKajsabaren;
-    @FXML private Button cubeZaloonen;
-    @FXML private Button cubeWinden;
-    @FXML private Button cubeLofTDet;
-    @FXML private Button cubeRodaRummet;
-    @FXML private Button cubeVerum;
-    @FXML private Button cubeVillan;
-    @FXML private Button cubeADammen;
-    @FXML private Button cubeFocus;
-    @FXML private Button cubeFortNox;
-    @FXML private Button cubeGTSpritis;
-    @FXML private Button cubeGoldenI;
-    @FXML private Button cubeChabo;
-    @FXML private Button cubeWijkanders;
-    @FXML private Button cubeHrum;
-    @FXML private Button cubeAlvan;
-    @FXML private Button cubeSpektrum;
-    @FXML private Button cubeGasquen;
-    @FXML private Button cubeChalmersplatsen;
-    @FXML private Button cubeOlgas;
-    @FXML private Button cubeRunAn;
-    @FXML private Button cubeTagvagnen;
-    @FXML private Button cubeOrigogarden;
-    @FXML private Button cubeKalleGlader;
-    @FXML private Button cubeTvargatan;
+    @FXML
+    private Button cubeHubben;
+    @FXML
+    private Button cubeBasen;
+    @FXML
+    private Button cubeKajsabaren;
+    @FXML
+    private Button cubeZaloonen;
+    @FXML
+    private Button cubeWinden;
+    @FXML
+    private Button cubeLofTDet;
+    @FXML
+    private Button cubeRodaRummet;
+    @FXML
+    private Button cubeVerum;
+    @FXML
+    private Button cubeVillan;
+    @FXML
+    private Button cubeADammen;
+    @FXML
+    private Button cubeFocus;
+    @FXML
+    private Button cubeFortNox;
+    @FXML
+    private Button cubeGTSpritis;
+    @FXML
+    private Button cubeGoldenI;
+    @FXML
+    private Button cubeChabo;
+    @FXML
+    private Button cubeWijkanders;
+    @FXML
+    private Button cubeHrum;
+    @FXML
+    private Button cubeAlvan;
+    @FXML
+    private Button cubeSpektrum;
+    @FXML
+    private Button cubeGasquen;
+    @FXML
+    private Button cubeChalmersplatsen;
+    @FXML
+    private Button cubeOlgas;
+    @FXML
+    private Button cubeRunAn;
+    @FXML
+    private Button cubeTagvagnen;
+    @FXML
+    private Button cubeOrigogarden;
+    @FXML
+    private Button cubeKalleGlader;
+    @FXML
+    private Button cubeTvargatan;
 
-    @FXML private Text textHubben;
-    @FXML private Text textBasen;
-    @FXML private Text textKajsabaren;
-    @FXML private Text textZaloonen;
-    @FXML private Text textWinden;
-    @FXML private Text textLofTDet;
-    @FXML private Text textRodaRummet;
-    @FXML private Text textVerum;
-    @FXML private Text textVillan;
-    @FXML private Text textAdammen;
-    @FXML private Text textFocus;
-    @FXML private Text textFortNox;
-    @FXML private Text textGTSpritis;
-    @FXML private Text textGoldenI;
-    @FXML private Text textChabo;
-    @FXML private Text textWijkanders;
-    @FXML private Text textHrum;
-    @FXML private Text textAlvan;
-    @FXML private Text textSpektrum;
-    @FXML private Text textGasquen;
-    @FXML private Text textChalmersplatsen;
-    @FXML private Text textOlgas;
-    @FXML private Text textRunAn;
-    @FXML private Text textTagvagnen;
-    @FXML private Text textOrigogarden;
-    @FXML private Text textKalleGlader;
-    @FXML private Text textTvargatan;
+    @FXML
+    private Text textHubben;
+    @FXML
+    private Text textBasen;
+    @FXML
+    private Text textKajsabaren;
+    @FXML
+    private Text textZaloonen;
+    @FXML
+    private Text textWinden;
+    @FXML
+    private Text textLofTDet;
+    @FXML
+    private Text textRodaRummet;
+    @FXML
+    private Text textVerum;
+    @FXML
+    private Text textVillan;
+    @FXML
+    private Text textAdammen;
+    @FXML
+    private Text textFocus;
+    @FXML
+    private Text textFortNox;
+    @FXML
+    private Text textGTSpritis;
+    @FXML
+    private Text textGoldenI;
+    @FXML
+    private Text textChabo;
+    @FXML
+    private Text textWijkanders;
+    @FXML
+    private Text textHrum;
+    @FXML
+    private Text textAlvan;
+    @FXML
+    private Text textSpektrum;
+    @FXML
+    private Text textGasquen;
+    @FXML
+    private Text textChalmersplatsen;
+    @FXML
+    private Text textOlgas;
+    @FXML
+    private Text textRunAn;
+    @FXML
+    private Text textTagvagnen;
+    @FXML
+    private Text textOrigogarden;
+    @FXML
+    private Text textKalleGlader;
+    @FXML
+    private Text textTvargatan;
 
-    @FXML public AnchorPane rootpane;
-    @FXML AnchorPane startMenu;
+    @FXML
+    public AnchorPane rootpane;
+    @FXML
+    AnchorPane startMenu;
 
-    @FXML public AnchorPane deployPhase;
-    @FXML public AnchorPane attackPhase;
-    @FXML public AnchorPane movePhase;
+    @FXML
+    public AnchorPane deployPhase;
+    @FXML
+    public AnchorPane attackPhase;
+    @FXML
+    public AnchorPane movePhase;
 
-    @FXML private Slider moveSlider;
+    @FXML
+    public Slider moveSlider;
 
-    @FXML private Button startButton;
-    @FXML private Button skipAttack;
-    @FXML private Button doneMove;
-    @FXML private Button donedeploy;
-    @FXML private Button deployButton;
-    @FXML private Button attackButton;
-    @FXML private Button moveButton;
-    @FXML private Button firstMarked;
-    @FXML private Button secondMarked;
-    @FXML public Button showCurrentPlayer;
+    @FXML
+    private Button startButton;
+    @FXML
+    private Button skipAttack;
+    @FXML
+    private Button doneMove;
+    @FXML
+    private Button donedeploy;
+    @FXML
+    private Button deployButton;
+    @FXML
+    private Button attackButton;
+    @FXML
+    private Button moveButton;
+    @FXML
+    private Button firstMarked;
+    @FXML
+    private Button secondMarked;
+    @FXML
+    public Button showCurrentPlayer;
 
-    @FXML private Text showMoveUnitsText;
-    @FXML private Text firstDisplayText;
-    @FXML private Text secondDisplayText;
-    @FXML public Text playerText;
-    @FXML public Text phaseText;
-    @FXML private Text deployableUnitsText;
+    @FXML
+    private Text showMoveUnitsText;
+    @FXML
+    private Text firstDisplayText;
+    @FXML
+    private Text secondDisplayText;
+    @FXML
+    public Text playerText;
+    @FXML
+    public Text phaseText;
+    @FXML
+    private Text deployableUnitsText;
 
-    @FXML public Pane phasePane;
-    @FXML public Pane sliderPane;
+    @FXML
+    public Pane phasePane;
+    @FXML
+    public Pane sliderPane;
 
-    @FXML public ImageView imageTeamLogo;
+    @FXML
+    public ImageView imageTeamLogo;
 
     ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
     MapView view = new MapView();
@@ -130,6 +208,7 @@ public class MapController extends AnchorPane {
 
     MapController(List<String> colors, List<String> logoNames, Stage stage) throws IOException {
         this.stage = stage;
+
         pauseController = new PauseController(stage, this);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
         //stage.setFullScreen(true);
@@ -141,22 +220,23 @@ public class MapController extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-
-        allButtons = new ArrayList<>(Arrays.asList(cubeHubben,cubeBasen,cubeKajsabaren,cubeZaloonen,cubeWinden,cubeLofTDet,
-                cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
-                cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden, cubeKalleGlader, cubeTvargatan));
+        allButtons = new ArrayList<>(Arrays.asList(cubeHubben, cubeBasen, cubeKajsabaren, cubeZaloonen, cubeWinden, cubeLofTDet,
+                cubeRodaRummet, cubeVerum, cubeVillan, cubeADammen, cubeFocus, cubeFortNox, cubeGTSpritis, cubeGoldenI, cubeChabo, cubeWijkanders, cubeHrum,
+                cubeAlvan, cubeSpektrum, cubeGasquen, cubeChalmersplatsen, cubeOlgas, cubeRunAn, cubeTagvagnen, cubeOrigogarden, cubeKalleGlader, cubeTvargatan));
 
         allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsabaren, textZaloonen, textWinden, textLofTDet,
-                textRodaRummet,textVerum, textVillan, textAdammen, textFocus, textFortNox,textGTSpritis, textGoldenI, textChabo,textWijkanders,textHrum,
-                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogarden, textKalleGlader, textTvargatan));
+                textRodaRummet, textVerum, textVillan, textAdammen, textFocus, textFortNox, textGTSpritis, textGoldenI, textChabo, textWijkanders, textHrum,
+                textAlvan, textSpektrum, textGasquen, textChalmersplatsen, textOlgas, textRunAn, textTagvagnen, textOrigogarden, textKalleGlader, textTvargatan));
         modelDataHandler = ModelDataHandler.getModelDataHandler();
         modelDataHandler.initialize(allButtons.size(), colors, logoNames);
         initialize();
 
 
     }
+
     MapController(ClientController clientController, Stage stage) throws IOException {
         this.stage = stage;
+        this.clientController = clientController;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -165,25 +245,33 @@ public class MapController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        this.clientController = clientController;
-        allButtons = new ArrayList<>(Arrays.asList(cubeHubben,cubeBasen,cubeKajsabaren,cubeZaloonen,cubeWinden,cubeLofTDet,
-                cubeRodaRummet,cubeVerum,cubeVillan,cubeADammen,cubeFocus,cubeFortNox,cubeGTSpritis,cubeGoldenI,cubeChabo,cubeWijkanders,cubeHrum,
-                cubeAlvan,cubeSpektrum,cubeGasquen,cubeChalmersplatsen,cubeOlgas,cubeRunAn,cubeTagvagnen,cubeOrigogarden, cubeKalleGlader, cubeTvargatan));
+        allButtons = new ArrayList<>(Arrays.asList(cubeHubben, cubeBasen, cubeKajsabaren, cubeZaloonen, cubeWinden, cubeLofTDet,
+                cubeRodaRummet, cubeVerum, cubeVillan, cubeADammen, cubeFocus, cubeFortNox, cubeGTSpritis, cubeGoldenI, cubeChabo, cubeWijkanders, cubeHrum,
+                cubeAlvan, cubeSpektrum, cubeGasquen, cubeChalmersplatsen, cubeOlgas, cubeRunAn, cubeTagvagnen, cubeOrigogarden, cubeKalleGlader, cubeTvargatan));
 
         allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsabaren, textZaloonen, textWinden, textLofTDet,
-                textRodaRummet,textVerum, textVillan, textAdammen, textFocus, textFortNox,textGTSpritis, textGoldenI, textChabo,textWijkanders,textHrum,
-                textAlvan,textSpektrum,textGasquen,textChalmersplatsen,textOlgas,textRunAn, textTagvagnen,textOrigogarden, textKalleGlader, textTvargatan));
+                textRodaRummet, textVerum, textVillan, textAdammen, textFocus, textFortNox, textGTSpritis, textGoldenI, textChabo, textWijkanders, textHrum,
+                textAlvan, textSpektrum, textGasquen, textChalmersplatsen, textOlgas, textRunAn, textTagvagnen, textOrigogarden, textKalleGlader, textTvargatan));
         modelDataHandler = ModelDataHandler.getModelDataHandler();
         initialize();
     }
+
     private void initialize() throws IOException {
-        for (int i = 0; i<allButtons.size(); i++){
+        for (int i = 0; i < allButtons.size(); i++) {
             int var = i;
             allButtons.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     try {
-                        setSpace(var);
+                        if(clientController != null){
+                            if(clientController.player.getMyTurn()){
+                                setSpace(var);
+                            }
+                        }
+                        else {
+                            setSpace(var);
+                        }
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -191,12 +279,11 @@ public class MapController extends AnchorPane {
             });
         }
 
-             stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 
             @Override
             public void handle(KeyEvent t) {
-                if(t.getCode()== KeyCode.ESCAPE)
-                {
+                if (t.getCode() == KeyCode.ESCAPE) {
                     checkPauseController();
                 }
             }
@@ -222,7 +309,7 @@ public class MapController extends AnchorPane {
                 view.updatePhase("DEPLOY", MapController.this);
                 resetColor();
                 resetDisplayCubes();
-                view.updatePhaseText("DEPLOY",MapController.this);
+                view.updatePhaseText("DEPLOY", MapController.this);
                 view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
                 sliderVisibility(true);
                 removeMarkedCube(secondMarked);
@@ -237,7 +324,7 @@ public class MapController extends AnchorPane {
         donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (modelDataHandler.firstDeployment){
+                if (modelDataHandler.firstDeployment) {
                     view.updatePhase("DEPLOY", MapController.this);
                     modelDataHandler.firstRoundNextPhase();
                     view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
@@ -248,8 +335,7 @@ public class MapController extends AnchorPane {
                     resetColor();
                     donedeploy.setDisable(true);
                     donedeploy.setStyle("-fx-background-color: #000000");
-                }
-                else{
+                } else {
                     modelDataHandler.nextPhase();
                     view.updatePhase("ATTACK", MapController.this);
                     view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
@@ -289,8 +375,7 @@ public class MapController extends AnchorPane {
         });
         view.updatePhaseText(modelDataHandler.getCurrentPhase(), this);
         view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), this, modelDataHandler.getCurrentPlayerName());
-        for(int i = 0; i < allButtons.size(); i++)
-        {
+        for (int i = 0; i < allButtons.size(); i++) {
             view.updateTextUnits(i, modelDataHandler.getUnitsOnSpace(i), allButtons, this);
         }
         resetColor();
@@ -301,10 +386,11 @@ public class MapController extends AnchorPane {
         donedeploy.setStyle("-fx-background-color: #000000");
         moveSlider.setMax(modelDataHandler.getDeployableUnits());
         skipAttack.setVisible(false);
+
     }
-    public void deploy(){
-        if(modelDataHandler.startPhase())
-        {
+
+    public void deploy() {
+        if (modelDataHandler.startPhase()) {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
             moveSlider.setMax(modelDataHandler.getDeployableUnits());
@@ -312,51 +398,54 @@ public class MapController extends AnchorPane {
             //donedeploy.setStyle("-fx-background-color: #000000");
 
         }
-        if (modelDataHandler.getDeployableUnits() == 0){
+        if (modelDataHandler.getDeployableUnits() == 0) {
             donedeploy.setDisable(false);
             donedeploy.setStyle(null);
         }
     }
+
     public void attack() {
         System.out.println("Attacking");
-        view.updatePhase("ATTACK",this);
-        if(modelDataHandler.startPhase())
-        {
-            setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
+        view.updatePhase("ATTACK", this);
+        if (modelDataHandler.startPhase()) {
+            setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
+            setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
             changeToAttackView();
         }
     }
-    public void move(){
-        if(modelDataHandler.startPhase())
-        {
-            setSpaceEvent(modelDataHandler.getSelectedSpace().getId(),modelDataHandler.getSelectedSpace2().getId());
+
+    public void move() {
+        if (modelDataHandler.startPhase()) {
+            setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
+            setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
             modelDataHandler.resetSelectedSpaces();
         }
         resetDisplayCubes();
     }
+
     private void changeToAttackView() {
         attackController = new AttackController(this, stage);
         rootpane.getChildren().add(attackController);
     }
+
     void removeAttackView() {
         rootpane.getChildren().remove(attackController);
-        for(int i = 0; i < allButtons.size(); i++)
-        {
-            view.updateTextUnits(i,modelDataHandler.getUnitsOnSpace(i),allButtons, this);
-            view.setColor(allButtons.get(i), Color.web(modelDataHandler.getColorOnAllSpaces().get(i)),allButtons);
+        for (int i = 0; i < allButtons.size(); i++) {
+            view.updateTextUnits(i, modelDataHandler.getUnitsOnSpace(i), allButtons, this);
+            view.setColor(allButtons.get(i), Color.web(modelDataHandler.getColorOnAllSpaces().get(i)), allButtons);
         }
         modelDataHandler.resetSelectedSpaces();
         resetDisplayCubes();
 
     }
-    private void sliderVisibility(Boolean visible){
-        if(visible){
+
+    private void sliderVisibility(Boolean visible) {
+        if (visible) {
             moveSlider.setVisible(true);
             firstMarked.setVisible(true);
             secondMarked.setVisible(true);
             showMoveUnitsText.setVisible(true);
-        }
-        else{
+        } else {
             moveSlider.setVisible(false);
             firstMarked.setVisible(false);
             secondMarked.setVisible(false);
@@ -364,86 +453,75 @@ public class MapController extends AnchorPane {
         }
     }
 
-    void checkPauseController(){
-        if(rootpane.getChildren().contains(pauseController)) {
+    void checkPauseController() {
+        if (rootpane.getChildren().contains(pauseController)) {
             rootpane.getChildren().remove(pauseController);
-        }else{
+        } else {
             rootpane.getChildren().add(pauseController);
         }
     }
 
     private void setSpace(int id) throws IOException {
-        if(modelDataHandler.receiveSelectedSpace(id))
-        {
-            if(modelDataHandler.getSelectedSpace2() == null)
-            {
+        if (modelDataHandler.receiveSelectedSpace(id)) {
+            if (modelDataHandler.getSelectedSpace2() == null) {
                 resetDisplayCubes();
                 resetColor();
-            }
-            else {
+                clientController.resetColor();
+            } else {
                 resetColor(modelDataHandler.getSelectedSpace().getId());
-                resetDisplayCubes(secondMarked,secondDisplayText);
-                moveSlider.setMax(modelDataHandler.getUnitsOnSpace(modelDataHandler.getSelectedSpace().getId())-1);
+                modelDataHandler.getSelectedSpace2().setMarked(false);
+                resetDisplayCubes(secondMarked, secondDisplayText);
+                moveSlider.setMax(modelDataHandler.getUnitsOnSpace(modelDataHandler.getSelectedSpace().getId()) - 1);
                 moveSlider.setMin(0);
                 moveSlider.setDisable(false);
             }
             view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
             view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
-            displayCubes(id);
-            if(firstDisplayText.getText().isEmpty())
-            {
-                displayText(firstDisplayText, getTextFromList(id));
+            if (clientController != null) {
+                modelDataHandler.getSpaceFromId(id).setMarked(true);
+                clientController.sendObject(modelDataHandler.getSpaceFromId(id));
             }
-            else if(secondDisplayText.getText().isEmpty()){
+            displayCubes(id);
+            if (firstDisplayText.getText().isEmpty()) {
+                displayText(firstDisplayText, getTextFromList(id));
+            } else if (secondDisplayText.getText().isEmpty()) {
                 displayText(secondDisplayText, getTextFromList(id));
             }
 
-        }
-        else{
-            if(modelDataHandler.getSelectedSpace() == null && modelDataHandler.getSelectedSpace2() == null){
+        } else {
+            if (modelDataHandler.getSelectedSpace() == null && modelDataHandler.getSelectedSpace2() == null) {
                 resetDisplayCubes();
                 resetColor();
+
             }
         }
-        if(clientController != null) clientController.sendObject(modelDataHandler.getSpaceFromId(id));
-
     }
 
-    private void setSpaceEvent(int id) {
+    void setSpaceEvent(int id) {
         view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
         view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
-
     }
 
-    private void setSpaceEvent(int id, int id2) {
-        view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
-        view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)), allButtons);
-        view.updateTextUnits(id2, modelDataHandler.getUnitsOnSpace(id2), allButtons, this);
-        view.setColor(getCube(id2), Color.web(modelDataHandler.getColorOnSpace(id2)), allButtons);
-    }
-
-    private List<Color> getColors()
-    {
+    private List<Color> getColors() {
         List<Color> colors = new ArrayList<>();
-        for(String color : modelDataHandler.getColorOnAllSpaces()){
+        for (String color : modelDataHandler.getColorOnAllSpaces()) {
             colors.add(Color.web(color));
         }
         return colors;
     }
 
-    private void resetColor() {
-        view.resetColor(getColors(),allButtons);
+    void resetColor() {
+        view.resetColor(getColors(), allButtons);
     }
 
-    private void resetColor(int id) {
+    void resetColor(int id) {
         List<Color> colors = getColors();
-        for(int i = 1; i < allButtons.size(); i++)
-        {
-            if(i == id) {
-                colors.set(i,(colors.get(i).darker().darker()));
+        for (int i = 1; i < allButtons.size(); i++) {
+            if (i == id) {
+                colors.set(i, (colors.get(i).darker().darker()));
             }
         }
-        view.resetColor(colors,allButtons);
+        view.resetColor(colors, allButtons);
     }
 
     Button getCube(int id) {
@@ -455,55 +533,49 @@ public class MapController extends AnchorPane {
         return null;
     }
 
-    private void displayCubes(int id){
-        if (firstMarked.getStyle().isEmpty()){
+    private void displayCubes(int id) {
+        if (firstMarked.getStyle().isEmpty()) {
             view.updateDisplayCubes(firstMarked, modelDataHandler.getColorOnSpace(id));
-        }
-        else{
+        } else {
             view.updateDisplayCubes(secondMarked, modelDataHandler.getColorOnSpace(id));
         }
     }
 
-    private void resetDisplayCubes(Button button, Text text){
-        view.resetDisplayCubes(button,text);
-    }
-    private void resetDisplayCubes(){
-        view.resetDisplayCubes(firstMarked,firstDisplayText);
-        view.resetDisplayCubes(secondMarked,secondDisplayText);
+    private void resetDisplayCubes(Button button, Text text) {
+        view.resetDisplayCubes(button, text);
     }
 
-    private void removeMarkedCube(Button button)
-    {
-        if(button == firstMarked)
-        {
+    private void resetDisplayCubes() {
+        view.resetDisplayCubes(firstMarked, firstDisplayText);
+        view.resetDisplayCubes(secondMarked, secondDisplayText);
+    }
+
+    private void removeMarkedCube(Button button) {
+        if (button == firstMarked) {
             firstDisplayText.setVisible(false);
             firstMarked.setVisible(false);
-        }
-        else {
+        } else {
             secondDisplayText.setVisible(false);
             secondMarked.setVisible(false);
         }
 
     }
-    private void addMarkedCube(Button button)
-    {
-        if(button == firstMarked)
-        {
+
+    private void addMarkedCube(Button button) {
+        if (button == firstMarked) {
             firstDisplayText.setVisible(true);
             firstMarked.setVisible(true);
-        }
-        else {
+        } else {
             secondDisplayText.setVisible(true);
             secondMarked.setVisible(true);
         }
     }
 
-    private void displayText(Text displayText, Text cubeText){
-       view.updateDisplayTexts(displayText, cubeText);
+    private void displayText(Text displayText, Text cubeText) {
+        view.updateDisplayTexts(displayText, cubeText);
     }
 
-    private Text getTextFromList(int id)
-    {
+    private Text getTextFromList(int id) {
         for (Text allText : allTexts) {
             if (allText == allTexts.get(id)) {
                 return allText;
@@ -512,14 +584,11 @@ public class MapController extends AnchorPane {
         return null;
     }
 
-    public String getTeamLogo(int id){
-        return modelDataHandler.getTeamLogo(id);
-    }
-    public String getTeamLogo(){
+    public String getTeamLogo() {
         return modelDataHandler.getTeamLogo();
     }
 
-    public String getSpaceColor(int id){
+    public String getSpaceColor(int id) {
         return modelDataHandler.getColorOnSpace(id);
     }
 }

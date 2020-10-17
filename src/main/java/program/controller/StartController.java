@@ -35,9 +35,8 @@ public class StartController extends AnchorPane {
 
     LobbySelectController lobbySelectController;
     LobbyReadyController lobbyReadyController;
-    private MultiplayerLogoController setUpMultiplayer;
+    MultiplayerLogoController multiplayerLogoController;
     ClientController clientController;
-    Client client;
 
     /**
      *
@@ -101,19 +100,20 @@ public class StartController extends AnchorPane {
         });
     }
     public void goToLobbySelect() throws IOException, ClassNotFoundException {
-        client = new Client();
+        Client client = new Client();
         clientController = new ClientController(client, this);
         clientController.getLobbies();
         rootpane.getChildren().add(lobbySelectController);
 
     }
-    public void goToLobbyReady(Player player) throws IOException, ClassNotFoundException {
+    public void goToLobbyReady(Player player, int gridPosImageview) throws IOException, ClassNotFoundException {
         clientController.player = player;
+        System.out.println(player);
         clientController.addPlayerToLobby(player);
         clientController.checkIfLobbyLeader();
+        clientController.updateGridPane(gridPosImageview);
         lobbyReadyController.startButton.setVisible(false);
         lobbyReadyController.startButton.setDisable(true);
-
         rootpane.getChildren().add(lobbyReadyController);
     }
     public void goToSetup() throws IOException {
@@ -123,11 +123,11 @@ public class StartController extends AnchorPane {
                 break;
             }
         }
-        setUpMultiplayer = new MultiplayerLogoController(clientController, this);
-        rootpane.getChildren().add(setUpMultiplayer);
+        multiplayerLogoController = new MultiplayerLogoController(clientController, this);
+        rootpane.getChildren().add(multiplayerLogoController);
     }
     public void removeSetUp() {
-        rootpane.getChildren().remove(setUpMultiplayer);
+        rootpane.getChildren().remove(multiplayerLogoController);
     }
     public void backToMainMenu(){
 
@@ -136,7 +136,7 @@ public class StartController extends AnchorPane {
     }
     public void toLobbySelect() throws IOException {
 
-        rootpane.getChildren().remove(setUpMultiplayer);
+        rootpane.getChildren().remove(multiplayerLogoController);
         rootpane.getChildren().add(lobbySelectController);
     }
 

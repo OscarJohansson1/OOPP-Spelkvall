@@ -83,7 +83,6 @@ public class LobbyReadyController extends AnchorPane {
                     userCards.add(new PlayerCard(player));
                 }
                 userFlow.getChildren().setAll(userCards);
-                System.out.println("Usercards are " + userCards.size());
             }
         });
 

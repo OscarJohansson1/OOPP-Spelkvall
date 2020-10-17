@@ -82,6 +82,8 @@ public class SetUpGameController extends AnchorPane {
 
     private ColorAdjust chosen = new ColorAdjust();
 
+    private StartController startController;
+
 
     /**
      * this is the constructor for SetUpGameController
@@ -97,6 +99,7 @@ public class SetUpGameController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         this.stage = stage;
+        this.startController = startController;
         initialize();
     }
 

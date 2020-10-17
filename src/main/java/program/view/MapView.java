@@ -179,4 +179,16 @@ public class MapView extends AnchorPane {
         }
         mapController.phaseText.setText(string);
     }
+    public void myturn(MapController mapController){
+        mapController.deployPhase.setVisible(true);
+        mapController.attackPhase.setVisible(true);
+        mapController.movePhase.setVisible(true);
+        mapController.moveSlider.setVisible(true);
+    }
+    public void otherPlayerPlaying(MapController mapController){
+        mapController.deployPhase.setVisible(false);
+        mapController.attackPhase.setVisible(false);
+        mapController.movePhase.setVisible(false);
+        mapController.moveSlider.setVisible(false);
+    }
 }
