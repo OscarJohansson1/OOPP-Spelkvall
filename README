@@ -1,8 +1,28 @@
-The application is probably easiest to run through IntelliJ IDEA at the moment, you might have to set up JavaFX (vm-options) and import JUnit in the test-files.
-This will hopefully be made easier in the future, but as of now it is what it is.
+Chalmers Chance - The classic Risk game, but on Chalmers campus.
+Brought to you by Spelkväll?
 
-If the application can't find the Chans-class it could help to clone again with "OOPP-Spelkvall" as root. 
+The main objective of the game is to conquer Chalmers campus (in a friendly manner of course), by deploying, attacking
+and moving units.
 
-If the application claims that there is a "java error: release version 12 not supported", try changing your project language level to "12".
+More information about Risk and its rules can be find online.
 
-If you can't get it to run, we are happy to help :)
+------------------------------------------------------------------------------------------------------------------------
+
+To start the application you need to run the javafx-plugin.
+
+Terminal:
+1. Move to the OOPP-Spelkvall folder.
+2. Write "mvn javafx:run".
+
+IntelliJ IDEA:
+1.1 Go to your Maven-settings.
+1.2 Go to Chans > Plugins > javafx > javafx:run and double-click
+
+2.1 Go to "Edit Configurations..."
+2.2 Add a new Maven configuration.
+2.3 Write "javafx:run" in the commandline option
+2.4 Press OK
+2.5 Choose the new configuration and run it.
+
+If Maven is not your friend, but you really want to play some Chalmers Chance. Try to run the main class "Chans" as you
+usually do in an IDE. (You may need to fix some errors that pops up)
