@@ -29,7 +29,7 @@ public class LobbyItemCreator {
         return null;
     }
 
-    public void resetVariables() {
+    private void resetVariables() {
         name = null;
         time = null;
         capacity = null;

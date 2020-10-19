@@ -29,12 +29,18 @@ public class Client {
     }
 
     private static class ClientHolder {
-        private static final Client client = new Client();
+        private static Client client;
+        public static Client getClient(){
+            if(client == null){
+                return client = new Client();
+            }
+            return client;
+        }
     }
 
     public static Client getClient() {
-        System.out.println(ClientHolder.client);
-        return ClientHolder.client;
+        System.out.println(ClientHolder.getClient());
+        return ClientHolder.getClient();
     }
 
     public void startConnection(String ip, int port, StartController startController) throws IOException {
