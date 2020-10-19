@@ -10,7 +10,7 @@ public class Player implements Serializable {
 
     private int units;
     private int id;
-    private String color;
+    private final String color;
     private String logoUrl;
     private String name;
     private boolean myTurn = false;
@@ -18,25 +18,27 @@ public class Player implements Serializable {
 
     /**
      * This is a constructor for the player.
+     *
      * @param units This is the amount of units that a player has.
-     * @param id This is the players id, it is used to find the different player
+     * @param id    This is the players id, it is used to find the different player
      * @param color This is used to set different colors for all players.
      */
     public Player(int units, int id, String color, String logoUrl, String name) {
         this.units = units;
         this.id = id;
         this.color = color;
-        this.logoUrl = "file:src/main/resources/pictures/logos/"+logoUrl+".png";
+        this.logoUrl = "file:src/main/resources/pictures/logos/" + logoUrl + ".png";
         this.name = name;
     }
 
-    public Player(Player player){
+    public Player(Player player) {
         units = player.units;
         id = player.id;
         color = player.color;
         logoUrl = player.logoUrl;
         name = player.name;
         myTurn = player.myTurn;
+        ready = player.ready;
     }
 
     //TODO: for tests right now
@@ -58,7 +60,9 @@ public class Player implements Serializable {
         return id;
     }
 
-    public void setId(int id){ this.id = id;}
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getColor() {
         return color;
@@ -71,14 +75,20 @@ public class Player implements Serializable {
     public String getName() {
         return name;
     }
-    public void setMyTurn(boolean myTurn){ this.myTurn = myTurn;}
-    public boolean getMyTurn(){
+
+    public void setMyTurn(boolean myTurn) {
+        this.myTurn = myTurn;
+    }
+
+    public boolean getMyTurn() {
         return myTurn;
     }
-    public boolean setReady(boolean ready){
-        return this.ready = ready;
+
+    public void setReady(boolean ready) {
+        this.ready = ready;
     }
-    public boolean isReady(){
+
+    public boolean isReady() {
         return ready;
     }
 

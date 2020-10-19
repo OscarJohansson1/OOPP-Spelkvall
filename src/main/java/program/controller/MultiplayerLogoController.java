@@ -1,14 +1,13 @@
 package program.controller;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import program.client.Client;
 import program.model.Player;
 
 import java.io.IOException;
@@ -59,12 +58,12 @@ public class MultiplayerLogoController extends AnchorPane {
     private ImageView recZ;
 
     private ArrayList<ImageView> divisionList;
-    private final ClientController clientController;
+    private final Client client = Client.getClient();
     private final StartController startController;
     private ImageView selectedbutton;
     private List<Integer> integerList = new ArrayList<>();
 
-    public MultiplayerLogoController(ClientController clientController, StartController startController) throws IOException {
+    public MultiplayerLogoController(StartController startController) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("setUpOnline.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -74,27 +73,23 @@ public class MultiplayerLogoController extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        this.clientController = clientController;
         this.startController = startController;
         initialize();
     }
 
     private void initialize() throws IOException {
 
-        clientController.getGridPane();
+        client.sendObject("gridPane");
         divisionList = new ArrayList<>(Arrays.asList(recA, recAE, recD, recE, recF, recH, recI, recIT, recK,
                 recKfKb, recM, recSjo, recTB, recTD, recV, recZ));
         for (int i = 0; i < divisionList.size(); i++) {
             int var = i;
-            divisionList.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    if (integerList != null && integerList.contains(var)) {
-                        divisionList.get(var).setDisable(true);
-                    } else {
-                        logoImage.setImage(divisionList.get(var).getImage());
-                        selectedbutton = divisionList.get(var);
-                    }
+            divisionList.get(i).setOnMouseClicked(mouseEvent -> {
+                if (integerList != null && integerList.contains(var)) {
+                    divisionList.get(var).setDisable(true);
+                } else {
+                    logoImage.setImage(divisionList.get(var).getImage());
+                    selectedbutton = divisionList.get(var);
                 }
             });
         }
@@ -109,12 +104,12 @@ public class MultiplayerLogoController extends AnchorPane {
             divisionList.get(integer).setEffect(colorAdjust);
         }
     }
-
+    @FXML
     public void backToLobbyList() {
         startController.removeSetUp();
     }
-
-    public void choose() throws IOException, ClassNotFoundException {
+    @FXML
+    public void choose() throws IOException {
 
         if (!(playerNameTextField.getText().trim().isEmpty())) {
 
@@ -127,8 +122,8 @@ public class MultiplayerLogoController extends AnchorPane {
         }
 
     }
-
-    public void toLobbySelect() throws IOException {
+    @FXML
+    public void toLobbySelect() {
         startController.toLobbySelect();
     }
 

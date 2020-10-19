@@ -1,6 +1,5 @@
 package program.model;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -8,17 +7,15 @@ import java.util.List;
  */
 public class Round {
 
-    //TODO Inte hårdkoda
-    private Deployment deploy;
-    private Attack attack;
-    private Movement move;
+    private final Attack attack;
     private IPhase currentPhaseNew;
 
     //TODO Hårdkoda inte
     Round() {
-        deploy = new Deployment();
+        //TODO Inte hårdkoda
+        Deployment deploy = new Deployment();
         attack = new Attack();
-        move = new Movement();
+        Movement move = new Movement();
         currentPhaseNew = deploy;
         deploy.setNextPhase(attack);
         attack.setNextPhase(move);
@@ -36,13 +33,13 @@ public class Round {
     /**
      * Method that calls start-methods of Deployment, Attack and Move, based on current phase, selected spaces and
      * the current player.
-     * @param selectedSpace The space the action starts from. Eg. the space to deploy units on, attack from and move from
+     *
+     * @param selectedSpace  The space the action starts from. Eg. the space to deploy units on, attack from and move from
      * @param selectedSpace2 The space the action impacts. Eg. the space that is attacked or moved to.
-     * @param currentPlayer The active player during the turn.
+     * @param currentPlayer  The active player during the turn.
      * @return True if phase can start as expected, else false.
      */
-    boolean startPhase(Space selectedSpace, Space selectedSpace2, Player currentPlayer, int units)
-    {
+    boolean startPhase(Space selectedSpace, Space selectedSpace2, Player currentPlayer, int units) {
         currentPhaseNew.startPhase(selectedSpace, selectedSpace2, currentPlayer, units);
         return true;
     }
@@ -67,7 +64,7 @@ public class Round {
         return attack.nextAttackPossible;
     }
 
-    public Attack getAttack(){
+    public Attack getAttack() {
         return attack;
     }
 }

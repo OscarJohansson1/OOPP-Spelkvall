@@ -21,9 +21,10 @@ public class Attack implements IPhase, Serializable {
     public boolean nextAttackPossible = true;
 
 
-    public Attack(){
+    public Attack() {
 
     }
+
     public Attack(Attack attack) {
         nextPhase = attack.nextPhase;
         attackerDice = attack.attackerDice;
@@ -36,10 +37,10 @@ public class Attack implements IPhase, Serializable {
     /**
      * Method that calculates the attack and updates the state of the spaces involved in the attack.
      *
-     * @param selectedSpace     The space which the attacker attacks from.
-     * @param selectedSpace2    The space which is the defender.
-     * @param player            Not used.
-     * @param amount            Not used.
+     * @param selectedSpace  The space which the attacker attacks from.
+     * @param selectedSpace2 The space which is the defender.
+     * @param player         Not used.
+     * @param amount         Not used.
      */
     @Override
     public void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
@@ -168,12 +169,6 @@ public class Attack implements IPhase, Serializable {
         return results;
     }
 
-    public int getAttackerLoss(){
-        return attackerLoss;
-    }
-    public int getDefenderLoss(){
-        return defenderLoss;
-    }
     @Override
     public IPhase nextPhase() {
         return nextPhase;

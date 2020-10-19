@@ -1,9 +1,5 @@
 package program.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -27,69 +22,101 @@ import java.util.Arrays;
  */
 public class SetUpGameController extends AnchorPane {
 
-    @FXML private Slider slider;
-    @FXML private AnchorPane pane;
-    @FXML private GridPane gridPane;
+    @FXML
+    private Slider slider;
+    @FXML
+    private AnchorPane pane;
+    @FXML
+    private GridPane gridPane;
+    @FXML
+    private Button backButton;
+    @FXML
+    private Button startGameButton;
 
-    @FXML private Button backButton;
-    @FXML private Button startGameButton;
-    @FXML private ImageView recA;
-    @FXML private ImageView recAE;
-    @FXML private ImageView recD;
-    @FXML private ImageView recE;
-    @FXML private ImageView recF;
-    @FXML private ImageView recH;
-    @FXML private ImageView recI;
-    @FXML private ImageView recIT;
-    @FXML private ImageView recK;
-    @FXML private ImageView recKfKb;
-    @FXML private ImageView recM;
-    @FXML private ImageView recSjo;
-    @FXML private ImageView recTB;
-    @FXML private ImageView recTD;
-    @FXML private ImageView recV;
-    @FXML private ImageView recZ;
+    @FXML
+    private ImageView recA;
+    @FXML
+    private ImageView recAE;
+    @FXML
+    private ImageView recD;
+    @FXML
+    private ImageView recE;
+    @FXML
+    private ImageView recF;
+    @FXML
+    private ImageView recH;
+    @FXML
+    private ImageView recI;
+    @FXML
+    private ImageView recIT;
+    @FXML
+    private ImageView recK;
+    @FXML
+    private ImageView recKfKb;
+    @FXML
+    private ImageView recM;
+    @FXML
+    private ImageView recSjo;
+    @FXML
+    private ImageView recTB;
+    @FXML
+    private ImageView recTD;
+    @FXML
+    private ImageView recV;
+    @FXML
+    private ImageView recZ;
 
-    @FXML private Button rec1;
-    @FXML private Button rec2;
-    @FXML private Button rec3;
-    @FXML private Button rec4;
-    @FXML private Button rec5;
-    @FXML private Button rec6;
-    @FXML private Button rec7;
-    @FXML private Button rec8;
-    @FXML private Button rec9;
-    @FXML private Button rec10;
-    @FXML private Button rec11;
-    @FXML private Button rec12;
-    @FXML private Button rec13;
-    @FXML private Button rec14;
-    @FXML private Button rec15;
-    @FXML private Button rec16;
+    @FXML
+    private Button rec1;
+    @FXML
+    private Button rec2;
+    @FXML
+    private Button rec3;
+    @FXML
+    private Button rec4;
+    @FXML
+    private Button rec5;
+    @FXML
+    private Button rec6;
+    @FXML
+    private Button rec7;
+    @FXML
+    private Button rec8;
+    @FXML
+    private Button rec9;
+    @FXML
+    private Button rec10;
+    @FXML
+    private Button rec11;
+    @FXML
+    private Button rec12;
+    @FXML
+    private Button rec13;
+    @FXML
+    private Button rec14;
+    @FXML
+    private Button rec15;
+    @FXML
+    private Button rec16;
 
     private int nextToChoose = 1;
-    private ArrayList<ImageView> selectedDivisions = new ArrayList<>();
-    private ArrayList<String> colorList = new ArrayList<>();
-    private ArrayList<String> logoNameList = new ArrayList<>();
-    private ArrayList<Integer> nextPlayerNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-            11, 12, 13, 14, 15, 16));
+    private final ArrayList<ImageView> selectedDivisions = new ArrayList<>();
+    private final ArrayList<String> colorList = new ArrayList<>();
+    private final ArrayList<String> logoNameList = new ArrayList<>();
     private ArrayList<Button> playerButtonList;
-    private ArrayList<ImageView> divisionList;
 
     private int amountOfPlayers = 0;
 
-    private Stage stage;
+    private final Stage stage;
 
-    private ColorAdjust chosen = new ColorAdjust();
-
-    private StartController startController;
-
+    private final ColorAdjust chosen = new ColorAdjust();
 
     /**
      * this is the constructor for SetUpGameController
+     *
      * @param stage the main stage
      */
-    SetUpGameController(Stage stage){
+    SetUpGameController(Stage stage) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("setUpGame.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -99,52 +126,27 @@ public class SetUpGameController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         this.stage = stage;
-        this.startController = startController;
         initialize();
     }
 
     private void initialize() {
         playerButtonList = new ArrayList<>(Arrays.asList(rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, rec9,
                 rec10, rec11, rec12, rec13, rec14, rec15, rec16));
-        divisionList = new ArrayList<>(Arrays.asList(recA, recAE, recD, recE, recF, recH, recI, recIT, recK,
+        ArrayList<ImageView> divisionList = new ArrayList<>(Arrays.asList(recA, recAE, recD, recE, recF, recH, recI, recIT, recK,
                 recKfKb, recM, recSjo, recTB, recTD, recV, recZ));
         updatePlayerGrid((int) slider.getValue());
 
-        slider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                updatePlayerGrid( newValue.intValue());
-            }
-        });
-        startGameButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if(colorList.size() >= slider.getValue()) {
-                    Parent root = null;
-                    try {
-                        root = new MapController(colorList, logoNameList, stage);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    Scene scene = new Scene(root, 1920, 1080);
-
-                    stage.setTitle("program.Chans");
-                    stage.setScene(scene);
-                    stage.show();
-                }
-            }
-        });
-        backButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
+        slider.valueProperty().addListener((observableValue, oldValue, newValue) -> updatePlayerGrid(newValue.intValue()));
+        startGameButton.setOnMouseClicked(mouseEvent -> {
+            if (colorList.size() >= slider.getValue()) {
                 Parent root = null;
                 try {
-                    root = new StartController(stage);
-                } catch (IOException | ClassNotFoundException e) {
+                    root = new MapController(colorList, logoNameList, stage);
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                assert root != null;
                 Scene scene = new Scene(root, 1920, 1080);
 
                 stage.setTitle("program.Chans");
@@ -152,35 +154,31 @@ public class SetUpGameController extends AnchorPane {
                 stage.show();
             }
         });
-        for(ImageView button : divisionList){
-            button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    mouseClicked(button);
-                }
-            });
-        }
-        for(Button button : playerButtonList){
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    makeSelected(button);
+        backButton.setOnMouseClicked(mouseEvent -> {
 
-                }
-            });
+            Parent root;
+            root = new StartController(stage);
+            Scene scene = new Scene(root, 1920, 1080);
+
+            stage.setTitle("program.Chans");
+            stage.setScene(scene);
+            stage.show();
+        });
+        for (ImageView button : divisionList) {
+            button.setOnMouseClicked(mouseEvent -> mouseClicked(button));
         }
     }
 
-    private void mouseClicked(ImageView image){
-        if(!selectedDivisions.contains(image) && nextToChoose <= amountOfPlayers) {
-            colorList.add(image.getStyle().substring(22,29));
+    private void mouseClicked(ImageView image) {
+        if (!selectedDivisions.contains(image) && nextToChoose <= amountOfPlayers) {
+            colorList.add(image.getStyle().substring(22, 29));
             logoNameList.add(image.getId().substring(3).toLowerCase() + "_logo");
             System.out.println(image.getId().substring(3).toLowerCase() + "_logo");
 
             Button playerButton = playerButtonList.get(nextToChoose - 1);
             playerButton.setText("Player " + nextToChoose + " represents " + image.getId().substring(3));
-            Color color = (Color)playerButton.getBackground().getFills().get(0).getFill();
-            setTextContrastColor(playerButton,color);
+            Color color = (Color) playerButton.getBackground().getFills().get(0).getFill();
+            setTextContrastColor(playerButton, color);
             playerButton.setStyle(image.getStyle());
 
             chosen.setBrightness(-0.5);
@@ -191,24 +189,22 @@ public class SetUpGameController extends AnchorPane {
             nextToChoose++;
         }
     }
-    public static void setTextContrastColor(Button button,Color color){
 
+    public static void setTextContrastColor(Button button, Color color) {
         button.setTextFill(getContrastColor(color));
-
     }
+
     public static Color getContrastColor(Color color) {
         double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000;
         return y >= 0.5 ? Color.valueOf("#000000") : Color.valueOf("#ffffff");
     }
-    private void makeSelected(Button button){
-        //Going to implement at a later stage
-    }
-    private void updatePlayerGrid(int players){
 
-        for(int i = 0; i < players; i++){
+    private void updatePlayerGrid(int players) {
+
+        for (int i = 0; i < players; i++) {
             playerButtonList.get(i).setVisible(true);
         }
-        for(int i = players; i < playerButtonList.size(); i++){
+        for (int i = players; i < playerButtonList.size(); i++) {
             playerButtonList.get(i).setVisible(false);
         }
         amountOfPlayers = players;

@@ -1,8 +1,5 @@
 package server.code.model;
 
-import javafx.scene.layout.GridPane;
-import program.controller.PlayerCard;
-import program.model.Player;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

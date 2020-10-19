@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 /**
@@ -18,19 +19,26 @@ import java.io.IOException;
  */
 public class PauseController extends AnchorPane {
 
-    @FXML private AnchorPane rootpane;
-    @FXML private HBox pauseHBox;
-    @FXML private ImageView chanceImageView;
-    @FXML private Pane buttonPane;
+    @FXML
+    private AnchorPane rootpane;
+    @FXML
+    private HBox pauseHBox;
+    @FXML
+    private ImageView chanceImageView;
+    @FXML
+    private Pane buttonPane;
 
-    @FXML private Button returnButton;
-    @FXML private Button newGameButton;
-    @FXML private Button endGameButton;
-    @FXML private Button quitGameButton;
+    @FXML
+    private Button returnButton;
+    @FXML
+    private Button newGameButton;
+    @FXML
+    private Button endGameButton;
+    @FXML
+    private Button quitGameButton;
 
-    private MapController mapController;
-    private Parent root = mapController;
-    private Stage stage;
+    private final MapController mapController;
+    private final Stage stage;
 
     public PauseController(Stage stage, MapController mapcontroller) {
 
@@ -51,14 +59,15 @@ public class PauseController extends AnchorPane {
     /**
      * Closes the pauseMenu
      */
-    public void returnButtonPressed(){
-       mapController.checkPauseController();
+    @FXML
+    public void returnButtonPressed() {
+        mapController.checkPauseController();
     }
 
     /**
      * Creates a new game when the button is pressed
      */
-    public void newGameButtonPressed() throws IOException, ClassNotFoundException {
+    public void newGameButtonPressed() {
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
@@ -70,7 +79,7 @@ public class PauseController extends AnchorPane {
     /**
      * Ends the game when the button is pressed
      */
-    public void endGameButtonPressed(){
+    public void endGameButtonPressed() {
         Parent root = new EndController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
@@ -82,11 +91,11 @@ public class PauseController extends AnchorPane {
     /**
      * Quits the application when the button is pressed
      */
-    public void quitGameButtonPressed(){
+    @FXML
+    public void quitGameButtonPressed() {
         Platform.exit();
         System.exit(0);
     }
-
 
 
 }

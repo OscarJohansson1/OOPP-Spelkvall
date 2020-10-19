@@ -1,17 +1,15 @@
 package program.controller;
 
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
+import program.client.Client;
 import program.model.Player;
 
 import java.io.IOException;
@@ -29,13 +27,15 @@ public class LobbyReadyController extends AnchorPane {
     @FXML
     public Button startButton;
 
-    @FXML Button readyButton;
+    @FXML
+    Button readyButton;
 
     private final StartController startController;
     private final List<PlayerCard> userCards = new ArrayList<>();
     private final Stage stage;
+    private final Client client = Client.getClient();
 
-    public LobbyReadyController(Stage stage, StartController startController) throws IOException, ClassNotFoundException {
+    public LobbyReadyController(Stage stage, StartController startController) {
 
         this.startController = startController;
         this.stage = stage;
@@ -57,52 +57,37 @@ public class LobbyReadyController extends AnchorPane {
         userFlow.setVgap(10);
         userFlow.setHgap(52);
         userFlow.setPadding(new Insets(10, 0, 10, 52));
-        backButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        backButton.setOnMouseClicked(mouseEvent -> {
 
-                //Skapar setUpGameController
-                Scene scene = new Scene(startController, 1920, 1080);
-
-                stage.setTitle("program.Chans");
-                stage.setScene(scene);
-                stage.show();
-            }
-
+            Scene scene = new Scene(startController, 1920, 1080);
+            stage.setTitle("program.Chans");
+            stage.setScene(scene);
+            stage.show();
         });
     }
-
+    @FXML
     public void ready() throws IOException {
-        startController.clientController.player.setReady(!startController.clientController.player.isReady());
-        if(startController.clientController.player.isReady()){
+        client.getPlayer().setReady(!client.getPlayer().isReady());
+        if (client.getPlayer().isReady()) {
             readyButton.setStyle("-fx-background-color: #5DFF00;");
-        }
-        else {
+        } else {
             readyButton.setStyle(null);
         }
-        startController.clientController.sendObject(startController.clientController.player.isReady());
-
-
+        client.sendObject(client.getPlayer().isReady());
     }
-
+    @FXML
     public void startGame() throws IOException {
-        startController.clientController.startGame();
+        client.sendObject("startGame");
     }
 
     public void updateUserCards(List<Player> players) {
-
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                userCards.clear();
-                for (Player player : players) {
-                    userCards.add(new PlayerCard(player));
-                }
-                userFlow.getChildren().setAll(userCards);
+        Platform.runLater(() -> {
+            userCards.clear();
+            for (Player player : players) {
+                userCards.add(new PlayerCard(player));
             }
+            userFlow.getChildren().setAll(userCards);
         });
-
-
     }
 
 }

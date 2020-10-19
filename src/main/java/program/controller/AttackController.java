@@ -2,13 +2,11 @@ package program.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import program.client.Client;
 import program.model.Attack;
 import program.model.ModelDataHandler;
 import program.view.AttackView;
@@ -55,12 +53,11 @@ public class AttackController extends AnchorPane {
     @FXML
     private ImageView defenderImageView;
 
-    private AttackView attackView;
-    private MapController mapController;
-    private ModelDataHandler modelDataHandler;
-    private Stage stage;
+    private final AttackView attackView;
+    private final MapController mapController;
+    private final ModelDataHandler modelDataHandler;
 
-    AttackController(MapController mapController, Stage stage, ClientController clientController) throws IOException {
+    AttackController(MapController mapController) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("attackMenu.fxml"));
         fxmlLoader.setRoot(this);
@@ -73,19 +70,18 @@ public class AttackController extends AnchorPane {
         }
 
         this.mapController = mapController;
-        this.stage = stage;
         this.modelDataHandler = ModelDataHandler.getModelDataHandler();
         this.attackView = new AttackView(new ArrayList<>(Arrays.asList(attackerDieImage1, attackerDieImage2, attackerDieImage3, defenderDieImage1, defenderDieImage2)),
                 new ArrayList<>(Arrays.asList(attackerImageView, defenderImageView)));
-        if (clientController == null) attack();
+        if (!Client.getClient().startedConnection) attack();
     }
 
     void attack() throws IOException {
-        attackView.updateDice(mapController.clientController);
+        attackView.updateDice(Client.getClient());
         attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton);
     }
 
-    void attack(Attack attack) {
+    public void attack(Attack attack) {
         attackView.updateDice(attack);
         attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton, attack);
     }
@@ -110,6 +106,5 @@ public class AttackController extends AnchorPane {
     @FXML
     public void abortButtonPressed() throws IOException {
         mapController.removeAttackView();
-
     }
 }

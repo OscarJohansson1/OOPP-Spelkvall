@@ -41,8 +41,8 @@ public class EndController extends AnchorPane {
     @FXML
     private Button quitGameButton;
 
-    private Stage stage;
-    private ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
+    private final Stage stage;
+    private final ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
 
     EndController(Stage stage) {
 
@@ -76,7 +76,7 @@ public class EndController extends AnchorPane {
      * When the new game button is clicked the player is taken back to the
      * start view and gets to play the game from the beginning again
      */
-    public void newGameButtonPressed() throws IOException, ClassNotFoundException {
+    public void newGameButtonPressed() {
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 
@@ -88,6 +88,7 @@ public class EndController extends AnchorPane {
     /**
      * Quits the application when the button is pressed
      */
+    @FXML
     public void quitGameButtonPressed() {
         Platform.exit();
         System.exit(0);
@@ -96,7 +97,7 @@ public class EndController extends AnchorPane {
     /**
      * Taken back to the menu when the button is pressed
      */
-    public void toMenuButtonPressed() throws IOException, ClassNotFoundException {
+    public void toMenuButtonPressed() {
         Parent root = new StartController(stage);
         Scene scene = new Scene(root, 1920, 1080);
 

@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class Chans extends Application {
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         Parent start = new StartController(stage);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         stage.setMaxWidth(screenSize.width);
@@ -24,7 +24,7 @@ public class Chans extends Application {
         stage.show();
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         launch(args);
     }
 }

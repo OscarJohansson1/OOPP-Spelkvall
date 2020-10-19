@@ -46,7 +46,7 @@ public class Board implements Serializable {
      * 25 Kalle Glader
      * 26 Tvärgatan
      */
-    private int[][] neighbours = {
+    private final int[][] neighbours = {
             {0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -78,12 +78,13 @@ public class Board implements Serializable {
 
     public Board(List<Space> spaces) {
         this.spaces = spaces;
+        createAreas();
     }
 
     /**
      * Hardcoded as of now
      */
-    public void createAreas() {
+    private void createAreas() {
 
         Area karhuset = new Area("Kårhuset", 7,
                 Arrays.asList(spaces.get(19), spaces.get(20), spaces.get(21), spaces.get(22), spaces.get(23)));
@@ -106,13 +107,14 @@ public class Board implements Serializable {
     /**
      * Method that checks what areas a specific player is controlling and returns the amount of units those areas are
      * worth.
+     *
      * @param player The player that areas should be checked for.
      * @return The amount of extra units a player should get when deploying, based on areas controlled.
      */
     int getUnitsFromAreas(Player player) {
         int count = 0;
-        for(Area area : areas){
-            if(area.checkArea(player)) {
+        for (Area area : areas) {
+            if (area.checkArea(player)) {
                 count += area.getWorth();
             }
         }
@@ -122,13 +124,14 @@ public class Board implements Serializable {
     /**
      * Method that checks what spaces a specific player holds and returns the amount of units they should get for
      * those spaces.
+     *
      * @param player The player that spaces should be checked for.
      * @return The amount of extra units a player should get when deploying, based on spaces hold.
      */
     int getUnitsForSpacesHold(Player player) {
         int count = 0;
-        for(Space space : spaces){
-            if(space.getPlayerId() == player.getId()) {
+        for (Space space : spaces) {
+            if (space.getPlayerId() == player.getId()) {
                 count++;
             }
         }
@@ -137,12 +140,13 @@ public class Board implements Serializable {
 
     /**
      * Method that checks if a player has won the game
+     *
      * @return If a player has won the game.
      */
     boolean isWinner() {
         Player winner = spaces.get(0).getPlayer();
-        for(Space space : spaces){
-            if(!(space.getPlayerId() == winner.getId())) {
+        for (Space space : spaces) {
+            if (!(space.getPlayerId() == winner.getId())) {
                 return false;
             }
         }
@@ -151,12 +155,13 @@ public class Board implements Serializable {
 
     /**
      * Method that checks if a player is out of the game. A player is out when they no longer hold any spaces.
+     *
      * @param player The player that might be out of the game.
      * @return If the player have lost the game or not.
      */
     boolean isPlayerOut(Player player) {
-        for(Space space : spaces){
-            if(space.getPlayerId() == player.getId()) {
+        for (Space space : spaces) {
+            if (space.getPlayerId() == player.getId()) {
                 return false;
             }
         }
@@ -165,11 +170,12 @@ public class Board implements Serializable {
 
     /**
      * Checks if the a space is a neighbour to the current selected space.
+     *
      * @param space A space that is not selectedSpace.
      * @return If the space is a neighbour.
      */
     boolean isNeighbours(Space space) {
-        if (selectedSpace != null){
+        if (selectedSpace != null) {
             return neighbours[selectedSpace.getId()][space.getId()] == 1;
         }
         return false;
@@ -177,12 +183,13 @@ public class Board implements Serializable {
 
     /**
      * Get amount of neighbours of a space. Mainly used for tests.
+     *
      * @param id Which space to get amount of neighbours from.
      * @return Amount of neighbours
      */
     int getNumberOfNeighbours(int id) {
         int count = 0;
-        for(int i = 0; i < neighbours[id].length; i++) {
+        for (int i = 0; i < neighbours[id].length; i++) {
             count += neighbours[id][i];
         }
         return count;
@@ -190,6 +197,7 @@ public class Board implements Serializable {
 
     /**
      * Method that finds a space on the board based on id.
+     *
      * @param id id-number of the space
      * @return The space if id exists, else null
      */
@@ -212,6 +220,7 @@ public class Board implements Serializable {
 
     /**
      * Method that initialises all the colors on the spaces that the board starts with
+     *
      * @return It then returns the colors
      */
     List<String> getColorOnAllSpaces() {
@@ -227,11 +236,11 @@ public class Board implements Serializable {
         return spaces.get(id);
     }
 
-    void setSelectedSpace(Space space){
+    void setSelectedSpace(Space space) {
         selectedSpace = space;
     }
 
-    void setSelectedSpace2(Space space){
+    void setSelectedSpace2(Space space) {
         selectedSpace2 = space;
     }
 
@@ -244,12 +253,13 @@ public class Board implements Serializable {
     }
 
     private Space getCopyOfSpace(Space space) {
-        if(space != null) {
+        if (space != null) {
             return new Space(space);
         }
         return null;
     }
-    public List<Space> getSpaces(){
+
+    public List<Space> getSpaces() {
         return spaces;
     }
 }

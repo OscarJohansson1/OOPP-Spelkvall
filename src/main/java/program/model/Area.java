@@ -20,12 +20,13 @@ class Area implements Serializable {
 
     /**
      * Method that checks if a single player holds all spaces in the area.
+     *
      * @param player The player that the area should be checked for.
      * @return If the player holds the entire area.
      */
     boolean checkArea(Player player) {
-        for(Space space : spaces){
-            if(!(player.getId() == space.getPlayerId())){
+        for (Space space : spaces) {
+            if (!(player.getId() == space.getPlayerId())) {
                 return false;
             }
         }
@@ -36,7 +37,4 @@ class Area implements Serializable {
         return worth;
     }
 
-    String getName() {
-        return name;
-    }
 }

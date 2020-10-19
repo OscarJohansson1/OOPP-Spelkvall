@@ -13,14 +13,15 @@ class Deployment implements IPhase, Serializable {
     /**
      * The main method describing what should happen during the Deployment-phase. The method add units to a space if the
      * player is matching the player holding the space.
-     * @param selectedSpace The first selected space.
+     *
+     * @param selectedSpace  The first selected space.
      * @param selectedSpace2 Not used in this phase.
-     * @param player The active player during the phase.
-     * @param amount The amount of units that should be added to the space.
+     * @param player         The active player during the phase.
+     * @param amount         The amount of units that should be added to the space.
      */
     @Override
     public void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
-        if(selectedSpace != null) {
+        if (selectedSpace != null) {
             if (selectedSpace.getPlayerId() == player.getId() && player.getUnits() >= amount) {
                 deployUnit(selectedSpace, amount);
                 player.setUnits(player.getUnits() - amount);
@@ -29,13 +30,14 @@ class Deployment implements IPhase, Serializable {
     }
 
     private void deployUnit(Space space, int unitsToDeploy) {
-        if(unitsToDeploy > 0) {
+        if (unitsToDeploy > 0) {
             space.updateSpace(space.getUnits() + unitsToDeploy);
         }
     }
 
     /**
      * Method that returns the phase that follows this phase.
+     *
      * @return The following phase.
      */
     @Override

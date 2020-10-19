@@ -1,21 +1,19 @@
 package program.controller;
 
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import program.client.Client;
 import program.model.Player;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * The controller for the StartMenu.fxml
@@ -34,25 +32,22 @@ public class StartController extends AnchorPane {
     @FXML
     private Button quitButton;
 
-    private SetUpGameController setUpGameController;// = new SetUpGameController();
-    private Parent root;// = setUpGameController;
-    Stage stage;
+    private final Parent root;
+    public Stage stage;
 
 
-    LobbySelectController lobbySelectController;
-    LobbyReadyController lobbyReadyController;
-    MultiplayerLogoController multiplayerLogoController;
-    ClientController clientController;
+    public LobbySelectController lobbySelectController;
+    public LobbyReadyController lobbyReadyController;
+    public MultiplayerLogoController multiplayerLogoController;
+    private final Client client = Client.getClient();
 
     /**
      * @param stage the main stage
      */
-    public StartController(Stage stage) throws IOException, ClassNotFoundException {
+    public StartController(Stage stage) {
 
         this.stage = stage;
         root = new SetUpGameController(stage);
-
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartMenu.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -70,55 +65,43 @@ public class StartController extends AnchorPane {
     }
 
     private void initialize() {
-        startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        startButton.setOnMouseClicked(mouseEvent -> {
 
-                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                Scene scene = new Scene(root, screenSize.width, screenSize.height);
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            Scene scene = new Scene(root, screenSize.width, screenSize.height);
 
-                stage.setFullScreen(true);
-                stage.setTitle("program.Chans");
-                stage.setScene(scene);
-                stage.show();
-            }
+            stage.setFullScreen(true);
+            stage.setTitle("program.Chans");
+            stage.setScene(scene);
+            stage.show();
         });
 
-        quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        quitButton.setOnMouseClicked(mouseEvent -> {
 
-                Platform.exit();
-                System.exit(0);
+            Platform.exit();
+            System.exit(0);
 
-            }
         });
-        startButton2.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    goToLobbySelect();
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+        startButton2.setOnMouseClicked(mouseEvent -> {
+            try {
+                goToLobbySelect();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
 
-    public void goToLobbySelect() throws IOException, ClassNotFoundException {
-        Client client = new Client();
-        clientController = new ClientController(client, this);
-        clientController.getLobbies();
+    public void goToLobbySelect() throws IOException {
+        client.startConnection("95.80.61.51", 6666, this);
+        client.sendObject("LOBBYS");
         rootpane.getChildren().add(lobbySelectController);
-
     }
 
-    public void goToLobbyReady(Player player, int gridPosImageview) throws IOException, ClassNotFoundException {
-        clientController.player = player;
-        System.out.println(player);
-        clientController.addPlayerToLobby(new Player(player));
-        clientController.checkIfLobbyLeader();
-        clientController.updateGridPane(gridPosImageview);
+    public void goToLobbyReady(Player player, int gridPosImageview) throws IOException {
+        client.setPlayer(player);
+        client.sendObject(new Player(player));
+        client.sendObject("LOBBYLEADER");
+        client.sendObject(gridPosImageview);
         lobbyReadyController.startButton.setVisible(false);
         lobbyReadyController.startButton.setDisable(true);
         rootpane.getChildren().add(lobbyReadyController);
@@ -127,11 +110,11 @@ public class StartController extends AnchorPane {
     public void goToSetup() throws IOException {
         for (int i = 0; i < lobbySelectController.lobbyItems.size(); i++) {
             if (lobbySelectController.lobbyItems.get(i).marked) {
-                clientController.sendObject(i);
+                client.sendObject(i);
                 break;
             }
         }
-        multiplayerLogoController = new MultiplayerLogoController(clientController, this);
+        multiplayerLogoController = new MultiplayerLogoController(this);
         rootpane.getChildren().add(multiplayerLogoController);
     }
 
@@ -140,13 +123,10 @@ public class StartController extends AnchorPane {
     }
 
     public void backToMainMenu() {
-
         rootpane.getChildren().remove(lobbySelectController);
-
     }
 
-    public void toLobbySelect() throws IOException {
-
+    public void toLobbySelect() {
         rootpane.getChildren().remove(multiplayerLogoController);
         rootpane.getChildren().add(lobbySelectController);
     }

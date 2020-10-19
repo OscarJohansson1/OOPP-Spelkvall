@@ -1,7 +1,7 @@
 package program.model;
 
 
-import program.controller.ClientController;
+import program.client.Client;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class ModelDataHandler {
     private Board board;
     private int unitsToUse = 1;
     public boolean firstDeployment = true;
-    private ClientController clientController;
+    private final Client client = Client.getClient();
 
     public List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
             "RödaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hrum",
@@ -65,7 +65,6 @@ public class ModelDataHandler {
         }
         currentPlayer = getRandomPlayer(null, players);
         board = new Board(randomizeSpaces(amountOfSpaces, players));
-        board.createAreas();
     }
 
     public List<Space> randomizeSpaces(int amountOfSpaces, List<Player> players) {
@@ -144,20 +143,20 @@ public class ModelDataHandler {
      */
     public void nextPhase() throws IOException {
 
-        if (clientController != null) {
-            clientController.sendObject("nextPhase");
+        if (client.startedConnection) {
+            sendObject("nextPhase");
         } else {
             round.nextPhase();
         }
         resetSelectedSpaces();
         phaseCount++;
+        sendObject(phaseCount);
         if (phaseCount > 3) {
             currentPlayer = nextPlayer(players, currentPlayer);
-            if (clientController != null) {
-                clientController.player.setMyTurn(currentPlayer.getId() == clientController.player.getId());
-                clientController.nextPlayer(new Player(currentPlayer));
+            if (client.startedConnection) {
+                client.getPlayer().setMyTurn(currentPlayer.getId() == client.getPlayer().getId());
+                sendObject(new Player(currentPlayer));
             }
-
             phaseCount = 1;
         }
     }
@@ -170,10 +169,10 @@ public class ModelDataHandler {
     public void firstRoundNextPhase() throws IOException {
         resetSelectedSpaces();
         currentPlayer = nextPlayer(players, currentPlayer);
-        if (clientController != null) {
-            clientController.player.setMyTurn(currentPlayer.getId() == clientController.player.getId());
-            clientController.nextPlayer(new Player(currentPlayer));
+        if (client.startedConnection) {
+            client.getPlayer().setMyTurn(currentPlayer.getId() == client.getPlayer().getId());
         }
+        sendObject(new Player(currentPlayer));
         roundCount++;
         if (roundCount > players.size()) {
             firstDeployment = false;
@@ -226,10 +225,6 @@ public class ModelDataHandler {
         return board.isWinner();
     }
 
-    public boolean isAttackedPlayerOut() {
-        return board.isPlayerOut(getSelectedSpace2().getPlayer());
-    }
-
     //TODO Can this be optimized?
     public void removePlayersWithoutSpaces() {
         players.removeIf(player -> board.isPlayerOut(player));
@@ -242,6 +237,12 @@ public class ModelDataHandler {
      */
     public boolean isAttackDone() {
         return !round.isNextAttackPossible();
+    }
+
+    public void sendObject(Object message) throws IOException {
+        if (client.startedConnection) {
+            client.sendObject(message);
+        }
     }
 
     public void setSliderAmount(int unitsToUse) {
@@ -359,14 +360,6 @@ public class ModelDataHandler {
                 break;
             }
         }
-    }
-
-    public void setClientController(ClientController clientController) {
-        this.clientController = clientController;
-    }
-
-    public List<Space> getSpaces() {
-        return board.getSpaces();
     }
 
 }

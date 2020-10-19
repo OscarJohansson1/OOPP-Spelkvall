@@ -1,7 +1,6 @@
 package program.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * This class holds methods that´s controlling the spaces. Mostly creating them and updating them.

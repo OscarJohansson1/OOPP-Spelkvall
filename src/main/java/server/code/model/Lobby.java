@@ -1,12 +1,7 @@
 package server.code.model;
 
-import program.controller.PlayerCard;
 import program.model.Player;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public abstract class Lobby {
@@ -15,7 +10,6 @@ public abstract class Lobby {
 
     public Lobby(String name) {
         lobbyName = name;
-
     }
 
     public void addPlayer(Player player) {

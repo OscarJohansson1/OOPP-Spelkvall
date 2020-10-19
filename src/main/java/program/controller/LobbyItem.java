@@ -6,8 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 
 public class LobbyItem extends AnchorPane {
 
@@ -16,9 +15,9 @@ public class LobbyItem extends AnchorPane {
     @FXML
     private Label capacityLabel;
     @FXML
-    private Label nameLabel;
+    Label nameLabel;
     boolean marked = false;
-    private StartController startController;
+    private final StartController startController;
 
 
     public LobbyItem(String name, String time, String capacity, String players, StartController startController) {
@@ -37,7 +36,8 @@ public class LobbyItem extends AnchorPane {
 
     }
 
-    public void onClick() throws IOException {
+    @FXML
+    public void onClick() {
         startController.lobbySelectController.resetLobbyItems();
         marked = true;
         this.setStyle("-fx-background-color: cornflowerblue");

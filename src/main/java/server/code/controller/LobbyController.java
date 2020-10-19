@@ -39,8 +39,6 @@ public class LobbyController {
 
     public void createNewGameLobby(String name) {
         addLobby(new GameLobby(name));
-
-
     }
 
     public void addMenuLobbyPlayersToGameLobby(MenuLobby menuLobby, GameLobby gameLobby) {

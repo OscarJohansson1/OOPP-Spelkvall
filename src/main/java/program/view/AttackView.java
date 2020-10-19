@@ -6,8 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import program.controller.ClientController;
-import program.controller.LobbyItem;
+import program.client.Client;
 import program.facade.ModelAttackViewFacade;
 import program.model.Attack;
 import program.model.ModelDataHandler;
@@ -19,9 +18,9 @@ import java.util.*;
 
 public class AttackView extends AnchorPane {
 
-    private ModelAttackViewFacade model = new ModelAttackViewFacade();
+    private final ModelAttackViewFacade model = new ModelAttackViewFacade();
 
-    private List<ImageView> images;
+    private final List<ImageView> images;
 
 
     public AttackView(ArrayList<ImageView> images, ArrayList<ImageView> logoImages) {
@@ -31,15 +30,15 @@ public class AttackView extends AnchorPane {
 
     }
 
-    public void updateDice(ClientController clientController) throws IOException {
+    public void updateDice(Client client) throws IOException {
 
         List<Integer> whiteDices = model.getAttackerDiceResults();
         List<Integer> blackDices = model.getDefenderDiceResults();
         updateDie(whiteDices, blackDices);
-        if (clientController != null) {
-            clientController.sendObject(new Attack(ModelDataHandler.getModelDataHandler().round.getAttack()));
-            clientController.sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace()));
-            clientController.sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace2()));
+        if (client != null) {
+            client.sendObject(new Attack(ModelDataHandler.getModelDataHandler().round.getAttack()));
+            client.sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace()));
+            client.sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace2()));
         }
     }
 
@@ -88,14 +87,11 @@ public class AttackView extends AnchorPane {
     }
 
     public void attackDone(Button attackButton, Button abortButton) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                attackButton.setVisible(false);
-                abortButton.setLayoutX(attackButton.getLayoutX());
-                abortButton.setLayoutY(attackButton.getLayoutY());
-                abortButton.setText("Done");
-            }
+        Platform.runLater(() -> {
+            attackButton.setVisible(false);
+            abortButton.setLayoutX(attackButton.getLayoutX());
+            abortButton.setLayoutY(attackButton.getLayoutY());
+            abortButton.setText("Done");
         });
 
     }
@@ -115,19 +111,6 @@ public class AttackView extends AnchorPane {
                 break;
         }
     }
-
-    private void spinDice(ImageView imageView) {
-        int timer = 0;
-        while (true) {
-            updateDie(imageView, new Random().nextInt(7), "White");
-            timer++;
-            if (timer > 2000) {
-                timer = 0;
-                break;
-            }
-        }
-    }
-
 
     private void resetImages(List<ImageView> images) {
         for (ImageView image : images) {

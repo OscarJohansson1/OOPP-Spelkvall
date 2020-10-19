@@ -5,46 +5,35 @@ public class LobbyItemCreator {
     private String time;
     private String capacity;
     private String players;
+    private boolean done = false;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public String getCapacity() {
-        return capacity;
-    }
-
-    public String getPlayers() {
-        return players;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public void setCapacity(String capacity) {
-        this.capacity = capacity;
-    }
-
-    public void setPlayers(String players) {
-        this.players = players;
+    public void setVariables(String message) {
+        if (name == null) {
+            name = message;
+        } else if (time == null) {
+            time = message;
+        } else if (capacity == null) {
+            capacity = message;
+        } else if (players == null) {
+            players = message;
+            done = true;
+        }
     }
 
     public LobbyItem createLobbyItem(StartController startController) {
-        return new LobbyItem(name, time, capacity, players, startController);
+        if (done) {
+            LobbyItem lobbyItem = new LobbyItem(name, time, capacity, players, startController);
+            resetVariables();
+            return lobbyItem;
+        }
+        return null;
     }
 
     public void resetVariables() {
         name = null;
         time = null;
         capacity = null;
+        players = null;
+        done = false;
     }
 }

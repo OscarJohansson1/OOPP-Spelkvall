@@ -8,18 +8,15 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import program.client.Client;
 import program.model.Attack;
 import program.model.ModelDataHandler;
 import program.model.Space;
 import program.view.MapView;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -181,7 +178,7 @@ public class MapController extends AnchorPane {
     public Button showCurrentPlayer;
 
     @FXML
-    private Text showMoveUnitsText;
+    public Text showMoveUnitsText;
     @FXML
     private Text firstDisplayText;
     @FXML
@@ -191,7 +188,7 @@ public class MapController extends AnchorPane {
     @FXML
     public Text phaseText;
     @FXML
-    Text deployableUnitsText;
+    public Text deployableUnitsText;
 
     @FXML
     public Pane phasePane;
@@ -201,14 +198,14 @@ public class MapController extends AnchorPane {
     @FXML
     public ImageView imageTeamLogo;
 
-    ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
-    MapView view = new MapView();
-    AttackController attackController;
-    List<Button> allButtons;
-    private List<Text> allTexts;
-    private Stage stage;
-    private PauseController pauseController;
-    ClientController clientController;
+    private final ModelDataHandler modelDataHandler;
+    public MapView view = new MapView();
+    public AttackController attackController;
+    public List<Button> allButtons;
+    private final List<Text> allTexts;
+    private final Stage stage;
+    private final PauseController pauseController;
+    private Client client;
 
 
     MapController(List<String> colors, List<String> logoNames, Stage stage) throws IOException {
@@ -239,9 +236,9 @@ public class MapController extends AnchorPane {
 
     }
 
-    MapController(ClientController clientController, Stage stage) throws IOException {
+    public MapController(Stage stage) throws IOException {
         this.stage = stage;
-        this.clientController = clientController;
+        pauseController = new PauseController(stage, this);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -258,173 +255,139 @@ public class MapController extends AnchorPane {
                 textRodaRummet, textVerum, textVillan, textAdammen, textFocus, textFortNox, textGTSpritis, textGoldenI, textChabo, textWijkanders, textHrum,
                 textAlvan, textSpektrum, textGasquen, textChalmersplatsen, textOlgas, textRunAn, textTagvagnen, textOrigogarden, textKalleGlader, textTvargatan));
         modelDataHandler = ModelDataHandler.getModelDataHandler();
+        client = Client.getClient();
         initialize();
     }
 
     private void initialize() throws IOException {
         for (int i = 0; i < allButtons.size(); i++) {
             int var = i;
-            allButtons.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    try {
-                        if (clientController != null) {
-                            if (clientController.player.getMyTurn()) {
-                                setSpace(var);
-                            }
-                        } else {
+            allButtons.get(i).setOnMouseClicked(mouseEvent -> {
+                try {
+                    if (client != null) {
+                        if (client.getPlayer().getMyTurn()) {
                             setSpace(var);
                         }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } else {
+                        setSpace(var);
                     }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             });
         }
 
-        stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-
-            @Override
-            public void handle(KeyEvent t) {
-                if (t.getCode() == KeyCode.ESCAPE) {
-                    checkPauseController();
-                }
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, t -> {
+            if (t.getCode() == KeyCode.ESCAPE) {
+                checkPauseController();
             }
         });
 
-        skipAttack.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                modelDataHandler.removePlayersWithoutSpaces();
-                try {
-                    modelDataHandler.nextPhase();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                view.updatePhase("MOVE", MapController.this);
+        skipAttack.setOnMouseClicked(mouseEvent -> {
+            modelDataHandler.removePlayersWithoutSpaces();
+            try {
+                modelDataHandler.nextPhase();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            view.updatePhase("MOVE", MapController.this);
+            try {
                 resetColor();
-                resetDisplayCubes();
-                sliderVisibility(true);
-                addMarkedCube(secondMarked);
-                moveSlider.setMax(25);
-                if(clientController != null){
-                    try {
-                        clientController.resetColor();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+            resetDisplayCubes();
+            sliderVisibility(true);
+            addMarkedCube(secondMarked);
         });
-        doneMove.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    modelDataHandler.nextPhase();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        doneMove.setOnMouseClicked(mouseEvent -> {
+            try {
+                modelDataHandler.nextPhase();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            view.updatePhase("DEPLOY", MapController.this);
+            try {
+                resetColor();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            resetDisplayCubes();
+            view.updatePhaseText("DEPLOY", MapController.this);
+            view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
+            sliderVisibility(true);
+            removeMarkedCube(secondMarked);
+            view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+            donedeploy.setDisable(true);
+            donedeploy.setStyle("-fx-background-color: #000000");
+            view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+            moveSlider.setMax(modelDataHandler.getDeployableUnits());
+        });
+        donedeploy.setOnMouseClicked(mouseEvent -> {
+            if (modelDataHandler.firstDeployment) {
                 view.updatePhase("DEPLOY", MapController.this);
-                resetColor();
-                resetDisplayCubes();
-                view.updatePhaseText("DEPLOY", MapController.this);
+                try {
+                    modelDataHandler.firstRoundNextPhase();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
-                sliderVisibility(true);
-                removeMarkedCube(secondMarked);
-                view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
-                donedeploy.setDisable(true);
-                donedeploy.setStyle("-fx-background-color: #000000");
                 modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits());
                 view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
                 moveSlider.setMax(modelDataHandler.getDeployableUnits());
-                if(clientController != null){
-                    try {
-                        clientController.resetColor();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        donedeploy.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (modelDataHandler.firstDeployment) {
-                    view.updatePhase("DEPLOY", MapController.this);
-                    try {
-                        modelDataHandler.firstRoundNextPhase();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
-                    modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits());
-                    view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
-                    moveSlider.setMax(modelDataHandler.getDeployableUnits());
-                    resetDisplayCubes();
+                resetDisplayCubes();
+                try {
                     resetColor();
-                    donedeploy.setDisable(true);
-                    donedeploy.setStyle("-fx-background-color: #000000");
-                } else {
-                    try {
-                        modelDataHandler.nextPhase();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    view.updatePhase("ATTACK", MapController.this);
-                    view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                donedeploy.setDisable(true);
+                donedeploy.setStyle("-fx-background-color: #000000");
+            } else {
+                try {
+                    modelDataHandler.nextPhase();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                view.updatePhase("ATTACK", MapController.this);
+                view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
+                try {
                     resetColor();
-                    resetDisplayCubes();
-                    sliderVisibility(false);
-                    addMarkedCube(firstMarked);
-                    addMarkedCube(secondMarked);
-                    skipAttack.setVisible(true);
-                }
-                if(clientController != null){
-                    try {
-                        clientController.resetColor();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        deployButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    deploy();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                resetDisplayCubes();
+                sliderVisibility(false);
+                addMarkedCube(firstMarked);
+                addMarkedCube(secondMarked);
+                skipAttack.setVisible(true);
             }
         });
-        attackButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    attack();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        deployButton.setOnMouseClicked(mouseEvent -> {
+            try {
+                deploy();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
-        moveButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    move();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        attackButton.setOnMouseClicked(mouseEvent -> {
+            try {
+                attack();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
-        moveSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                modelDataHandler.setSliderAmount(newValue.intValue());
-                view.updateSliderText(newValue.intValue(), showMoveUnitsText);
+        moveButton.setOnMouseClicked(mouseEvent -> {
+            try {
+                move();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        });
+        moveSlider.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            modelDataHandler.setSliderAmount(newValue.intValue());
+            view.updateSliderText(newValue.intValue(), showMoveUnitsText);
         });
         view.updatePhaseText(modelDataHandler.getCurrentPhase(), this);
         view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), this, modelDataHandler.getCurrentPlayerName());
@@ -447,10 +410,8 @@ public class MapController extends AnchorPane {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
             moveSlider.setMax(modelDataHandler.getDeployableUnits());
-            if (clientController != null) {
-                System.out.println("Sending space with " + modelDataHandler.getSelectedSpace().getUnits() + " units");
-                clientController.sendObject(new Space(modelDataHandler.getSelectedSpace()));
-            }
+            sendObject(new Space(modelDataHandler.getSelectedSpace()));
+
         }
         if (modelDataHandler.getDeployableUnits() == 0) {
             donedeploy.setDisable(false);
@@ -464,11 +425,10 @@ public class MapController extends AnchorPane {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
             changeToAttackView();
-            if(clientController != null){
-                clientController.sendObject(new Attack(ModelDataHandler.getModelDataHandler().round.getAttack()));
-                clientController.sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace()));
-                clientController.sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace2()));
-            }
+            sendObject(new Attack(ModelDataHandler.getModelDataHandler().round.getAttack()));
+            sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace()));
+            sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace2()));
+
         }
     }
 
@@ -476,46 +436,44 @@ public class MapController extends AnchorPane {
         if (modelDataHandler.startPhase()) {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
-            if (clientController != null) {
-                clientController.sendObject(new Space(modelDataHandler.getSelectedSpace()));
-                clientController.sendObject(new Space(modelDataHandler.getSelectedSpace2()));
-            }
+            sendObject(new Space(modelDataHandler.getSelectedSpace()));
+            sendObject(new Space(modelDataHandler.getSelectedSpace2()));
+
             modelDataHandler.resetSelectedSpaces();
         }
         resetDisplayCubes();
     }
 
-    void changeToAttackView() throws IOException {
-        if (attackController == null) {
-            attackController = new AttackController(this, stage, clientController);
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    rootpane.getChildren().add(attackController);
-                }
-            });
+    private void sendObject(Object object) throws IOException {
+        if (client != null) {
+            client.sendObject(object);
         }
     }
-    void changeToOnlineAttackView() throws IOException {
+
+    void changeToAttackView() throws IOException {
+        if (attackController == null) {
+            attackController = new AttackController(this);
+            Platform.runLater(() -> rootpane.getChildren().add(attackController));
+        }
+    }
+
+    public void changeToOnlineAttackView() throws IOException {
         changeToAttackView();
-        if(clientController.player.getId() != modelDataHandler.getCurrentPlayer().getId()){
+        if (client.getPlayer().getId() != modelDataHandler.getCurrentPlayer().getId()) {
             attackController.abortButton.setVisible(false);
             attackController.attackButton.setVisible(false);
         }
     }
 
     void removeAttackView() throws IOException {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if (modelDataHandler.isWinner()) {
-                    Parent root = new EndController(stage);
-                    Scene scene = new Scene(root, 1920, 1080);
+        Platform.runLater(() -> {
+            if (modelDataHandler.isWinner()) {
+                Parent root = new EndController(stage);
+                Scene scene = new Scene(root, 1920, 1080);
 
-                    stage.setTitle("End");
-                    stage.setScene(scene);
-                    stage.show();
-                }
+                stage.setTitle("End");
+                stage.setScene(scene);
+                stage.show();
             }
         });
         rootpane.getChildren().remove(attackController);
@@ -523,36 +481,33 @@ public class MapController extends AnchorPane {
             view.updateTextUnits(i, modelDataHandler.getUnitsOnSpace(i), allButtons, this);
             view.setColor(allButtons.get(i), Color.web(modelDataHandler.getColorOnAllSpaces().get(i)), allButtons);
         }
-        if (clientController != null) {
-            clientController.sendObject(modelDataHandler.getSelectedSpace());
-            clientController.sendObject(modelDataHandler.getSelectedSpace2());
-            clientController.sendObject("removeAttackView");
-        }
+
+        sendObject(modelDataHandler.getSelectedSpace());
+        sendObject(modelDataHandler.getSelectedSpace2());
+        sendObject("removeAttackView");
+
         modelDataHandler.resetSelectedSpaces();
         attackController = null;
         resetDisplayCubes();
 
     }
 
-    void removeOnlineAttackView() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if (modelDataHandler.isWinner()) {
-                    Parent root = new EndController(stage);
-                    Scene scene = new Scene(root, 1920, 1080);
+    public void removeOnlineAttackView() {
+        Platform.runLater(() -> {
+            if (modelDataHandler.isWinner()) {
+                Parent root = new EndController(stage);
+                Scene scene = new Scene(root, 1920, 1080);
 
-                    stage.setTitle("End");
-                    stage.setScene(scene);
-                    stage.show();
-                }
-                rootpane.getChildren().remove(attackController);
-                attackController = null;
+                stage.setTitle("End");
+                stage.setScene(scene);
+                stage.show();
             }
+            rootpane.getChildren().remove(attackController);
+            attackController = null;
         });
         modelDataHandler.resetSelectedSpaces();
         resetDisplayCubes();
-        view.resetColor(getColors(),allButtons);
+        view.resetColor(getColors(), allButtons);
     }
 
     private void sliderVisibility(Boolean visible) {
@@ -582,7 +537,6 @@ public class MapController extends AnchorPane {
             if (modelDataHandler.getSelectedSpace2() == null) {
                 resetDisplayCubes();
                 resetColor();
-                if (clientController != null) clientController.resetColor();
             } else {
                 resetColor(modelDataHandler.getSelectedSpace().getId());
                 resetDisplayCubes(secondMarked, secondDisplayText);
@@ -592,9 +546,8 @@ public class MapController extends AnchorPane {
             }
             view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
             view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
-            if (clientController != null) {
-                clientController.sendObject(new Space(modelDataHandler.getSpaceFromId(id)));
-            }
+            sendObject(new Space(modelDataHandler.getSpaceFromId(id)));
+
             displayCubes(id);
             if (firstDisplayText.getText().isEmpty()) {
                 displayText(firstDisplayText, getTextFromList(id));
@@ -624,7 +577,12 @@ public class MapController extends AnchorPane {
         return colors;
     }
 
-    void resetColor() {
+    void resetColor() throws IOException {
+        view.resetColor(getColors(), allButtons);
+        sendObject("resetColor");
+    }
+
+    public void resetColorOnline() {
         view.resetColor(getColors(), allButtons);
     }
 
@@ -638,7 +596,7 @@ public class MapController extends AnchorPane {
         view.resetColor(colors, allButtons);
     }
 
-    Button getCube(int id) {
+    public Button getCube(int id) {
         for (Button allButton : allButtons) {
             if (allButtons.get(id) == allButton) {
                 return allButton;

@@ -12,13 +12,14 @@ import java.util.List;
 
 public class LobbySelectController extends AnchorPane {
 
-    @FXML public FlowPane lobbyFlow;
+    @FXML
+    public FlowPane lobbyFlow;
 
-    List<LobbyItem> lobbyItems = new ArrayList<>();
+    public List<LobbyItem> lobbyItems = new ArrayList<>();
 
     private final StartController startController;
 
-    public LobbySelectController(StartController startController) throws IOException, ClassNotFoundException {
+    public LobbySelectController(StartController startController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("lobbySelect.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -30,26 +31,23 @@ public class LobbySelectController extends AnchorPane {
         this.startController = startController;
     }
 
+    @FXML
     public void joinLobby() throws IOException {
         startController.goToSetup();
     }
 
-    public void toMenu() throws IOException {
-
+    @FXML
+    public void toMenu() {
         startController.backToMainMenu();
-
     }
-    public void resetLobbyItems(){
-        for(LobbyItem lobbyItem: lobbyItems)
-        {
+
+    public void resetLobbyItems() {
+        for (LobbyItem lobbyItem : lobbyItems) {
             lobbyItem.marked = false;
         }
     }
-    public void updateLobbys(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                lobbyFlow.getChildren().addAll(lobbyItems);
-            }});
+
+    public void updateLobbies() {
+        Platform.runLater(() -> lobbyFlow.getChildren().addAll(lobbyItems));
     }
 }

@@ -1,5 +1,6 @@
 package server.code.model;
 
+import program.model.Board;
 import program.model.ModelDataHandler;
 import program.model.Player;
 
@@ -21,5 +22,9 @@ public class GameLobby extends Lobby {
 
     private Player getRandomPlayer() {
         return players.get(new Random().nextInt(players.size()));
+    }
+    public Board initializeBoard() {
+        ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
+        return new Board(modelDataHandler.randomizeSpaces(modelDataHandler.spaceNames.size(), players));
     }
 }

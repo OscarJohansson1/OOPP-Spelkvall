@@ -9,14 +9,11 @@ import javafx.scene.layout.AnchorPane;
 import program.model.Player;
 
 import java.io.IOException;
-import java.io.Serializable;
 
-public class PlayerCard extends AnchorPane implements Serializable {
+public class PlayerCard extends AnchorPane {
 
     @FXML private Label cardNameLabel;
     @FXML private ImageView cardImageView;
-
-    Player player;
 
     public PlayerCard(Player player){
 
@@ -30,11 +27,7 @@ public class PlayerCard extends AnchorPane implements Serializable {
             throw new RuntimeException(exception);
         }
 
-        this.player = player;
-
         this.cardImageView.setImage(new Image(player.getLogoUrl()));
         this.cardNameLabel.setText(player.getName());
     }
-
-
 }
