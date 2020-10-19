@@ -1,6 +1,7 @@
 package program.model;
 
 
+
 import program.client.Client;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class ModelDataHandler {
     private Board board;
     private int unitsToUse = 1;
     public boolean firstDeployment = true;
-    private final Client client = Client.getClient();
+    private Client client;
 
     public List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
             "RödaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hrum",
@@ -65,6 +66,10 @@ public class ModelDataHandler {
         }
         currentPlayer = getRandomPlayer(null, players);
         board = new Board(randomizeSpaces(amountOfSpaces, players));
+    }
+    public void initialize(Client client){
+        this.client = client;
+
     }
 
     public List<Space> randomizeSpaces(int amountOfSpaces, List<Player> players) {
@@ -133,7 +138,15 @@ public class ModelDataHandler {
     /**
      * Method that resets the current selected spaces.
      */
-    public void resetSelectedSpaces() {
+    public void resetSelectedSpaces() throws IOException {
+        if(client.startedConnection){
+            sendObject("resetSelectedSpaces");
+        }
+        else {
+            resetSpaces();
+        }
+    }
+    public void resetSpaces(){
         board.resetSpaces();
     }
 
@@ -150,7 +163,6 @@ public class ModelDataHandler {
         }
         resetSelectedSpaces();
         phaseCount++;
-        sendObject(phaseCount);
         if (phaseCount > 3) {
             currentPlayer = nextPlayer(players, currentPlayer);
             if (client.startedConnection) {
@@ -167,6 +179,7 @@ public class ModelDataHandler {
      * turn deploying units, and does not attack and move.
      */
     public void firstRoundNextPhase() throws IOException {
+
         resetSelectedSpaces();
         currentPlayer = nextPlayer(players, currentPlayer);
         if (client.startedConnection) {
@@ -177,6 +190,7 @@ public class ModelDataHandler {
         if (roundCount > players.size()) {
             firstDeployment = false;
         }
+
     }
 
     public static Player nextPlayer(List<Player> players, Player currentPlayer) {
@@ -293,6 +307,9 @@ public class ModelDataHandler {
     public String getCurrentPhase() {
         return round.getCurrentPhase();
     }
+    public void setRoundCount(int roundCount){
+        this.roundCount = roundCount;
+    }
 
     public List<String> getColorOnAllSpaces() {
         return board.getColorOnAllSpaces();
@@ -347,6 +364,7 @@ public class ModelDataHandler {
         for (Player player : players) {
             player.setUnits(50 / players.size());
         }
+        roundCount = players.size();
     }
 
     public List<Player> getPlayers() {

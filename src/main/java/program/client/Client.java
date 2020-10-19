@@ -22,25 +22,19 @@ public class Client {
     private MapController mapController;
     private Player player;
     private final LobbyItemCreator lobbyItemCreator = new LobbyItemCreator();
-    private final ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
+    private ModelDataHandler modelDataHandler;
     public boolean startedConnection = false;
+    private boolean startedGame = false;
 
     private Client() {
     }
 
     private static class ClientHolder {
-        private static Client client;
-        public static Client getClient(){
-            if(client == null){
-                return client = new Client();
-            }
-            return client;
-        }
+        private static final Client client = new Client();
     }
 
     public static Client getClient() {
-        System.out.println(ClientHolder.getClient());
-        return ClientHolder.getClient();
+        return ClientHolder.client;
     }
 
     public void startConnection(String ip, int port, StartController startController) throws IOException {
@@ -49,6 +43,7 @@ public class Client {
         this.startController = startController;
         System.out.println("Connecting to 95.80.61.51, Port: 6666");
         startedConnection = true;
+        modelDataHandler = ModelDataHandler.getModelDataHandler();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 stopConnection();
@@ -88,6 +83,7 @@ public class Client {
                         stage.setScene(scene);
                         stage.show();
                     });
+                    startedGame = true;
 
                 } else if (message.equals("startNotClear")) {
                     startController.lobbyReadyController.startButton.setDisable(true);
@@ -97,12 +93,19 @@ public class Client {
                     modelDataHandler.round.nextPhase();
                 } else if (message.equals("removeAttackView")) {
                     mapController.removeOnlineAttackView();
+                }else if(message.equals("resetSelectedSpaces")){
+                    modelDataHandler.resetSpaces();
                 }
             } else if (message instanceof Integer) {
                 if (modelDataHandler.getCurrentPlayer() == null) {
                     modelDataHandler.setCurrentPlayer(modelDataHandler.getPlayers().get((Integer) message));
                 }
+                else if(startedGame){
+                    modelDataHandler.setRoundCount((Integer) message);
+                    return;
+                }
                 player.setId((Integer) message);
+
 
             } else if (message instanceof List) {
                 for (Object object : (List<?>) message) {

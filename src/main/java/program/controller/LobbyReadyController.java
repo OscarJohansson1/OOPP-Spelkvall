@@ -33,7 +33,6 @@ public class LobbyReadyController extends AnchorPane {
     private final StartController startController;
     private final List<PlayerCard> userCards = new ArrayList<>();
     private final Stage stage;
-    private final Client client = Client.getClient();
 
     public LobbyReadyController(Stage stage, StartController startController) {
 
@@ -65,19 +64,19 @@ public class LobbyReadyController extends AnchorPane {
             stage.show();
         });
     }
+
     @FXML
     public void ready() throws IOException {
-        client.getPlayer().setReady(!client.getPlayer().isReady());
-        if (client.getPlayer().isReady()) {
+        if (startController.ready()) {
             readyButton.setStyle("-fx-background-color: #5DFF00;");
         } else {
             readyButton.setStyle(null);
         }
-        client.sendObject(client.getPlayer().isReady());
     }
+
     @FXML
     public void startGame() throws IOException {
-        client.sendObject("startGame");
+        startController.startGame();
     }
 
     public void updateUserCards(List<Player> players) {

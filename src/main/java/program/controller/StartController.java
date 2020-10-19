@@ -105,6 +105,7 @@ public class StartController extends AnchorPane {
         lobbyReadyController.startButton.setVisible(false);
         lobbyReadyController.startButton.setDisable(true);
         rootpane.getChildren().add(lobbyReadyController);
+        rootpane.getChildren().remove(multiplayerLogoController);
     }
 
     public void goToSetup() throws IOException {
@@ -116,6 +117,15 @@ public class StartController extends AnchorPane {
         }
         multiplayerLogoController = new MultiplayerLogoController(this);
         rootpane.getChildren().add(multiplayerLogoController);
+        rootpane.getChildren().remove(lobbySelectController);
+    }
+    public boolean ready() throws IOException {
+        client.getPlayer().setReady(!client.getPlayer().isReady());
+        client.sendObject(client.getPlayer().isReady());
+        return client.getPlayer().isReady();
+    }
+    public void startGame() throws IOException {
+        client.sendObject("startGame");
     }
 
     public void removeSetUp() {

@@ -198,14 +198,14 @@ public class MapController extends AnchorPane {
     @FXML
     public ImageView imageTeamLogo;
 
-    private final ModelDataHandler modelDataHandler;
+    public final ModelDataHandler modelDataHandler;
     public MapView view = new MapView();
     public AttackController attackController;
     public List<Button> allButtons;
     private final List<Text> allTexts;
     private final Stage stage;
     private final PauseController pauseController;
-    private Client client;
+    private final Client client = Client.getClient();
 
 
     MapController(List<String> colors, List<String> logoNames, Stage stage) throws IOException {
@@ -232,8 +232,6 @@ public class MapController extends AnchorPane {
         modelDataHandler = ModelDataHandler.getModelDataHandler();
         modelDataHandler.initialize(allButtons.size(), colors, logoNames);
         initialize();
-
-
     }
 
     public MapController(Stage stage) throws IOException {
@@ -255,7 +253,7 @@ public class MapController extends AnchorPane {
                 textRodaRummet, textVerum, textVillan, textAdammen, textFocus, textFortNox, textGTSpritis, textGoldenI, textChabo, textWijkanders, textHrum,
                 textAlvan, textSpektrum, textGasquen, textChalmersplatsen, textOlgas, textRunAn, textTagvagnen, textOrigogarden, textKalleGlader, textTvargatan));
         modelDataHandler = ModelDataHandler.getModelDataHandler();
-        client = Client.getClient();
+        modelDataHandler.initialize(client);
         initialize();
     }
 
@@ -438,7 +436,6 @@ public class MapController extends AnchorPane {
             setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
             sendObject(new Space(modelDataHandler.getSelectedSpace()));
             sendObject(new Space(modelDataHandler.getSelectedSpace2()));
-
             modelDataHandler.resetSelectedSpaces();
         }
         resetDisplayCubes();
@@ -482,8 +479,9 @@ public class MapController extends AnchorPane {
             view.setColor(allButtons.get(i), Color.web(modelDataHandler.getColorOnAllSpaces().get(i)), allButtons);
         }
 
-        sendObject(modelDataHandler.getSelectedSpace());
-        sendObject(modelDataHandler.getSelectedSpace2());
+        modelDataHandler.getSelectedSpace().updateSpace(1);
+        sendObject(new Space(modelDataHandler.getSelectedSpace()));
+        sendObject(new Space(modelDataHandler.getSelectedSpace2()));
         sendObject("removeAttackView");
 
         modelDataHandler.resetSelectedSpaces();
@@ -492,7 +490,7 @@ public class MapController extends AnchorPane {
 
     }
 
-    public void removeOnlineAttackView() {
+    public void removeOnlineAttackView() throws IOException {
         Platform.runLater(() -> {
             if (modelDataHandler.isWinner()) {
                 Parent root = new EndController(stage);
