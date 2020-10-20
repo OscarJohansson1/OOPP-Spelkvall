@@ -26,3 +26,16 @@ IntelliJ IDEA:
 
 If Maven is not your friend, but you really want to play some Chalmers Chance. Try to run the main class "Chans" as you
 usually do in an IDE. (You may need to fix some errors that pops up)
+
+------------------------------------------------------------------------------------------------------------------------
+
+As of now, we do not have a server constantly running, this have the consequence that if you wish to host yourself,
+you'll need to take some extra steps.
+
+To play online, you need to update the IP-address in the code to match your computers IP-address, and make sure whoever
+you are playing with does the same (change to your IP-address). You may also need to open up a port for the connection,
+remember to specify what port in the code and notify the other players.
+
+------------------------------------------------------------------------------------------------------------------------
+
+We wish you the very best in life and hope you enjoy our game :)
