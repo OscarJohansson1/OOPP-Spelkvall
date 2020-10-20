@@ -12,10 +12,12 @@ import java.io.IOException;
 
 public class PlayerCard extends AnchorPane {
 
-    @FXML private Label cardNameLabel;
-    @FXML private ImageView cardImageView;
+    @FXML
+    private Label cardNameLabel;
+    @FXML
+    private ImageView cardImageView;
 
-    public PlayerCard(Player player){
+    public PlayerCard(Player player) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("userCard.fxml"));
         fxmlLoader.setRoot(this);

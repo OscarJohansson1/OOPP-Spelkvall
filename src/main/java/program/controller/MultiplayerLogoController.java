@@ -104,10 +104,12 @@ public class MultiplayerLogoController extends AnchorPane {
             divisionList.get(integer).setEffect(colorAdjust);
         }
     }
+
     @FXML
     public void backToLobbyList() {
         startController.removeSetUp();
     }
+
     @FXML
     public void choose() throws IOException {
 
@@ -122,6 +124,7 @@ public class MultiplayerLogoController extends AnchorPane {
         }
 
     }
+
     @FXML
     public void toLobbySelect() {
         startController.toLobbySelect();

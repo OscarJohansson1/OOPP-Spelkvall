@@ -171,16 +171,18 @@ public class SetUpGameController extends AnchorPane {
 
     private void mouseClicked(ImageView image) {
         if (!selectedDivisions.contains(image) && nextToChoose <= amountOfPlayers) {
+            Color color = Color.web(image.getStyle().substring(22, 29));
             colorList.add(image.getStyle().substring(22, 29));
             logoNameList.add(image.getId().substring(3).toLowerCase() + "_logo");
-            System.out.println(image.getId().substring(3).toLowerCase() + "_logo");
-
             Button playerButton = playerButtonList.get(nextToChoose - 1);
+            double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000;
+            if (y >= 0.5) {
+                playerButton.setTextFill(Color.valueOf("#000000"));
+            } else {
+                playerButton.setTextFill(Color.valueOf("#ffffff"));
+            }
             playerButton.setText("Player " + nextToChoose + " represents " + image.getId().substring(3));
-            Color color = (Color) playerButton.getBackground().getFills().get(0).getFill();
-            setTextContrastColor(playerButton, color);
             playerButton.setStyle(image.getStyle());
-
             chosen.setBrightness(-0.5);
             chosen.setSaturation(-1.0);
             image.setEffect(chosen);
@@ -188,15 +190,6 @@ public class SetUpGameController extends AnchorPane {
             selectedDivisions.add(image);
             nextToChoose++;
         }
-    }
-
-    public static void setTextContrastColor(Button button, Color color) {
-        button.setTextFill(getContrastColor(color));
-    }
-
-    public static Color getContrastColor(Color color) {
-        double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000;
-        return y >= 0.5 ? Color.valueOf("#000000") : Color.valueOf("#ffffff");
     }
 
     private void updatePlayerGrid(int players) {

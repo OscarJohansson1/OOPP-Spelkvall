@@ -545,7 +545,7 @@ public class MapController extends AnchorPane {
             view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
             view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
             sendObject(new Space(modelDataHandler.getSpaceFromId(id)));
-            if(client == null){
+            if(!client.startedConnection){
                 displayCubes(id);
             }
         } else {

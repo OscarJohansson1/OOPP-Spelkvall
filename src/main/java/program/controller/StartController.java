@@ -119,11 +119,13 @@ public class StartController extends AnchorPane {
         rootpane.getChildren().add(multiplayerLogoController);
         rootpane.getChildren().remove(lobbySelectController);
     }
+
     public boolean ready() throws IOException {
         client.getPlayer().setReady(!client.getPlayer().isReady());
         client.sendObject(client.getPlayer().isReady());
         return client.getPlayer().isReady();
     }
+
     public void startGame() throws IOException {
         client.sendObject("startGame");
     }
