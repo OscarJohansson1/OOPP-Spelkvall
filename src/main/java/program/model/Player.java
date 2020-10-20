@@ -96,7 +96,5 @@ public class Player implements Serializable {
     public void setFirstDeployment() {
         firstDeployment = false;
     }
-    public boolean getFirstDeployment(){
-        return firstDeployment;
-    }
+
 }

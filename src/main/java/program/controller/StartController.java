@@ -9,16 +9,19 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import program.client.Client;
+import program.model.IObservable;
+import program.model.IObserver;
 import program.model.Player;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The controller for the StartMenu.fxml
  */
-public class StartController extends AnchorPane {
+public class StartController extends AnchorPane implements IObservable {
 
     @FXML
     private AnchorPane rootpane;
@@ -35,11 +38,10 @@ public class StartController extends AnchorPane {
     private final Parent root;
     public Stage stage;
 
-
+    private final List<IObserver> observers = new ArrayList<>();
     public LobbySelectController lobbySelectController;
     public LobbyReadyController lobbyReadyController;
     public MultiplayerLogoController multiplayerLogoController;
-    private final Client client = Client.getClient();
 
     /**
      * @param stage the main stage
@@ -62,6 +64,18 @@ public class StartController extends AnchorPane {
         lobbyReadyController = new LobbyReadyController(stage, this);
         initialize();
 
+    }
+
+    @Override
+    public void addObserver(IObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notifyObservers(Object object) throws IOException {
+        for (IObserver observer : observers) {
+            observer.sendObject(object);
+        }
     }
 
     private void initialize() {
@@ -92,16 +106,17 @@ public class StartController extends AnchorPane {
     }
 
     public void goToLobbySelect() throws IOException {
-        client.startConnection("95.80.61.51", 6666, this);
-        client.sendObject("LOBBYS");
-        rootpane.getChildren().add(lobbySelectController);
+        notifyObservers("startConnection");
+        notifyObservers("LOBBYS");
+        if (observers.size() != 0) {
+            rootpane.getChildren().add(lobbySelectController);
+        }
     }
 
     public void goToLobbyReady(Player player, int gridPosImageview) throws IOException {
-        client.setPlayer(player);
-        client.sendObject(new Player(player));
-        client.sendObject("LOBBYLEADER");
-        client.sendObject(gridPosImageview);
+        notifyObservers(new Player(player));
+        notifyObservers("LOBBYLEADER");
+        notifyObservers(gridPosImageview);
         lobbyReadyController.startButton.setVisible(false);
         lobbyReadyController.startButton.setDisable(true);
         rootpane.getChildren().add(lobbyReadyController);
@@ -111,7 +126,7 @@ public class StartController extends AnchorPane {
     public void goToSetup() throws IOException {
         for (int i = 0; i < lobbySelectController.lobbyItems.size(); i++) {
             if (lobbySelectController.lobbyItems.get(i).marked) {
-                client.sendObject(i);
+                notifyObservers(i);
                 break;
             }
         }
@@ -120,14 +135,8 @@ public class StartController extends AnchorPane {
         rootpane.getChildren().remove(lobbySelectController);
     }
 
-    public boolean ready() throws IOException {
-        client.getPlayer().setReady(!client.getPlayer().isReady());
-        client.sendObject(client.getPlayer().isReady());
-        return client.getPlayer().isReady();
-    }
-
     public void startGame() throws IOException {
-        client.sendObject("startGame");
+        notifyObservers("startGame");
     }
 
     public void removeSetUp() {
@@ -142,5 +151,6 @@ public class StartController extends AnchorPane {
         rootpane.getChildren().remove(multiplayerLogoController);
         rootpane.getChildren().add(lobbySelectController);
     }
+
 
 }

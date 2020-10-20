@@ -6,22 +6,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import program.client.Client;
 import program.facade.ModelAttackViewFacade;
-import program.model.Attack;
-import program.model.ModelDataHandler;
-import program.model.Space;
+import program.model.*;
 
 
 import java.io.IOException;
 import java.util.*;
 
-public class AttackView extends AnchorPane {
+public class AttackView extends AnchorPane implements IObservable {
+
+    public final List<IObserver> observers = new ArrayList<>();
 
     private final ModelAttackViewFacade model = new ModelAttackViewFacade();
 
     private final List<ImageView> images;
-
 
     public AttackView(ArrayList<ImageView> images, ArrayList<ImageView> logoImages) {
         this.images = images;
@@ -29,17 +27,24 @@ public class AttackView extends AnchorPane {
         setLogoImages(model.getTeamLogo(model.getSelectedSpaceId(1)), model.getTeamLogo(model.getSelectedSpaceId(2)), logoImages);
 
     }
+    @Override
+    public void addObserver(IObserver observer) {
+        observers.add(observer);
+    }
 
-    public void updateDice(Client client) throws IOException {
-
+    @Override
+    public void notifyObservers(Object object) throws IOException {
+        for (IObserver observer : observers) {
+            observer.sendObject(object);
+        }
+    }
+    public void updateDice() throws IOException {
         List<Integer> whiteDices = model.getAttackerDiceResults();
         List<Integer> blackDices = model.getDefenderDiceResults();
         updateDie(whiteDices, blackDices);
-        if (client.startedConnection) {
-            client.sendObject(new Attack(ModelDataHandler.getModelDataHandler().round.getAttack()));
-            client.sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace()));
-            client.sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace2()));
-        }
+        notifyObservers(new Attack(ModelDataHandler.getModelDataHandler().round.getAttack()));
+        notifyObservers(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace()));
+        notifyObservers(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace2()));
     }
 
     public void updateDice(Attack attack) {

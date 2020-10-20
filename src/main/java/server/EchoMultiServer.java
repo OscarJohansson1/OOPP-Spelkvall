@@ -114,7 +114,7 @@ public class EchoMultiServer {
             } else if (inputLine instanceof Space) {
                 writeToAllInLobby(inputLine, gameLobby);
             } else if (inputLine instanceof Boolean) {
-                player.setReady((Boolean) inputLine);
+                player.setReady(!player.isReady());
                 writeToLobbyLeaderInLobby(menuLobby, menuLobby.checkIfAllPlayersReady());
             } else if (inputLine instanceof Player) {
                 Player receivedPlayer = (Player) inputLine;

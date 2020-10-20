@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import program.client.Client;
 import program.model.ModelDataHandler;
 import program.model.Attack;
 import program.view.AttackView;
@@ -53,11 +52,12 @@ public class AttackController extends AnchorPane {
     @FXML
     private ImageView defenderImageView;
 
-    private final AttackView attackView;
+    public final AttackView attackView;
     private final MapController mapController;
     private final ModelDataHandler modelDataHandler;
 
-    AttackController(MapController mapController) throws IOException {
+
+    AttackController(MapController mapController) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("attackMenu.fxml"));
         fxmlLoader.setRoot(this);
@@ -71,13 +71,11 @@ public class AttackController extends AnchorPane {
 
         this.mapController = mapController;
         this.modelDataHandler = ModelDataHandler.getModelDataHandler();
-        this.attackView = new AttackView(new ArrayList<>(Arrays.asList(attackerDieImage1, attackerDieImage2, attackerDieImage3, defenderDieImage1, defenderDieImage2)),
-                new ArrayList<>(Arrays.asList(attackerImageView, defenderImageView)));
-        if (!Client.getClient().startedConnection) attack();
+        this.attackView = new AttackView(new ArrayList<>(Arrays.asList(attackerDieImage1, attackerDieImage2, attackerDieImage3, defenderDieImage1, defenderDieImage2)), new ArrayList<>(Arrays.asList(attackerImageView, defenderImageView)));
     }
 
     void attack() throws IOException {
-        attackView.updateDice(Client.getClient());
+        attackView.updateDice();
         attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton);
     }
 

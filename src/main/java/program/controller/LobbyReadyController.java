@@ -48,6 +48,7 @@ public class LobbyReadyController extends AnchorPane {
             throw new RuntimeException(exception);
         }
         Platform.setImplicitExit(false);
+        readyButton.setStyle("");
         initialize();
 
     }
@@ -67,11 +68,12 @@ public class LobbyReadyController extends AnchorPane {
 
     @FXML
     public void ready() throws IOException {
-        if (startController.ready()) {
+        if (readyButton.getStyle().equals("")) {
             readyButton.setStyle("-fx-background-color: #5DFF00;");
         } else {
-            readyButton.setStyle(null);
+            readyButton.setStyle("");
         }
+        startController.notifyObservers(true);
     }
 
     @FXML

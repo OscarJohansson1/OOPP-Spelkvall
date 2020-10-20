@@ -11,7 +11,9 @@ import program.controller.StartController;
 import program.model.*;
 
 import java.io.*;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -23,7 +25,6 @@ public class Client implements IObserver {
     private Player player;
     private final LobbyItemCreator lobbyItemCreator = new LobbyItemCreator();
     private ModelDataHandler modelDataHandler;
-    public boolean startedConnection = false;
     private boolean startedGame = false;
 
     private Client() {
@@ -38,11 +39,18 @@ public class Client implements IObserver {
     }
 
     public void startConnection(String ip, int port, StartController startController) throws IOException {
-        server = new ConnectionToServer(new Socket(ip, port));
-        messages = new LinkedBlockingQueue<>();
+        try {
+            Socket socket = new Socket();
+            int timeout = 500;
+            socket.connect(new InetSocketAddress(ip, port), timeout);
+            server = new ConnectionToServer(socket);
+        } catch (SocketTimeoutException e) {
+            return;
+        }
         this.startController = startController;
-        System.out.println("Connecting to 95.80.61.51, Port: 6666");
-        startedConnection = true;
+        startController.addObserver(this);
+        messages = new LinkedBlockingQueue<>();
+        System.out.println("Connected to 95.80.61.51, Port: 6666");
         modelDataHandler = ModelDataHandler.getModelDataHandler();
         modelDataHandler.addObserver(this);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -77,6 +85,7 @@ public class Client implements IObserver {
                 } else if (message.equals("startGame")) {
                     Stage stage = startController.stage;
                     mapController = new MapController(stage);
+                    mapController.addObserver(this);
                     player.setMyTurn(modelDataHandler.getCurrentPlayer().getId() == player.getId());
                     Platform.runLater(() -> {
                         Scene scene = new Scene(mapController, 1920, 1080);
@@ -92,15 +101,15 @@ public class Client implements IObserver {
                     mapController.resetColorOnline();
                 } else if (message.equals("nextPhase")) {
                     modelDataHandler.round.nextPhase();
-                    mapController.view.updatePhase(modelDataHandler.getCurrentPhase(),mapController);
-                    if(!modelDataHandler.getCurrentPhase().equals("DEPLOY")){
+                    mapController.view.updatePhase(modelDataHandler.getCurrentPhase(), mapController);
+                    if (!modelDataHandler.getCurrentPhase().equals("DEPLOY")) {
                         mapController.addMarkedCube(mapController.secondMarked);
-                    }
-                    else {
+                    } else {
                         mapController.removeMarkedCube(mapController.secondMarked);
                     }
                 } else if (message.equals("removeAttackView")) {
                     mapController.removeOnlineAttackView();
+
                 } else if (message.equals("resetSelectedSpaces")) {
                     modelDataHandler.resetSpaces();
                 }
@@ -118,6 +127,9 @@ public class Client implements IObserver {
                         List<Player> playerList = (List<Player>) message;
                         modelDataHandler.setPlayers(playerList);
                         startController.lobbyReadyController.updateUserCards(playerList);
+                        if(player == null){
+                            player = playerList.get(playerList.size() - 1);
+                        }
                     } else if (object instanceof Integer) {
                         if (mapController == null) {
                             startController.multiplayerLogoController.updateGridPane((List<Integer>) message);
@@ -157,15 +169,23 @@ public class Client implements IObserver {
                 mapController.view.updateDeployableUnits(mapController.deployableUnitsText, receivedPlayer.getUnits());
                 if (player.getId() == ((Player) message).getId()) {
                     player.setMyTurn(true);
+                    modelDataHandler.getCurrentPlayer().setMyTurn(true);
                     mapController.view.myturn(mapController);
                 } else {
                     player.setMyTurn(false);
                     mapController.view.otherPlayerPlaying(mapController);
+                    modelDataHandler.getCurrentPlayer().setMyTurn(false);
                 }
 
             } else if (message instanceof Attack) {
-                mapController.changeToOnlineAttackView();
+                mapController.changeToAttackView();
+                if(mapController.attackController.attackView.observers.size() == 0){
+                    mapController.attackController.attackView.addObserver(this);
+                }
                 mapController.attackController.attack((Attack) message);
+                if (player.getId() != modelDataHandler.getCurrentPlayer().getId()) {
+                    mapController.removeAbortAndAttack();
+                }
             }
         } catch (IOException ignored) {
         }
@@ -199,10 +219,6 @@ public class Client implements IObserver {
     @Override
     public void sendObject(Object object) throws IOException {
         server.outObject.writeObject(object);
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public void setPlayer(Player player) {

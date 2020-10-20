@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class ModelDataHandler implements IObservable {
 
-    private List<IObserver> observers = new ArrayList<>();
+    private final List<IObserver> observers = new ArrayList<>();
 
     private List<Player> players = new ArrayList<>();
     private Player currentPlayer;
@@ -146,7 +146,8 @@ public class ModelDataHandler implements IObservable {
         notifyObservers("resetSelectedSpaces");
         resetSpaces();
     }
-    public void resetSpaces(){
+
+    public void resetSpaces() {
         board.resetSpaces();
     }
 
@@ -169,7 +170,6 @@ public class ModelDataHandler implements IObservable {
             phaseCount = 1;
         }
     }
-
 
     /**
      * Method that controls the phase changes during the first round-robin. During the first round the players takes
@@ -299,10 +299,12 @@ public class ModelDataHandler implements IObservable {
     public String getCurrentPhase() {
         return round.getCurrentPhase();
     }
-    public int getRoundCount(){
+
+    public int getRoundCount() {
         return roundCount;
     }
-    public void setRoundCount(int roundCount){
+
+    public void setRoundCount(int roundCount) {
         this.roundCount = roundCount;
     }
 
