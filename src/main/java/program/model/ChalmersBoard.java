@@ -1,9 +1,10 @@
 package program.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class ChalmersBoard implements IBoard {
+public class ChalmersBoard implements IBoard, Serializable {
 
     private List<Area> areas;
     private List<Space> spaces;
