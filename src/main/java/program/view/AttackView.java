@@ -35,7 +35,7 @@ public class AttackView extends AnchorPane {
         List<Integer> whiteDices = model.getAttackerDiceResults();
         List<Integer> blackDices = model.getDefenderDiceResults();
         updateDie(whiteDices, blackDices);
-        if (client != null) {
+        if (client.startedConnection) {
             client.sendObject(new Attack(ModelDataHandler.getModelDataHandler().round.getAttack()));
             client.sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace()));
             client.sendObject(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace2()));
