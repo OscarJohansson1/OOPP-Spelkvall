@@ -91,22 +91,20 @@ public class Client {
                     mapController.resetColorOnline();
                 } else if (message.equals("nextPhase")) {
                     modelDataHandler.round.nextPhase();
+                    mapController.view.updatePhase(modelDataHandler.getCurrentPhase(),mapController);
                 } else if (message.equals("removeAttackView")) {
                     mapController.removeOnlineAttackView();
-                }else if(message.equals("resetSelectedSpaces")){
+                } else if (message.equals("resetSelectedSpaces")) {
                     modelDataHandler.resetSpaces();
                 }
             } else if (message instanceof Integer) {
                 if (modelDataHandler.getCurrentPlayer() == null) {
                     modelDataHandler.setCurrentPlayer(modelDataHandler.getPlayers().get((Integer) message));
-                }
-                else if(startedGame){
+                } else if (startedGame) {
                     modelDataHandler.setRoundCount((Integer) message);
                     return;
                 }
                 player.setId((Integer) message);
-
-
             } else if (message instanceof List) {
                 for (Object object : (List<?>) message) {
                     if (object instanceof Player) {
@@ -138,10 +136,16 @@ public class Client {
                 mapController.view.setColor(mapController.getCube(space.getId()), Color.web(modelDataHandler.getColorOnSpace(space.getId())).darker().darker(), mapController.allButtons);
 
             } else if (message instanceof Player) {
-                modelDataHandler.setCurrentPlayer((Player) message);
-                Player currentPlayer = modelDataHandler.getCurrentPlayer();
-                mapController.view.updateCurrentPlayer(currentPlayer.getColor(), mapController, currentPlayer.getName());
-                mapController.view.updateDeployableUnits(mapController.deployableUnitsText, ((Player) message).getUnits());
+                Player receivedPlayer = (Player) message;
+                modelDataHandler.setCurrentPlayer(receivedPlayer);
+                if (modelDataHandler.getRoundCount() > modelDataHandler.getPlayers().size()) {
+                    modelDataHandler.firstDeployment = false;
+                    receivedPlayer.setUnits(0);
+                    modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
+                    mapController.moveSlider.setMax(modelDataHandler.getCurrentPlayer().getUnits());
+                }
+                mapController.view.updateCurrentPlayer(receivedPlayer.getColor(), mapController, receivedPlayer.getName());
+                mapController.view.updateDeployableUnits(mapController.deployableUnitsText, receivedPlayer.getUnits());
                 if (player.getId() == ((Player) message).getId()) {
                     player.setMyTurn(true);
                     mapController.view.myturn(mapController);

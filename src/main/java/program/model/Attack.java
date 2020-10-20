@@ -43,14 +43,16 @@ public class Attack implements IPhase, Serializable {
      * @param amount         Not used.
      */
     @Override
-    public void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
+    public boolean startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
         if (selectedSpace != null && selectedSpace2 != null) {
             if (isAttackPossible(selectedSpace.getUnits())) {
                 savePreAttackState(selectedSpace, selectedSpace2);
                 calculateAttack(selectedSpace, selectedSpace2);
                 updateCasualties(selectedSpace, selectedSpace2);
+                return true;
             }
         }
+        return false;
     }
 
     private void savePreAttackState(Space attacker, Space defender) {

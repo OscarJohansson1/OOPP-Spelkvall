@@ -69,7 +69,6 @@ public class ModelDataHandler {
     }
     public void initialize(Client client){
         this.client = client;
-
     }
 
     public List<Space> randomizeSpaces(int amountOfSpaces, List<Player> players) {
@@ -139,7 +138,7 @@ public class ModelDataHandler {
      * Method that resets the current selected spaces.
      */
     public void resetSelectedSpaces() throws IOException {
-        if(client.startedConnection){
+        if(client != null){
             sendObject("resetSelectedSpaces");
         }
         else {
@@ -156,7 +155,7 @@ public class ModelDataHandler {
      */
     public void nextPhase() throws IOException {
 
-        if (client.startedConnection) {
+        if (client != null) {
             sendObject("nextPhase");
         } else {
             round.nextPhase();
@@ -164,8 +163,9 @@ public class ModelDataHandler {
         resetSelectedSpaces();
         phaseCount++;
         if (phaseCount > 3) {
+            sendObject(new Player(currentPlayer));
             currentPlayer = nextPlayer(players, currentPlayer);
-            if (client.startedConnection) {
+            if (client != null) {
                 client.getPlayer().setMyTurn(currentPlayer.getId() == client.getPlayer().getId());
                 sendObject(new Player(currentPlayer));
             }
@@ -181,15 +181,19 @@ public class ModelDataHandler {
     public void firstRoundNextPhase() throws IOException {
 
         resetSelectedSpaces();
+        currentPlayer.setFirstDeployment();
+        sendObject(new Player(currentPlayer));
         currentPlayer = nextPlayer(players, currentPlayer);
-        if (client.startedConnection) {
+        if (client != null) {
             client.getPlayer().setMyTurn(currentPlayer.getId() == client.getPlayer().getId());
         }
-        sendObject(new Player(currentPlayer));
         roundCount++;
         if (roundCount > players.size()) {
             firstDeployment = false;
+            currentPlayer.setFirstDeployment();
         }
+        sendObject(roundCount);
+        sendObject(new Player(currentPlayer));
 
     }
 
@@ -221,11 +225,11 @@ public class ModelDataHandler {
     /**
      * @return Should return the calculated amount. Is hard coded right now and needs to be fixed
      */
-    public int calculateDeployableUnits() {
-        if (currentPlayer.getUnits() != 0) {
-            return currentPlayer.getUnits();
+    public int calculateDeployableUnits(Player player) {
+        if (player.getUnits() != 0) {
+            return player.getUnits();
         }
-        return board.getUnitsForSpacesHold(currentPlayer) + board.getUnitsFromAreas(currentPlayer);
+        return board.getUnitsForSpacesHold(player) + board.getUnitsFromAreas(player);
     }
 
     public List<String> attackResult() {
@@ -254,7 +258,7 @@ public class ModelDataHandler {
     }
 
     public void sendObject(Object message) throws IOException {
-        if (client.startedConnection) {
+        if (client != null) {
             client.sendObject(message);
         }
     }
@@ -306,6 +310,9 @@ public class ModelDataHandler {
 
     public String getCurrentPhase() {
         return round.getCurrentPhase();
+    }
+    public int getRoundCount(){
+        return roundCount;
     }
     public void setRoundCount(int roundCount){
         this.roundCount = roundCount;
@@ -364,7 +371,6 @@ public class ModelDataHandler {
         for (Player player : players) {
             player.setUnits(50 / players.size());
         }
-        roundCount = players.size();
     }
 
     public List<Player> getPlayers() {

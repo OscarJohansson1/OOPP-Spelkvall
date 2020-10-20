@@ -13,7 +13,7 @@ public interface IPhase {
      * @param player         The active player during the phase.
      * @param amount         The amount of units that should change, in some way, during the phase.
      */
-    void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount);
+    boolean startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount);
 
     /**
      * Method that returns the phase that follows this phase.

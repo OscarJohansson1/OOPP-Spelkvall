@@ -20,13 +20,15 @@ class Deployment implements IPhase, Serializable {
      * @param amount         The amount of units that should be added to the space.
      */
     @Override
-    public void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
+    public boolean startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
         if (selectedSpace != null) {
             if (selectedSpace.getPlayerId() == player.getId() && player.getUnits() >= amount) {
                 deployUnit(selectedSpace, amount);
                 player.setUnits(player.getUnits() - amount);
+                return true;
             }
         }
+        return false;
     }
 
     private void deployUnit(Space space, int unitsToDeploy) {

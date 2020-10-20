@@ -19,7 +19,7 @@ class Movement implements IPhase, Serializable {
      * @param amount         The amount of units to move from the first space, to the second.
      */
     @Override
-    public void startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
+    public boolean startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
         if (selectedSpace != null && selectedSpace2 != null) {
             int units1 = selectedSpace.getUnits();
             int units2 = selectedSpace2.getUnits();
@@ -28,7 +28,9 @@ class Movement implements IPhase, Serializable {
                 selectedSpace.updateSpace(selectedSpace.getPlayer(), units1 - amount);
                 selectedSpace2.updateSpace(selectedSpace.getPlayer(), units2 + amount);
             }
+            return true;
         }
+        return false;
     }
 
     /**

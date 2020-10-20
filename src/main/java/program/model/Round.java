@@ -40,8 +40,7 @@ public class Round {
      * @return True if phase can start as expected, else false.
      */
     boolean startPhase(Space selectedSpace, Space selectedSpace2, Player currentPlayer, int units) {
-        currentPhaseNew.startPhase(selectedSpace, selectedSpace2, currentPlayer, units);
-        return true;
+        return currentPhaseNew.startPhase(selectedSpace, selectedSpace2, currentPlayer, units);
     }
 
     List<Integer> attackerDiceResults() {
@@ -56,7 +55,7 @@ public class Round {
         return attack.attackResults();
     }
 
-    String getCurrentPhase() {
+    public String getCurrentPhase() {
         return currentPhaseNew.getPhaseName();
     }
 

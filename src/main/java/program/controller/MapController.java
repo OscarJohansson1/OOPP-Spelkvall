@@ -262,7 +262,7 @@ public class MapController extends AnchorPane {
             int var = i;
             allButtons.get(i).setOnMouseClicked(mouseEvent -> {
                 try {
-                    if (client != null) {
+                    if (client.startedConnection) {
                         if (client.getPlayer().getMyTurn()) {
                             setSpace(var);
                         }
@@ -331,7 +331,7 @@ public class MapController extends AnchorPane {
                     e.printStackTrace();
                 }
                 view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
-                modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits());
+                modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
                 view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
                 moveSlider.setMax(modelDataHandler.getDeployableUnits());
                 resetDisplayCubes();
@@ -442,7 +442,7 @@ public class MapController extends AnchorPane {
     }
 
     private void sendObject(Object object) throws IOException {
-        if (client != null) {
+        if (client.startedConnection) {
             client.sendObject(object);
         }
     }
