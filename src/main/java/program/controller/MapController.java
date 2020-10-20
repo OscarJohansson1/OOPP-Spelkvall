@@ -173,7 +173,7 @@ public class MapController extends AnchorPane {
     @FXML
     private Button firstMarked;
     @FXML
-    private Button secondMarked;
+    public Button secondMarked;
     @FXML
     public Button showCurrentPlayer;
 
@@ -213,7 +213,7 @@ public class MapController extends AnchorPane {
 
         pauseController = new PauseController(stage, this);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
-        //stage.setFullScreen(true);
+        stage.setFullScreen(true);
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {
@@ -236,6 +236,7 @@ public class MapController extends AnchorPane {
 
     public MapController(Stage stage) throws IOException {
         this.stage = stage;
+        Platform.runLater(() -> stage.setFullScreen(true));
         pauseController = new PauseController(stage, this);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("karta.fxml"));
         fxmlLoader.setRoot(this);
@@ -439,6 +440,7 @@ public class MapController extends AnchorPane {
             modelDataHandler.resetSelectedSpaces();
         }
         resetDisplayCubes();
+        resetColor();
     }
 
     private void sendObject(Object object) throws IOException {
@@ -533,11 +535,9 @@ public class MapController extends AnchorPane {
     private void setSpace(int id) throws IOException {
         if (modelDataHandler.receiveSelectedSpace(id)) {
             if (modelDataHandler.getSelectedSpace2() == null) {
-                resetDisplayCubes();
                 resetColor();
             } else {
                 resetColor(modelDataHandler.getSelectedSpace().getId());
-                resetDisplayCubes(secondMarked, secondDisplayText);
                 moveSlider.setMax(modelDataHandler.getUnitsOnSpace(modelDataHandler.getSelectedSpace().getId()) - 1);
                 moveSlider.setMin(0);
                 moveSlider.setDisable(false);
@@ -545,19 +545,12 @@ public class MapController extends AnchorPane {
             view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
             view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
             sendObject(new Space(modelDataHandler.getSpaceFromId(id)));
-
-            displayCubes(id);
-            if (firstDisplayText.getText().isEmpty()) {
-                displayText(firstDisplayText, getTextFromList(id));
-            } else if (secondDisplayText.getText().isEmpty()) {
-                displayText(secondDisplayText, getTextFromList(id));
+            if(client == null){
+                displayCubes(id);
             }
-
         } else {
             if (modelDataHandler.getSelectedSpace() == null && modelDataHandler.getSelectedSpace2() == null) {
-                resetDisplayCubes();
                 resetColor();
-
             }
         }
     }
@@ -577,11 +570,13 @@ public class MapController extends AnchorPane {
 
     void resetColor() throws IOException {
         view.resetColor(getColors(), allButtons);
+        resetDisplayCubes();
         sendObject("resetColor");
     }
 
     public void resetColorOnline() {
         view.resetColor(getColors(), allButtons);
+        resetDisplayCubes();
     }
 
     void resetColor(int id) {
@@ -603,16 +598,17 @@ public class MapController extends AnchorPane {
         return null;
     }
 
-    private void displayCubes(int id) {
+    public void displayCubes(int id) {
         if (firstMarked.getStyle().isEmpty()) {
             view.updateDisplayCubes(firstMarked, modelDataHandler.getColorOnSpace(id));
         } else {
             view.updateDisplayCubes(secondMarked, modelDataHandler.getColorOnSpace(id));
         }
-    }
-
-    private void resetDisplayCubes(Button button, Text text) {
-        view.resetDisplayCubes(button, text);
+        if (firstDisplayText.getText().isEmpty()) {
+            view.updateDisplayTexts(firstDisplayText, getTextFromList(id));
+        } else {
+            view.updateDisplayTexts(secondDisplayText, getTextFromList(id));
+        }
     }
 
     private void resetDisplayCubes() {
@@ -620,7 +616,7 @@ public class MapController extends AnchorPane {
         view.resetDisplayCubes(secondMarked, secondDisplayText);
     }
 
-    private void removeMarkedCube(Button button) {
+    public void removeMarkedCube(Button button) {
         if (button == firstMarked) {
             firstDisplayText.setVisible(false);
             firstMarked.setVisible(false);
@@ -631,7 +627,7 @@ public class MapController extends AnchorPane {
 
     }
 
-    private void addMarkedCube(Button button) {
+    public void addMarkedCube(Button button) {
         if (button == firstMarked) {
             firstDisplayText.setVisible(true);
             firstMarked.setVisible(true);
@@ -639,10 +635,6 @@ public class MapController extends AnchorPane {
             secondDisplayText.setVisible(true);
             secondMarked.setVisible(true);
         }
-    }
-
-    private void displayText(Text displayText, Text cubeText) {
-        view.updateDisplayTexts(displayText, cubeText);
     }
 
     private Text getTextFromList(int id) {

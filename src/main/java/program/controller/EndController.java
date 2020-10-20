@@ -90,7 +90,6 @@ public class EndController extends AnchorPane {
      */
     @FXML
     public void quitGameButtonPressed() {
-        Platform.exit();
         System.exit(0);
     }
 

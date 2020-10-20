@@ -92,6 +92,12 @@ public class Client {
                 } else if (message.equals("nextPhase")) {
                     modelDataHandler.round.nextPhase();
                     mapController.view.updatePhase(modelDataHandler.getCurrentPhase(),mapController);
+                    if(!modelDataHandler.getCurrentPhase().equals("DEPLOY")){
+                        mapController.addMarkedCube(mapController.secondMarked);
+                    }
+                    else {
+                        mapController.removeMarkedCube(mapController.secondMarked);
+                    }
                 } else if (message.equals("removeAttackView")) {
                     mapController.removeOnlineAttackView();
                 } else if (message.equals("resetSelectedSpaces")) {
@@ -134,6 +140,8 @@ public class Client {
                 modelDataHandler.receiveOnlineSelectedSpace(space);
                 mapController.view.updateTextUnits(space.getId(), space.getUnits(), mapController.allButtons, mapController);
                 mapController.view.setColor(mapController.getCube(space.getId()), Color.web(modelDataHandler.getColorOnSpace(space.getId())).darker().darker(), mapController.allButtons);
+                mapController.displayCubes(space.getId());
+
 
             } else if (message instanceof Player) {
                 Player receivedPlayer = (Player) message;
