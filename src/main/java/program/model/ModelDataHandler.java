@@ -65,7 +65,7 @@ public class ModelDataHandler {
             players.add(new Player((50 / colors.size()), i, colors.get(i), logoNames.get(i), i + ""));
         }
         currentPlayer = getRandomPlayer(null, players);
-        board = new Board(randomizeSpaces(amountOfSpaces, players));
+        board = new Board(new ChalmersBoard(randomizeSpaces(amountOfSpaces, players)));
     }
     public void initialize(Client client){
         this.client = client;

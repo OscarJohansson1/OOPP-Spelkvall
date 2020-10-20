@@ -42,14 +42,14 @@ public class TestWin {
 
     @Test
     public void testWin() {
-        Board board = new Board(spaces);
+        Board board = new Board(new ChalmersBoard(spaces));
 
         assertTrue(board.isWinner());
     }
 
     @Test
     public void testRemovePlayer() {
-        Board board = new Board(spaces);
+        Board board = new Board(new ChalmersBoard(spaces));
 
         assertTrue(board.isPlayerOut(player2));
 

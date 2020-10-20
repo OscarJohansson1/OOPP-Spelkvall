@@ -2,7 +2,6 @@ package program.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,98 +9,19 @@ import java.util.List;
  */
 public class Board implements Serializable {
 
-    private final List<Space> spaces;
-    private List<Area> areas;
+    private IBoard board;
 
     private Space selectedSpace;
     private Space selectedSpace2;
 
     /**
-     * Indexes in the neighbours-matrix represent the following spaces:
-     * 0 Hubben
-     * 1 Basen
-     * 2 Kajsabaren
-     * 3 Zaloonen
-     * 4 Winden
-     * 5 LofTDet
-     * 6 Röda Rummet
-     * 7 Verum
-     * 8 Villan
-     * 9 A-dammen
-     * 10 Focus
-     * 11 Fort NOx
-     * 12 GT Spritis
-     * 13 Golden I
-     * 14 Chabo
-     * 15 Wijkanders
-     * 16 Hyddan
-     * 17 11:an
-     * 18 Spektrum
-     * 19 Gasquen
-     * 20 Chalmersplatsen
-     * 21 Olgas
-     * 22 RunAn
-     * 23 Tågvagnen
-     * 24 Origogården
-     * 25 Kalle Glader
-     * 26 Tvärgatan
+     * The constructor.
+     *
+     * @param board Takes in a board
      */
-    private final int[][] neighbours = {
-            {0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0},
-    };
+    public Board(IBoard board) {
+        this.board = board;
 
-    public Board(List<Space> spaces) {
-        this.spaces = spaces;
-        createAreas();
-    }
-
-    /**
-     * Hardcoded as of now
-     */
-    private void createAreas() {
-
-        Area karhuset = new Area("Kårhuset", 7,
-                Arrays.asList(spaces.get(19), spaces.get(20), spaces.get(21), spaces.get(22), spaces.get(23)));
-        Area maskinhuset = new Area("Maskinhuset", 5,
-                Arrays.asList(spaces.get(3), spaces.get(4), spaces.get(5), spaces.get(26)));
-        Area edit = new Area("EDIT", 3,
-                Arrays.asList(spaces.get(0), spaces.get(1), spaces.get(2)));
-        Area vasa = new Area("Vasa", 5,
-                Arrays.asList(spaces.get(13), spaces.get(14), spaces.get(15), spaces.get(25)));
-        Area lindholmen = new Area("Lindholmen", 3,
-                Arrays.asList(spaces.get(16), spaces.get(17), spaces.get(18)));
-        Area kemigarden = new Area("Kemigården", 5,
-                Arrays.asList(spaces.get(10), spaces.get(11), spaces.get(12), spaces.get(24)));
-        Area sb = new Area("SB", 5,
-                Arrays.asList(spaces.get(6), spaces.get(7), spaces.get(8), spaces.get(9)));
-
-        areas = Arrays.asList(karhuset, maskinhuset, edit, vasa, lindholmen, kemigarden, sb);
     }
 
     /**
@@ -113,7 +33,7 @@ public class Board implements Serializable {
      */
     int getUnitsFromAreas(Player player) {
         int count = 0;
-        for (Area area : areas) {
+        for (Area area : board.getAreas()) {
             if (area.checkArea(player)) {
                 count += area.getWorth();
             }
@@ -130,7 +50,7 @@ public class Board implements Serializable {
      */
     int getUnitsForSpacesHold(Player player) {
         int count = 0;
-        for (Space space : spaces) {
+        for (Space space : board.getSpaces()) {
             if (space.getPlayerId() == player.getId()) {
                 count++;
             }
@@ -144,8 +64,8 @@ public class Board implements Serializable {
      * @return If a player has won the game.
      */
     boolean isWinner() {
-        Player winner = spaces.get(0).getPlayer();
-        for (Space space : spaces) {
+        Player winner = board.getSpaces().get(0).getPlayer();
+        for (Space space : board.getSpaces()) {
             if (!(space.getPlayerId() == winner.getId())) {
                 return false;
             }
@@ -160,7 +80,7 @@ public class Board implements Serializable {
      * @return If the player have lost the game or not.
      */
     boolean isPlayerOut(Player player) {
-        for (Space space : spaces) {
+        for (Space space : board.getSpaces()) {
             if (space.getPlayerId() == player.getId()) {
                 return false;
             }
@@ -176,33 +96,19 @@ public class Board implements Serializable {
      */
     boolean isNeighbours(Space space) {
         if (selectedSpace != null) {
-            return neighbours[selectedSpace.getId()][space.getId()] == 1;
+            return board.isNeighbours(selectedSpace.getId(), space.getId());
         }
         return false;
     }
 
     /**
-     * Get amount of neighbours of a space. Mainly used for tests.
-     *
-     * @param id Which space to get amount of neighbours from.
-     * @return Amount of neighbours
-     */
-    int getNumberOfNeighbours(int id) {
-        int count = 0;
-        for (int i = 0; i < neighbours[id].length; i++) {
-            count += neighbours[id][i];
-        }
-        return count;
-    }
-
-    /**
      * Method that finds a space on the board based on id.
      *
-     * @param id id-number of the space
+     * @param id Id-number of the space
      * @return The space if id exists, else null
      */
     Space findSpace(int id) {
-        for (Space space : spaces) {
+        for (Space space : board.getSpaces()) {
             if (space.getId() == id) {
                 return space;
             }
@@ -221,19 +127,18 @@ public class Board implements Serializable {
     /**
      * Method that initialises all the colors on the spaces that the board starts with
      *
-     * @return It then returns the colors
+     * @return It then returns the hex-codes of the colors
      */
     List<String> getColorOnAllSpaces() {
         List<String> colors = new ArrayList<>();
-        for (Space space : spaces) {
+        for (Space space : board.getSpaces()) {
             colors.add(space.getPlayer().getColor());
         }
         return colors;
     }
 
-    //TODO Change later to new Space(...)
     Space getSpace(int id) {
-        return spaces.get(id);
+        return board.getSpaces().get(id);
     }
 
     void setSelectedSpace(Space space) {
@@ -252,14 +157,7 @@ public class Board implements Serializable {
         return selectedSpace2;
     }
 
-    private Space getCopyOfSpace(Space space) {
-        if (space != null) {
-            return new Space(space);
-        }
-        return null;
-    }
-
     public List<Space> getSpaces() {
-        return spaces;
+        return board.getSpaces();
     }
 }

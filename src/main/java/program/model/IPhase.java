@@ -3,7 +3,7 @@ package program.model;
 /**
  * An interface that describes the overall structure of a phase.
  */
-public interface IPhase {
+interface IPhase {
 
     /**
      * The primary method that holds the logic of what happens during a phase.
