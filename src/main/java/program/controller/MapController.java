@@ -254,7 +254,6 @@ public class MapController extends AnchorPane {
                 textRodaRummet, textVerum, textVillan, textAdammen, textFocus, textFortNox, textGTSpritis, textGoldenI, textChabo, textWijkanders, textHrum,
                 textAlvan, textSpektrum, textGasquen, textChalmersplatsen, textOlgas, textRunAn, textTagvagnen, textOrigogarden, textKalleGlader, textTvargatan));
         modelDataHandler = ModelDataHandler.getModelDataHandler();
-        modelDataHandler.initialize(client);
         initialize();
     }
 

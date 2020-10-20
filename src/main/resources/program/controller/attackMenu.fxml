@@ -14,7 +14,7 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="75.0">
          <children>
-            <ImageView fx:id="attackBackgruondImage" fitHeight="930.0" fitWidth="1658.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-38.0" AnchorPane.topAnchor="0.0">
+            <ImageView fx:id="attackBackgroundImage" fitHeight="930.0" fitWidth="1658.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-38.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../pictures/soldiers-French-front-line-Battle-of-Verdun-1916.jpg" />
                </image>

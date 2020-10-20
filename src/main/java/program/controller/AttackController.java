@@ -7,8 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import program.client.Client;
-import program.model.Attack;
 import program.model.ModelDataHandler;
+import program.model.Attack;
 import program.view.AttackView;
 
 

@@ -15,7 +15,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Client {
+public class Client implements IObserver {
     private LinkedBlockingQueue<Object> messages;
     private ConnectionToServer server;
     private StartController startController;
@@ -44,6 +44,7 @@ public class Client {
         System.out.println("Connecting to 95.80.61.51, Port: 6666");
         startedConnection = true;
         modelDataHandler = ModelDataHandler.getModelDataHandler();
+        modelDataHandler.addObserver(this);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 stopConnection();
@@ -195,6 +196,7 @@ public class Client {
         }
     }
 
+    @Override
     public void sendObject(Object object) throws IOException {
         server.outObject.writeObject(object);
     }

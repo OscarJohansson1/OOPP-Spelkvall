@@ -1,9 +1,5 @@
 package program.model;
 
-
-
-import program.client.Client;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +9,9 @@ import java.util.Random;
 /**
  * This class controls everything at the moment. //TODO Make the class smaller
  */
-public class ModelDataHandler {
+public class ModelDataHandler implements IObservable {
 
+    private List<IObserver> observers = new ArrayList<>();
 
     private List<Player> players = new ArrayList<>();
     private Player currentPlayer;
@@ -24,7 +21,6 @@ public class ModelDataHandler {
     private Board board;
     private int unitsToUse = 1;
     public boolean firstDeployment = true;
-    private Client client;
 
     public List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
             "RödaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hrum",
@@ -34,6 +30,18 @@ public class ModelDataHandler {
      * Overrides the default constructor to prevent other classes from creating new ModelDataHandlers.
      */
     private ModelDataHandler() {
+    }
+
+    @Override
+    public void addObserver(IObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notifyObservers(Object object) throws IOException {
+        for(IObserver observer : observers) {
+            observer.sendObject(object);
+        }
     }
 
     /**
@@ -66,9 +74,6 @@ public class ModelDataHandler {
         }
         currentPlayer = getRandomPlayer(null, players);
         board = new Board(new ChalmersBoard(randomizeSpaces(amountOfSpaces, players)));
-    }
-    public void initialize(Client client){
-        this.client = client;
     }
 
     public List<Space> randomizeSpaces(int amountOfSpaces, List<Player> players) {
@@ -138,12 +143,8 @@ public class ModelDataHandler {
      * Method that resets the current selected spaces.
      */
     public void resetSelectedSpaces() throws IOException {
-        if(client != null){
-            sendObject("resetSelectedSpaces");
-        }
-        else {
-            resetSpaces();
-        }
+        notifyObservers("resetSelectedSpaces");
+        resetSpaces();
     }
     public void resetSpaces(){
         board.resetSpaces();
@@ -155,20 +156,16 @@ public class ModelDataHandler {
      */
     public void nextPhase() throws IOException {
 
-        if (client != null) {
-            sendObject("nextPhase");
+        if (observers.size() != 0) {
+            notifyObservers("nextPhase");
         } else {
             round.nextPhase();
         }
         resetSelectedSpaces();
         phaseCount++;
         if (phaseCount > 3) {
-            sendObject(new Player(currentPlayer));
+            notifyObservers(new Player(currentPlayer));
             currentPlayer = nextPlayer(players, currentPlayer);
-            if (client != null) {
-                client.getPlayer().setMyTurn(currentPlayer.getId() == client.getPlayer().getId());
-                sendObject(new Player(currentPlayer));
-            }
             phaseCount = 1;
         }
     }
@@ -182,18 +179,15 @@ public class ModelDataHandler {
 
         resetSelectedSpaces();
         currentPlayer.setFirstDeployment();
-        sendObject(new Player(currentPlayer));
+        notifyObservers(new Player(currentPlayer));
         currentPlayer = nextPlayer(players, currentPlayer);
-        if (client != null) {
-            client.getPlayer().setMyTurn(currentPlayer.getId() == client.getPlayer().getId());
-        }
         roundCount++;
         if (roundCount > players.size()) {
             firstDeployment = false;
             currentPlayer.setFirstDeployment();
         }
-        sendObject(roundCount);
-        sendObject(new Player(currentPlayer));
+        notifyObservers(roundCount);
+        notifyObservers(new Player(currentPlayer));
 
     }
 
@@ -255,12 +249,6 @@ public class ModelDataHandler {
      */
     public boolean isAttackDone() {
         return !round.isNextAttackPossible();
-    }
-
-    public void sendObject(Object message) throws IOException {
-        if (client != null) {
-            client.sendObject(message);
-        }
     }
 
     public void setSliderAmount(int unitsToUse) {

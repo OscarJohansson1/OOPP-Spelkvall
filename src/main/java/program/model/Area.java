@@ -37,4 +37,8 @@ class Area implements Serializable {
         return worth;
     }
 
+    String getName() {
+        return name;
+    }
+
 }
