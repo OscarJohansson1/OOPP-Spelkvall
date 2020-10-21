@@ -81,6 +81,7 @@ public class EchoMultiServer {
                         strings.add(menuLobby.getLobbyCapacity());
                         strings.add(menuLobby.getPlayers());
                         outObject.writeObject(strings);
+                        this.menuLobby = null;
                     }
 
                 } else if (inputLine.equals("LOBBYLEADER")) {

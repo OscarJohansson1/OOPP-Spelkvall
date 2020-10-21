@@ -26,10 +26,15 @@ public abstract class Lobby {
     }
 
     public boolean checkIfAllPlayersReady() {
-        for (Player player : players) {
-            if (!player.isReady()) {
-                return false;
+        if(players.size() > 1){
+            for (Player player : players) {
+                if (!player.isReady()) {
+                    return false;
+                }
             }
+        }
+        else {
+            return false;
         }
         return true;
     }

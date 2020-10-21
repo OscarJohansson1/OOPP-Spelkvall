@@ -105,7 +105,6 @@ public class MapView extends AnchorPane {
             button.setStyle(null);
             text.setText("");
         });
-
     }
 
     /**
