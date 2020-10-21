@@ -14,8 +14,8 @@
          <children>
             <AnchorPane prefHeight="880.0" prefWidth="1520.0" style="-fx-background-color: #FFFFFF;" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="100.0">
                <children>
-                  <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="200.0" styleClass="standard-button" text="Back to menu" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
-                  <Button layoutX="1229.0" layoutY="697.0" mnemonicParsing="false" onAction="#joinLobby" prefHeight="80.0" prefWidth="200.0" styleClass="standard-button" text="Join lobby" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+                  <Button fx:id="backToMenuButton" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#toMenu" prefHeight="80.0" prefWidth="200.0" styleClass="standard-button" text="Back to menu" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
+                  <Button fx:id="joinLobbyButton" layoutX="1229.0" layoutY="697.0" mnemonicParsing="false" onAction="#joinLobby" prefHeight="80.0" prefWidth="200.0" styleClass="standard-button" text="Join lobby" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0" />
                   <Pane layoutX="983.0" layoutY="141.0" prefHeight="317.0" prefWidth="530.0" style="-fx-border-color: black;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="140.0">
                      <children>
                         <Label fx:id="lblDetails" layoutX="14.0" layoutY="14.0" text="Lobby details:">

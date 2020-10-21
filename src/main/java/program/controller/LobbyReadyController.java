@@ -52,7 +52,15 @@ public class LobbyReadyController extends AnchorPane {
         initialize();
 
     }
-
+/*
+    void checkReadyStyle(){
+        if(startController.clientController.user.isReady()) {
+            readyButton.getStyleClass().add("readyButton-check");
+        }else{
+            readyButton.getStyleClass().remove("readyButton-check");
+        }
+    }
+*/
     public void initialize() {
         userFlow.setVgap(10);
         userFlow.setHgap(52);

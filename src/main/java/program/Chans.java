@@ -12,6 +12,7 @@ import program.controller.StartController;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.SocketException;
 
 public class Chans extends Application {
     @Override
@@ -35,6 +36,16 @@ public class Chans extends Application {
         stage.setTitle("Menu");
         stage.setScene(menu);
         stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                System.out.println("Stage is closing");
+                Platform.exit();
+                System.exit(0);
+
+
+            }
+        });
+
     }
 
     public static void main(String[] args) {

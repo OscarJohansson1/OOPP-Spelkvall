@@ -45,6 +45,14 @@
 
 }
 
+.text-shadow-attack{
+
+    -fx-effect: dropshadow(gaussian, #AAAAAA, 3, 10, 0, 0);
+    -fx-font-weight: bolder;
+    -fx-font-size: 48px;
+
+}
+
 .card{
     -fx-effect: dropshadow(gaussian, #999999, 10, 0.1, 3, 6);
     -fx-background-color: #FFFFFF;
@@ -74,4 +82,9 @@
     -fx-font-weight: bold;
     -fx-font-size: 32px;
 
+}
+
+.readyButton-check{
+    -fx-background-color: #66DD2A;
+    -fx-text-fill: #FFFFFF;
 }

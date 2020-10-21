@@ -263,14 +263,14 @@
                         <Button fx:id="donedeploy" layoutX="139.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Done" AnchorPane.rightAnchor="0.0" />
                     </children>
                 </AnchorPane>
-                <Pane fx:id="sliderPane" layoutX="510.0" layoutY="-3.0" prefHeight="70.0" prefWidth="250.0">
+                <Pane fx:id="sliderPane" layoutX="510.0" layoutY="-3.0" prefHeight="82.0" prefWidth="250.0">
                     <children>
                         <Button fx:id="secondMarked" layoutX="200.0" layoutY="18.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
                         <Button fx:id="firstMarked" layoutY="20.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
                         <Text fx:id="firstDisplayText" layoutX="12.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                         <Slider fx:id="moveSlider" layoutX="55.0" layoutY="29.0" max="25.0" min="1.0" showTickLabels="true" showTickMarks="true" />
                         <Text fx:id="secondDisplayText" layoutX="212.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                        <Text fx:id="showMoveUnitsText" layoutX="122.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                        <Text fx:id="showMoveUnitsText" layoutX="122.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                     </children>
                 </Pane>
             </children>

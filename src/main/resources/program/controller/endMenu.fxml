@@ -27,17 +27,12 @@
       </HBox>
       <Pane fx:id="buttonPane" layoutX="165.0" layoutY="489.0" prefHeight="340.0" prefWidth="1520.0" AnchorPane.topAnchor="520.0">
          <children>
-            <Button fx:id="newGameButton" layoutX="310.0" mnemonicParsing="false" onMouseClicked="#newGameButtonPressed" prefHeight="100.0" prefWidth="900.0" text="Start new game">
+            <Button fx:id="toMenuButton" layoutX="310.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#toMenuButtonPressed" prefHeight="100.0" prefWidth="900.0" text="Quit to menu">
                <font>
                   <Font size="37.0" />
                </font>
             </Button>
-            <Button fx:id="toMenuButton" layoutX="310.0" layoutY="120.0" mnemonicParsing="false" onMouseClicked="#toMenuButtonPressed" prefHeight="100.0" prefWidth="900.0" text="Quit to menu">
-               <font>
-                  <Font size="37.0" />
-               </font>
-            </Button>
-            <Button fx:id="quitGameButton" layoutX="310.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#quitGameButtonPressed" prefHeight="100.0" prefWidth="900.0" text="Quit game">
+            <Button fx:id="quitGameButton" layoutX="310.0" layoutY="143.0" mnemonicParsing="false" onMouseClicked="#quitGameButtonPressed" prefHeight="100.0" prefWidth="900.0" text="Quit game">
                <font>
                   <Font size="37.0" />
                </font>

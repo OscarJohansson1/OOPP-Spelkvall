@@ -3,6 +3,7 @@ package program.controller;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
@@ -12,8 +13,10 @@ import java.util.List;
 
 public class LobbySelectController extends AnchorPane {
 
-    @FXML
-    public FlowPane lobbyFlow;
+    @FXML public FlowPane lobbyFlow;
+    @FXML public Button backToMenuButton;
+    @FXML public Button joinLobbyButton;
+
 
     public List<LobbyItem> lobbyItems = new ArrayList<>();
 
@@ -48,6 +51,9 @@ public class LobbySelectController extends AnchorPane {
     }
 
     public void updateLobbies() {
-        Platform.runLater(() -> lobbyFlow.getChildren().addAll(lobbyItems));
+        Platform.runLater(() -> {
+            lobbyFlow.getChildren().addAll(lobbyItems);
+            });
+
     }
 }

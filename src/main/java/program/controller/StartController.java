@@ -107,6 +107,10 @@ public class StartController extends AnchorPane implements IObservable {
     }
 
     public void goToLobbySelect() throws IOException {
+        lobbySelectController.lobbyItems = new ArrayList<>();
+        lobbySelectController.lobbyFlow.getChildren().removeAll(lobbySelectController.lobbyItems);
+        System.out.println(lobbySelectController.lobbyItems);
+        notifyObservers("startConnection");
         Client.getClient().startConnection("95.80.61.51", 6666, this);
         notifyObservers("LOBBYS");
         if (observers.size() != 0) {
@@ -147,6 +151,19 @@ public class StartController extends AnchorPane implements IObservable {
     public void backToMainMenu() {
         rootpane.getChildren().remove(lobbySelectController);
     }
+
+    public void backToLobbySelect(){
+
+
+
+    }
+
+    public void backToSetupOnline(){
+
+
+
+    }
+
 
     public void toLobbySelect() {
         rootpane.getChildren().remove(multiplayerLogoController);

@@ -65,7 +65,7 @@ public class EndController extends AnchorPane {
      */
     private void initialize() {
         if (modelDataHandler.isWinner()) {
-            winnerLabel.setText("Congratulations to the winner");
+            winnerLabel.setText("Congratulations to " + modelDataHandler.getCurrentPlayerName());
             winnerImageView.setImage(new Image(modelDataHandler.getWinnerLogo()));
         } else {
             winnerLabel.setText("No winner this time");

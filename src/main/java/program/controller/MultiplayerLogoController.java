@@ -2,6 +2,7 @@ package program.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
@@ -17,45 +18,29 @@ import java.util.List;
 
 public class MultiplayerLogoController extends AnchorPane {
 
-    @FXML
-    private ImageView logoImage;
-    @FXML
-    private TextField playerNameTextField;
-    @FXML
-    private GridPane gridPane;
+    @FXML private ImageView logoImage;
+    @FXML private TextField playerNameTextField;
+    @FXML private GridPane gridPane;
 
-    @FXML
-    private ImageView recA;
-    @FXML
-    private ImageView recAE;
-    @FXML
-    private ImageView recD;
-    @FXML
-    private ImageView recE;
-    @FXML
-    private ImageView recF;
-    @FXML
-    private ImageView recH;
-    @FXML
-    private ImageView recI;
-    @FXML
-    private ImageView recIT;
-    @FXML
-    private ImageView recK;
-    @FXML
-    private ImageView recKfKb;
-    @FXML
-    private ImageView recM;
-    @FXML
-    private ImageView recSjo;
-    @FXML
-    private ImageView recTB;
-    @FXML
-    private ImageView recTD;
-    @FXML
-    private ImageView recV;
-    @FXML
-    private ImageView recZ;
+    @FXML private Button backToLobbySelectButton;
+    @FXML private Button chooseButton;
+
+    @FXML private ImageView recA;
+    @FXML private ImageView recAE;
+    @FXML private ImageView recD;
+    @FXML private ImageView recE;
+    @FXML private ImageView recF;
+    @FXML private ImageView recH;
+    @FXML private ImageView recI;
+    @FXML private ImageView recIT;
+    @FXML private ImageView recK;
+    @FXML private ImageView recKfKb;
+    @FXML private ImageView recM;
+    @FXML private ImageView recSjo;
+    @FXML private ImageView recTB;
+    @FXML private ImageView recTD;
+    @FXML private ImageView recV;
+    @FXML private ImageView recZ;
 
     private ArrayList<ImageView> divisionList;
     private final Client client = Client.getClient();
@@ -105,12 +90,11 @@ public class MultiplayerLogoController extends AnchorPane {
         }
     }
 
-    @FXML
-    public void backToLobbyList() {
+    public void backToLobbySelect() throws IOException {
         startController.removeSetUp();
+        startController.goToLobbySelect();
     }
 
-    @FXML
     public void choose() throws IOException {
 
         if (!(playerNameTextField.getText().trim().isEmpty())) {
@@ -125,7 +109,6 @@ public class MultiplayerLogoController extends AnchorPane {
 
     }
 
-    @FXML
     public void toLobbySelect() {
         startController.toLobbySelect();
     }
