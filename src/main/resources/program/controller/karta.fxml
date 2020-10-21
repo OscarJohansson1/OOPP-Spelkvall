@@ -244,7 +244,7 @@
                         <Font size="24.0" />
                     </font>
                 </Text>
-                <Button fx:id="showCurrentPlayer" layoutX="245.0" layoutY="5.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="44.0" />
+                <Button fx:id="showCurrentPlayer" layoutX="244.0" layoutY="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="current-player-button" text="fhem" textAlignment="CENTER" />
                 <AnchorPane fx:id="movePhase" layoutX="510.0" prefHeight="200.0" prefWidth="250.0">
                     <children>
                         <Button fx:id="moveButton" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Move" />
@@ -267,9 +267,9 @@
                     <children>
                         <Button fx:id="secondMarked" layoutX="200.0" layoutY="18.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
                         <Button fx:id="firstMarked" layoutY="20.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
-                        <Text fx:id="firstDisplayText" layoutX="12.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="firstDisplayText" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="50.0" />
                         <Slider fx:id="moveSlider" layoutX="55.0" layoutY="29.0" max="25.0" min="1.0" showTickLabels="true" showTickMarks="true" />
-                        <Text fx:id="secondDisplayText" layoutX="212.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="secondDisplayText" layoutX="203.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="44.0" />
                         <Text fx:id="showMoveUnitsText" layoutX="122.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                     </children>
                 </Pane>

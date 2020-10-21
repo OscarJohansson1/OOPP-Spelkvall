@@ -95,3 +95,14 @@
     -fx-background-color: #66DD2A;
     -fx-text-fill: #FFFFFF;
 }
+
+.current-player-button{
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    /*
+    -fx-border-width: 1;
+    -fx-border-color: #000000;
+    */
+
+
+}
