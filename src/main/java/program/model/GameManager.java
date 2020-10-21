@@ -345,7 +345,7 @@ public class GameManager implements IObservable {
         return currentPlayer;
     }
 
-    public Attack getAttack() {
+    public AttackPhase getAttack() {
         return round.getAttack();
     }
 

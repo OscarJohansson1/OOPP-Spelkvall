@@ -417,7 +417,7 @@ public class MapController extends AnchorPane implements IObservable {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
             changeToAttackView();
-            notifyObservers(new Attack(GameManager.getModelDataHandler().round.getAttack()));
+            notifyObservers(new AttackPhase(GameManager.getModelDataHandler().round.getAttack()));
             notifyObservers(new Space(GameManager.getModelDataHandler().getSelectedSpace()));
             notifyObservers(new Space(GameManager.getModelDataHandler().getSelectedSpace2()));
 

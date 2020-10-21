@@ -8,7 +8,7 @@ import java.util.List;
  * This class makes it possible for the current player to attack another players space. It then calculates the results of the attack
  * and if all units on the other players space dies then it moves all units except one.
  */
-public class Attack implements IPhase, Serializable {
+public class AttackPhase implements IPhase, Serializable {
 
     private IPhase nextPhase;
 
@@ -21,11 +21,11 @@ public class Attack implements IPhase, Serializable {
     public boolean nextAttackPossible = true;
 
 
-    public Attack() {
+    public AttackPhase() {
 
     }
 
-    public Attack(Attack attack) {
+    public AttackPhase(AttackPhase attack) {
         nextPhase = attack.nextPhase;
         attackerDice = attack.attackerDice;
         defenderDice = attack.defenderDice;

@@ -1,15 +1,11 @@
 package program.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.junit.Before;
-import org.junit.Test;
 
 public class TestDeployment {
 
-    Deployment deployment = new Deployment();
+    DeployPhase deployment = new DeployPhase();
 
     Rectangle rec1;
     Rectangle rec2;

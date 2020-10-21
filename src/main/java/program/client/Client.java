@@ -201,12 +201,12 @@ public class Client implements IObserver {
                     modelDataHandler.getCurrentPlayer().setMyTurn(false);
                 }
 
-            } else if (message instanceof Attack) {
+            } else if (message instanceof AttackPhase) {
                 mapController.changeToAttackView();
                 if (mapController.attackController.attackView.observers.size() == 0) {
                     mapController.attackController.attackView.addObserver(this);
                 }
-                mapController.attackController.attack((Attack) message);
+                mapController.attackController.attack((AttackPhase) message);
                 if (player.getId() != modelDataHandler.getCurrentPlayer().getId()) {
                     mapController.removeAbortAndAttack();
                 }

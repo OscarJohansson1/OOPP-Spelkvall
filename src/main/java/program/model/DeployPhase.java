@@ -6,7 +6,7 @@ import java.io.Serializable;
  * This class makes it possible for the current player to deploy units in the marked space IF the marked space is owned
  * by the current player and that player has any units left to deploy.
  */
-class Deployment implements IPhase, Serializable {
+class DeployPhase implements IPhase, Serializable {
 
     private IPhase nextPhase;
 

@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import program.model.GameManager;
-import program.model.Attack;
+import program.model.AttackPhase;
 import program.view.AttackView;
 
 
@@ -82,7 +82,7 @@ public class AttackController extends AnchorPane {
         attackView.updatePicture(modelDataHandler.getSelectedSpace2(), attackBackgroundImage);
     }
 
-    public void attack(Attack attack) {
+    public void attack(AttackPhase attack) {
         attackView.updateDice(attack);
         attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton, attack);
         attackView.updatePicture(modelDataHandler.getSelectedSpace2(), attackBackgroundImage);

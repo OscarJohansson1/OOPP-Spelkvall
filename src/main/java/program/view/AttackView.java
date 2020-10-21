@@ -43,12 +43,12 @@ public class AttackView extends AnchorPane implements IObservable {
         List<Integer> whiteDices = model.getAttackerDiceResults();
         List<Integer> blackDices = model.getDefenderDiceResults();
         updateDie(whiteDices, blackDices);
-        notifyObservers(new Attack(GameManager.getModelDataHandler().round.getAttack()));
+        notifyObservers(new AttackPhase(GameManager.getModelDataHandler().round.getAttack()));
         notifyObservers(new Space(GameManager.getModelDataHandler().getSelectedSpace()));
         notifyObservers(new Space(GameManager.getModelDataHandler().getSelectedSpace2()));
     }
 
-    public void updateDice(Attack attack) {
+    public void updateDice(AttackPhase attack) {
         List<Integer> whiteDices = attack.attackerDiceResults();
         List<Integer> blackDices = attack.defenderDiceResults();
         updateDie(whiteDices, blackDices);
@@ -78,7 +78,7 @@ public class AttackView extends AnchorPane implements IObservable {
         }
     }
 
-    public void updateText(Text attackerText, Text defenderText, Text attackerUnits, Text defenderUnits, Button attackButton, Button abortButton, Attack attack) {
+    public void updateText(Text attackerText, Text defenderText, Text attackerUnits, Text defenderUnits, Button attackButton, Button abortButton, AttackPhase attack) {
         updateText(attackerText, model.getSelectedSpaceName(1) + attack.attackResults().get(0));
         updateText(defenderText, model.getSelectedSpaceName(2) + attack.attackResults().get(1));
         updateText(attackerUnits, model.getSelectedSpaceName(1) + " units: " + model.getSelectedSpaceUnits(1));
