@@ -13,7 +13,7 @@ public class ModelDataHandler implements IObservable {
 
     private final List<IObserver> observers = new ArrayList<>();
 
-    private List<Player> players = new ArrayList<>();
+    private List<Player> players;
     private Player currentPlayer;
     private int roundCount = 1;
     private int phaseCount = 1;
@@ -30,18 +30,6 @@ public class ModelDataHandler implements IObservable {
      * Overrides the default constructor to prevent other classes from creating new ModelDataHandlers.
      */
     private ModelDataHandler() {
-    }
-
-    @Override
-    public void addObserver(IObserver observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void notifyObservers(Object object) throws IOException {
-        for(IObserver observer : observers) {
-            observer.sendObject(object);
-        }
     }
 
     /**
@@ -69,6 +57,7 @@ public class ModelDataHandler implements IObservable {
      * @param logoNames      A list of Strings with the logotypes that should represent each player.
      */
     public void initialize(int amountOfSpaces, List<String> colors, List<String> logoNames) {
+        players = new ArrayList<>();
         for (int i = 0; i < colors.size(); i++) {
             players.add(new Player((50 / colors.size()), i, colors.get(i), logoNames.get(i), i + ""));
         }
@@ -104,6 +93,18 @@ public class ModelDataHandler implements IObservable {
             } else if (!lastPickedPlayers.contains(player)) {
                 return player;
             }
+        }
+    }
+
+    @Override
+    public void addObserver(IObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notifyObservers(Object object) throws IOException {
+        for(IObserver observer : observers) {
+            observer.sendObject(object);
         }
     }
 
@@ -237,7 +238,6 @@ public class ModelDataHandler implements IObservable {
         return board.isWinner();
     }
 
-    //TODO Can this be optimized?
     public void removePlayersWithoutSpaces() {
         players.removeIf(player -> board.isPlayerOut(player));
     }
@@ -352,6 +352,10 @@ public class ModelDataHandler implements IObservable {
         return currentPlayer;
     }
 
+    public Attack getAttack() {
+        return round.getAttack();
+    }
+
     public void setBoard(Board board) {
         this.board = board;
     }
@@ -377,4 +381,3 @@ public class ModelDataHandler implements IObservable {
     }
 
 }
-
