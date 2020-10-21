@@ -115,7 +115,7 @@ public class GameManager implements IObservable {
      * @param id The id of the space to add as a selectedSpace
      * @return True if a the space was added to a selectedSpace, false if unsuccessful
      */
-    public boolean receiveSelectedSpace(int id) {
+    public boolean setSelectedSpace(int id) {
         if (board.findSpace(id).getPlayerId() == currentPlayer.getId() && (board.getSelectedSpace() == null || round.getCurrentPhase().equals("DEPLOY"))) {
             board.setSelectedSpace(board.findSpace(id));
             return true;

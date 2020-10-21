@@ -141,7 +141,7 @@ public class SetUpGameController extends AnchorPane {
             if (colorList.size() >= slider.getValue()) {
                 Parent root = null;
                 try {
-                    root = new MapController(colorList, logoNameList, stage);
+                    root = new MapController(colorList.subList(0, (int) slider.getValue()), logoNameList, stage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

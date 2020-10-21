@@ -519,7 +519,7 @@ public class MapController extends AnchorPane implements IObservable {
     }
 
     private void setSpace(int id) throws IOException {
-        if (modelDataHandler.receiveSelectedSpace(id)) {
+        if (modelDataHandler.setSelectedSpace(id)) {
             if (modelDataHandler.getSelectedSpace2() == null) {
                 resetColor();
             } else {
