@@ -21,13 +21,12 @@ public class AttackView extends AnchorPane implements IObservable {
 
     private final List<ImageView> images;
 
-   // @FXML
-    //private ImageView image;
 
     public AttackView(ArrayList<ImageView> images, ArrayList<ImageView> logoImages) {
         this.images = images;
         setLogoImages(model.getTeamLogo(model.getSelectedSpaceId(1)), model.getTeamLogo(model.getSelectedSpaceId(2)), logoImages);
     }
+
     @Override
     public void addObserver(IObserver observer) {
         observers.add(observer);
@@ -39,6 +38,12 @@ public class AttackView extends AnchorPane implements IObservable {
             observer.sendObject(object);
         }
     }
+
+    @Override
+    public void removeObserver(IObserver observer) {
+
+    }
+
     public void updateDice() throws IOException {
         List<Integer> whiteDices = model.getAttackerDiceResults();
         List<Integer> blackDices = model.getDefenderDiceResults();
@@ -133,7 +138,7 @@ public class AttackView extends AnchorPane implements IObservable {
         text.setText(replacestring);
     }
 
-    public void updatePicture(Space space, ImageView imageView){
+    public void updatePicture(Space space, ImageView imageView) {
         imageView.setImage(new Image("file:src/main/resources/pictures/places/" + space.getName() + ".jpg"));
     }
 }

@@ -20,6 +20,10 @@ public class Attack implements IPhase, Serializable {
 
     public boolean nextAttackPossible = true;
 
+    private Space oldspace;
+
+    private boolean destroyedOpponent = false;
+
 
     public Attack() {
 
@@ -46,6 +50,7 @@ public class Attack implements IPhase, Serializable {
     public boolean startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
         if (selectedSpace != null && selectedSpace2 != null) {
             if (isAttackPossible(selectedSpace.getUnits())) {
+                oldspace = selectedSpace2;
                 savePreAttackState(selectedSpace, selectedSpace2);
                 calculateAttack(selectedSpace, selectedSpace2);
                 updateCasualties(selectedSpace, selectedSpace2);
@@ -61,10 +66,11 @@ public class Attack implements IPhase, Serializable {
     }
 
     private void updateCasualties(Space attacker, Space defender) {
-        if (attacker.getUnits() == 1 && (attacker.getPlayerId() == defender.getPlayerId())) {
+        if (attacker.getUnits() == 1 && destroyedOpponent) {
             attackerLoss -= defender.getUnits() + 1;
             defenderLoss = -1;
             nextAttackPossible = false;
+            destroyedOpponent = false;
         } else if (attacker.getUnits() == 1) {
             attackerLoss -= attacker.getUnits();
             defenderLoss -= defender.getUnits();
@@ -84,7 +90,8 @@ public class Attack implements IPhase, Serializable {
             if (findHighestDie(tempAttacker) > findHighestDie(tempDefender)) {
                 defender.updateSpace(defender.getUnits() - 1);
                 if (defender.getUnits() < 1) {
-                    defender.updateSpace(attacker.getPlayer(), attacker.getUnits() - 1);
+                    defender.updateSpace(attacker.getUnits() - 1);
+                    destroyedOpponent = true;
                     attacker.updateSpace(1);
                 }
             } else {
@@ -169,6 +176,10 @@ public class Attack implements IPhase, Serializable {
             results.add(" lost: " + defenderLoss);
         }
         return results;
+    }
+
+    public Space getOldspace() {
+        return oldspace;
     }
 
     @Override

@@ -79,6 +79,11 @@ public class StartController extends AnchorPane implements IObservable {
         }
     }
 
+    @Override
+    public void removeObserver(IObserver observer) {
+        observers.remove(observer);
+    }
+
     private void initialize() {
         startButton.setOnMouseClicked(mouseEvent -> {
 
@@ -109,10 +114,11 @@ public class StartController extends AnchorPane implements IObservable {
     public void goToLobbySelect() throws IOException {
         lobbySelectController.lobbyItems = new ArrayList<>();
         lobbySelectController.lobbyFlow.getChildren().removeAll(lobbySelectController.lobbyItems);
-        System.out.println(lobbySelectController.lobbyItems);
-        notifyObservers("startConnection");
-        Client.getClient().startConnection("95.80.61.51", 6666, this);
-        notifyObservers("LOBBYS");
+        if (!Client.getClient().hasConnection) {
+            Client.getClient().startConnection("95.80.61.51", 6666, this);
+            System.out.println("Yes");
+            notifyObservers("LOBBYS");
+        }
         if (observers.size() != 0) {
             rootpane.getChildren().add(lobbySelectController);
         }
@@ -148,18 +154,17 @@ public class StartController extends AnchorPane implements IObservable {
         rootpane.getChildren().remove(multiplayerLogoController);
     }
 
-    public void backToMainMenu() {
+    public void backToMainMenu() throws IOException {
         rootpane.getChildren().remove(lobbySelectController);
+        Client.getClient().stopConnection();
     }
 
-    public void backToLobbySelect(){
-
+    public void backToLobbySelect() {
 
 
     }
 
-    public void backToSetupOnline(){
-
+    public void backToSetupOnline() {
 
 
     }

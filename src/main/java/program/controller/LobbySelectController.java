@@ -40,7 +40,7 @@ public class LobbySelectController extends AnchorPane {
     }
 
     @FXML
-    public void toMenu() {
+    public void toMenu() throws IOException {
         startController.backToMainMenu();
     }
 

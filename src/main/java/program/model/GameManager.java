@@ -21,6 +21,7 @@ public class GameManager implements IObservable {
     private BoardManager board;
     private int unitsToUse = 1;
     public boolean firstDeployment = true;
+    private String oldSpaceUrl;
 
     public List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
             "RödaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hyddan",
@@ -106,6 +107,11 @@ public class GameManager implements IObservable {
         for (IObserver observer : observers) {
             observer.sendObject(object);
         }
+    }
+
+    @Override
+    public void removeObserver(IObserver observer) {
+        observers.remove(observer);
     }
 
     /**
@@ -317,6 +323,10 @@ public class GameManager implements IObservable {
         return round.defenderDiceResults();
     }
 
+    public Space getOldSpace(){
+        return round.getOldSpace();
+    }
+
     public Space getSelectedSpace() {
         return board.getSelectedSpace();
     }
@@ -331,6 +341,9 @@ public class GameManager implements IObservable {
 
     public String getTeamLogo(int id) {
         return board.findSpace(id).getPlayer().getLogoUrl();
+    }
+    public String getOldSpaceUrl(){
+        return oldSpaceUrl;
     }
 
     public String getTeamLogo() {

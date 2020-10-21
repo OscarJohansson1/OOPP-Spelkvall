@@ -26,6 +26,7 @@ public class Client implements IObserver {
     private final LobbyItemCreator lobbyItemCreator = new LobbyItemCreator();
     private GameManager modelDataHandler;
     private boolean startedGame = false;
+    public boolean hasConnection = false;
 
     private Client() {
     }
@@ -47,12 +48,11 @@ public class Client implements IObserver {
         } catch (SocketTimeoutException e) {
             return;
         }
+        hasConnection = true;
         this.startController = startController;
         startController.addObserver(this);
         messages = new LinkedBlockingQueue<>();
         System.out.println("Connected to 95.80.61.51, Port: 6666");
-        modelDataHandler = GameManager.getModelDataHandler();
-        modelDataHandler.addObserver(this);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 stopConnection();
@@ -112,6 +112,8 @@ public class Client implements IObserver {
                     mapController = new MapController(stage);
                     mapController.addObserver(this);
                     player.setMyTurn(modelDataHandler.getCurrentPlayer().getId() == player.getId());
+                    modelDataHandler = GameManager.getModelDataHandler();
+                    modelDataHandler.addObserver(this);
                     Platform.runLater(() -> {
                         Scene scene = new Scene(mapController, 1920, 1080);
                         stage.setTitle("program.Chans");
@@ -224,8 +226,20 @@ public class Client implements IObserver {
         this.player = player;
     }
 
+    private void removeObserver(){
+        if(startController != null){
+            mapController.removeObserver(this);
+        }
+        if(mapController != null){
+            mapController.removeObserver(this);
+        }
+        startController.removeObserver(this);
+        mapController.removeObserver(this);
+    }
+
     public void stopConnection() throws IOException {
         System.out.println("Terminating connection to server");
+        hasConnection = false;
         server.inObject.close();
         server.outObject.close();
         server.socket.close();

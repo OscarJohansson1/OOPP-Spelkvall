@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class BoardManager implements Serializable {
 
-    private IBoard board;
+    private final IBoard board;
 
     private Space selectedSpace;
     private Space selectedSpace2;

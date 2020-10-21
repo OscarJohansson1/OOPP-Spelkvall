@@ -7,7 +7,7 @@ import java.util.List;
 public class ChalmersBoard implements IBoard, Serializable {
 
     private List<Area> areas;
-    private List<Space> spaces;
+    private final List<Space> spaces;
 
     /**
      * Indexes in the neighbours-matrix represent the following spaces:

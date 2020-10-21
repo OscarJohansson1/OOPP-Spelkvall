@@ -1,5 +1,7 @@
 package program.model;
 
+import javafx.application.Platform;
+
 import java.io.Serializable;
 
 /**
@@ -41,7 +43,7 @@ public class Space implements Serializable {
      * @param player The new player that controls the space.
      * @param units  The new amount of units on the space.
      */
-    void updateSpace(Player player, int units) {
+    public void updateSpace(Player player, int units) {
         this.player = player;
         this.units = units;
     }
@@ -68,6 +70,9 @@ public class Space implements Serializable {
 
     public Player getPlayer() {
         return new Player(player);
+    }
+
+    public void setPlayer(Player player){ this.player = player;
     }
 
     int getPlayerId() {

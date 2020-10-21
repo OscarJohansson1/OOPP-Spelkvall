@@ -66,4 +66,6 @@ public class Round {
     public Attack getAttack() {
         return attack;
     }
+
+    public Space getOldSpace(){return attack.getOldspace();}
 }

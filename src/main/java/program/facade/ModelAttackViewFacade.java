@@ -13,6 +13,8 @@ public class ModelAttackViewFacade {
         return new Image(modelDataHandler.getTeamLogo(i));
     }
 
+    public Image getTeamLogoOld(){ return new Image(modelDataHandler.getOldSpaceUrl());}
+
     public boolean isAttackDone() {
         return modelDataHandler.isAttackDone();
     }
@@ -60,5 +62,6 @@ public class ModelAttackViewFacade {
         }
         return 0; // error instead
     }
+
 
 }

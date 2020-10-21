@@ -204,18 +204,17 @@ public class MapController extends AnchorPane implements IObservable {
     private List<Text> allTexts;
     private Stage stage;
     private PauseController pauseController;
-    private final boolean localmode;
-
+    private final boolean localMode;
 
     MapController(List<String> colors, List<String> logoNames, Stage stage) throws IOException {
-        localmode = true;
+        localMode = true;
         firstInitialize(stage);
         modelDataHandler.initialize(allButtons.size(), colors, logoNames);
         secondInitialize();
     }
 
     public MapController(Stage stage) throws IOException {
-        localmode = false;
+        localMode = false;
         firstInitialize(stage);
         secondInitialize();
     }
@@ -247,7 +246,7 @@ public class MapController extends AnchorPane implements IObservable {
             int var = i;
             allButtons.get(i).setOnMouseClicked(mouseEvent -> {
                 try {
-                    if (!localmode) {
+                    if (!localMode) {
                         if (modelDataHandler.getCurrentPlayer().getMyTurn()) {
 
                             setSpace(var);
@@ -313,7 +312,7 @@ public class MapController extends AnchorPane implements IObservable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                if(!modelDataHandler.firstDeployment){
+                if (!modelDataHandler.firstDeployment) {
                     modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
                 }
                 updateCurrentPlayer();
@@ -385,17 +384,17 @@ public class MapController extends AnchorPane implements IObservable {
         view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), this, modelDataHandler.getCurrentPlayerName());
         view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
     }
-    public void updatePhase(String phase){
+
+    public void updatePhase(String phase) {
         view.updatePhase(phase, MapController.this);
         view.updatePhaseText(phase, MapController.this);
     }
 
-    private void setDeployButton(boolean b){
+    private void setDeployButton(boolean b) {
         donedeploy.setDisable(b);
-        if(b){
+        if (b) {
             donedeploy.setStyle("-fx-background-color: #000000");
-        }
-        else {
+        } else {
             donedeploy.setStyle(null);
         }
     }
@@ -414,9 +413,10 @@ public class MapController extends AnchorPane implements IObservable {
 
     public void attack() throws IOException {
         if (modelDataHandler.startPhase()) {
-            setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
-            setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
             changeToAttackView();
+            setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
+            modelDataHandler.getSelectedSpace2().setPlayer(modelDataHandler.getSelectedSpace().getPlayer());
+            setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
             notifyObservers(new Attack(GameManager.getModelDataHandler().round.getAttack()));
             notifyObservers(new Space(GameManager.getModelDataHandler().getSelectedSpace()));
             notifyObservers(new Space(GameManager.getModelDataHandler().getSelectedSpace2()));
@@ -438,7 +438,7 @@ public class MapController extends AnchorPane implements IObservable {
     public void changeToAttackView() throws IOException {
         if (attackController == null) {
             attackController = new AttackController(this);
-            if (localmode) {
+            if (localMode) {
                 attackController.attack();
             }
             Platform.runLater(() -> rootpane.getChildren().add(attackController));
@@ -531,7 +531,7 @@ public class MapController extends AnchorPane implements IObservable {
             view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
             view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
             notifyObservers(new Space(modelDataHandler.getSpaceFromId(id)));
-            if (localmode) {
+            if (localMode) {
                 displayCubes(id);
             }
         } else {
@@ -652,5 +652,10 @@ public class MapController extends AnchorPane implements IObservable {
         for (IObserver observer : observers) {
             observer.sendObject(object);
         }
+    }
+
+    @Override
+    public void removeObserver(IObserver observer) {
+        observers.remove(observer);
     }
 }

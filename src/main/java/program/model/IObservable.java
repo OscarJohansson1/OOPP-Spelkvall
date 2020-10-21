@@ -8,4 +8,6 @@ public interface IObservable {
 
     void notifyObservers(Object object) throws IOException;
 
+    void removeObserver(IObserver observer);
+
 }

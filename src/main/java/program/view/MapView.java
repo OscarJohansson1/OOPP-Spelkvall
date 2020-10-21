@@ -28,9 +28,10 @@ public class MapView extends AnchorPane {
 
     public void updateCurrentPlayer(String currentPlayerColor, MapController mapController, String playerName) {
         Platform.runLater(() -> {
-            mapController.showCurrentPlayer.setStyle("-fx-background-color: " + currentPlayerColor + ";");
+            mapController.showCurrentPlayer.setStyle("-fx-background-color: " + currentPlayerColor + ";" + "-fx-text-fill: " + getContrastColor(Color.valueOf(currentPlayerColor)) + ";");
             mapController.showCurrentPlayer.setText(playerName);
             mapController.imageTeamLogo.setImage(new Image(mapController.getTeamLogo()));
+
         });
     }
 
@@ -56,16 +57,16 @@ public class MapView extends AnchorPane {
                 if (allButton == allButtons.get(id)) {
                     allButton.setText(units + "");
                     //allButton.setStyle("-fx-color: #FFFFFF");
-                    allButton.setTextFill(getContrastColor(Color.web(mapController.getSpaceColor((id)))));
+                    allButton.setTextFill(Color.valueOf(getContrastColor(Color.web(mapController.getSpaceColor((id))))));
                     break;
                 }
             }
         });
     }
 
-    public static Color getContrastColor(Color color) {
+    public static String getContrastColor(Color color) {
         double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000;
-        return y >= 0.5 ? Color.valueOf("#000000") : Color.valueOf("#ffffff");
+        return y >= 0.5 ? "#000000" : "#ffffff";
     }
 
     /**
