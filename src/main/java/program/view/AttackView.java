@@ -1,6 +1,7 @@
 package program.view;
 
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,11 +22,12 @@ public class AttackView extends AnchorPane implements IObservable {
 
     private final List<ImageView> images;
 
+   // @FXML
+    //private ImageView image;
+
     public AttackView(ArrayList<ImageView> images, ArrayList<ImageView> logoImages) {
         this.images = images;
-
         setLogoImages(model.getTeamLogo(model.getSelectedSpaceId(1)), model.getTeamLogo(model.getSelectedSpaceId(2)), logoImages);
-
     }
     @Override
     public void addObserver(IObserver observer) {
@@ -130,5 +132,9 @@ public class AttackView extends AnchorPane implements IObservable {
 
     private void updateText(Text text, String replacestring) {
         text.setText(replacestring);
+    }
+
+    public void updatePicture(Space space, ImageView imageView){
+        imageView.setImage(new Image("file:src/main/resources/pictures/" + space.getName() + ".jpg"));
     }
 }

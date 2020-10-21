@@ -23,7 +23,7 @@ public class ModelDataHandler implements IObservable {
     public boolean firstDeployment = true;
 
     public List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
-            "RödaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hrum",
+            "RodaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hrum",
             "Alvan", "Spektrum", "Gasquen", "Chalmersplatsen", "Olgas", "RunAn", "Tagvagnen", "Origogarden", "KalleGlader", "Tvargatan"));
 
     /**

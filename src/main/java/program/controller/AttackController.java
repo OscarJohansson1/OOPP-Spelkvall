@@ -51,6 +51,8 @@ public class AttackController extends AnchorPane {
     private ImageView attackerImageView;
     @FXML
     private ImageView defenderImageView;
+    @FXML
+    private ImageView attackBackgroundImage;
 
     public final AttackView attackView;
     private final MapController mapController;
@@ -77,6 +79,7 @@ public class AttackController extends AnchorPane {
     void attack() throws IOException {
         attackView.updateDice();
         attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton);
+        attackView.updatePicture(modelDataHandler.getSelectedSpace2(), attackBackgroundImage);
     }
 
     public void attack(Attack attack) {
