@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * This class represents the board and is keeping track of the board.
  */
-public class Board implements Serializable {
+public class BoardManager implements Serializable {
 
     private IBoard board;
 
@@ -19,7 +19,7 @@ public class Board implements Serializable {
      *
      * @param board Takes in a board
      */
-    public Board(IBoard board) {
+    public BoardManager(IBoard board) {
         this.board = board;
 
     }

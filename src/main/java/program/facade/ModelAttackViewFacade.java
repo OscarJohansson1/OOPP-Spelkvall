@@ -1,13 +1,13 @@
 package program.facade;
 
 import javafx.scene.image.Image;
-import program.model.ModelDataHandler;
+import program.model.GameManager;
 
 import java.util.List;
 
 public class ModelAttackViewFacade {
 
-    private final ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
+    private final GameManager modelDataHandler = GameManager.getModelDataHandler();
 
     public Image getTeamLogo(int i) {
         return new Image(modelDataHandler.getTeamLogo(i));

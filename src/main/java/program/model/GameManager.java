@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * This class controls everything at the moment. //TODO Make the class smaller
  */
-public class ModelDataHandler implements IObservable {
+public class GameManager implements IObservable {
 
     private final List<IObserver> observers = new ArrayList<>();
 
@@ -18,7 +18,7 @@ public class ModelDataHandler implements IObservable {
     private int roundCount = 1;
     private int phaseCount = 1;
     public final Round round = new Round();
-    private Board board;
+    private BoardManager board;
     private int unitsToUse = 1;
     public boolean firstDeployment = true;
 
@@ -29,14 +29,14 @@ public class ModelDataHandler implements IObservable {
     /**
      * Overrides the default constructor to prevent other classes from creating new ModelDataHandlers.
      */
-    private ModelDataHandler() {
+    private GameManager() {
     }
 
     /**
      * Private class that holds a single ModelDataHandler and is later used to implement the Singleton Pattern.
      */
-    private static class ModelDataHandlerHolder {
-        private static final ModelDataHandler modelDataHandler = new ModelDataHandler();
+    private static class GameManagerHolder {
+        private static final GameManager gameManager = new GameManager();
     }
 
     /**
@@ -44,8 +44,8 @@ public class ModelDataHandler implements IObservable {
      *
      * @return The ModelDataHandler.
      */
-    public static ModelDataHandler getModelDataHandler() {
-        return ModelDataHandlerHolder.modelDataHandler;
+    public static GameManager getModelDataHandler() {
+        return GameManagerHolder.gameManager;
     }
 
     /**
@@ -62,7 +62,7 @@ public class ModelDataHandler implements IObservable {
             players.add(new Player((50 / colors.size()), i, colors.get(i), logoNames.get(i), i + ""));
         }
         currentPlayer = getRandomPlayer(null, players);
-        board = new Board(new ChalmersBoard(randomizeSpaces(amountOfSpaces, players)));
+        board = new BoardManager(new ChalmersBoard(randomizeSpaces(amountOfSpaces, players)));
     }
 
     public List<Space> randomizeSpaces(int amountOfSpaces, List<Player> players) {
@@ -349,7 +349,7 @@ public class ModelDataHandler implements IObservable {
         return round.getAttack();
     }
 
-    public void setBoard(Board board) {
+    public void setBoard(BoardManager board) {
         this.board = board;
     }
 

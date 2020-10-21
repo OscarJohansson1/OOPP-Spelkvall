@@ -24,7 +24,7 @@ public class Client implements IObserver {
     private MapController mapController;
     private Player player;
     private final LobbyItemCreator lobbyItemCreator = new LobbyItemCreator();
-    private ModelDataHandler modelDataHandler;
+    private GameManager modelDataHandler;
     private boolean startedGame = false;
 
     private Client() {
@@ -51,7 +51,7 @@ public class Client implements IObserver {
         startController.addObserver(this);
         messages = new LinkedBlockingQueue<>();
         System.out.println("Connected to 95.80.61.51, Port: 6666");
-        modelDataHandler = ModelDataHandler.getModelDataHandler();
+        modelDataHandler = GameManager.getModelDataHandler();
         modelDataHandler.addObserver(this);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
@@ -168,8 +168,8 @@ public class Client implements IObserver {
                         }
                     }
                 }
-            } else if (message instanceof Board) {
-                modelDataHandler.setBoard((Board) message);
+            } else if (message instanceof BoardManager) {
+                modelDataHandler.setBoard((BoardManager) message);
             } else if (message instanceof Boolean) {
                 if ((Boolean) message)
                     startController.lobbyReadyController.startButton.setVisible(true);

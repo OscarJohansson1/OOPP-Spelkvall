@@ -1,7 +1,6 @@
 package program.view;
 
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,9 +43,9 @@ public class AttackView extends AnchorPane implements IObservable {
         List<Integer> whiteDices = model.getAttackerDiceResults();
         List<Integer> blackDices = model.getDefenderDiceResults();
         updateDie(whiteDices, blackDices);
-        notifyObservers(new Attack(ModelDataHandler.getModelDataHandler().round.getAttack()));
-        notifyObservers(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace()));
-        notifyObservers(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace2()));
+        notifyObservers(new Attack(GameManager.getModelDataHandler().round.getAttack()));
+        notifyObservers(new Space(GameManager.getModelDataHandler().getSelectedSpace()));
+        notifyObservers(new Space(GameManager.getModelDataHandler().getSelectedSpace2()));
     }
 
     public void updateDice(Attack attack) {

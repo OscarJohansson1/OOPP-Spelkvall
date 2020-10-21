@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import program.model.ModelDataHandler;
+import program.model.GameManager;
 import program.model.Attack;
 import program.view.AttackView;
 
@@ -56,7 +56,7 @@ public class AttackController extends AnchorPane {
 
     public final AttackView attackView;
     private final MapController mapController;
-    private final ModelDataHandler modelDataHandler;
+    private final GameManager modelDataHandler;
 
 
     AttackController(MapController mapController) {
@@ -72,7 +72,7 @@ public class AttackController extends AnchorPane {
         }
 
         this.mapController = mapController;
-        this.modelDataHandler = ModelDataHandler.getModelDataHandler();
+        this.modelDataHandler = GameManager.getModelDataHandler();
         this.attackView = new AttackView(new ArrayList<>(Arrays.asList(attackerDieImage1, attackerDieImage2, attackerDieImage3, defenderDieImage1, defenderDieImage2)), new ArrayList<>(Arrays.asList(attackerImageView, defenderImageView)));
     }
 

@@ -1,8 +1,8 @@
 package server.code.model;
 
-import program.model.Board;
+import program.model.BoardManager;
 import program.model.ChalmersBoard;
-import program.model.ModelDataHandler;
+import program.model.GameManager;
 import program.model.Player;
 
 import java.util.Random;
@@ -18,14 +18,14 @@ public class GameLobby extends Lobby {
         if (currentPlayer == null) {
             return currentPlayer = getRandomPlayer();
         }
-        return currentPlayer = ModelDataHandler.nextPlayer(players, currentPlayer);
+        return currentPlayer = GameManager.nextPlayer(players, currentPlayer);
     }
 
     private Player getRandomPlayer() {
         return players.get(new Random().nextInt(players.size()));
     }
-    public Board initializeBoard() {
-        ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
-        return new Board(new ChalmersBoard(modelDataHandler.randomizeSpaces(modelDataHandler.spaceNames.size(), players)));
+    public BoardManager initializeBoard() {
+        GameManager modelDataHandler = GameManager.getModelDataHandler();
+        return new BoardManager(new ChalmersBoard(modelDataHandler.randomizeSpaces(modelDataHandler.spaceNames.size(), players)));
     }
 }

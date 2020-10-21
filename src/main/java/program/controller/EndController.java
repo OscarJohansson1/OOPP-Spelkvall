@@ -1,6 +1,5 @@
 package program.controller;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import program.model.ModelDataHandler;
+import program.model.GameManager;
 
 
 import java.io.IOException;
@@ -42,7 +41,7 @@ public class EndController extends AnchorPane {
     private Button quitGameButton;
 
     private final Stage stage;
-    private final ModelDataHandler modelDataHandler = ModelDataHandler.getModelDataHandler();
+    private final GameManager modelDataHandler = GameManager.getModelDataHandler();
 
     EndController(Stage stage) {
 

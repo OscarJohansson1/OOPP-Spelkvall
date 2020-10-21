@@ -1,6 +1,5 @@
 package program.model;
 
-import javafx.scene.paint.Color;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,14 +41,14 @@ public class TestWin {
 
     @Test
     public void testWin() {
-        Board board = new Board(new ChalmersBoard(spaces));
+        BoardManager board = new BoardManager(new ChalmersBoard(spaces));
 
         assertTrue(board.isWinner());
     }
 
     @Test
     public void testRemovePlayer() {
-        Board board = new Board(new ChalmersBoard(spaces));
+        BoardManager board = new BoardManager(new ChalmersBoard(spaces));
 
         assertTrue(board.isPlayerOut(player2));
 

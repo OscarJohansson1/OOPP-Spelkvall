@@ -197,7 +197,7 @@ public class MapController extends AnchorPane implements IObservable {
 
     private final List<IObserver> observers = new ArrayList<>();
 
-    public ModelDataHandler modelDataHandler;
+    public GameManager modelDataHandler;
     public MapView view = new MapView();
     public AttackController attackController;
     public List<Button> allButtons;
@@ -239,7 +239,7 @@ public class MapController extends AnchorPane implements IObservable {
         allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsabaren, textZaloonen, textWinden, textLofTDet,
                 textRodaRummet, textVerum, textVillan, textAdammen, textFocus, textFortNox, textGTSpritis, textGoldenI, textChabo, textWijkanders, textHrum,
                 textAlvan, textSpektrum, textGasquen, textChalmersplatsen, textOlgas, textRunAn, textTagvagnen, textOrigogarden, textKalleGlader, textTvargatan));
-        modelDataHandler = ModelDataHandler.getModelDataHandler();
+        modelDataHandler = GameManager.getModelDataHandler();
     }
 
     private void secondInitialize() throws IOException {
@@ -417,9 +417,9 @@ public class MapController extends AnchorPane implements IObservable {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
             changeToAttackView();
-            notifyObservers(new Attack(ModelDataHandler.getModelDataHandler().round.getAttack()));
-            notifyObservers(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace()));
-            notifyObservers(new Space(ModelDataHandler.getModelDataHandler().getSelectedSpace2()));
+            notifyObservers(new Attack(GameManager.getModelDataHandler().round.getAttack()));
+            notifyObservers(new Space(GameManager.getModelDataHandler().getSelectedSpace()));
+            notifyObservers(new Space(GameManager.getModelDataHandler().getSelectedSpace2()));
 
         }
     }
