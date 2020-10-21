@@ -7,15 +7,15 @@ import java.util.List;
  */
 public class Round {
 
-    private final Attack attack;
+    private final AttackPhase attack;
     private IPhase currentPhaseNew;
 
     //TODO Hårdkoda inte
     Round() {
         //TODO Inte hårdkoda
-        Deployment deploy = new Deployment();
-        attack = new Attack();
-        Movement move = new Movement();
+        DeployPhase deploy = new DeployPhase();
+        attack = new AttackPhase();
+        MovePhase move = new MovePhase();
         currentPhaseNew = deploy;
         deploy.setNextPhase(attack);
         attack.setNextPhase(move);
@@ -63,7 +63,7 @@ public class Round {
         return attack.nextAttackPossible;
     }
 
-    public Attack getAttack() {
+    public AttackPhase getAttack() {
         return attack;
     }
 

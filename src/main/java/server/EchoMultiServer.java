@@ -139,7 +139,7 @@ public class EchoMultiServer {
                 }
             } else if (inputLine instanceof List) {
                 writeToAllInLobby(inputLine, gameLobby);
-            } else if (inputLine instanceof Attack) {
+            } else if (inputLine instanceof AttackPhase) {
                 writeToAllInLobby(inputLine, gameLobby);
             }
         }

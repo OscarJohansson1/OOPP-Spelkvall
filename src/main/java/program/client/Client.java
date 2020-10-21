@@ -53,6 +53,8 @@ public class Client implements IObserver {
         startController.addObserver(this);
         messages = new LinkedBlockingQueue<>();
         System.out.println("Connected to 95.80.61.51, Port: 6666");
+        modelDataHandler = GameManager.getGameManager();
+        modelDataHandler.addObserver(this);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 stopConnection();
@@ -203,12 +205,12 @@ public class Client implements IObserver {
                     modelDataHandler.getCurrentPlayer().setMyTurn(false);
                 }
 
-            } else if (message instanceof Attack) {
+            } else if (message instanceof AttackPhase) {
                 mapController.changeToAttackView();
                 if (mapController.attackController.attackView.observers.size() == 0) {
                     mapController.attackController.attackView.addObserver(this);
                 }
-                mapController.attackController.attack((Attack) message);
+                mapController.attackController.attack((AttackPhase) message);
                 if (player.getId() != modelDataHandler.getCurrentPlayer().getId()) {
                     mapController.removeAbortAndAttack();
                 }

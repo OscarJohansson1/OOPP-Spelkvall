@@ -2,13 +2,12 @@ package program.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import javafx.scene.paint.Color;
 import org.junit.Before;
 import org.junit.Test;
 
 public class TestMovement {
 
-    Movement movement;
+    MovePhase movement;
 
     Player player1;
     Player player2;

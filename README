@@ -4,11 +4,28 @@ Brought to you by Spelkväll?
 The main objective of the game is to conquer Chalmers campus (in a friendly manner of course), by deploying, attacking
 and moving units.
 
+If you want to beat your friends (or enemies) here are some useful information:
+
+You get extra units to deploy in the deploy-phase depending on the amount of spaces you hold according to the following
+formula:
+
++ ( 1 + ( Spaces / 2 ) ) units
+
+You can get extra units by holding entire areas as well:
+
++ 7 units: Kårhuset
+
++ 5 units: SB, Maskinhuset, Kemigården, Vasa
+
++ 3 units: EDIT, Lindholmen
+
 More information about Risk and its rules can be find online.
 
 ------------------------------------------------------------------------------------------------------------------------
 
 To start the application you need to run the javafx-plugin.
+
+Here are some easy ways to do this (that hopefully work).
 
 Terminal:
 1. Move to the OOPP-Spelkvall folder.
