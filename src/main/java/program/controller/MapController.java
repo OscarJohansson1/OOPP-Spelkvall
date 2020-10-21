@@ -204,15 +204,18 @@ public class MapController extends AnchorPane implements IObservable {
     private List<Text> allTexts;
     private Stage stage;
     private PauseController pauseController;
+    private boolean localmode;
 
 
     MapController(List<String> colors, List<String> logoNames, Stage stage) throws IOException {
+        localmode = true;
         firstInitialize(stage);
         modelDataHandler.initialize(allButtons.size(), colors, logoNames);
         secondInitialize();
     }
 
     public MapController(Stage stage) throws IOException {
+        localmode = false;
         firstInitialize(stage);
         secondInitialize();
     }
@@ -244,7 +247,7 @@ public class MapController extends AnchorPane implements IObservable {
             int var = i;
             allButtons.get(i).setOnMouseClicked(mouseEvent -> {
                 try {
-                    if (observers.size() != 0) {
+                    if (observers.size() != 0 && !localmode) {
                         if (modelDataHandler.getCurrentPlayer().getMyTurn()) {
                             setSpace(var);
                         }
@@ -310,8 +313,10 @@ public class MapController extends AnchorPane implements IObservable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
                 updateCurrentPlayer();
+                if(!modelDataHandler.firstDeployment){
+                    modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
+                }
                 moveSlider.setMax(modelDataHandler.getDeployableUnits());
                 try {
                     resetColor();
@@ -326,8 +331,10 @@ public class MapController extends AnchorPane implements IObservable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
+                moveSlider.setMax(modelDataHandler.getDeployableUnits());
                 view.updatePhase("ATTACK", MapController.this);
-                view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), MapController.this, modelDataHandler.getCurrentPlayerName());
+                updateCurrentPlayer();
                 try {
                     resetColor();
                 } catch (IOException e) {
@@ -386,7 +393,6 @@ public class MapController extends AnchorPane implements IObservable {
         if (modelDataHandler.startPhase()) {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
-            moveSlider.setMax(modelDataHandler.getDeployableUnits());
             notifyObservers(new Space(modelDataHandler.getSelectedSpace()));
 
         }
@@ -423,7 +429,7 @@ public class MapController extends AnchorPane implements IObservable {
     public void changeToAttackView() throws IOException {
         if (attackController == null) {
             attackController = new AttackController(this);
-            if (observers.size() == 0) {
+            if (observers.size() == 0 && !localmode) {
                 attackController.attack();
             }
             Platform.runLater(() -> rootpane.getChildren().add(attackController));
@@ -516,7 +522,7 @@ public class MapController extends AnchorPane implements IObservable {
             view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
             view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
             notifyObservers(new Space(modelDataHandler.getSpaceFromId(id)));
-            if (observers.size() == 0) {
+            if (observers.size() == 0 && localmode) {
                 displayCubes(id);
             }
         } else {

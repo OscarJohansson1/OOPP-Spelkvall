@@ -15,7 +15,6 @@ public class Player implements Serializable {
     private String name;
     private boolean myTurn = false;
     private boolean ready = false;
-    private boolean firstDeployment = true;
 
     /**
      * This is a constructor for the player.
@@ -93,8 +92,5 @@ public class Player implements Serializable {
         return ready;
     }
 
-    public void setFirstDeployment() {
-        firstDeployment = false;
-    }
 
 }

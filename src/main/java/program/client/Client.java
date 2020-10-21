@@ -56,8 +56,6 @@ public class Client implements IObserver {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 stopConnection();
-                System.exit(0);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -70,11 +68,38 @@ public class Client implements IObserver {
                     handleObject(message);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    break;
                 }
             }
         });
         messageHandling.setDaemon(true);
         messageHandling.start();
+    }
+
+
+    private class ConnectionToServer {
+        private final ObjectOutputStream outObject;
+        private final ObjectInputStream inObject;
+        Socket socket;
+
+        ConnectionToServer(Socket socket) throws IOException {
+            this.socket = socket;
+            outObject = new ObjectOutputStream(socket.getOutputStream());
+            inObject = new ObjectInputStream(socket.getInputStream());
+            Thread read = new Thread(() -> {
+                while (true) {
+                    try {
+                        Object obj = inObject.readObject();
+                        System.out.println("Recieved object: " + obj);
+                        messages.put(obj);
+                    } catch (IOException | InterruptedException | ClassNotFoundException e) {
+                        break;
+                    }
+                }
+            });
+            read.setDaemon(true);
+            read.start();
+        }
     }
 
     private void handleObject(Object message) {
@@ -127,7 +152,7 @@ public class Client implements IObserver {
                         List<Player> playerList = (List<Player>) message;
                         modelDataHandler.setPlayers(playerList);
                         startController.lobbyReadyController.updateUserCards(playerList);
-                        if(player == null){
+                        if (player == null) {
                             player = playerList.get(playerList.size() - 1);
                         }
                     } else if (object instanceof Integer) {
@@ -179,7 +204,7 @@ public class Client implements IObserver {
 
             } else if (message instanceof Attack) {
                 mapController.changeToAttackView();
-                if(mapController.attackController.attackView.observers.size() == 0){
+                if (mapController.attackController.attackView.observers.size() == 0) {
                     mapController.attackController.attackView.addObserver(this);
                 }
                 mapController.attackController.attack((Attack) message);
@@ -188,31 +213,6 @@ public class Client implements IObserver {
                 }
             }
         } catch (IOException ignored) {
-        }
-    }
-
-    private class ConnectionToServer {
-        private final ObjectOutputStream outObject;
-        private final ObjectInputStream inObject;
-        Socket socket;
-
-        ConnectionToServer(Socket socket) throws IOException {
-            this.socket = socket;
-            outObject = new ObjectOutputStream(socket.getOutputStream());
-            inObject = new ObjectInputStream(socket.getInputStream());
-            Thread read = new Thread(() -> {
-                while (true) {
-                    try {
-                        Object obj = inObject.readObject();
-                        System.out.println("Recieved object: " + obj);
-                        messages.put(obj);
-                    } catch (IOException | InterruptedException | ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            read.setDaemon(true);
-            read.start();
         }
     }
 
@@ -227,6 +227,8 @@ public class Client implements IObserver {
 
     public void stopConnection() throws IOException {
         System.out.println("Terminating connection to server");
+        server.inObject.close();
+        server.outObject.close();
         server.socket.close();
     }
 }

@@ -103,7 +103,7 @@ public class ModelDataHandler implements IObservable {
 
     @Override
     public void notifyObservers(Object object) throws IOException {
-        for(IObserver observer : observers) {
+        for (IObserver observer : observers) {
             observer.sendObject(object);
         }
     }
@@ -177,19 +177,15 @@ public class ModelDataHandler implements IObservable {
      * turn deploying units, and does not attack and move.
      */
     public void firstRoundNextPhase() throws IOException {
-
         resetSelectedSpaces();
-        currentPlayer.setFirstDeployment();
         notifyObservers(new Player(currentPlayer));
         currentPlayer = nextPlayer(players, currentPlayer);
         roundCount++;
         if (roundCount > players.size()) {
             firstDeployment = false;
-            currentPlayer.setFirstDeployment();
         }
         notifyObservers(roundCount);
         notifyObservers(new Player(currentPlayer));
-
     }
 
     public static Player nextPlayer(List<Player> players, Player currentPlayer) {
