@@ -72,7 +72,7 @@ public class AttackController extends AnchorPane {
         }
 
         this.mapController = mapController;
-        this.modelDataHandler = GameManager.getModelDataHandler();
+        this.modelDataHandler = GameManager.getGameManager();
         this.attackView = new AttackView(new ArrayList<>(Arrays.asList(attackerDieImage1, attackerDieImage2, attackerDieImage3, defenderDieImage1, defenderDieImage2)), new ArrayList<>(Arrays.asList(attackerImageView, defenderImageView)));
     }
 

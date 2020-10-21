@@ -25,7 +25,7 @@ public class GameLobby extends Lobby {
         return players.get(new Random().nextInt(players.size()));
     }
     public BoardManager initializeBoard() {
-        GameManager modelDataHandler = GameManager.getModelDataHandler();
+        GameManager modelDataHandler = GameManager.getGameManager();
         return new BoardManager(new ChalmersBoard(modelDataHandler.randomizeSpaces(modelDataHandler.spaceNames.size(), players)));
     }
 }

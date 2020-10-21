@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ModelAttackViewFacade {
 
-    private final GameManager modelDataHandler = GameManager.getModelDataHandler();
+    private final GameManager modelDataHandler = GameManager.getGameManager();
 
     public Image getTeamLogo(int i) {
         return new Image(modelDataHandler.getTeamLogo(i));

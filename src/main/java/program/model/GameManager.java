@@ -44,7 +44,7 @@ public class GameManager implements IObservable {
      *
      * @return The ModelDataHandler.
      */
-    public static GameManager getModelDataHandler() {
+    public static GameManager getGameManager() {
         return GameManagerHolder.gameManager;
     }
 

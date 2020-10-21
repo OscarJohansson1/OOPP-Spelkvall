@@ -51,7 +51,7 @@ public class Client implements IObserver {
         startController.addObserver(this);
         messages = new LinkedBlockingQueue<>();
         System.out.println("Connected to 95.80.61.51, Port: 6666");
-        modelDataHandler = GameManager.getModelDataHandler();
+        modelDataHandler = GameManager.getGameManager();
         modelDataHandler.addObserver(this);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {

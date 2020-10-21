@@ -41,7 +41,7 @@ public class EndController extends AnchorPane {
     private Button quitGameButton;
 
     private final Stage stage;
-    private final GameManager modelDataHandler = GameManager.getModelDataHandler();
+    private final GameManager modelDataHandler = GameManager.getGameManager();
 
     EndController(Stage stage) {
 
