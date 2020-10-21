@@ -146,7 +146,7 @@ public class EchoMultiServer {
         private void addClientsToGameLobby(GameLobby gameLobby) {
             lobbyController.addMenuLobbyPlayersToGameLobby(menuLobby, gameLobby);
             for (ClientHandler clientHandler : clients) {
-                if (clientHandler.menuLobby.getLobbyName().equals(gameLobby.getLobbyName())) {
+                if (clientHandler.menuLobby != null && clientHandler.menuLobby.lobbyId == gameLobby.lobbyId) {
                     clientHandler.gameLobby = lobbyController.getGameLobbies().get(lobbyController.getGameLobbies().size() - 1);
                     clientHandler.menuLobby = null;
                 }
@@ -172,11 +172,11 @@ public class EchoMultiServer {
             List<ClientHandler> clientHandlers = new ArrayList<>();
             for (ClientHandler clientHandler : clients) {
                 if (lobby instanceof GameLobby) {
-                    if (clientHandler.gameLobby.getLobbyName().equals(lobby.getLobbyName())) {
+                    if (clientHandler.gameLobby != null && clientHandler.gameLobby.lobbyId == gameLobby.lobbyId) {
                         clientHandlers.add(clientHandler);
                     }
                 } else if (lobby instanceof MenuLobby) {
-                    if (clientHandler.menuLobby.getLobbyName().equals(lobby.getLobbyName())) {
+                    if (clientHandler.menuLobby != null && clientHandler.menuLobby.lobbyId == menuLobby.lobbyId) {
                         clientHandlers.add(clientHandler);
                     }
                 }

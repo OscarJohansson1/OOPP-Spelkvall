@@ -28,8 +28,10 @@ public class LobbyController {
     private void addLobby(Lobby lobby) {
         if (lobby instanceof GameLobby) {
             gameLobbies.add((GameLobby) lobby);
+            gameLobbies.get(gameLobbies.size() - 1).lobbyId = gameLobbies.size();
         } else if (lobby instanceof MenuLobby) {
             menuLobbies.add((MenuLobby) lobby);
+            menuLobbies.get(menuLobbies.size() - 1).lobbyId = menuLobbies.size();
         }
     }
 
@@ -46,6 +48,7 @@ public class LobbyController {
             gameLobby.getLobbyPlayers().add(player);
         }
     }
+
 
 
 }

@@ -16,9 +16,7 @@ import java.io.IOException;
 public class Chans extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        StartController startController = new StartController(stage);
-        Client.getClient().startConnection("95.80.61.51", 6666, startController);
-        Parent start = startController;
+        Parent start = new StartController(stage);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         stage.setMaxWidth(screenSize.width);
         stage.setMaxHeight(screenSize.height);

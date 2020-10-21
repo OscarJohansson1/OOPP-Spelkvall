@@ -135,6 +135,6 @@ public class AttackView extends AnchorPane implements IObservable {
     }
 
     public void updatePicture(Space space, ImageView imageView){
-        imageView.setImage(new Image("file:src/main/resources/pictures/" + space.getName() + ".jpg"));
+        imageView.setImage(new Image("file:src/main/resources/pictures/Campus Pictures/" + space.getName() + ".jpg"));
     }
 }

@@ -190,8 +190,7 @@ public class Client implements IObserver {
                     modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
                     mapController.moveSlider.setMax(modelDataHandler.getCurrentPlayer().getUnits());
                 }
-                mapController.view.updateCurrentPlayer(receivedPlayer.getColor(), mapController, receivedPlayer.getName());
-                mapController.view.updateDeployableUnits(mapController.deployableUnitsText, receivedPlayer.getUnits());
+                mapController.updateCurrentPlayer();
                 if (player.getId() == ((Player) message).getId()) {
                     player.setMyTurn(true);
                     modelDataHandler.getCurrentPlayer().setMyTurn(true);

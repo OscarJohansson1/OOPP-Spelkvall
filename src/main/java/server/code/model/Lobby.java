@@ -6,6 +6,7 @@ import java.util.List;
 
 public abstract class Lobby {
     final String lobbyName;
+    public int lobbyId;
     protected List<Player> players = new ArrayList<>();
 
     public Lobby(String name) {

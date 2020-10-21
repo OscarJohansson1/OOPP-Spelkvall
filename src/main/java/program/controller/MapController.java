@@ -204,7 +204,7 @@ public class MapController extends AnchorPane implements IObservable {
     private List<Text> allTexts;
     private Stage stage;
     private PauseController pauseController;
-    private boolean localmode;
+    private final boolean localmode;
 
 
     MapController(List<String> colors, List<String> logoNames, Stage stage) throws IOException {
@@ -247,8 +247,10 @@ public class MapController extends AnchorPane implements IObservable {
             int var = i;
             allButtons.get(i).setOnMouseClicked(mouseEvent -> {
                 try {
-                    if (observers.size() != 0 && !localmode) {
+                    System.out.println(localmode);
+                    if (!localmode) {
                         if (modelDataHandler.getCurrentPlayer().getMyTurn()) {
+
                             setSpace(var);
                         }
                     } else {
@@ -274,7 +276,7 @@ public class MapController extends AnchorPane implements IObservable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            view.updatePhase("MOVE", MapController.this);
+            updatePhase("MOVE");
             try {
                 resetColor();
             } catch (IOException e) {
@@ -290,31 +292,32 @@ public class MapController extends AnchorPane implements IObservable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            view.updatePhase("DEPLOY", MapController.this);
+            updatePhase("DEPLOY");
             try {
                 resetColor();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            view.updatePhaseText("DEPLOY", MapController.this);
+            modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
+            moveSlider.setMax(modelDataHandler.getDeployableUnits());
+            updateCurrentPlayer();
+
             updateCurrentPlayer();
             sliderVisibility(true);
             removeMarkedCube(secondMarked);
-            donedeploy.setDisable(true);
-            donedeploy.setStyle("-fx-background-color: #000000");
-            view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+            setDeployButton(true);
             moveSlider.setMax(modelDataHandler.getDeployableUnits());
         });
         donedeploy.setOnMouseClicked(mouseEvent -> {
             if (modelDataHandler.firstDeployment) {
-                view.updatePhase("DEPLOY", MapController.this);
+                updatePhase("DEPLOY");
                 try {
                     modelDataHandler.firstRoundNextPhase();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 updateCurrentPlayer();
-                if(!modelDataHandler.firstDeployment){
+                if (!modelDataHandler.firstDeployment) {
                     modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
                 }
                 moveSlider.setMax(modelDataHandler.getDeployableUnits());
@@ -323,23 +326,20 @@ public class MapController extends AnchorPane implements IObservable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                donedeploy.setDisable(true);
-                donedeploy.setStyle("-fx-background-color: #000000");
+                setDeployButton(true);
             } else {
                 try {
                     modelDataHandler.nextPhase();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
-                moveSlider.setMax(modelDataHandler.getDeployableUnits());
-                view.updatePhase("ATTACK", MapController.this);
-                updateCurrentPlayer();
                 try {
                     resetColor();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                updatePhase("ATTACK");
+                updateCurrentPlayer();
                 sliderVisibility(false);
                 addMarkedCube(firstMarked);
                 addMarkedCube(secondMarked);
@@ -378,8 +378,7 @@ public class MapController extends AnchorPane implements IObservable {
         }
         resetColor();
         removeMarkedCube(secondMarked);
-        donedeploy.setDisable(true);
-        donedeploy.setStyle("-fx-background-color: #000000");
+        setDeployButton(true);
         moveSlider.setMax(modelDataHandler.getDeployableUnits());
         skipAttack.setVisible(false);
     }
@@ -388,22 +387,33 @@ public class MapController extends AnchorPane implements IObservable {
         view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), this, modelDataHandler.getCurrentPlayerName());
         view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
     }
+    public void updatePhase(String phase){
+        view.updatePhase(phase, MapController.this);
+        view.updatePhaseText(phase, MapController.this);
+    }
+
+    private void setDeployButton(boolean b){
+        donedeploy.setDisable(b);
+        if(b){
+            donedeploy.setStyle("-fx-background-color: #000000");
+        }
+        else {
+            donedeploy.setStyle(null);
+        }
+    }
 
     public void deploy() throws IOException {
         if (modelDataHandler.startPhase()) {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
             notifyObservers(new Space(modelDataHandler.getSelectedSpace()));
-
         }
         if (modelDataHandler.getDeployableUnits() == 0) {
-            donedeploy.setDisable(false);
-            donedeploy.setStyle(null);
+            setDeployButton(false);
         }
     }
 
     public void attack() throws IOException {
-        view.updatePhase("ATTACK", this);
         if (modelDataHandler.startPhase()) {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
@@ -429,7 +439,7 @@ public class MapController extends AnchorPane implements IObservable {
     public void changeToAttackView() throws IOException {
         if (attackController == null) {
             attackController = new AttackController(this);
-            if (observers.size() == 0 && !localmode) {
+            if (localmode) {
                 attackController.attack();
             }
             Platform.runLater(() -> rootpane.getChildren().add(attackController));
@@ -522,7 +532,7 @@ public class MapController extends AnchorPane implements IObservable {
             view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
             view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
             notifyObservers(new Space(modelDataHandler.getSpaceFromId(id)));
-            if (observers.size() == 0 && localmode) {
+            if (localmode) {
                 displayCubes(id);
             }
         } else {

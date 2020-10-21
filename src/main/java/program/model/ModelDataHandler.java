@@ -23,8 +23,8 @@ public class ModelDataHandler implements IObservable {
     public boolean firstDeployment = true;
 
     public List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
-            "RodaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hrum",
-            "Alvan", "Spektrum", "Gasquen", "Chalmersplatsen", "Olgas", "RunAn", "Tagvagnen", "Origogarden", "KalleGlader", "Tvargatan"));
+            "RödaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hyddan",
+            "Alvan", "Spektrum", "Gasquen", "Chalmersplatsen", "Olgas", "RunAn", "Tagvagnen", "Origogården", "KalleGlader", "Tvargatan"));
 
     /**
      * Overrides the default constructor to prevent other classes from creating new ModelDataHandlers.
@@ -166,8 +166,8 @@ public class ModelDataHandler implements IObservable {
         resetSelectedSpaces();
         phaseCount++;
         if (phaseCount > 3) {
-            notifyObservers(new Player(currentPlayer));
             currentPlayer = nextPlayer(players, currentPlayer);
+            notifyObservers(new Player(currentPlayer));
             phaseCount = 1;
         }
     }
@@ -285,7 +285,7 @@ public class ModelDataHandler implements IObservable {
      * @return the id of a player as a String.
      */
     public String getCurrentPlayerName() {
-        return String.valueOf(currentPlayer.getId() + 1);
+        return currentPlayer.getName();
     }
 
     public String getCurrentPlayerColor() {

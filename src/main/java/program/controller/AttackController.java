@@ -85,6 +85,7 @@ public class AttackController extends AnchorPane {
     public void attack(Attack attack) {
         attackView.updateDice(attack);
         attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton, attack);
+        attackView.updatePicture(modelDataHandler.getSelectedSpace2(), attackBackgroundImage);
     }
 
     /**

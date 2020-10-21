@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import program.client.Client;
 import program.model.IObservable;
 import program.model.IObserver;
 import program.model.Player;
@@ -106,7 +107,7 @@ public class StartController extends AnchorPane implements IObservable {
     }
 
     public void goToLobbySelect() throws IOException {
-        notifyObservers("startConnection");
+        Client.getClient().startConnection("95.80.61.51", 6666, this);
         notifyObservers("LOBBYS");
         if (observers.size() != 0) {
             rootpane.getChildren().add(lobbySelectController);
