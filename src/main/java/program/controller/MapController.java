@@ -247,7 +247,6 @@ public class MapController extends AnchorPane implements IObservable {
             int var = i;
             allButtons.get(i).setOnMouseClicked(mouseEvent -> {
                 try {
-                    System.out.println(localmode);
                     if (!localmode) {
                         if (modelDataHandler.getCurrentPlayer().getMyTurn()) {
 
@@ -301,8 +300,6 @@ public class MapController extends AnchorPane implements IObservable {
             modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
             moveSlider.setMax(modelDataHandler.getDeployableUnits());
             updateCurrentPlayer();
-
-            updateCurrentPlayer();
             sliderVisibility(true);
             removeMarkedCube(secondMarked);
             setDeployButton(true);
@@ -316,10 +313,10 @@ public class MapController extends AnchorPane implements IObservable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                updateCurrentPlayer();
-                if (!modelDataHandler.firstDeployment) {
+                if(!modelDataHandler.firstDeployment){
                     modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
                 }
+                updateCurrentPlayer();
                 moveSlider.setMax(modelDataHandler.getDeployableUnits());
                 try {
                     resetColor();
@@ -333,6 +330,7 @@ public class MapController extends AnchorPane implements IObservable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                moveSlider.setMax(modelDataHandler.getDeployableUnits());
                 try {
                     resetColor();
                 } catch (IOException e) {
@@ -406,6 +404,7 @@ public class MapController extends AnchorPane implements IObservable {
         if (modelDataHandler.startPhase()) {
             setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
             view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+            moveSlider.setMax(modelDataHandler.getDeployableUnits());
             notifyObservers(new Space(modelDataHandler.getSelectedSpace()));
         }
         if (modelDataHandler.getDeployableUnits() == 0) {
@@ -586,16 +585,18 @@ public class MapController extends AnchorPane implements IObservable {
     }
 
     public void displayCubes(int id) {
-        if (firstMarked.getStyle().isEmpty()) {
-            view.updateDisplayCubes(firstMarked, modelDataHandler.getColorOnSpace(id));
-        } else {
-            view.updateDisplayCubes(secondMarked, modelDataHandler.getColorOnSpace(id));
-        }
-        if (firstDisplayText.getText().isEmpty()) {
-            view.updateDisplayTexts(firstDisplayText, getTextFromList(id));
-        } else {
-            view.updateDisplayTexts(secondDisplayText, getTextFromList(id));
-        }
+        Platform.runLater(() -> {
+            if (firstMarked.getStyle().isEmpty()) {
+                view.updateDisplayCubes(firstMarked, modelDataHandler.getColorOnSpace(id));
+            } else {
+                view.updateDisplayCubes(secondMarked, modelDataHandler.getColorOnSpace(id));
+            }
+            if (firstDisplayText.getText().isEmpty()) {
+                view.updateDisplayTexts(firstDisplayText, getTextFromList(id));
+            } else {
+                view.updateDisplayTexts(secondDisplayText, getTextFromList(id));
+            }
+        });
     }
 
     private void resetDisplayCubes() {

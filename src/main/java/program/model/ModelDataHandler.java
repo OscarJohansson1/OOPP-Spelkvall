@@ -217,9 +217,6 @@ public class ModelDataHandler implements IObservable {
      * @return Should return the calculated amount. Is hard coded right now and needs to be fixed
      */
     public int calculateDeployableUnits(Player player) {
-        if (player.getUnits() != 0) {
-            return player.getUnits();
-        }
         return board.getUnitsForSpacesHold(player) + board.getUnitsFromAreas(player);
     }
 
