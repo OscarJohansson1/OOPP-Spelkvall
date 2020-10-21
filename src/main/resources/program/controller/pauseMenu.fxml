@@ -30,7 +30,7 @@
                               <Font size="37.0" />
                            </font>
                         </Button>
-                        <Button fx:id="newGameButton" layoutX="310.0" layoutY="120.0" mnemonicParsing="false" onMouseClicked="#newGameButtonPressed" prefHeight="100.0" prefWidth="900.0" text="Start new game">
+                        <Button fx:id="newGameButton" layoutX="310.0" layoutY="120.0" mnemonicParsing="false" onMouseClicked="#newGameButtonPressed" prefHeight="100.0" prefWidth="900.0" text="To Start Menu">
                            <font>
                               <Font size="37.0" />
                            </font>

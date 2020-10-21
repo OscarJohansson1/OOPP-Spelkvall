@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import program.model.GameManager;
 import program.model.AttackPhase;
@@ -20,39 +21,28 @@ import java.util.*;
 
 public class AttackController extends AnchorPane {
 
-    @FXML
-    private ImageView attackerDieImage1;
-    @FXML
-    private ImageView attackerDieImage2;
-    @FXML
-    private ImageView attackerDieImage3;
+    @FXML private ImageView attackerDieImage1;
+    @FXML private ImageView attackerDieImage2;
+    @FXML private ImageView attackerDieImage3;
 
-    @FXML
-    private ImageView defenderDieImage1;
-    @FXML
-    private ImageView defenderDieImage2;
+    @FXML private ImageView defenderDieImage1;
+    @FXML private ImageView defenderDieImage2;
 
-    @FXML
-    Button attackButton;
-    @FXML
-    Button abortButton;
+    @FXML Button attackButton;
+    @FXML Button abortButton;
 
-    @FXML
-    private Text attackerText;
-    @FXML
-    private Text defenderText;
+    @FXML private Text attackerText;
+    @FXML private Text defenderText;
 
-    @FXML
-    private Text attackerUnits;
-    @FXML
-    private Text defenderUnits;
+    @FXML private Text attackerUnits;
+    @FXML private Text defenderUnits;
 
-    @FXML
-    private ImageView attackerImageView;
-    @FXML
-    private ImageView defenderImageView;
-    @FXML
-    private ImageView attackBackgroundImage;
+    @FXML private ImageView attackerImageView;
+    @FXML private ImageView defenderImageView;
+    @FXML private ImageView attackBackgroundImage;
+
+    @FXML private HBox attackerDiceHBox;
+    @FXML private HBox defenderDiceHBox;
 
     public final AttackView attackView;
     private final MapController mapController;
@@ -74,6 +64,9 @@ public class AttackController extends AnchorPane {
         this.mapController = mapController;
         this.modelDataHandler = GameManager.getGameManager();
         this.attackView = new AttackView(new ArrayList<>(Arrays.asList(attackerDieImage1, attackerDieImage2, attackerDieImage3, defenderDieImage1, defenderDieImage2)), new ArrayList<>(Arrays.asList(attackerImageView, defenderImageView)));
+
+        attackerDiceHBox.setSpacing(30);
+        defenderDiceHBox.setSpacing(30);
     }
 
     void attack() throws IOException {
