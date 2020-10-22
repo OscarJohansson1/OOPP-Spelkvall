@@ -413,7 +413,6 @@ public class MapController extends AnchorPane implements IObservable {
 
     public boolean attack() throws IOException {
         if (gameManager.startPhase()) {
-            System.out.println("Ajjemän" + gameManager.getAttackerDiceResults());
             changeToAttackView();
             if (gameManager.getAttack().destroyedOpponent) {
                 gameManager.getSelectedSpace2().setPlayer(gameManager.getSelectedSpace().getPlayer());

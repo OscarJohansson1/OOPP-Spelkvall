@@ -157,9 +157,11 @@ public class Client implements IObserver {
                         if (player == null) {
                             player = playerList.get(playerList.size() - 1);
                         }
+                        return;
                     } else if (object instanceof Integer) {
                         if (mapController == null) {
                             startController.multiplayerLogoController.updateGridPane((List<Integer>) message);
+                            return;
                         }
                     } else if (object instanceof String) {
                         lobbyItemCreator.setVariables((String) object);
