@@ -16,9 +16,9 @@ public class TestMovePhase {
     Space space2;
 
     @Before
-    public void before(){
-        player1 = new Player(10,1, "#123123", "hej", "hej");
-        player2 = new Player(10,2, "#123123", "hej", "hej");
+    public void before() {
+        player1 = new Player(10, 1, "#123123", "hej", "hej");
+        player2 = new Player(10, 2, "#123123", "hej", "hej");
 
         space1 = new Space(1, player1, 15, "Test");
         space2 = new Space(2, player1, 5, "Test");
@@ -33,7 +33,7 @@ public class TestMovePhase {
 
     @Test
     public void testMovementWithIllegalUnits() {
-        movement.startPhase(space1, space2, player1,20);
+        movement.startPhase(space1, space2, player1, 20);
         assertEquals(15, space1.getUnits(), "Units were moved when they shouldn't have been");
         assertEquals(5, space2.getUnits(), "Units were moved when they shouldn't have been");
     }

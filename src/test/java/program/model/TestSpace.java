@@ -10,30 +10,39 @@ import org.junit.Test;
 
 public class TestSpace {
 
-    private Player player1 = new Player(10, 1, "#123123", "hej", "hej");
-    private Player player2 = new Player(15, 2, "#123123", "hej", "hej");
-    private Space space1 = new Space(1, player1,10, "Space");
+    private Player player1;
+    private Player player2;
+    private Space space1;
+    private Space space2;
 
-    /*
+
     @Before
     public void before(){
 
-        Stage stage = new Stage();
-
-        player1 = new Player(10, 1, Color.color(1,0,0), "");
-        player2 = new Player(15, 2, Color.color(0,0,1), "");
-        space1 = new Space(1, player1,10, "Space");
-    }*/
+        player1 = new Player(10, 1, "#123123", "hej", "hej");
+        player2 = new Player(15, 2, "#123123", "hej", "hej");
+        space1 = new Space(1, player1,10, "FirstSpace");
+        space2 = new Space(2, player2,10, "SecondSpace");
+    }
 
     @Test
-    public void testUpdateSpace() {
+    public void testUpdateSpaceNewUnits() {
         space1.updateSpace(20);
-        assertEquals(space1.getUnits(), 20);
+        assertEquals(space1.getUnits(), 20, "Units didn't change when space was updated");
     }
 
     @Test
     public void testUpdateSpaceNewPlayer() {
         space1.updateSpace(player2,20);
-        assertEquals(space1.getPlayer(), player2, "Player didn't change when space was updated");
+        assertEquals(player2.getId(), space1.getPlayerId(), "Player didn't change when space was updated");
+    }
+
+    @Test
+    public void testUpdateSpaceNewSpace(){
+        space1.updateSpace(space2);
+        assertEquals(space2.getId(), space1.getId(), "Id didn't change when space was updated");
+        assertEquals(space2.getPlayerId(), space1.getPlayerId(), "Player didn't change when space was updated");
+        assertEquals(space2.getUnits(), space1.getUnits(), "Units didn't change when space was updated");
+        assertEquals(space2.getName(), space1.getName(), "Name didn't change when space was updated");
     }
 }
