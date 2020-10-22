@@ -20,7 +20,6 @@ public class BoardManager implements Serializable {
      */
     public BoardManager(IBoard board) {
         this.board = board;
-
     }
 
     /**
