@@ -126,6 +126,7 @@ public class Client implements IObserver {
                     startController.lobbyReadyController.startButton.setDisable(true);
                 } else if (message.equals("resetColor")) {
                     mapController.resetColorOnline();
+
                 } else if (message.equals("nextPhase")) {
                     gameManager.round.nextPhase();
                     mapController.view.updatePhase(gameManager.getCurrentPhase(), mapController);

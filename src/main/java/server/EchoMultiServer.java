@@ -124,7 +124,7 @@ public class EchoMultiServer {
             } else if (inputLine instanceof Player) {
                 Player receivedPlayer = (Player) inputLine;
                 if (player == null) {
-                    player = receivedPlayer;
+                    player = new Player(receivedPlayer);
                 }
                 if (menuLobby != null) {
                     menuLobby.addPlayer(receivedPlayer);

@@ -405,6 +405,7 @@ public class MapController extends AnchorPane implements IObservable {
             view.updateDeployableUnits(deployableUnitsText, gameManager.getDeployableUnits());
             moveSlider.setMax(gameManager.getDeployableUnits());
             notifyObservers(new Space(gameManager.getSelectedSpace()));
+            gameManager.resetSelectedSpaces();
         }
         if (gameManager.getDeployableUnits() == 0) {
             setDeployButton(false);
@@ -421,6 +422,7 @@ public class MapController extends AnchorPane implements IObservable {
             notifyObservers(new Space(gameManager.getSelectedSpace()));
             notifyObservers(new Space(gameManager.getSelectedSpace2()));
             notifyObservers(new AttackPhase(gameManager.getAttack()));
+            gameManager.resetSelectedSpaces();
             return true;
         } else {
             return false;
