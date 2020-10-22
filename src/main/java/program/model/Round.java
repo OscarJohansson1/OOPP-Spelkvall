@@ -9,10 +9,6 @@ public class Round {
 
     private IPhase currentPhaseNew;
 
-    Round() {
-
-    }
-
     /**
      * Method that switch to the next phase. If the current phase is Move, switch to Deploy instead.
      */
