@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestAttack {
+public class TestAttackPhase {
 
     private Player player1;
     private Player player2;

@@ -88,6 +88,4 @@ public class Player implements Serializable {
     public boolean isReady() {
         return ready;
     }
-
-
 }

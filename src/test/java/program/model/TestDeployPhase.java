@@ -3,7 +3,7 @@ package program.model;
 import javafx.scene.shape.Rectangle;
 import org.junit.Before;
 
-public class TestDeployment {
+public class TestDeployPhase {
 
     DeployPhase deployment = new DeployPhase();
 
