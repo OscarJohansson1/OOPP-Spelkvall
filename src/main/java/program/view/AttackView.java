@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import program.facade.ModelAttackViewFacade;
+import program.model.ModelToViewFacade;
 import program.model.*;
 
 
@@ -17,14 +17,14 @@ public class AttackView extends AnchorPane implements IObservable {
 
     public final List<IObserver> observers = new ArrayList<>();
 
-    private final ModelAttackViewFacade model = new ModelAttackViewFacade();
+    private final ModelToViewFacade model = new ModelToViewFacade();
 
     private final List<ImageView> images;
 
 
     public AttackView(ArrayList<ImageView> images, ArrayList<ImageView> logoImages) {
         this.images = images;
-        setLogoImages(model.getTeamLogo(model.getSelectedSpaceId(1)), model.getTeamLogo(model.getSelectedSpaceId(2)), logoImages);
+        setLogoImages(new Image(model.getTeamLogo(model.getSelectedSpaceId(1))), new Image(model.getTeamLogo(model.getSelectedSpaceId(2))), logoImages);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class AttackView extends AnchorPane implements IObservable {
 
     }
 
-    public void updateDice() throws IOException {
+    public void updateDice() {
         List<Integer> whiteDices = model.getAttackerDiceResults();
         List<Integer> blackDices = model.getDefenderDiceResults();
         updateDie(whiteDices, blackDices);
@@ -112,8 +112,8 @@ public class AttackView extends AnchorPane implements IObservable {
         images.get(1).setImage(defenderImage);
     }
 
-    private void updateText(Text text, String replacestring) {
-        text.setText(replacestring);
+    private void updateText(Text text, String replaceString) {
+        text.setText(replaceString);
     }
 
     public void updatePicture(Space space, ImageView imageView) {
