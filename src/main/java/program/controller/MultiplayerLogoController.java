@@ -92,7 +92,6 @@ public class MultiplayerLogoController extends AnchorPane {
 
     public void backToLobbySelect() throws IOException {
         startController.removeSetUp();
-        startController.goToLobbySelect();
     }
 
     public void choose() throws IOException {

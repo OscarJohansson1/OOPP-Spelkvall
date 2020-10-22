@@ -75,6 +75,11 @@ public class LobbyReadyController extends AnchorPane {
     }
 
     @FXML
+    public void backToTeamSelect() throws IOException {
+        startController.removeLobbyReady();
+    }
+
+    @FXML
     public void ready() throws IOException {
         if (readyButton.getStyle().equals("")) {
             readyButton.setStyle("-fx-background-color: #5DFF00;");

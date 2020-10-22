@@ -16,7 +16,7 @@
                <children>
                   <AnchorPane prefHeight="880.0" prefWidth="1520.0" style="-fx-background-color: #FFFFFF;" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="100.0">
                      <children>
-                        <Button fx:id="backButton" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="258.0" styleClass="standard-button" text="Back to team select" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
+                        <Button fx:id="backButton" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#backToTeamSelect" prefHeight="80.0" prefWidth="258.0" styleClass="standard-button" text="Back to team select" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
                         <Button fx:id="readyButton" layoutX="1229.0" layoutY="697.0" mnemonicParsing="false" onAction="#ready" prefHeight="80.0" prefWidth="200.0" styleClass="standard-button" text="Ready" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0" />
                         <Pane layoutX="983.0" layoutY="141.0" prefHeight="530.0" prefWidth="530.0" style="-fx-border-color: black;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="140.0">
                            <children>

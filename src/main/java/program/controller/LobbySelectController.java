@@ -52,6 +52,7 @@ public class LobbySelectController extends AnchorPane {
 
     public void updateLobbies() {
         Platform.runLater(() -> {
+            lobbyFlow.getChildren().removeAll();
             lobbyFlow.getChildren().addAll(lobbyItems);
             });
 

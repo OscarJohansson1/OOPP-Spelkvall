@@ -24,7 +24,7 @@ public class Client implements IObserver {
     private MapController mapController;
     private Player player;
     private final LobbyItemCreator lobbyItemCreator = new LobbyItemCreator();
-    private GameManager modelDataHandler;
+    private GameManager gameManager;
     private boolean startedGame = false;
     public boolean hasConnection = false;
 
@@ -53,8 +53,8 @@ public class Client implements IObserver {
         startController.addObserver(this);
         messages = new LinkedBlockingQueue<>();
         System.out.println("Connected to 95.80.61.51, Port: 6666");
-        modelDataHandler = GameManager.getGameManager();
-        modelDataHandler.addObserver(this);
+        gameManager = GameManager.getGameManager();
+        gameManager.addObserver(this);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 stopConnection();
@@ -113,9 +113,9 @@ public class Client implements IObserver {
                     Stage stage = startController.stage;
                     mapController = new MapController(stage);
                     mapController.addObserver(this);
-                    player.setMyTurn(modelDataHandler.getCurrentPlayer().getId() == player.getId());
-                    modelDataHandler = GameManager.getGameManager();
-                    modelDataHandler.addObserver(this);
+                    player.setMyTurn(gameManager.getCurrentPlayer().getId() == player.getId());
+                    gameManager = GameManager.getGameManager();
+                    gameManager.addObserver(this);
                     Platform.runLater(() -> {
                         Scene scene = new Scene(mapController, 1920, 1080);
                         stage.setTitle("program.Chans");
@@ -129,9 +129,9 @@ public class Client implements IObserver {
                 } else if (message.equals("resetColor")) {
                     mapController.resetColorOnline();
                 } else if (message.equals("nextPhase")) {
-                    modelDataHandler.round.nextPhase();
-                    mapController.view.updatePhase(modelDataHandler.getCurrentPhase(), mapController);
-                    if (!modelDataHandler.getCurrentPhase().equals("DEPLOY")) {
+                    gameManager.round.nextPhase();
+                    mapController.view.updatePhase(gameManager.getCurrentPhase(), mapController);
+                    if (!gameManager.getCurrentPhase().equals("DEPLOY")) {
                         mapController.addMarkedCube(mapController.secondMarked);
                     } else {
                         mapController.removeMarkedCube(mapController.secondMarked);
@@ -140,13 +140,13 @@ public class Client implements IObserver {
                     mapController.removeOnlineAttackView();
 
                 } else if (message.equals("resetSelectedSpaces")) {
-                    modelDataHandler.resetSpaces();
+                    gameManager.resetSpaces();
                 }
             } else if (message instanceof Integer) {
-                if (modelDataHandler.getCurrentPlayer() == null) {
-                    modelDataHandler.setCurrentPlayer(modelDataHandler.getPlayers().get((Integer) message));
+                if (gameManager.getCurrentPlayer() == null) {
+                    gameManager.setCurrentPlayer(gameManager.getPlayers().get((Integer) message));
                 } else if (startedGame) {
-                    modelDataHandler.setRoundCount((Integer) message);
+                    gameManager.setRoundCount((Integer) message);
                     return;
                 }
                 player.setId((Integer) message);
@@ -154,7 +154,7 @@ public class Client implements IObserver {
                 for (Object object : (List<?>) message) {
                     if (object instanceof Player) {
                         List<Player> playerList = (List<Player>) message;
-                        modelDataHandler.setPlayers(playerList);
+                        gameManager.setPlayers(playerList);
                         startController.lobbyReadyController.updateUserCards(playerList);
                         if (player == null) {
                             player = playerList.get(playerList.size() - 1);
@@ -173,36 +173,36 @@ public class Client implements IObserver {
                     }
                 }
             } else if (message instanceof BoardManager) {
-                modelDataHandler.setBoard((BoardManager) message);
+                gameManager.setBoard((BoardManager) message);
             } else if (message instanceof Boolean) {
                 if ((Boolean) message)
                     startController.lobbyReadyController.startButton.setVisible(true);
             } else if (message instanceof Space) {
                 Space space = (Space) message;
-                modelDataHandler.receiveOnlineSelectedSpace(space);
+                gameManager.receiveOnlineSelectedSpace(space);
                 mapController.view.updateTextUnits(space.getId(), space.getUnits(), mapController.allButtons, mapController);
-                mapController.view.setColor(mapController.getCube(space.getId()), Color.web(modelDataHandler.getColorOnSpace(space.getId())).darker().darker(), mapController.allButtons);
+                mapController.view.setColor(mapController.getCube(space.getId()), Color.web(gameManager.getColorOnSpace(space.getId())).darker().darker(), mapController.allButtons);
                 mapController.displayCubes(space.getId());
 
 
             } else if (message instanceof Player) {
                 Player receivedPlayer = (Player) message;
-                modelDataHandler.setCurrentPlayer(receivedPlayer);
-                if (modelDataHandler.getRoundCount() > modelDataHandler.getPlayers().size()) {
-                    modelDataHandler.firstDeployment = false;
+                gameManager.setCurrentPlayer(receivedPlayer);
+                if (gameManager.getRoundCount() > gameManager.getPlayers().size()) {
+                    gameManager.firstDeployment = false;
                     receivedPlayer.setUnits(0);
-                    modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
-                    mapController.moveSlider.setMax(modelDataHandler.getCurrentPlayer().getUnits());
+                    gameManager.setDeployableUnits(gameManager.calculateDeployableUnits(gameManager.getCurrentPlayer()));
+                    mapController.moveSlider.setMax(gameManager.getCurrentPlayer().getUnits());
                 }
                 mapController.updateCurrentPlayer();
                 if (player.getId() == ((Player) message).getId()) {
                     player.setMyTurn(true);
-                    modelDataHandler.getCurrentPlayer().setMyTurn(true);
+                    gameManager.getCurrentPlayer().setMyTurn(true);
                     mapController.view.myturn(mapController);
                 } else {
                     player.setMyTurn(false);
                     mapController.view.otherPlayerPlaying(mapController);
-                    modelDataHandler.getCurrentPlayer().setMyTurn(false);
+                    gameManager.getCurrentPlayer().setMyTurn(false);
                 }
 
             } else if (message instanceof AttackPhase) {
@@ -211,7 +211,7 @@ public class Client implements IObserver {
                     mapController.attackController.attackView.addObserver(this);
                 }
                 mapController.attackController.attack((AttackPhase) message);
-                if (player.getId() != modelDataHandler.getCurrentPlayer().getId()) {
+                if (player.getId() != gameManager.getCurrentPlayer().getId()) {
                     mapController.removeAbortAndAttack();
                 }
             }
@@ -228,15 +228,16 @@ public class Client implements IObserver {
         this.player = player;
     }
 
-    private void removeObserver(){
+    public void removeObserver(){
         if(startController != null){
-            mapController.removeObserver(this);
+            startController.removeObserver(this);
         }
         if(mapController != null){
             mapController.removeObserver(this);
         }
-        startController.removeObserver(this);
-        mapController.removeObserver(this);
+        if(gameManager != null){
+            gameManager.removeObserver(this);
+        }
     }
 
     public void stopConnection() throws IOException {

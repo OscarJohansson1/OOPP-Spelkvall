@@ -109,6 +109,17 @@ public class EchoMultiServer {
                     writeToAllInLobby("removeAttackView", gameLobby);
                 } else if (inputLine.equals("nextPhase")) {
                     writeToAllInLobby("nextPhase", gameLobby);
+                } else if (inputLine.equals("removePlayer")) {
+                    for (Player player : menuLobby.getLobbyPlayers()) {
+                        assert this.player != null;
+                        if (this.player.getId() == player.getId()) {
+                            removePlayerFromLobby(menuLobby, this.player);
+                            menuLobby.getGridPane().remove(menuLobby.getGridPane().get(this.player.getId()));
+                            this.player = null;
+                            menuLobby = null;
+                            break;
+                        }
+                    }
                 }
             } else if (inputLine instanceof Space) {
                 writeToAllInLobby(inputLine, gameLobby);
@@ -134,6 +145,7 @@ public class EchoMultiServer {
                     menuLobby = lobbyController.getMenuLobbies().get((Integer) inputLine);
                 } else if (menuLobby != null) {
                     menuLobby.getGridPane().add((Integer) inputLine);
+                    writeToAllInLobby(menuLobby.getGridPane(), menuLobby);
                 } else {
                     writeToAllInLobby(inputLine, gameLobby);
                 }
@@ -144,6 +156,15 @@ public class EchoMultiServer {
             }
         }
 
+
+        private void removePlayerFromLobby(Lobby lobby, Player player) throws IOException {
+            for(ClientHandler clientHandler: clients){
+                if(clientHandler.menuLobby != null && clientHandler.menuLobby.lobbyId == lobby.lobbyId){
+                    clientHandler.menuLobby.getLobbyPlayers().remove(player);
+                }
+            }
+            writeToAllInLobby(lobby.getLobbyPlayers(), lobby);
+        }
         private void addClientsToGameLobby(GameLobby gameLobby) {
             lobbyController.addMenuLobbyPlayersToGameLobby(menuLobby, gameLobby);
             for (ClientHandler clientHandler : clients) {
@@ -153,7 +174,6 @@ public class EchoMultiServer {
                 }
             }
         }
-
         private void writeToAllInLobby(Object input, Lobby lobby) throws IOException {
             for (ClientHandler client : findClientsInLobby(lobby)) {
                 client.outObject.writeObject(input);

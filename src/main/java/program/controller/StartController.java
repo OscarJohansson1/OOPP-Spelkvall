@@ -17,6 +17,7 @@ import program.model.Player;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -104,7 +105,7 @@ public class StartController extends AnchorPane implements IObservable {
         });
         startButton2.setOnMouseClicked(mouseEvent -> {
             try {
-                goToLobbySelect();
+                goOnline();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -112,16 +113,22 @@ public class StartController extends AnchorPane implements IObservable {
     }
 
     public void goToLobbySelect() throws IOException {
-        lobbySelectController.lobbyItems = new ArrayList<>();
-        lobbySelectController.lobbyFlow.getChildren().removeAll(lobbySelectController.lobbyItems);
-        if (!Client.getClient().hasConnection) {
-            Client.getClient().startConnection("95.80.61.51", 6666, this);
-            System.out.println("Yes");
-            notifyObservers("LOBBYS");
-        }
+        lobbySelectController = new LobbySelectController(this);
+        notifyObservers("LOBBYS");
         if (observers.size() != 0) {
             rootpane.getChildren().add(lobbySelectController);
         }
+    }
+
+    public void goOnline() throws IOException {
+        if (observers.size() == 0) {
+            Client.getClient().startConnection("95.80.61.51", 6666, this);
+        }
+        goToLobbySelect();
+    }
+
+    public void exitOnline() throws IOException {
+        Client.getClient().removeObserver();
     }
 
     public void goToLobbyReady(Player player, int gridPosImageview) throws IOException {
@@ -150,13 +157,20 @@ public class StartController extends AnchorPane implements IObservable {
         notifyObservers("startGame");
     }
 
-    public void removeSetUp() {
+    public void removeSetUp() throws IOException {
         rootpane.getChildren().remove(multiplayerLogoController);
+        goToLobbySelect();
+    }
+
+    public void removeLobbyReady() throws IOException {
+        rootpane.getChildren().remove(lobbyReadyController);
+        notifyObservers("removePlayer");
+        goToLobbySelect();
     }
 
     public void backToMainMenu() throws IOException {
         rootpane.getChildren().remove(lobbySelectController);
-        Client.getClient().stopConnection();
+        exitOnline();
     }
 
     public void backToLobbySelect() {
@@ -168,7 +182,6 @@ public class StartController extends AnchorPane implements IObservable {
 
 
     }
-
 
     public void toLobbySelect() {
         rootpane.getChildren().remove(multiplayerLogoController);
