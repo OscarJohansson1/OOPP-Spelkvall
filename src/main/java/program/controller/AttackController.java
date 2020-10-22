@@ -84,7 +84,7 @@ public class AttackController extends AnchorPane {
     @FXML
     public void attackButtonPressed() throws IOException {
         if(!Client.getClient().hasConnection){
-            if(!modelDataHandler.startPhase()){
+            if(!mapController.attack()){
                 attackView.attackDone(attackButton,abortButton);
                 return;
             }

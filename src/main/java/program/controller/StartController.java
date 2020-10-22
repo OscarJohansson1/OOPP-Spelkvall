@@ -129,6 +129,7 @@ public class StartController extends AnchorPane implements IObservable {
 
     public void exitOnline() throws IOException {
         Client.getClient().removeObserver();
+        Client.getClient().stopConnection();
     }
 
     public void goToLobbyReady(Player player, int gridPosImageview) throws IOException {
