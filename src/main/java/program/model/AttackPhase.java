@@ -20,9 +20,7 @@ public class AttackPhase implements IPhase, Serializable {
 
     public boolean nextAttackPossible = true;
 
-    private Space oldspace;
-
-    private boolean destroyedOpponent = false;
+    public boolean destroyedOpponent = false;
 
 
     public AttackPhase() {
@@ -36,6 +34,7 @@ public class AttackPhase implements IPhase, Serializable {
         attackerLoss = attack.attackerLoss;
         defenderLoss = attack.defenderLoss;
         nextAttackPossible = attack.nextAttackPossible;
+        destroyedOpponent = attack.destroyedOpponent;
     }
 
     /**
@@ -50,7 +49,7 @@ public class AttackPhase implements IPhase, Serializable {
     public boolean startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
         if (selectedSpace != null && selectedSpace2 != null) {
             if (isAttackPossible(selectedSpace.getUnits())) {
-                oldspace = selectedSpace2;
+                destroyedOpponent = false;
                 savePreAttackState(selectedSpace, selectedSpace2);
                 calculateAttack(selectedSpace, selectedSpace2);
                 updateCasualties(selectedSpace, selectedSpace2);
@@ -70,7 +69,6 @@ public class AttackPhase implements IPhase, Serializable {
             attackerLoss -= defender.getUnits() + 1;
             defenderLoss = -1;
             nextAttackPossible = false;
-            destroyedOpponent = false;
         } else if (attacker.getUnits() == 1) {
             attackerLoss -= attacker.getUnits();
             defenderLoss -= defender.getUnits();
@@ -93,6 +91,7 @@ public class AttackPhase implements IPhase, Serializable {
                     defender.updateSpace(attacker.getUnits() - 1);
                     destroyedOpponent = true;
                     attacker.updateSpace(1);
+                    System.out.println("opponent destroyed");
                 }
             } else {
                 attacker.updateSpace(attacker.getUnits() - 1);
@@ -176,10 +175,6 @@ public class AttackPhase implements IPhase, Serializable {
             results.add(" lost: " + defenderLoss);
         }
         return results;
-    }
-
-    public Space getOldspace() {
-        return oldspace;
     }
 
     @Override

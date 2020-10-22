@@ -72,7 +72,6 @@ public class EchoMultiServer {
         private void handleObject(Object inputLine) throws IOException {
             System.out.println("Recieved: " + inputLine);
             if (inputLine instanceof String) {
-
                 if (inputLine.equals("LOBBYS")) {
                     for (MenuLobby menuLobby : lobbyController.getMenuLobbies()) {
                         List<String> strings = new ArrayList<>();
@@ -83,11 +82,12 @@ public class EchoMultiServer {
                         outObject.writeObject(strings);
                         this.menuLobby = null;
                     }
-
+                    return;
                 } else if (inputLine.equals("LOBBYLEADER")) {
                     if (menuLobby.getLobbyPlayers().size() == 1) {
                         outObject.writeObject(true);
                     }
+                    return;
                 } else if (inputLine.equals("startGame")) {
                     lobbyController.createNewGameLobby(menuLobby.getLobbyName());
                     gameLobby = lobbyController.getGameLobbies().get(lobbyController.getGameLobbies().size() - 1);
@@ -97,18 +97,13 @@ public class EchoMultiServer {
                     writeToAllInLobby(gameLobby.initializeBoard(), gameLobby);
                     writeToAllInLobby("startGame", gameLobby);
                     writeToAllInLobby(gameLobby.nextPlayer(), gameLobby);
-                } else if (inputLine.equals("resetColor")) {
-                    writeToAllInLobby("resetColor", gameLobby);
-                } else if (inputLine.equals("resetSelectedSpaces")) {
-                    writeToAllInLobby("resetSelectedSpaces", gameLobby);
+                    return;
                 } else if (inputLine.equals("nextPlayer")) {
                     writeToAllInLobby(gameLobby.nextPlayer(), gameLobby);
+                    return;
                 } else if (inputLine.equals("gridPane")) {
                     outObject.writeObject(new ArrayList<>(menuLobby.getGridPane()));
-                } else if (inputLine.equals("removeAttackView")) {
-                    writeToAllInLobby("removeAttackView", gameLobby);
-                } else if (inputLine.equals("nextPhase")) {
-                    writeToAllInLobby("nextPhase", gameLobby);
+                    return;
                 } else if (inputLine.equals("removePlayer")) {
                     for (Player player : menuLobby.getLobbyPlayers()) {
                         assert this.player != null;
@@ -120,12 +115,12 @@ public class EchoMultiServer {
                             break;
                         }
                     }
+                    return;
                 }
-            } else if (inputLine instanceof Space) {
-                writeToAllInLobby(inputLine, gameLobby);
             } else if (inputLine instanceof Boolean) {
                 player.setReady(!player.isReady());
                 writeToLobbyLeaderInLobby(menuLobby, menuLobby.checkIfAllPlayersReady());
+                return;
             } else if (inputLine instanceof Player) {
                 Player receivedPlayer = (Player) inputLine;
                 if (player == null) {
@@ -136,35 +131,30 @@ public class EchoMultiServer {
                     receivedPlayer.setId(menuLobby.getLobbyPlayers().size() - 1);
                     writeToAllInLobby(new ArrayList<>(menuLobby.getLobbyPlayers()), menuLobby);
                     outObject.writeObject(menuLobby.getLobbyPlayers().indexOf(receivedPlayer));
-                } else {
-                    writeToAllInLobby(inputLine, gameLobby);
+                    return;
                 }
-
             } else if (inputLine instanceof Integer) {
                 if (menuLobby == null && gameLobby == null) {
                     menuLobby = lobbyController.getMenuLobbies().get((Integer) inputLine);
+                    return;
                 } else if (menuLobby != null) {
                     menuLobby.getGridPane().add((Integer) inputLine);
                     writeToAllInLobby(menuLobby.getGridPane(), menuLobby);
-                } else {
-                    writeToAllInLobby(inputLine, gameLobby);
+                    return;
                 }
-            } else if (inputLine instanceof List) {
-                writeToAllInLobby(inputLine, gameLobby);
-            } else if (inputLine instanceof AttackPhase) {
-                writeToAllInLobby(inputLine, gameLobby);
             }
+            writeToAllInLobby(inputLine, gameLobby);
         }
 
-
         private void removePlayerFromLobby(Lobby lobby, Player player) throws IOException {
-            for(ClientHandler clientHandler: clients){
-                if(clientHandler.menuLobby != null && clientHandler.menuLobby.lobbyId == lobby.lobbyId){
+            for (ClientHandler clientHandler : clients) {
+                if (clientHandler.menuLobby != null && clientHandler.menuLobby.lobbyId == lobby.lobbyId) {
                     clientHandler.menuLobby.getLobbyPlayers().remove(player);
                 }
             }
             writeToAllInLobby(lobby.getLobbyPlayers(), lobby);
         }
+
         private void addClientsToGameLobby(GameLobby gameLobby) {
             lobbyController.addMenuLobbyPlayersToGameLobby(menuLobby, gameLobby);
             for (ClientHandler clientHandler : clients) {
@@ -174,6 +164,7 @@ public class EchoMultiServer {
                 }
             }
         }
+
         private void writeToAllInLobby(Object input, Lobby lobby) throws IOException {
             for (ClientHandler client : findClientsInLobby(lobby)) {
                 client.outObject.writeObject(input);
@@ -204,6 +195,7 @@ public class EchoMultiServer {
             }
             return clientHandlers;
         }
+
     }
 
     public static void main(String[] args) {

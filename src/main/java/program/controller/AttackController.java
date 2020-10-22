@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import program.client.Client;
 import program.model.GameManager;
 import program.model.AttackPhase;
 import program.view.AttackView;
@@ -69,17 +70,12 @@ public class AttackController extends AnchorPane {
         defenderDiceHBox.setSpacing(30);
     }
 
-    void attack() throws IOException {
+    public void attack() throws IOException {
         attackView.updateDice();
         attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton);
         attackView.updatePicture(modelDataHandler.getSelectedSpace2(), attackBackgroundImage);
     }
 
-    public void attack(AttackPhase attack) {
-        attackView.updateDice(attack);
-        attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton, attack);
-        attackView.updatePicture(modelDataHandler.getSelectedSpace2(), attackBackgroundImage);
-    }
 
     /**
      * When the attack button is pressed in the attackView, an attack is done.
@@ -87,11 +83,18 @@ public class AttackController extends AnchorPane {
      */
     @FXML
     public void attackButtonPressed() throws IOException {
-        if (!modelDataHandler.startPhase()) {
-            attackView.attackDone(attackButton, abortButton);
-            return;
+        if(!Client.getClient().hasConnection){
+            if(!modelDataHandler.startPhase()){
+                attackView.attackDone(attackButton,abortButton);
+                return;
+            }
+            attack();
         }
-        attack();
+        else {
+            if(!mapController.attack()){
+                attackView.attackDone(attackButton, abortButton);
+            }
+        }
     }
 
     /**

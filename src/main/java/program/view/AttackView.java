@@ -48,15 +48,6 @@ public class AttackView extends AnchorPane implements IObservable {
         List<Integer> whiteDices = model.getAttackerDiceResults();
         List<Integer> blackDices = model.getDefenderDiceResults();
         updateDie(whiteDices, blackDices);
-        notifyObservers(new AttackPhase(GameManager.getGameManager().getAttack()));
-        notifyObservers(new Space(GameManager.getGameManager().getSelectedSpace()));
-        notifyObservers(new Space(GameManager.getGameManager().getSelectedSpace2()));
-    }
-
-    public void updateDice(AttackPhase attack) {
-        List<Integer> whiteDices = attack.attackerDiceResults();
-        List<Integer> blackDices = attack.defenderDiceResults();
-        updateDie(whiteDices, blackDices);
     }
 
     public void updateDie(List<Integer> whiteDices, List<Integer> blackDices) {
@@ -70,31 +61,18 @@ public class AttackView extends AnchorPane implements IObservable {
     }
 
     public void updateText(Text attackerText, Text defenderText, Text attackerUnits, Text defenderUnits, Button attackButton, Button abortButton) {
-        List<String> attackResults = model.getAttackResults();
+        List<String> attackResults  = model.getAttackResults();
         updateText(attackerText, model.getSelectedSpaceName(1) + attackResults.get(0));
         updateText(defenderText, model.getSelectedSpaceName(2) + attackResults.get(1));
         updateText(attackerUnits, model.getSelectedSpaceName(1) + " units: " + model.getSelectedSpaceUnits(1));
         updateText(defenderUnits, model.getSelectedSpaceName(2) + " units: 0");
         if (model.isAttackDone()) {
+            System.out.println("attack done");
             attackDone(attackButton, abortButton);
             updateText(attackerUnits, model.getSelectedSpaceName(1) + " units: " + model.getSelectedSpaceUnits(2));
         } else {
             updateText(defenderUnits, model.getSelectedSpaceName(2) + " units: " + model.getSelectedSpaceUnits(2));
         }
-    }
-
-    public void updateText(Text attackerText, Text defenderText, Text attackerUnits, Text defenderUnits, Button attackButton, Button abortButton, AttackPhase attack) {
-        updateText(attackerText, model.getSelectedSpaceName(1) + attack.attackResults().get(0));
-        updateText(defenderText, model.getSelectedSpaceName(2) + attack.attackResults().get(1));
-        updateText(attackerUnits, model.getSelectedSpaceName(1) + " units: " + model.getSelectedSpaceUnits(1));
-        updateText(defenderUnits, model.getSelectedSpaceName(2) + " units: 0");
-        if (!attack.nextAttackPossible) {
-            attackDone(attackButton, abortButton);
-            updateText(attackerUnits, model.getSelectedSpaceName(1) + " units: " + model.getSelectedSpaceUnits(2));
-        } else {
-            updateText(defenderUnits, model.getSelectedSpaceName(2) + " units: " + model.getSelectedSpaceUnits(2));
-        }
-
     }
 
     public void attackDone(Button attackButton, Button abortButton) {

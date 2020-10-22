@@ -114,8 +114,6 @@ public class Client implements IObserver {
                     mapController = new MapController(stage);
                     mapController.addObserver(this);
                     player.setMyTurn(gameManager.getCurrentPlayer().getId() == player.getId());
-                    gameManager = GameManager.getGameManager();
-                    gameManager.addObserver(this);
                     Platform.runLater(() -> {
                         Scene scene = new Scene(mapController, 1920, 1080);
                         stage.setTitle("program.Chans");
@@ -210,7 +208,8 @@ public class Client implements IObserver {
                 if (mapController.attackController.attackView.observers.size() == 0) {
                     mapController.attackController.attackView.addObserver(this);
                 }
-                mapController.attackController.attack((AttackPhase) message);
+                gameManager.setAttack(new AttackPhase((AttackPhase) message));
+                mapController.attackController.attack();
                 if (player.getId() != gameManager.getCurrentPlayer().getId()) {
                     mapController.removeAbortAndAttack();
                 }
@@ -228,14 +227,14 @@ public class Client implements IObserver {
         this.player = player;
     }
 
-    public void removeObserver(){
-        if(startController != null){
+    public void removeObserver() {
+        if (startController != null) {
             startController.removeObserver(this);
         }
-        if(mapController != null){
+        if (mapController != null) {
             mapController.removeObserver(this);
         }
-        if(gameManager != null){
+        if (gameManager != null) {
             gameManager.removeObserver(this);
         }
     }

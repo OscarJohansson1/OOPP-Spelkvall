@@ -28,97 +28,176 @@ import java.util.List;
  */
 public class MapController extends AnchorPane implements IObservable {
 
-    @FXML private Button cubeHubben;
-    @FXML private Button cubeBasen;
-    @FXML private Button cubeKajsabaren;
-    @FXML private Button cubeZaloonen;
-    @FXML private Button cubeWinden;
-    @FXML private Button cubeLofTDet;
-    @FXML private Button cubeRodaRummet;
-    @FXML private Button cubeVerum;
-    @FXML private Button cubeVillan;
-    @FXML private Button cubeADammen;
-    @FXML private Button cubeFocus;
-    @FXML private Button cubeFortNox;
-    @FXML private Button cubeGTSpritis;
-    @FXML private Button cubeGoldenI;
-    @FXML private Button cubeChabo;
-    @FXML private Button cubeWijkanders;
-    @FXML private Button cubeHrum;
-    @FXML private Button cubeAlvan;
-    @FXML private Button cubeSpektrum;
-    @FXML private Button cubeGasquen;
-    @FXML private Button cubeChalmersplatsen;
-    @FXML private Button cubeOlgas;
-    @FXML private Button cubeRunAn;
-    @FXML private Button cubeTagvagnen;
-    @FXML private Button cubeOrigogarden;
-    @FXML private Button cubeKalleGlader;
-    @FXML private Button cubeTvargatan;
+    @FXML
+    private Button cubeHubben;
+    @FXML
+    private Button cubeBasen;
+    @FXML
+    private Button cubeKajsabaren;
+    @FXML
+    private Button cubeZaloonen;
+    @FXML
+    private Button cubeWinden;
+    @FXML
+    private Button cubeLofTDet;
+    @FXML
+    private Button cubeRodaRummet;
+    @FXML
+    private Button cubeVerum;
+    @FXML
+    private Button cubeVillan;
+    @FXML
+    private Button cubeADammen;
+    @FXML
+    private Button cubeFocus;
+    @FXML
+    private Button cubeFortNox;
+    @FXML
+    private Button cubeGTSpritis;
+    @FXML
+    private Button cubeGoldenI;
+    @FXML
+    private Button cubeChabo;
+    @FXML
+    private Button cubeWijkanders;
+    @FXML
+    private Button cubeHrum;
+    @FXML
+    private Button cubeAlvan;
+    @FXML
+    private Button cubeSpektrum;
+    @FXML
+    private Button cubeGasquen;
+    @FXML
+    private Button cubeChalmersplatsen;
+    @FXML
+    private Button cubeOlgas;
+    @FXML
+    private Button cubeRunAn;
+    @FXML
+    private Button cubeTagvagnen;
+    @FXML
+    private Button cubeOrigogarden;
+    @FXML
+    private Button cubeKalleGlader;
+    @FXML
+    private Button cubeTvargatan;
 
-    @FXML private Text textHubben;
-    @FXML private Text textBasen;
-    @FXML private Text textKajsabaren;
-    @FXML private Text textZaloonen;
-    @FXML private Text textWinden;
-    @FXML private Text textLofTDet;
-    @FXML private Text textRodaRummet;
-    @FXML private Text textVerum;
-    @FXML private Text textVillan;
-    @FXML private Text textAdammen;
-    @FXML private Text textFocus;
-    @FXML private Text textFortNox;
-    @FXML private Text textGTSpritis;
-    @FXML private Text textGoldenI;
-    @FXML private Text textChabo;
-    @FXML private Text textWijkanders;
-    @FXML private Text textHrum;
-    @FXML private Text textAlvan;
-    @FXML private Text textSpektrum;
-    @FXML private Text textGasquen;
-    @FXML private Text textChalmersplatsen;
-    @FXML private Text textOlgas;
-    @FXML private Text textRunAn;
-    @FXML private Text textTagvagnen;
-    @FXML private Text textOrigogarden;
-    @FXML private Text textKalleGlader;
-    @FXML private Text textTvargatan;
+    @FXML
+    private Text textHubben;
+    @FXML
+    private Text textBasen;
+    @FXML
+    private Text textKajsabaren;
+    @FXML
+    private Text textZaloonen;
+    @FXML
+    private Text textWinden;
+    @FXML
+    private Text textLofTDet;
+    @FXML
+    private Text textRodaRummet;
+    @FXML
+    private Text textVerum;
+    @FXML
+    private Text textVillan;
+    @FXML
+    private Text textAdammen;
+    @FXML
+    private Text textFocus;
+    @FXML
+    private Text textFortNox;
+    @FXML
+    private Text textGTSpritis;
+    @FXML
+    private Text textGoldenI;
+    @FXML
+    private Text textChabo;
+    @FXML
+    private Text textWijkanders;
+    @FXML
+    private Text textHrum;
+    @FXML
+    private Text textAlvan;
+    @FXML
+    private Text textSpektrum;
+    @FXML
+    private Text textGasquen;
+    @FXML
+    private Text textChalmersplatsen;
+    @FXML
+    private Text textOlgas;
+    @FXML
+    private Text textRunAn;
+    @FXML
+    private Text textTagvagnen;
+    @FXML
+    private Text textOrigogarden;
+    @FXML
+    private Text textKalleGlader;
+    @FXML
+    private Text textTvargatan;
 
-    @FXML public AnchorPane rootpane;
-    @FXML AnchorPane startMenu;
+    @FXML
+    public AnchorPane rootpane;
+    @FXML
+    AnchorPane startMenu;
 
-    @FXML public AnchorPane deployPhase;
-    @FXML public AnchorPane attackPhase;
-    @FXML public AnchorPane movePhase;
+    @FXML
+    public AnchorPane deployPhase;
+    @FXML
+    public AnchorPane attackPhase;
+    @FXML
+    public AnchorPane movePhase;
 
-    @FXML public Slider moveSlider;
+    @FXML
+    public Slider moveSlider;
 
-    @FXML private Button startButton;
-    @FXML private Button skipAttack;
-    @FXML private Button doneMove;
-    @FXML private Button donedeploy;
-    @FXML private Button deployButton;
-    @FXML private Button attackButton;
-    @FXML private Button moveButton;
-    @FXML private Button firstMarked;
-    @FXML public Button secondMarked;
-    @FXML public Button showCurrentPlayer;
+    @FXML
+    private Button startButton;
+    @FXML
+    private Button skipAttack;
+    @FXML
+    private Button doneMove;
+    @FXML
+    private Button donedeploy;
+    @FXML
+    private Button deployButton;
+    @FXML
+    private Button attackButton;
+    @FXML
+    private Button moveButton;
+    @FXML
+    private Button firstMarked;
+    @FXML
+    public Button secondMarked;
+    @FXML
+    public Button showCurrentPlayer;
 
-    @FXML public Text showMoveUnitsText;
-    @FXML private Text firstDisplayText;
-    @FXML private Text secondDisplayText;
-    @FXML public Text playerText;
-    @FXML public Text phaseText;
-    @FXML public Text deployableUnitsText;
+    @FXML
+    public Text showMoveUnitsText;
+    @FXML
+    private Text firstDisplayText;
+    @FXML
+    private Text secondDisplayText;
+    @FXML
+    public Text playerText;
+    @FXML
+    public Text phaseText;
+    @FXML
+    public Text deployableUnitsText;
 
-    @FXML public Pane phasePane;
-    @FXML public Pane sliderPane;
+    @FXML
+    public Pane phasePane;
+    @FXML
+    public Pane sliderPane;
 
-    @FXML public ImageView imageTeamLogo;
+    @FXML
+    public ImageView imageTeamLogo;
 
     private final List<IObserver> observers = new ArrayList<>();
 
-    public GameManager modelDataHandler;
+    public GameManager gameManager;
     public MapView view = new MapView();
     public AttackController attackController;
     public List<Button> allButtons;
@@ -130,13 +209,14 @@ public class MapController extends AnchorPane implements IObservable {
     MapController(List<String> colors, List<String> logoNames, Stage stage) throws IOException {
         localMode = true;
         firstInitialize(stage);
-        modelDataHandler.initialize(allButtons.size(), colors, logoNames);
+        gameManager.initialize(allButtons.size(), colors, logoNames);
         secondInitialize();
     }
 
     public MapController(Stage stage) throws IOException {
         localMode = false;
         firstInitialize(stage);
+        gameManager.initialize();
         secondInitialize();
     }
 
@@ -159,7 +239,7 @@ public class MapController extends AnchorPane implements IObservable {
         allTexts = new ArrayList<>(Arrays.asList(textHubben, textBasen, textKajsabaren, textZaloonen, textWinden, textLofTDet,
                 textRodaRummet, textVerum, textVillan, textAdammen, textFocus, textFortNox, textGTSpritis, textGoldenI, textChabo, textWijkanders, textHrum,
                 textAlvan, textSpektrum, textGasquen, textChalmersplatsen, textOlgas, textRunAn, textTagvagnen, textOrigogarden, textKalleGlader, textTvargatan));
-        modelDataHandler = GameManager.getGameManager();
+        gameManager = GameManager.getGameManager();
     }
 
     private void secondInitialize() throws IOException {
@@ -168,8 +248,7 @@ public class MapController extends AnchorPane implements IObservable {
             allButtons.get(i).setOnMouseClicked(mouseEvent -> {
                 try {
                     if (!localMode) {
-                        if (modelDataHandler.getCurrentPlayer().getMyTurn()) {
-
+                        if (gameManager.getCurrentPlayer().getMyTurn()) {
                             setSpace(var);
                         }
                     } else {
@@ -189,9 +268,9 @@ public class MapController extends AnchorPane implements IObservable {
         });
 
         skipAttack.setOnMouseClicked(mouseEvent -> {
-            modelDataHandler.removePlayersWithoutSpaces();
+            gameManager.removePlayersWithoutSpaces();
             try {
-                modelDataHandler.nextPhase();
+                gameManager.nextPhase();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -207,7 +286,7 @@ public class MapController extends AnchorPane implements IObservable {
         });
         doneMove.setOnMouseClicked(mouseEvent -> {
             try {
-                modelDataHandler.nextPhase();
+                gameManager.nextPhase();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -217,27 +296,27 @@ public class MapController extends AnchorPane implements IObservable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
-            moveSlider.setMax(modelDataHandler.getDeployableUnits());
+            gameManager.setDeployableUnits(gameManager.calculateDeployableUnits(gameManager.getCurrentPlayer()));
+            moveSlider.setMax(gameManager.getDeployableUnits());
             updateCurrentPlayer();
             sliderVisibility(true);
             removeMarkedCube(secondMarked);
             setDeployButton(true);
-            moveSlider.setMax(modelDataHandler.getDeployableUnits());
+            moveSlider.setMax(gameManager.getDeployableUnits());
         });
         donedeploy.setOnMouseClicked(mouseEvent -> {
-            if (modelDataHandler.firstDeployment) {
+            if (gameManager.firstDeployment) {
                 updatePhase("DEPLOY");
                 try {
-                    modelDataHandler.firstRoundNextPhase();
+                    gameManager.firstRoundNextPhase();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                if (!modelDataHandler.firstDeployment) {
-                    modelDataHandler.setDeployableUnits(modelDataHandler.calculateDeployableUnits(modelDataHandler.getCurrentPlayer()));
+                if (!gameManager.firstDeployment) {
+                    gameManager.setDeployableUnits(gameManager.calculateDeployableUnits(gameManager.getCurrentPlayer()));
                 }
                 updateCurrentPlayer();
-                moveSlider.setMax(modelDataHandler.getDeployableUnits());
+                moveSlider.setMax(gameManager.getDeployableUnits());
                 try {
                     resetColor();
                 } catch (IOException e) {
@@ -246,11 +325,11 @@ public class MapController extends AnchorPane implements IObservable {
                 setDeployButton(true);
             } else {
                 try {
-                    modelDataHandler.nextPhase();
+                    gameManager.nextPhase();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                moveSlider.setMax(modelDataHandler.getDeployableUnits());
+                moveSlider.setMax(gameManager.getDeployableUnits());
                 try {
                     resetColor();
                 } catch (IOException e) {
@@ -286,24 +365,24 @@ public class MapController extends AnchorPane implements IObservable {
             }
         });
         moveSlider.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            modelDataHandler.setSliderAmount(newValue.intValue());
+            gameManager.setSliderAmount(newValue.intValue());
             view.updateSliderText(newValue.intValue(), showMoveUnitsText);
         });
-        view.updatePhaseText(modelDataHandler.getCurrentPhase(), this);
+        view.updatePhaseText(gameManager.getCurrentPhase(), this);
         updateCurrentPlayer();
         for (int i = 0; i < allButtons.size(); i++) {
-            view.updateTextUnits(i, modelDataHandler.getUnitsOnSpace(i), allButtons, this);
+            view.updateTextUnits(i, gameManager.getUnitsOnSpace(i), allButtons, this);
         }
         resetColor();
         removeMarkedCube(secondMarked);
         setDeployButton(true);
-        moveSlider.setMax(modelDataHandler.getDeployableUnits());
+        moveSlider.setMax(gameManager.getDeployableUnits());
         skipAttack.setVisible(false);
     }
 
     public void updateCurrentPlayer() {
-        view.updateCurrentPlayer(modelDataHandler.getCurrentPlayerColor(), this, modelDataHandler.getCurrentPlayerName());
-        view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
+        view.updateCurrentPlayer(gameManager.getCurrentPlayerColor(), this, gameManager.getCurrentPlayerName());
+        view.updateDeployableUnits(deployableUnitsText, gameManager.getDeployableUnits());
     }
 
     public void updatePhase(String phase) {
@@ -321,37 +400,40 @@ public class MapController extends AnchorPane implements IObservable {
     }
 
     public void deploy() throws IOException {
-        if (modelDataHandler.startPhase()) {
-            setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
-            view.updateDeployableUnits(deployableUnitsText, modelDataHandler.getDeployableUnits());
-            moveSlider.setMax(modelDataHandler.getDeployableUnits());
-            notifyObservers(new Space(modelDataHandler.getSelectedSpace()));
+        if (gameManager.startPhase()) {
+            setSpaceEvent(gameManager.getSelectedSpace().getId());
+            view.updateDeployableUnits(deployableUnitsText, gameManager.getDeployableUnits());
+            moveSlider.setMax(gameManager.getDeployableUnits());
+            notifyObservers(new Space(gameManager.getSelectedSpace()));
         }
-        if (modelDataHandler.getDeployableUnits() == 0) {
+        if (gameManager.getDeployableUnits() == 0) {
             setDeployButton(false);
         }
     }
 
-    public void attack() throws IOException {
-        if (modelDataHandler.startPhase()) {
+    public boolean attack() throws IOException {
+        if (gameManager.startPhase()) {
             changeToAttackView();
-            setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
-            modelDataHandler.getSelectedSpace2().setPlayer(modelDataHandler.getSelectedSpace().getPlayer());
-            setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
-            notifyObservers(new AttackPhase(GameManager.getGameManager().getAttack()));
-            notifyObservers(new Space(GameManager.getGameManager().getSelectedSpace()));
-            notifyObservers(new Space(GameManager.getGameManager().getSelectedSpace2()));
-
+            if (gameManager.getAttack().destroyedOpponent) {
+                gameManager.getSelectedSpace2().setPlayer(gameManager.getSelectedSpace().getPlayer());
+                System.out.println("Jööö");
+            }
+            notifyObservers(new Space(gameManager.getSelectedSpace()));
+            notifyObservers(new Space(gameManager.getSelectedSpace2()));
+            notifyObservers(new AttackPhase(gameManager.getAttack()));
+            return true;
+        } else {
+            return false;
         }
     }
 
     public void move() throws IOException {
-        if (modelDataHandler.startPhase()) {
-            setSpaceEvent(modelDataHandler.getSelectedSpace().getId());
-            setSpaceEvent(modelDataHandler.getSelectedSpace2().getId());
-            notifyObservers(new Space(modelDataHandler.getSelectedSpace()));
-            notifyObservers(new Space(modelDataHandler.getSelectedSpace2()));
-            modelDataHandler.resetSelectedSpaces();
+        if (gameManager.startPhase()) {
+            setSpaceEvent(gameManager.getSelectedSpace().getId());
+            setSpaceEvent(gameManager.getSelectedSpace2().getId());
+            notifyObservers(new Space(gameManager.getSelectedSpace()));
+            notifyObservers(new Space(gameManager.getSelectedSpace2()));
+            gameManager.resetSelectedSpaces();
         }
         resetColor();
     }
@@ -373,7 +455,7 @@ public class MapController extends AnchorPane implements IObservable {
 
     void removeAttackView() throws IOException {
         Platform.runLater(() -> {
-            if (modelDataHandler.isWinner()) {
+            if (gameManager.isWinner()) {
                 Parent root = new EndController(stage);
                 Scene scene = new Scene(root, 1920, 1080);
 
@@ -384,16 +466,15 @@ public class MapController extends AnchorPane implements IObservable {
         });
         rootpane.getChildren().remove(attackController);
         for (int i = 0; i < allButtons.size(); i++) {
-            view.updateTextUnits(i, modelDataHandler.getUnitsOnSpace(i), allButtons, this);
-            view.setColor(allButtons.get(i), Color.web(modelDataHandler.getColorOnAllSpaces().get(i)), allButtons);
+            view.updateTextUnits(i, gameManager.getUnitsOnSpace(i), allButtons, this);
+            view.setColor(allButtons.get(i), Color.web(gameManager.getColorOnAllSpaces().get(i)), allButtons);
         }
 
-        modelDataHandler.getSelectedSpace().updateSpace(1);
-        notifyObservers(new Space(modelDataHandler.getSelectedSpace()));
-        notifyObservers(new Space(modelDataHandler.getSelectedSpace2()));
+        notifyObservers(new Space(gameManager.getSelectedSpace()));
+        notifyObservers(new Space(gameManager.getSelectedSpace2()));
         notifyObservers("removeAttackView");
 
-        modelDataHandler.resetSelectedSpaces();
+        gameManager.resetSelectedSpaces();
         attackController = null;
         resetColor();
 
@@ -401,7 +482,7 @@ public class MapController extends AnchorPane implements IObservable {
 
     public void removeOnlineAttackView() throws IOException {
         Platform.runLater(() -> {
-            if (modelDataHandler.isWinner()) {
+            if (gameManager.isWinner()) {
                 Parent root = new EndController(stage);
                 Scene scene = new Scene(root, 1920, 1080);
 
@@ -412,7 +493,7 @@ public class MapController extends AnchorPane implements IObservable {
             rootpane.getChildren().remove(attackController);
             attackController = null;
         });
-        modelDataHandler.resetSelectedSpaces();
+        gameManager.resetSelectedSpaces();
         resetColor();
         view.resetColor(getColors(), allButtons);
     }
@@ -440,36 +521,37 @@ public class MapController extends AnchorPane implements IObservable {
     }
 
     private void setSpace(int id) throws IOException {
-        if (modelDataHandler.setSelectedSpace(id)) {
-            if (modelDataHandler.getSelectedSpace2() == null) {
+        if (gameManager.setSelectedSpace(id)) {
+            if (gameManager.getSelectedSpace2() == null) {
                 resetColor();
             } else {
-                resetColor(modelDataHandler.getSelectedSpace().getId());
-                moveSlider.setMax(modelDataHandler.getUnitsOnSpace(modelDataHandler.getSelectedSpace().getId()) - 1);
+                resetColor(gameManager.getSelectedSpace().getId());
+                moveSlider.setMax(gameManager.getUnitsOnSpace(gameManager.getSelectedSpace().getId()) - 1);
                 moveSlider.setMin(0);
                 moveSlider.setDisable(false);
             }
-            view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
-            view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
-            notifyObservers(new Space(modelDataHandler.getSpaceFromId(id)));
+            view.updateTextUnits(id, gameManager.getUnitsOnSpace(id), allButtons, this);
+            view.setColor(getCube(id), Color.web(gameManager.getColorOnSpace(id)).darker().darker(), allButtons);
+            notifyObservers(new Space(gameManager.getSpaceFromId(id)));
             if (localMode) {
                 displayCubes(id);
             }
         } else {
-            if (modelDataHandler.getSelectedSpace() == null && modelDataHandler.getSelectedSpace2() == null) {
+            if (gameManager.getSelectedSpace() == null && gameManager.getSelectedSpace2() == null) {
                 resetColor();
             }
+            System.out.println("not valid space");
         }
     }
 
     void setSpaceEvent(int id) {
-        view.updateTextUnits(id, modelDataHandler.getUnitsOnSpace(id), allButtons, this);
-        view.setColor(getCube(id), Color.web(modelDataHandler.getColorOnSpace(id)).darker().darker(), allButtons);
+        view.updateTextUnits(id, gameManager.getUnitsOnSpace(id), allButtons, this);
+        view.setColor(getCube(id), Color.web(gameManager.getColorOnSpace(id)).darker().darker(), allButtons);
     }
 
     private List<Color> getColors() {
         List<Color> colors = new ArrayList<>();
-        for (String color : modelDataHandler.getColorOnAllSpaces()) {
+        for (String color : gameManager.getColorOnAllSpaces()) {
             colors.add(Color.web(color));
         }
         return colors;
@@ -508,9 +590,9 @@ public class MapController extends AnchorPane implements IObservable {
     public void displayCubes(int id) {
         Platform.runLater(() -> {
             if (firstMarked.getStyle().isEmpty()) {
-                view.updateDisplayCubes(firstMarked, modelDataHandler.getColorOnSpace(id));
+                view.updateDisplayCubes(firstMarked, gameManager.getColorOnSpace(id));
             } else {
-                view.updateDisplayCubes(secondMarked, modelDataHandler.getColorOnSpace(id));
+                view.updateDisplayCubes(secondMarked, gameManager.getColorOnSpace(id));
             }
             if (firstDisplayText.getText().isEmpty()) {
                 view.updateDisplayTexts(firstDisplayText, getTextFromList(id));
@@ -556,11 +638,11 @@ public class MapController extends AnchorPane implements IObservable {
     }
 
     public String getTeamLogo() {
-        return modelDataHandler.getTeamLogo();
+        return gameManager.getTeamLogo();
     }
 
     public String getSpaceColor(int id) {
-        return modelDataHandler.getColorOnSpace(id);
+        return gameManager.getColorOnSpace(id);
     }
 
     @Override
