@@ -34,7 +34,7 @@ class MovePhase implements IPhase, Serializable {
     }
 
     /**
-     * Returns the next phase.
+     * Method that returns the next phase.
      *
      * @return The next phase.
      */

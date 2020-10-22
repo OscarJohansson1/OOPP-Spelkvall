@@ -10,8 +10,8 @@ import org.junit.Test;
 
 public class TestSpace {
 
-    private Player player1 = new Player(10, 1, "#123123");
-    private Player player2 = new Player(15, 2, "#123123");
+    private Player player1 = new Player(10, 1, "#123123", "hej", "hej");
+    private Player player2 = new Player(15, 2, "#123123", "hej", "hej");
     private Space space1 = new Space(1, player1,10, "Space");
 
     /*

@@ -21,8 +21,8 @@ public class TestAttack {
     @Before
     public void before(){
 
-        player1 = new Player(10,1, "#123123");
-        player2 = new Player(10,2, "#123123");
+        player1 = new Player(10,1, "#123123", "hej", "hej");
+        player2 = new Player(10,2, "#123123", "hej", "hej");
 
         space1 = new Space(0, player1, 5, "Test");
         space2 = new Space(1, player2, 5, "Test");

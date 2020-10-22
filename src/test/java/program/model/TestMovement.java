@@ -19,8 +19,8 @@ public class TestMovement {
     @Before
     public void before(){
 
-        player1 = new Player(10,1, "#123123");
-        player2 = new Player(10,2, "#123123");
+        player1 = new Player(10,1, "#123123", "hej", "hej");
+        player2 = new Player(10,2, "#123123", "hej", "hej");
 
         space1 = new Space(1, player1, 10, "Test");
         space2 = new Space(2, player1, 2, "Test");

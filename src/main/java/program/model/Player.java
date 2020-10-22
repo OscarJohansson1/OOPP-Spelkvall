@@ -5,7 +5,6 @@ import java.io.Serializable;
 /**
  * The Player class creates players and hold information about a player.
  */
-
 public class Player implements Serializable {
 
     private int units;
@@ -17,7 +16,7 @@ public class Player implements Serializable {
     private boolean ready = false;
 
     /**
-     * This is a constructor for the player.
+     * A constructor for a player.
      *
      * @param units This is the amount of units that a player has.
      * @param id    This is the players id, it is used to find the different player
@@ -31,6 +30,11 @@ public class Player implements Serializable {
         this.name = name;
     }
 
+    /**
+     * A constructor for copying a player.
+     *
+     * @param player The player that should be copied.
+     */
     public Player(Player player) {
         units = player.units;
         id = player.id;
@@ -39,13 +43,6 @@ public class Player implements Serializable {
         name = player.name;
         myTurn = player.myTurn;
         ready = player.ready;
-    }
-
-    //TODO: for tests right now
-    public Player(int units, int id, String color) {
-        this.units = units;
-        this.id = id;
-        this.color = color;
     }
 
     public void setUnits(int units) {

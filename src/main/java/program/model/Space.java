@@ -15,7 +15,7 @@ public class Space implements Serializable {
     private String name;
 
     /**
-     * This is a constructor for a space
+     * A constructor for a space
      *
      * @param id     This is the id for a space, it is used to find a space
      * @param player This is the player that owns the space
@@ -30,7 +30,7 @@ public class Space implements Serializable {
     }
 
     /**
-     * This is a constructor for making copies of a space
+     * A constructor for copying of a space
      *
      * @param space The space that should be copied.
      */
