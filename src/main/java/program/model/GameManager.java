@@ -59,6 +59,16 @@ public class GameManager implements IObservable {
      * @param logoNames      A list of Strings with the logotypes that should represent each player.
      */
     public void initialize(int amountOfSpaces, List<String> colors, List<String> logoNames) {
+        setUpPhase();
+        players = new ArrayList<>();
+        for (int i = 0; i < colors.size(); i++) {
+            players.add(new Player((50 / colors.size()), i, colors.get(i), logoNames.get(i), i + ""));
+        }
+        currentPlayer = getRandomPlayer(null, players);
+        board = new BoardManager(new ChalmersBoard(randomizeSpaces(amountOfSpaces, players)));
+    }
+
+    void setUpPhase(){
         DeployPhase deploy = new DeployPhase();
         attack = new AttackPhase();
         MovePhase move = new MovePhase();
@@ -66,12 +76,6 @@ public class GameManager implements IObservable {
         deploy.setNextPhase(attack);
         attack.setNextPhase(move);
         move.setNextPhase(deploy);
-        players = new ArrayList<>();
-        for (int i = 0; i < colors.size(); i++) {
-            players.add(new Player((50 / colors.size()), i, colors.get(i), logoNames.get(i), i + ""));
-        }
-        currentPlayer = getRandomPlayer(null, players);
-        board = new BoardManager(new ChalmersBoard(randomizeSpaces(amountOfSpaces, players)));
     }
 
     public List<Space> randomizeSpaces(int amountOfSpaces, List<Player> players) {

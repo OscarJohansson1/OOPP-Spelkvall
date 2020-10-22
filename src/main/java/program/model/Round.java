@@ -16,7 +16,6 @@ public class Round {
         currentPhaseNew = currentPhaseNew.nextPhase();
     }
 
-
     /**
      * Method that calls start-methods of Deployment, Attack and Move, based on current phase, selected spaces and
      * the current player.
