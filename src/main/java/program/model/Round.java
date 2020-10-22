@@ -1,7 +1,5 @@
 package program.model;
 
-import java.util.List;
-
 /**
  * Round controls the start of each phase and the navigation between phases during a round.
  */

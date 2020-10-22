@@ -10,7 +10,6 @@ import java.util.List;
 public class BoardManager implements Serializable {
 
     private final IBoard board;
-
     private Space selectedSpace;
     private Space selectedSpace2;
 

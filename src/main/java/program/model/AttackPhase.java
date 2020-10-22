@@ -166,6 +166,7 @@ public class AttackPhase implements IPhase, Serializable {
         return new ArrayList<>(defenderDice);
     }
 
+    //TODO kolla om det här kan göras i view
     public List<String> attackResults() {
         List<String> results = new ArrayList<>();
         results.add(" lost: " + attackerLoss);
