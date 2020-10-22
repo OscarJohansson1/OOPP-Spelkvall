@@ -5,6 +5,7 @@ import program.model.GameManager;
 
 import java.util.List;
 
+//TODO flytta till model typ
 public class ModelAttackViewFacade {
 
     private final GameManager modelDataHandler = GameManager.getGameManager();
@@ -12,8 +13,6 @@ public class ModelAttackViewFacade {
     public Image getTeamLogo(int i) {
         return new Image(modelDataHandler.getTeamLogo(i));
     }
-
-    public Image getTeamLogoOld(){ return new Image(modelDataHandler.getOldSpaceUrl());}
 
     public boolean isAttackDone() {
         return modelDataHandler.isAttackDone();

@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class represents a concrete implementation of the board of the campus of Chalmers.
+ */
 public class ChalmersBoard implements IBoard, Serializable {
 
     private List<Area> areas;
@@ -93,6 +96,13 @@ public class ChalmersBoard implements IBoard, Serializable {
         areas = Arrays.asList(karhuset, maskinhuset, edit, vasa, lindholmen, kemigarden, sb);
     }
 
+    /**
+     * Method that takes in two id (of spaces) and checks if they are neighbours.
+     *
+     * @param firstIndex  The index of the first space.
+     * @param secondIndex The index of the second space.
+     * @return If they are neighbours or not.
+     */
     @Override
     public boolean isNeighbours(int firstIndex, int secondIndex) {
         return neighbours[firstIndex][secondIndex] == 1;

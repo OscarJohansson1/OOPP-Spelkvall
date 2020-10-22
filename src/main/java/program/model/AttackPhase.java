@@ -19,11 +19,7 @@ public class AttackPhase implements IPhase, Serializable {
     private int defenderLoss;
 
     public boolean nextAttackPossible = true;
-
-    private Space oldspace;
-
     private boolean destroyedOpponent = false;
-
 
     public AttackPhase() {
 
@@ -50,7 +46,6 @@ public class AttackPhase implements IPhase, Serializable {
     public boolean startPhase(Space selectedSpace, Space selectedSpace2, Player player, int amount) {
         if (selectedSpace != null && selectedSpace2 != null) {
             if (isAttackPossible(selectedSpace.getUnits())) {
-                oldspace = selectedSpace2;
                 savePreAttackState(selectedSpace, selectedSpace2);
                 calculateAttack(selectedSpace, selectedSpace2);
                 updateCasualties(selectedSpace, selectedSpace2);
@@ -167,6 +162,7 @@ public class AttackPhase implements IPhase, Serializable {
         return new ArrayList<>(defenderDice);
     }
 
+    //TODO kolla om det här kan göras i view
     public List<String> attackResults() {
         List<String> results = new ArrayList<>();
         results.add(" lost: " + attackerLoss);
@@ -176,10 +172,6 @@ public class AttackPhase implements IPhase, Serializable {
             results.add(" lost: " + defenderLoss);
         }
         return results;
-    }
-
-    public Space getOldspace() {
-        return oldspace;
     }
 
     @Override
