@@ -63,7 +63,6 @@ public class AttackPhase implements IPhase, Serializable {
                 savePreAttackState(selectedSpace, selectedSpace2);
                 calculateAttack(selectedSpace, selectedSpace2);
                 updateCasualties(selectedSpace, selectedSpace2);
-                System.out.println(attackerDice);
                 return true;
             }
         }
@@ -102,7 +101,6 @@ public class AttackPhase implements IPhase, Serializable {
                     defender.updateSpace(attacker.getUnits() - 1);
                     destroyedOpponent = true;
                     attacker.updateSpace(1);
-                    System.out.println("opponent destroyed");
                 }
             } else {
                 attacker.updateSpace(attacker.getUnits() - 1);

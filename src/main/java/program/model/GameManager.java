@@ -210,23 +210,16 @@ public class GameManager implements IObservable {
     }
 
     public static Player nextPlayer(List<Player> players, Player currentPlayer) {
-        System.out.println(players);
-        System.out.println(currentPlayer.getId() + "1");
-        System.out.println("id player 0 " + players.get(0).getId() + " id player 1 "+players.get(1).getId() + " id player 2 "+players.get(2).getId());
         for (int i = 0; i < players.size(); i++) {
 
             if (currentPlayer.getId() == players.get(i).getId() && i + 1 < players.size()) {
                 currentPlayer = new Player(players.get(i + 1));
-                System.out.println(currentPlayer.getId() + "2");
                 return currentPlayer;
             } else if (currentPlayer.getId() == players.get(i).getId()) {
-                System.out.println(currentPlayer.getId() + "3");
                 currentPlayer = new Player(players.get(0));
                 return currentPlayer;
             }
-            System.out.println("i: " + i);
         }
-        System.out.println(currentPlayer);
         return currentPlayer;
     }
 

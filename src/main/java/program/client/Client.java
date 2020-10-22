@@ -55,7 +55,6 @@ public class Client implements IObserver {
         System.out.println("Connected to 95.80.61.51, Port: 6666");
         gameManager = GameManager.getGameManager();
         gameManager.addObserver(this);
-        System.out.println(gameManager);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 stopConnection();
@@ -210,9 +209,7 @@ public class Client implements IObserver {
                 if (mapController.attackController.attackView.observers.size() == 0) {
                     mapController.attackController.attackView.addObserver(this);
                 }
-                System.out.println(gameManager.getAttack().attackerDiceResults());
                 gameManager.getAttack().updateAttack((AttackPhase) message);
-                System.out.println(((AttackPhase) message).attackerDiceResults());
                 mapController.attackController.attack();
                 if (player.getId() != gameManager.getCurrentPlayer().getId()) {
                     mapController.removeAbortAndAttack();
