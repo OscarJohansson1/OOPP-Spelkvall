@@ -33,6 +33,10 @@ class Area implements Serializable {
         return true;
     }
 
+    List<Space> getSpaces(){
+        return spaces;
+    }
+
     int getWorth() {
         return worth;
     }
