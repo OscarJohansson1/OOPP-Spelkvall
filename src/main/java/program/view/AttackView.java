@@ -48,7 +48,7 @@ public class AttackView extends AnchorPane implements IObservable {
         List<Integer> whiteDices = model.getAttackerDiceResults();
         List<Integer> blackDices = model.getDefenderDiceResults();
         updateDie(whiteDices, blackDices);
-        notifyObservers(new AttackPhase(GameManager.getGameManager().round.getAttack()));
+        notifyObservers(new AttackPhase(GameManager.getGameManager().getAttack()));
         notifyObservers(new Space(GameManager.getGameManager().getSelectedSpace()));
         notifyObservers(new Space(GameManager.getGameManager().getSelectedSpace2()));
     }

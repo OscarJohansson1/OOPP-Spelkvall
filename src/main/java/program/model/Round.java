@@ -7,19 +7,10 @@ import java.util.List;
  */
 public class Round {
 
-    private final AttackPhase attack;
     private IPhase currentPhaseNew;
 
-    //TODO Hårdkoda inte
     Round() {
-        //TODO Inte hårdkoda
-        DeployPhase deploy = new DeployPhase();
-        attack = new AttackPhase();
-        MovePhase move = new MovePhase();
-        currentPhaseNew = deploy;
-        deploy.setNextPhase(attack);
-        attack.setNextPhase(move);
-        move.setNextPhase(deploy);
+
     }
 
     /**
@@ -43,29 +34,11 @@ public class Round {
         return currentPhaseNew.startPhase(selectedSpace, selectedSpace2, currentPlayer, units);
     }
 
-    List<Integer> attackerDiceResults() {
-        return attack.attackerDiceResults();
-    }
-
-    List<Integer> defenderDiceResults() {
-        return attack.defenderDiceResults();
-    }
-
-    List<String> attackResults() {
-        return attack.attackResults();
-    }
-
-    public String getCurrentPhase() {
+    String getCurrentPhase() {
         return currentPhaseNew.getPhaseName();
     }
 
-    boolean isNextAttackPossible() {
-        return attack.nextAttackPossible;
+    void setCurrentPhase(IPhase phase) {
+        currentPhaseNew = phase;
     }
-
-    public AttackPhase getAttack() {
-        return attack;
-    }
-
-    public Space getOldSpace(){return attack.getOldspace();}
 }

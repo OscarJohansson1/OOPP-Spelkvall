@@ -7,7 +7,6 @@ import java.io.Serializable;
 /**
  * This class holds methods that´s controlling the spaces. Mostly creating them and updating them.
  */
-//TODO Remove public when controllers don't use getId() directly anymore
 public class Space implements Serializable {
 
     private int id;
@@ -30,6 +29,11 @@ public class Space implements Serializable {
         this.name = name;
     }
 
+    /**
+     * This is a constructor for making copies of a space
+     *
+     * @param space The space that should be copied.
+     */
     public Space(Space space) {
         id = space.id;
         player = space.player;
@@ -43,7 +47,7 @@ public class Space implements Serializable {
      * @param player The new player that controls the space.
      * @param units  The new amount of units on the space.
      */
-    public void updateSpace(Player player, int units) {
+    void updateSpace(Player player, int units) {
         this.player = player;
         this.units = units;
     }
@@ -57,7 +61,12 @@ public class Space implements Serializable {
         updateSpace(this.player, units);
     }
 
-    public void updateSpace(Space space) {
+    /**
+     * Method that updates the entire space
+     *
+     * @param space The space that information should be copied from.
+     */
+    void updateSpace(Space space) {
         id = space.id;
         player = space.player;
         units = space.units;
@@ -72,7 +81,8 @@ public class Space implements Serializable {
         return new Player(player);
     }
 
-    public void setPlayer(Player player){ this.player = player;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     int getPlayerId() {

@@ -114,7 +114,7 @@ public class Client implements IObserver {
                     mapController = new MapController(stage);
                     mapController.addObserver(this);
                     player.setMyTurn(modelDataHandler.getCurrentPlayer().getId() == player.getId());
-                    modelDataHandler = GameManager.getModelDataHandler();
+                    modelDataHandler = GameManager.getGameManager();
                     modelDataHandler.addObserver(this);
                     Platform.runLater(() -> {
                         Scene scene = new Scene(mapController, 1920, 1080);

@@ -22,6 +22,7 @@ public class GameManager implements IObservable {
     private int unitsToUse = 1;
     public boolean firstDeployment = true;
     private String oldSpaceUrl;
+    private AttackPhase attack;
 
     public List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
             "RödaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hyddan",
@@ -58,6 +59,13 @@ public class GameManager implements IObservable {
      * @param logoNames      A list of Strings with the logotypes that should represent each player.
      */
     public void initialize(int amountOfSpaces, List<String> colors, List<String> logoNames) {
+        DeployPhase deploy = new DeployPhase();
+        attack = new AttackPhase();
+        MovePhase move = new MovePhase();
+        round.setCurrentPhase(deploy);
+        deploy.setNextPhase(attack);
+        attack.setNextPhase(move);
+        move.setNextPhase(deploy);
         players = new ArrayList<>();
         for (int i = 0; i < colors.size(); i++) {
             players.add(new Player((50 / colors.size()), i, colors.get(i), logoNames.get(i), i + ""));
@@ -226,10 +234,6 @@ public class GameManager implements IObservable {
         return board.getUnitsForSpacesHold(player) + board.getUnitsFromAreas(player);
     }
 
-    public List<String> attackResult() {
-        return round.attackResults();
-    }
-
     /**
      * Winner 2
      */
@@ -247,7 +251,7 @@ public class GameManager implements IObservable {
      * @return Returns true if a next attack isn't possible.
      */
     public boolean isAttackDone() {
-        return !round.isNextAttackPossible();
+        return !attack.nextAttackPossible;
     }
 
     public void setSliderAmount(int unitsToUse) {
@@ -315,18 +319,6 @@ public class GameManager implements IObservable {
         return currentPlayer.getUnits();
     }
 
-    public List<Integer> getAttackerDiceResults() {
-        return round.attackerDiceResults();
-    }
-
-    public List<Integer> getDefenderDiceResults() {
-        return round.defenderDiceResults();
-    }
-
-    public Space getOldSpace(){
-        return round.getOldSpace();
-    }
-
     public Space getSelectedSpace() {
         return board.getSelectedSpace();
     }
@@ -358,9 +350,23 @@ public class GameManager implements IObservable {
         return currentPlayer;
     }
 
-    public AttackPhase getAttack() {
-        return round.getAttack();
+    public List<Integer> getAttackerDiceResults() {
+        return attack.attackerDiceResults();
     }
+
+    public List<Integer> getDefenderDiceResults() {
+        return attack.defenderDiceResults();
+    }
+
+    public List<String> attackResult() {
+        return attack.attackResults();
+    }
+
+    public AttackPhase getAttack() {
+        return attack;
+    }
+
+    public Space getOldSpace(){return attack.getOldspace();}
 
     public void setBoard(BoardManager board) {
         this.board = board;
