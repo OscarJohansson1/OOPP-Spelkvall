@@ -145,6 +145,10 @@ public class EchoMultiServer {
                     return;
                 }
             }
+            /*else if(inputLine instanceof AttackPhase){
+                writeToAllInLobby(new AttackPhase((AttackPhase) inputLine), gameLobby);
+                return;
+            }*/
             writeToAllInLobby(inputLine, gameLobby);
         }
 
@@ -169,7 +173,9 @@ public class EchoMultiServer {
 
         private void writeToAllInLobby(Object input, Lobby lobby) throws IOException {
             for (ClientHandler client : findClientsInLobby(lobby)) {
-                client.outObject.writeObject(input);
+                if (client.player != null) {
+                    client.outObject.writeObject(input);
+                }
             }
         }
 

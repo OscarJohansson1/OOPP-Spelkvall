@@ -37,7 +37,7 @@ public class AttackPhase implements IPhase, Serializable {
         destroyedOpponent = attack.destroyedOpponent;
     }
 
-    public void updateAttack(AttackPhase attack){
+    public void updateAttack(AttackPhase attack) {
         nextPhase = attack.nextPhase;
         attackerDice = attack.attackerDice;
         defenderDice = attack.defenderDice;
@@ -64,7 +64,6 @@ public class AttackPhase implements IPhase, Serializable {
                 calculateAttack(selectedSpace, selectedSpace2);
                 updateCasualties(selectedSpace, selectedSpace2);
                 System.out.println(attackerDice);
-                System.out.println(this);
                 return true;
             }
         }
@@ -171,11 +170,11 @@ public class AttackPhase implements IPhase, Serializable {
     }
 
     public List<Integer> attackerDiceResults() {
-        return new ArrayList<>(attackerDice);
+        return attackerDice;
     }
 
     public List<Integer> defenderDiceResults() {
-        return new ArrayList<>(defenderDice);
+        return defenderDice;
     }
 
     //TODO kolla om det här kan göras i view
