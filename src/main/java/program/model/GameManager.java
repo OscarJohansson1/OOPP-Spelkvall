@@ -61,7 +61,7 @@ public class GameManager implements IObservable {
         setUpPhase();
         players = new ArrayList<>();
         for (int i = 0; i < colors.size(); i++) {
-            players.add(new Player((50 / colors.size()), i, colors.get(i), logoNames.get(i), i+1 + ""));
+            players.add(new Player((50 / colors.size()), i, colors.get(i), logoNames.get(i), i + 1 + ""));
         }
         currentPlayer = getRandomPlayer(null, players);
         board = new BoardManager(new ChalmersBoard(randomizeSpaces(amountOfSpaces, players)));
@@ -314,6 +314,10 @@ public class GameManager implements IObservable {
         return roundCount;
     }
 
+    public void setAttack(AttackPhase attack){
+        this.attack = attack;
+    }
+
     public void setRoundCount(int roundCount) {
         this.roundCount = roundCount;
     }
@@ -368,10 +372,6 @@ public class GameManager implements IObservable {
 
     public AttackPhase getAttack() {
         return attack;
-    }
-
-    public void setAttack(AttackPhase attack) {
-        this.attack = attack;
     }
 
     public void setBoard(BoardManager board) {

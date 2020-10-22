@@ -154,12 +154,11 @@ public class Client implements IObserver {
                     if (object instanceof Player) {
                         List<Player> playerList = (List<Player>) message;
                         gameManager.setPlayers(playerList);
-                        System.out.println(gameManager.getPlayers());
                         startController.lobbyReadyController.updateUserCards(playerList);
                         if (player == null) {
                             player = playerList.get(playerList.size() - 1);
                         }
-                        break;
+                        return;
                     } else if (object instanceof Integer) {
                         if (mapController == null) {
                             startController.multiplayerLogoController.updateGridPane((List<Integer>) message);
@@ -185,8 +184,6 @@ public class Client implements IObserver {
                 mapController.view.updateTextUnits(space.getId(), space.getUnits(), mapController.allButtons, mapController);
                 mapController.view.setColor(mapController.getCube(space.getId()), Color.web(gameManager.getColorOnSpace(space.getId())).darker().darker(), mapController.allButtons);
                 mapController.displayCubes(space.getId());
-
-
             } else if (message instanceof Player) {
                 Player receivedPlayer = (Player) message;
                 gameManager.setCurrentPlayer(receivedPlayer);
@@ -212,7 +209,8 @@ public class Client implements IObserver {
                 if (mapController.attackController.attackView.observers.size() == 0) {
                     mapController.attackController.attackView.addObserver(this);
                 }
-                gameManager.getAttack().updateAttack(((AttackPhase) message));
+                System.out.println( message);
+                gameManager.getAttack().updateAttack((AttackPhase) message);
                 System.out.println(((AttackPhase) message).attackerDiceResults());
                 mapController.attackController.attack();
                 if (player.getId() != gameManager.getCurrentPlayer().getId()) {

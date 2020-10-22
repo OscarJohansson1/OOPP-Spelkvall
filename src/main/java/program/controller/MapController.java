@@ -405,7 +405,6 @@ public class MapController extends AnchorPane implements IObservable {
             view.updateDeployableUnits(deployableUnitsText, gameManager.getDeployableUnits());
             moveSlider.setMax(gameManager.getDeployableUnits());
             notifyObservers(new Space(gameManager.getSelectedSpace()));
-            gameManager.resetSelectedSpaces();
         }
         if (gameManager.getDeployableUnits() == 0) {
             setDeployButton(false);
@@ -415,6 +414,7 @@ public class MapController extends AnchorPane implements IObservable {
     public boolean attack() throws IOException {
         if (gameManager.startPhase()) {
             changeToAttackView();
+            System.out.println(gameManager.getAttack());
             if (gameManager.getAttack().destroyedOpponent) {
                 gameManager.getSelectedSpace2().setPlayer(gameManager.getSelectedSpace().getPlayer());
                 System.out.println("Jööö");
@@ -422,9 +422,9 @@ public class MapController extends AnchorPane implements IObservable {
             notifyObservers(new Space(gameManager.getSelectedSpace()));
             notifyObservers(new Space(gameManager.getSelectedSpace2()));
             notifyObservers(new AttackPhase(gameManager.getAttack()));
-            gameManager.resetSelectedSpaces();
             return true;
         } else {
+            gameManager.resetSelectedSpaces();
             return false;
         }
     }
@@ -472,8 +472,8 @@ public class MapController extends AnchorPane implements IObservable {
             view.setColor(allButtons.get(i), Color.web(gameManager.getColorOnAllSpaces().get(i)), allButtons);
         }
 
-        notifyObservers(new Space(gameManager.getSelectedSpace()));
-        notifyObservers(new Space(gameManager.getSelectedSpace2()));
+        //notifyObservers(new Space(gameManager.getSelectedSpace()));
+        //notifyObservers(new Space(gameManager.getSelectedSpace2()));
         notifyObservers("removeAttackView");
 
         gameManager.resetSelectedSpaces();

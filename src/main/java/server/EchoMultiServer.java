@@ -122,17 +122,19 @@ public class EchoMultiServer {
                 writeToLobbyLeaderInLobby(menuLobby, menuLobby.checkIfAllPlayersReady());
                 return;
             } else if (inputLine instanceof Player) {
-                Player receivedPlayer = (Player) inputLine;
+                Player receivedPlayer = new Player((Player) inputLine);
                 if (player == null) {
-                    player = new Player(receivedPlayer);
+                    player = receivedPlayer;
                 }
                 if (menuLobby != null) {
                     menuLobby.addPlayer(receivedPlayer);
                     receivedPlayer.setId(menuLobby.getLobbyPlayers().size() - 1);
+                    System.out.println(menuLobby.getLobbyPlayers());
                     writeToAllInLobby(new ArrayList<>(menuLobby.getLobbyPlayers()), menuLobby);
                     outObject.writeObject(menuLobby.getLobbyPlayers().indexOf(receivedPlayer));
                     return;
                 }
+
             } else if (inputLine instanceof Integer) {
                 if (menuLobby == null && gameLobby == null) {
                     menuLobby = lobbyController.getMenuLobbies().get((Integer) inputLine);
