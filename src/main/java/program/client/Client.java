@@ -209,7 +209,6 @@ public class Client implements IObserver {
                 if (mapController.attackController.attackView.observers.size() == 0) {
                     mapController.attackController.attackView.addObserver(this);
                 }
-                System.out.println( message);
                 gameManager.getAttack().updateAttack((AttackPhase) message);
                 System.out.println(((AttackPhase) message).attackerDiceResults());
                 mapController.attackController.attack();

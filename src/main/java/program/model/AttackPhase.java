@@ -64,6 +64,7 @@ public class AttackPhase implements IPhase, Serializable {
                 calculateAttack(selectedSpace, selectedSpace2);
                 updateCasualties(selectedSpace, selectedSpace2);
                 System.out.println(attackerDice);
+                System.out.println(this);
                 return true;
             }
         }
