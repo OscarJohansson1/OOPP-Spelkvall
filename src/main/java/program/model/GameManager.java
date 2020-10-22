@@ -66,11 +66,12 @@ public class GameManager implements IObservable {
         currentPlayer = getRandomPlayer(null, players);
         board = new BoardManager(new ChalmersBoard(randomizeSpaces(amountOfSpaces, players)));
     }
-    public void initialize(){
+
+    public void initialize() {
         setUpPhase();
     }
 
-    void setUpPhase(){
+    void setUpPhase() {
         DeployPhase deploy = new DeployPhase();
         attack = new AttackPhase();
         MovePhase move = new MovePhase();
@@ -86,14 +87,14 @@ public class GameManager implements IObservable {
         Player lastRandomPlayer;
         List<Player> playerList = new ArrayList<>();
         for (int i = 0; i < amountOfSpaces; i++) {
+            lastRandomPlayer = getRandomPlayer(playerList, players);
+            spaces.add(new Space(i, lastRandomPlayer, 1, spaceNames.get(i)));
+            playerList.add(lastRandomPlayer);
             player++;
             if (player > players.size() - 1) {
                 player = 0;
                 playerList.clear();
             }
-            lastRandomPlayer = getRandomPlayer(playerList, players);
-            spaces.add(new Space(i, lastRandomPlayer, 1, spaceNames.get(i)));
-            playerList.add(lastRandomPlayer);
         }
         return spaces;
     }
@@ -369,7 +370,7 @@ public class GameManager implements IObservable {
         return attack;
     }
 
-    public void setAttack(AttackPhase attack){
+    public void setAttack(AttackPhase attack) {
         this.attack = attack;
     }
 

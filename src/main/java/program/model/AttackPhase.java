@@ -37,6 +37,16 @@ public class AttackPhase implements IPhase, Serializable {
         destroyedOpponent = attack.destroyedOpponent;
     }
 
+    public void updateAttack(AttackPhase attack){
+        nextPhase = attack.nextPhase;
+        attackerDice = attack.attackerDice;
+        defenderDice = attack.defenderDice;
+        attackerLoss = attack.attackerLoss;
+        defenderLoss = attack.defenderLoss;
+        nextAttackPossible = attack.nextAttackPossible;
+        destroyedOpponent = attack.destroyedOpponent;
+    }
+
     /**
      * Method that calculates the attack and updates the state of the spaces involved in the attack.
      *
@@ -53,6 +63,8 @@ public class AttackPhase implements IPhase, Serializable {
                 savePreAttackState(selectedSpace, selectedSpace2);
                 calculateAttack(selectedSpace, selectedSpace2);
                 updateCasualties(selectedSpace, selectedSpace2);
+                System.out.println("Rolled attackerdice" + attackerDice);
+                System.out.println("Rolled defenderdice" + defenderDice);
                 return true;
             }
         }

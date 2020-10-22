@@ -50,6 +50,10 @@ public class AttackController extends AnchorPane {
     private final GameManager modelDataHandler;
 
 
+    /**
+     * Constructor for
+     * @param mapController
+     */
     AttackController(MapController mapController) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("attackMenu.fxml"));
