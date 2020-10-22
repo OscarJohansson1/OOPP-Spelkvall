@@ -1,19 +1,29 @@
-package program.facade;
-
-import javafx.scene.image.Image;
-import program.model.GameManager;
+package program.model;
 
 import java.util.List;
 
-//TODO flytta till model typ
-public class ModelAttackViewFacade {
+/**
+ * A class that limits the direct access from the view package to the model package, lowering coupling between packages,
+ * as well as enabling easier modification and extension of the code.
+ */
+public class ModelToViewFacade {
 
-    private final GameManager modelDataHandler = GameManager.getGameManager();
+    private GameManager modelDataHandler = GameManager.getGameManager();
 
-    public Image getTeamLogo(int i) {
-        return new Image(modelDataHandler.getTeamLogo(i));
+    /**
+     * Method that returns a string of the file-path to a team logotype.
+     *
+     * @param i The id of a space.
+     * @return The file-path, as a String, to the logotype of the player holding the space.
+     */
+    public String getTeamLogo(int i) {
+        return modelDataHandler.getTeamLogo(i);
     }
 
+    /**
+     * Method that returns if there can be another attack
+     * @return
+     */
     public boolean isAttackDone() {
         return modelDataHandler.isAttackDone();
     }
