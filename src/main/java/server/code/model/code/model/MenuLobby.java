@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Lobby for while sitting in waiting lobby before game starts.
+ * This class creates a lobby that is being used while waiting in the menu
  */
 public class MenuLobby extends Lobby implements Serializable {
 

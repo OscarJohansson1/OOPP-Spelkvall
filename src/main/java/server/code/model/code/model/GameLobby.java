@@ -8,7 +8,7 @@ import program.model.Player;
 import java.util.Random;
 
 /**
- * Lobby for while playing
+ * This class creates a lobby that is being used while playing the game
  */
 public class GameLobby extends Lobby {
     private Player currentPlayer;
