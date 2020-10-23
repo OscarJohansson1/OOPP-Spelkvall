@@ -4,9 +4,13 @@ import program.model.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * a lobby consists of a list of players, the lobby's name and it's id.
+ */
 public abstract class Lobby {
     final String lobbyName;
-    public int lobbyId;
+    private int lobbyId;
     protected List<Player> players = new ArrayList<>();
 
     public Lobby(String name) {
@@ -25,17 +29,12 @@ public abstract class Lobby {
         return players;
     }
 
-    public boolean checkIfAllPlayersReady() {
-        if(players.size() > 1){
-            for (Player player : players) {
-                if (!player.isReady()) {
-                    return false;
-                }
-            }
-        }
-        else {
-            return false;
-        }
-        return true;
+    public int getLobbyId(){
+        return lobbyId;
     }
+    public void setLobbyId(int lobbyId){
+        this.lobbyId = lobbyId;
+    }
+
+
 }

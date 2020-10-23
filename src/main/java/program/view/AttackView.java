@@ -13,6 +13,9 @@ import program.model.*;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * View for AttackController
+ */
 public class AttackView extends AnchorPane implements IObservable {
 
     public final List<IObserver> observers = new ArrayList<>();
@@ -41,16 +44,19 @@ public class AttackView extends AnchorPane implements IObservable {
 
     @Override
     public void removeObserver(IObserver observer) {
-
+        observers.remove(observer);
     }
 
+    /**
+     * Updates the dices on the attackview screen
+     */
     public void updateDice() {
         List<Integer> whiteDices = model.getAttackerDiceResults();
         List<Integer> blackDices = model.getDefenderDiceResults();
         updateDie(whiteDices, blackDices);
     }
 
-    public void updateDie(List<Integer> whiteDices, List<Integer> blackDices) {
+    private void updateDie(List<Integer> whiteDices, List<Integer> blackDices) {
         resetImages(images);
         for (int i = 0; i < whiteDices.size(); i++) {
             updateDie(images.get(i), whiteDices.get(i), "White");
@@ -60,6 +66,16 @@ public class AttackView extends AnchorPane implements IObservable {
         }
     }
 
+    /**
+     * Updates all the texts on the attackview screen.
+     *
+     * @param attackerText  The amount of lost units for attacker
+     * @param defenderText  The amount of lost units for defender
+     * @param attackerUnits Units on the attacker space
+     * @param defenderUnits Units on the defender space
+     * @param attackButton  Attack again button
+     * @param abortButton   Abort button
+     */
     public void updateText(Text attackerText, Text defenderText, Text attackerUnits, Text defenderUnits, Button attackButton, Button abortButton) {
         List<String> attackResults = model.getAttackResults();
         updateText(attackerText, model.getSelectedSpaceName(1) + attackResults.get(0));
@@ -74,6 +90,12 @@ public class AttackView extends AnchorPane implements IObservable {
         }
     }
 
+    /**
+     * When attack is done the attack again button is removed and abort button text is set to done.
+     *
+     * @param attackButton Attack again button
+     * @param abortButton  Abort button
+     */
     public void attackDone(Button attackButton, Button abortButton) {
         Platform.runLater(() -> {
             attackButton.setVisible(false);
@@ -115,6 +137,12 @@ public class AttackView extends AnchorPane implements IObservable {
         text.setText(replaceString);
     }
 
+    /**
+     * Updates the background by using the space name.
+     *
+     * @param space     attacked space
+     * @param imageView background
+     */
     public void updatePicture(Space space, ImageView imageView) {
         imageView.setImage(new Image("file:src/main/resources/pictures/places/" + space.getName() + ".jpg"));
     }

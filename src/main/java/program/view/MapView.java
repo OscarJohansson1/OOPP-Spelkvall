@@ -26,12 +26,18 @@ public class MapView extends AnchorPane {
         Platform.runLater(() -> mapController.phaseText.setText(currentPhase));
     }
 
+    /**
+     * Method that updates the visual representation of the current player.
+     *
+     * @param currentPlayerColor color of current player
+     * @param playerName         the name of the current player
+     */
     public void updateCurrentPlayer(String currentPlayerColor, MapController mapController, String playerName) {
         Platform.runLater(() -> {
             mapController.showCurrentPlayer.setStyle("-fx-background-color: " + currentPlayerColor + ";" +
                     "-fx-text-fill: " + getContrastColor(Color.valueOf(currentPlayerColor)) + ";" +
                     "-fx-border-color: " + getContrastColor(Color.valueOf(currentPlayerColor)) + ";" +
-                    "-fx-border-width: 3 "+";");
+                    "-fx-border-width: 3 " + ";");
             mapController.showCurrentPlayer.setText(playerName);
             mapController.imageTeamLogo.setImage(new Image(mapController.getTeamLogo()));
 
@@ -59,7 +65,6 @@ public class MapView extends AnchorPane {
             for (Button allButton : allButtons) {
                 if (allButton == allButtons.get(id)) {
                     allButton.setText(units + "");
-                    //allButton.setStyle("-fx-color: #FFFFFF");
                     allButton.setTextFill(Color.valueOf(getContrastColor(Color.web(mapController.getSpaceColor((id))))));
                     break;
                 }
@@ -67,7 +72,7 @@ public class MapView extends AnchorPane {
         });
     }
 
-    public static String getContrastColor(Color color) {
+    private static String getContrastColor(Color color) {
         double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000;
         return y >= 0.5 ? "#000000" : "#ffffff";
     }
@@ -187,6 +192,9 @@ public class MapView extends AnchorPane {
         mapController.phaseText.setText(string);
     }
 
+    /**
+     * Adds visibility of all phase anchorpanes and related texts
+     */
     public void myturn(MapController mapController) {
         Platform.runLater(() -> {
             mapController.deployPhase.setVisible(true);
@@ -198,6 +206,9 @@ public class MapView extends AnchorPane {
 
     }
 
+    /**
+     * Removes visibility of all phase anchorpanes and related texts
+     */
     public void otherPlayerPlaying(MapController mapController) {
         Platform.runLater(() -> {
             mapController.deployPhase.setVisible(false);

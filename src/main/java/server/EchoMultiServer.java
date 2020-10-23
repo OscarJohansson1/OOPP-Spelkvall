@@ -12,12 +12,20 @@ import server.code.model.GameLobby;
 import server.code.model.Lobby;
 import server.code.model.MenuLobby;
 
+/**
+ * Main server class
+ */
 public class EchoMultiServer {
 
     private ServerSocket serverSocket;
     private final List<ClientHandler> clients = new ArrayList<>();
     private final LobbyController lobbyController = new LobbyController();
 
+    /**
+     * Starts the server and waits for someone to connect.
+     *
+     * @param port port that is used to connect to the server.
+     */
     public void start(int port) {
         try {
             serverSocket = new ServerSocket(port);
@@ -45,6 +53,9 @@ public class EchoMultiServer {
 
     }
 
+    /**
+     * Class for handling clients
+     */
     public class ClientHandler extends Thread {
         private final Socket clientSocket;
         private GameLobby gameLobby;
@@ -57,6 +68,9 @@ public class EchoMultiServer {
             this.clientSocket = socket;
         }
 
+        /**
+         * Starts the thread and wait's for input
+         */
         public void run() {
             try {
                 outObject = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -69,6 +83,11 @@ public class EchoMultiServer {
             }
         }
 
+        /**
+         * Handles the received input and does something depending on what the object is
+         *
+         * @param inputLine recived input
+         */
         private void handleObject(Object inputLine) throws IOException {
             System.out.println("Recieved: " + inputLine);
             if (inputLine instanceof String) {
@@ -149,7 +168,7 @@ public class EchoMultiServer {
 
         private void removePlayerFromLobby(Lobby lobby, Player player) throws IOException {
             for (ClientHandler clientHandler : clients) {
-                if (clientHandler.menuLobby != null && clientHandler.menuLobby.lobbyId == lobby.lobbyId) {
+                if (clientHandler.menuLobby != null && clientHandler.menuLobby.getLobbyId() == lobby.getLobbyId()) {
                     clientHandler.menuLobby.getLobbyPlayers().remove(player);
                 }
             }
@@ -159,7 +178,7 @@ public class EchoMultiServer {
         private void addClientsToGameLobby(GameLobby gameLobby) {
             lobbyController.addMenuLobbyPlayersToGameLobby(menuLobby, gameLobby);
             for (ClientHandler clientHandler : clients) {
-                if (clientHandler.menuLobby != null && clientHandler.menuLobby.lobbyId == gameLobby.lobbyId) {
+                if (clientHandler.menuLobby != null && clientHandler.menuLobby.getLobbyId() == gameLobby.getLobbyId()) {
                     clientHandler.gameLobby = lobbyController.getGameLobbies().get(lobbyController.getGameLobbies().size() - 1);
                     clientHandler.menuLobby = null;
                 }
@@ -187,11 +206,11 @@ public class EchoMultiServer {
             List<ClientHandler> clientHandlers = new ArrayList<>();
             for (ClientHandler clientHandler : clients) {
                 if (lobby instanceof GameLobby) {
-                    if (clientHandler.gameLobby != null && clientHandler.gameLobby.lobbyId == gameLobby.lobbyId) {
+                    if (clientHandler.gameLobby != null && clientHandler.gameLobby.getLobbyId() == gameLobby.getLobbyId()) {
                         clientHandlers.add(clientHandler);
                     }
                 } else if (lobby instanceof MenuLobby) {
-                    if (clientHandler.menuLobby != null && clientHandler.menuLobby.lobbyId == menuLobby.lobbyId) {
+                    if (clientHandler.menuLobby != null && clientHandler.menuLobby.getLobbyId() == menuLobby.getLobbyId()) {
                         clientHandlers.add(clientHandler);
                     }
                 }
