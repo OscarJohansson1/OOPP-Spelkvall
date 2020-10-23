@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * the controller for StartMenu.fxml
+ * the controller for setUpGame.fxml
  */
 public class SetUpGameController extends AnchorPane {
 

@@ -181,8 +181,7 @@ public class Client implements IObserver {
             } else if (message instanceof Space) {
                 Space space = (Space) message;
                 gameManager.receiveOnlineSelectedSpace(space);
-                mapController.view.updateTextUnits(space.getId(), space.getUnits(), mapController.allButtons, mapController);
-                mapController.view.setColor(mapController.getCube(space.getId()), Color.web(gameManager.getColorOnSpace(space.getId())).darker().darker(), mapController.allButtons);
+                mapController.setSpaceEvent(space.getId());
                 mapController.displayCubes(space.getId());
             } else if (message instanceof Player) {
                 Player receivedPlayer = (Player) message;

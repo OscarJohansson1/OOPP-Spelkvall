@@ -7,7 +7,9 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-
+/**
+ * The controller for lobbyItem.fxml
+ */
 public class LobbyItem extends AnchorPane {
 
     @FXML
@@ -21,7 +23,7 @@ public class LobbyItem extends AnchorPane {
 
 
     public LobbyItem(String name, String time, String capacity, String players, StartController startController) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LobbyItem.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("lobbyItem.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {
@@ -36,6 +38,9 @@ public class LobbyItem extends AnchorPane {
 
     }
 
+    /**
+     * Method that resets lobby items in lobbySelect and marks itself and changes it's color
+     */
     @FXML
     public void onClick() {
         startController.lobbySelectController.resetLobbyItems();

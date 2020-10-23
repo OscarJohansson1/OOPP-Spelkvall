@@ -206,6 +206,12 @@ public class MapController extends AnchorPane implements IObservable {
     private PauseController pauseController;
     private final boolean localMode;
 
+    /**
+     * Constructor for local mode.
+     *
+     * @param colors    list of colors for each player.
+     * @param logoNames list of logo names for each player.
+     */
     MapController(List<String> colors, List<String> logoNames, Stage stage) throws IOException {
         localMode = true;
         firstInitialize(stage);
@@ -213,6 +219,9 @@ public class MapController extends AnchorPane implements IObservable {
         secondInitialize();
     }
 
+    /**
+     * Constructor for online mode.
+     */
     public MapController(Stage stage) throws IOException {
         localMode = false;
         firstInitialize(stage);
@@ -380,11 +389,19 @@ public class MapController extends AnchorPane implements IObservable {
         skipAttack.setVisible(false);
     }
 
+    /**
+     * Updates the currentplayer on the screen
+     */
     public void updateCurrentPlayer() {
         view.updateCurrentPlayer(gameManager.getCurrentPlayerColor(), this, gameManager.getCurrentPlayerName());
         view.updateDeployableUnits(deployableUnitsText, gameManager.getDeployableUnits());
     }
 
+    /**
+     * Updates the phasetext and moves anchorpanes depending on current phase.
+     *
+     * @param phase the current phase
+     */
     public void updatePhase(String phase) {
         view.updatePhase(phase, MapController.this);
         view.updatePhaseText(phase, MapController.this);
@@ -399,7 +416,8 @@ public class MapController extends AnchorPane implements IObservable {
         }
     }
 
-    public void deploy() throws IOException {
+
+    private void deploy() throws IOException {
         if (gameManager.startPhase()) {
             setSpaceEvent(gameManager.getSelectedSpace().getId());
             view.updateDeployableUnits(deployableUnitsText, gameManager.getDeployableUnits());
@@ -411,6 +429,11 @@ public class MapController extends AnchorPane implements IObservable {
         }
     }
 
+    /**
+     * Initializes the attack and notifies the observers
+     *
+     * @return returns true if it succeeded with the attack and false if it didn't.
+     */
     public boolean attack() throws IOException {
         if (gameManager.getAttack().startPhase(gameManager.getSelectedSpace(), gameManager.getSelectedSpace2(), null, 0)) {
             changeToAttackView();
@@ -427,7 +450,7 @@ public class MapController extends AnchorPane implements IObservable {
         }
     }
 
-    public void move() throws IOException {
+    private void move() throws IOException {
         if (gameManager.startPhase()) {
             setSpaceEvent(gameManager.getSelectedSpace().getId());
             setSpaceEvent(gameManager.getSelectedSpace2().getId());
@@ -438,7 +461,10 @@ public class MapController extends AnchorPane implements IObservable {
         resetColor();
     }
 
-    public void changeToAttackView() throws IOException {
+    /**
+     * Creates a new AttackController if null and adds it to the root AnchorPane.
+     */
+    public void changeToAttackView() {
         if (attackController == null) {
             attackController = new AttackController(this);
             if (localMode) {
@@ -448,11 +474,17 @@ public class MapController extends AnchorPane implements IObservable {
         }
     }
 
+    /**
+     * Removes the attackAgain and abort buttons on the AttackView screen.
+     */
     public void removeAbortAndAttack() {
         attackController.abortButton.setVisible(false);
         attackController.attackButton.setVisible(false);
     }
 
+    /**
+     * Removes the AttackView screen and notifies the observers and resets all spaces. Does also check if the game has a winner and if so creates a EndController
+     */
     void removeAttackView() throws IOException {
         Platform.runLater(() -> {
             if (gameManager.isWinner()) {
@@ -466,20 +498,18 @@ public class MapController extends AnchorPane implements IObservable {
         });
         rootpane.getChildren().remove(attackController);
         for (int i = 0; i < allButtons.size(); i++) {
-            view.updateTextUnits(i, gameManager.getUnitsOnSpace(i), allButtons, this);
-            view.setColor(allButtons.get(i), Color.web(gameManager.getColorOnAllSpaces().get(i)), allButtons);
+            setSpaceEvent(i);
         }
-
-        //notifyObservers(new Space(gameManager.getSelectedSpace()));
-        //notifyObservers(new Space(gameManager.getSelectedSpace2()));
         notifyObservers("removeAttackView");
-
         gameManager.resetSelectedSpaces();
         attackController = null;
         resetColor();
 
     }
 
+    /**
+     * Is called from client when "removeAttackView" is received from the server.
+     */
     public void removeOnlineAttackView() throws IOException {
         Platform.runLater(() -> {
             if (gameManager.isWinner()) {
@@ -512,6 +542,9 @@ public class MapController extends AnchorPane implements IObservable {
         }
     }
 
+    /**
+     * Removes or adds the PauseController depending on if rootpane already has one or not.
+     */
     void checkPauseController() {
         if (rootpane.getChildren().contains(pauseController)) {
             rootpane.getChildren().remove(pauseController);
@@ -520,6 +553,11 @@ public class MapController extends AnchorPane implements IObservable {
         }
     }
 
+    /**
+     * Checks if the space clicked on is valid and then updates the screen with the marked space and notifies the observers.
+     *
+     * @param id id of space
+     */
     private void setSpace(int id) throws IOException {
         if (gameManager.setSelectedSpace(id)) {
             if (gameManager.getSelectedSpace2() == null) {
@@ -530,8 +568,7 @@ public class MapController extends AnchorPane implements IObservable {
                 moveSlider.setMin(0);
                 moveSlider.setDisable(false);
             }
-            view.updateTextUnits(id, gameManager.getUnitsOnSpace(id), allButtons, this);
-            view.setColor(getCube(id), Color.web(gameManager.getColorOnSpace(id)).darker().darker(), allButtons);
+            setSpaceEvent(id);
             notifyObservers(new Space(gameManager.getSpaceFromId(id)));
             if (localMode) {
                 displayCubes(id);
@@ -540,11 +577,15 @@ public class MapController extends AnchorPane implements IObservable {
             if (gameManager.getSelectedSpace() == null && gameManager.getSelectedSpace2() == null) {
                 resetColor();
             }
-            System.out.println("not valid space");
         }
     }
 
-    void setSpaceEvent(int id) {
+    /**
+     * Updates a space and it's units on the screen.
+     *
+     * @param id id of space.
+     */
+    public void setSpaceEvent(int id) {
         view.updateTextUnits(id, gameManager.getUnitsOnSpace(id), allButtons, this);
         view.setColor(getCube(id), Color.web(gameManager.getColorOnSpace(id)).darker().darker(), allButtons);
     }
@@ -557,18 +598,21 @@ public class MapController extends AnchorPane implements IObservable {
         return colors;
     }
 
-    void resetColor() throws IOException {
+    private void resetColor() throws IOException {
         view.resetColor(getColors(), allButtons);
         resetDisplayCubes();
         notifyObservers("resetColor");
     }
 
+    /**
+     * Is called from Client and resets the space colors and display cubes.
+     */
     public void resetColorOnline() {
         view.resetColor(getColors(), allButtons);
         resetDisplayCubes();
     }
 
-    void resetColor(int id) {
+    private void resetColor(int id) {
         List<Color> colors = getColors();
         for (int i = 1; i < allButtons.size(); i++) {
             if (i == id) {
@@ -578,7 +622,7 @@ public class MapController extends AnchorPane implements IObservable {
         view.resetColor(colors, allButtons);
     }
 
-    public Button getCube(int id) {
+    private Button getCube(int id) {
         for (Button allButton : allButtons) {
             if (allButtons.get(id) == allButton) {
                 return allButton;
@@ -587,6 +631,11 @@ public class MapController extends AnchorPane implements IObservable {
         return null;
     }
 
+    /**
+     * Updates the display cubes with the chosen space
+     *
+     * @param id id of space
+     */
     public void displayCubes(int id) {
         Platform.runLater(() -> {
             if (firstMarked.getStyle().isEmpty()) {
@@ -607,6 +656,11 @@ public class MapController extends AnchorPane implements IObservable {
         view.resetDisplayCubes(secondMarked, secondDisplayText);
     }
 
+    /**
+     * Removes visibility of the chosen display cube on the screen.
+     *
+     * @param button display cube
+     */
     public void removeMarkedCube(Button button) {
         if (button == firstMarked) {
             firstDisplayText.setVisible(false);
@@ -615,13 +669,22 @@ public class MapController extends AnchorPane implements IObservable {
             secondDisplayText.setVisible(false);
             secondMarked.setVisible(false);
         }
-
     }
 
-    public void toggleVisibilityDeployableUnits(boolean b){
+    /**
+     * Sets the visibility of the deployableUnitsText on the screen.
+     *
+     * @param b true or false
+     */
+    public void toggleVisibilityDeployableUnits(boolean b) {
         deployableUnitsText.setVisible(b);
     }
 
+    /**
+     * Adds visibility of the chosen display cube on the screen.
+     *
+     * @param button display cube
+     */
     public void addMarkedCube(Button button) {
         if (button == firstMarked) {
             firstDisplayText.setVisible(true);

@@ -55,7 +55,7 @@ public class Space implements Serializable {
      *
      * @param units The new amount of units on the space.
      */
-    public void updateSpace(int units) {
+    void updateSpace(int units) {
         updateSpace(this.player, units);
     }
 

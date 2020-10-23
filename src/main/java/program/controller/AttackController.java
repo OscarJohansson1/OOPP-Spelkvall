@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import program.client.Client;
 import program.model.GameManager;
-import program.model.AttackPhase;
 import program.view.AttackView;
 
 
@@ -22,28 +21,44 @@ import java.util.*;
 
 public class AttackController extends AnchorPane {
 
-    @FXML private ImageView attackerDieImage1;
-    @FXML private ImageView attackerDieImage2;
-    @FXML private ImageView attackerDieImage3;
+    @FXML
+    private ImageView attackerDieImage1;
+    @FXML
+    private ImageView attackerDieImage2;
+    @FXML
+    private ImageView attackerDieImage3;
 
-    @FXML private ImageView defenderDieImage1;
-    @FXML private ImageView defenderDieImage2;
+    @FXML
+    private ImageView defenderDieImage1;
+    @FXML
+    private ImageView defenderDieImage2;
 
-    @FXML Button attackButton;
-    @FXML Button abortButton;
+    @FXML
+    Button attackButton;
+    @FXML
+    Button abortButton;
 
-    @FXML private Text attackerText;
-    @FXML private Text defenderText;
+    @FXML
+    private Text attackerText;
+    @FXML
+    private Text defenderText;
 
-    @FXML private Text attackerUnits;
-    @FXML private Text defenderUnits;
+    @FXML
+    private Text attackerUnits;
+    @FXML
+    private Text defenderUnits;
 
-    @FXML private ImageView attackerImageView;
-    @FXML private ImageView defenderImageView;
-    @FXML private ImageView attackBackgroundImage;
+    @FXML
+    private ImageView attackerImageView;
+    @FXML
+    private ImageView defenderImageView;
+    @FXML
+    private ImageView attackBackgroundImage;
 
-    @FXML private HBox attackerDiceHBox;
-    @FXML private HBox defenderDiceHBox;
+    @FXML
+    private HBox attackerDiceHBox;
+    @FXML
+    private HBox defenderDiceHBox;
 
     public final AttackView attackView;
     private final MapController mapController;
@@ -51,8 +66,7 @@ public class AttackController extends AnchorPane {
 
 
     /**
-     * Constructor for
-     * @param mapController
+     * Constructor for AttackController that also creates a attackView and stores it
      */
     AttackController(MapController mapController) {
 
@@ -74,28 +88,29 @@ public class AttackController extends AnchorPane {
         defenderDiceHBox.setSpacing(30);
     }
 
-    public void attack() throws IOException {
+    /**
+     * Updates the screen with all the necessary attackView data.
+     */
+    public void attack() {
         attackView.updateDice();
         attackView.updateText(attackerText, defenderText, attackerUnits, defenderUnits, attackButton, abortButton);
         attackView.updatePicture(modelDataHandler.getSelectedSpace2(), attackBackgroundImage);
     }
 
-
     /**
      * When the attack button is pressed in the attackView, an attack is done.
-     * If the defender doesn't have any units left the abort button is changed to done
+     * If the defender doesn't have any units left the abort button is changed to done.
      */
     @FXML
     public void attackButtonPressed() throws IOException {
-        if(!Client.getClient().hasConnection){
-            if(!mapController.attack()){
-                attackView.attackDone(attackButton,abortButton);
+        if (!Client.getClient().hasConnection) {
+            if (!mapController.attack()) {
+                attackView.attackDone(attackButton, abortButton);
                 return;
             }
             attack();
-        }
-        else {
-            if(!mapController.attack()){
+        } else {
+            if (!mapController.attack()) {
                 attackView.attackDone(attackButton, abortButton);
             }
         }
