@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Tests for Space
+ */
 public class TestSpace {
 
     private Player player1;
@@ -15,30 +18,40 @@ public class TestSpace {
     private Space space1;
     private Space space2;
 
-
+    /**
+     * Setup needed for testing Space
+     */
     @Before
-    public void before(){
-
+    public void before() {
         player1 = new Player(10, 1, "#123123", "hej", "hej");
         player2 = new Player(15, 2, "#123123", "hej", "hej");
-        space1 = new Space(1, player1,10, "FirstSpace");
-        space2 = new Space(2, player2,10, "SecondSpace");
+        space1 = new Space(1, player1, 10, "FirstSpace");
+        space2 = new Space(2, player2, 10, "SecondSpace");
     }
 
+    /**
+     * Test if a space units update correctly
+     */
     @Test
     public void testUpdateSpaceNewUnits() {
         space1.updateSpace(20);
         assertEquals(space1.getUnits(), 20, "Units didn't change when space was updated");
     }
 
+    /**
+     * Test if a space player updates correctly
+     */
     @Test
     public void testUpdateSpaceNewPlayer() {
-        space1.updateSpace(player2,20);
+        space1.updateSpace(player2, 20);
         assertEquals(player2.getId(), space1.getPlayerId(), "Player didn't change when space was updated");
     }
 
+    /**
+     * Test if a space can update to another space correctly
+     */
     @Test
-    public void testUpdateSpaceNewSpace(){
+    public void testUpdateSpaceNewSpace() {
         space1.updateSpace(space2);
         assertEquals(space2.getId(), space1.getId(), "Id didn't change when space was updated");
         assertEquals(space2.getPlayerId(), space1.getPlayerId(), "Player didn't change when space was updated");

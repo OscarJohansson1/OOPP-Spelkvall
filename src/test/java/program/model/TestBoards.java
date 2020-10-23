@@ -9,6 +9,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests for ChalmersBoard and BoardManager using the TestBoard
+ */
 public class TestBoards {
 
     Player player1;
@@ -31,10 +34,13 @@ public class TestBoards {
     CreateTestBoard testBoard;
 
 
+    /**
+     * SetUp needed for testing TestBoards
+     */
     @Before
-    public void before(){
-        player1 = new Player(10,1,"#123123", "hej", "hej");
-        player2 = new Player(10,2, "#123123", "hej", "hej");
+    public void before() {
+        player1 = new Player(10, 1, "#123123", "hej", "hej");
+        player2 = new Player(10, 2, "#123123", "hej", "hej");
 
         space1 = new Space(0, player1, 10, "Test");
         space2 = new Space(1, player1, 2, "Test");
@@ -53,6 +59,9 @@ public class TestBoards {
         board = new BoardManager(testBoard);
     }
 
+    /**
+     * Test if a player can win
+     */
     @Test
     public void testWin() {
         assertTrue(board.isWinner(), "Player1 has won");
@@ -60,6 +69,9 @@ public class TestBoards {
         assertFalse(board.isWinner(), "There is a winner when it shouldn't be any winner");
     }
 
+    /**
+     * Test if a player can be removed
+     */
     @Test
     public void testRemovePlayer() {
         assertTrue(board.isPlayerOut(player2), "Player 2 should be removed but isn't");
@@ -67,15 +79,21 @@ public class TestBoards {
         assertFalse(board.isPlayerOut(player2), "Player 2 is removed but shouldn't be");
     }
 
+    /**
+     * Test if two spaces can be neighbours
+     */
     @Test
-    public void testIsNeighbours(){
+    public void testIsNeighbours() {
         assertTrue(testBoard.isNeighbours(spaces.get(0).getId(), spaces.get(1).getId()), "Space 1 and 2 should be neighbours but weren't");
         assertTrue(testBoard.isNeighbours(spaces.get(4).getId(), spaces.get(5).getId()), "Space 5 and 6 should be neighbours but weren't");
         assertFalse(testBoard.isNeighbours(spaces.get(2).getId(), spaces.get(3).getId()), "Space 3 and 4 shouldn't be neighbours but were");
     }
 
+    /**
+     * Test if areas can be created
+     */
     @Test
-    public void testCreateAreas(){
+    public void testCreateAreas() {
         assertTrue(area1.getSpaces().contains(space1) && area1.getSpaces().contains(space2), "Space1 and 2 should be a part of area1 but isn't");
         assertFalse(area1.getSpaces().contains(space2) && area1.getSpaces().contains(space3), "Space1 and 2 shouldn't be a part of area1 but is");
     }

@@ -8,6 +8,9 @@ import org.junit.Test;
 
 import java.util.List;
 
+/**
+ * Tests for AttackPhase
+ */
 public class TestAttackPhase {
 
     AttackPhase attackPhase = new AttackPhase();
@@ -23,6 +26,9 @@ public class TestAttackPhase {
     private int attackerLoss;
     private int defenderLoss;
 
+    /**
+     * SetUp needed for testing AttackPhase
+     */
     @Before
     public void before() {
         player1 = new Player(10, 1, "#123123", "hej", "hej");
@@ -32,6 +38,9 @@ public class TestAttackPhase {
         space2 = new Space(1, player2, 5, "Test");
     }
 
+    /**
+     * Testing startPhase for attack
+     */
     @Test
     public void testStartPhase() {
         assertTrue(attackPhase.startPhase(space1, space2, player1, 0), "Space is null, or attack not possible");
@@ -40,6 +49,9 @@ public class TestAttackPhase {
         assertFalse(attackPhase.startPhase(null, null, player1, 5), "Both spaces is null so attack should not be possible, but is");
     }
 
+    /**
+     * Testing if an attack is possible
+     */
     @Test
     public void testIsAttackPossible() {
         space1.updateSpace(2);
@@ -50,6 +62,9 @@ public class TestAttackPhase {
         assertFalse(attackPhase.startPhase(space1, space2, player1, 5), "Attack shouldn't be possible, but is");
     }
 
+    /**
+     * Test for private method calculateAttack(). Parts Copied form AttackPhase to check if the private method works
+     */
     @Test
     public void testCalculateAttack() {
         attackPhase.startPhase(space1, space2, player1, 5);
@@ -82,6 +97,9 @@ public class TestAttackPhase {
         }
     }
 
+    /**
+     * This is used to find the highest die
+     */
     private Integer findHighestDie(List<Integer> rolls) {
         int value = 0;
         int index = 0;

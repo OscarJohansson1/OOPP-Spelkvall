@@ -1,15 +1,16 @@
 package program.model;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Tests for deployPhase
+ */
 public class TestDeployPhase {
 
     DeployPhase deploy = new DeployPhase();
-
 
     Player player1;
     Player player2;
@@ -17,6 +18,9 @@ public class TestDeployPhase {
     Space space1;
     Space space2;
 
+    /**
+     * SetUp needed for testing deployPhase
+     */
     @Before
     public void before() {
         player1 = new Player(10, 1, "#123123", "hej", "hej");
@@ -26,6 +30,9 @@ public class TestDeployPhase {
         space2 = new Space(1, player2, 5, "Test");
     }
 
+    /**
+     * Test if deploying works
+     */
     @Test
     public void testStartDeployment() {
         deploy.startPhase(space1, null, player1, 5);
@@ -37,8 +44,6 @@ public class TestDeployPhase {
         assertFalse(deploy.startPhase(null, null, player1, 5), "No selected space so the method should return false, but didn't");
 
         deploy.startPhase(space2, null, player2, 5);
-        assertEquals(5, player2.getUnits(),"If player2 deploys 5 units player2 should only have 5 units left, but has more");
+        assertEquals(5, player2.getUnits(), "If player2 deploys 5 units player2 should only have 5 units left, but has more");
     }
-
-
 }

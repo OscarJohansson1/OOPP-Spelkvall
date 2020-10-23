@@ -1,14 +1,21 @@
 package program.model;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Test;
 
 import javax.swing.*;
 
+/**
+ * Tests for Round
+ */
 public class TestRound {
 
     Round round = new Round();
 
+    /**
+     * Testing if all the phases move unto the next correct phase
+     */
     @Test
     public void testRound() {
         DeployPhase deploy = new DeployPhase();

@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This is the controller for setUpOnline.fxml
+ */
 public class MultiplayerLogoController extends AnchorPane implements IObservable {
 
     @FXML

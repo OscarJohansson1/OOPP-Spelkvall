@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Tests for MovePhase
+ */
 public class TestMovePhase {
 
     MovePhase movement = new MovePhase();
@@ -15,6 +18,9 @@ public class TestMovePhase {
     Space space1;
     Space space2;
 
+    /**
+     * SetUp needed for testing MovePhase
+     */
     @Before
     public void before() {
         player1 = new Player(10, 1, "#123123", "hej", "hej");
@@ -24,13 +30,19 @@ public class TestMovePhase {
         space2 = new Space(2, player1, 5, "Test");
     }
 
+    /**
+     * Testing startPhase in MovePhase
+     */
     @Test
-    public void testMovement() {
+    public void testStartPhase() {
         movement.startPhase(space1, space2, player1, 10);
         assertEquals(5, space1.getUnits(), "space1 has the wrong amount of units after move");
         assertEquals(15, space2.getUnits(), "space2 has the wrong amount of units after move");
     }
 
+    /**
+     * Testing startPhase in MovePhase
+     */
     @Test
     public void testMovementWithIllegalUnits() {
         movement.startPhase(space1, space2, player1, 20);
