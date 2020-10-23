@@ -1,14 +1,15 @@
 package program.model;
 
-import javafx.scene.shape.Rectangle;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.Before;
+import org.junit.Test;
 
 public class TestDeployPhase {
 
-    DeployPhase deployment = new DeployPhase();
+    DeployPhase deploy = new DeployPhase();
 
-    Rectangle rec1;
-    Rectangle rec2;
 
     Player player1;
     Player player2;
@@ -17,37 +18,27 @@ public class TestDeployPhase {
     Space space2;
 
     @Before
-    public void before(){
-
-        rec1 = new Rectangle();
-        rec2 = new Rectangle();
-
-        player1 = new Player(10,1, "#123123", "hej", "hej");
-        player2 = new Player(10,2, "#123123", "hej", "hej");
+    public void before() {
+        player1 = new Player(10, 1, "#123123", "hej", "hej");
+        player2 = new Player(10, 2, "#123123", "hej", "hej");
 
         space1 = new Space(0, player1, 5, "Test");
         space2 = new Space(1, player2, 5, "Test");
     }
-/*
-    @Test
-    public void testStartDeploymentUnitIncrement1() {
-        assertTrue(deployment.startPhase(space2, null, player2, 5), "Should return true if player and space match, but didn't");
-    }
 
     @Test
-    public void testStartDeploymentUnitIncrement2() {
-        Deployment.startDeployment(space1, player1, 5);
-        assertEquals(10, space1.getUnits(), "Amount of units on space didn't increase with 1");
+    public void testStartDeployment() {
+        deploy.startPhase(space1, null, player1, 5);
+        assertEquals(10, space1.getUnits(), "5 units should have been deployed to space1, but didn't");
+
+        deploy.startPhase(space1, null, player1, player1.getUnits() + 5);
+        assertEquals(10, space1.getUnits(), "Player1 shouldn't be able to deploy more units than it owns, but could");
+
+        assertFalse(deploy.startPhase(null, null, player1, 5), "No selected space so the method should return false, but didn't");
+
+        deploy.startPhase(space2, null, player2, 5);
+        assertEquals(5, player2.getUnits(),"If player2 deploys 5 units player2 should only have 5 units left, but has more");
     }
 
-    @Test
-    public void testStartDeploymentWrongSpace1() {
-        assertFalse(Deployment.startDeployment(space1, player2, 5), "Should return false if player and space don't match, but didn't");
-    }
 
-    @Test
-    public void testStartDeploymentWrongSpace2() {
-        Deployment.startDeployment(space2, player1,5);
-        assertEquals(5, space2.getUnits(), "Amount of units on space changed, when it shouldn't");
-    }*/
 }
