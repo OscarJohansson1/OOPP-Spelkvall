@@ -1,4 +1,4 @@
-package server.code.model;
+package server;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import program.model.*;
-import server.code.model.code.controller.LobbyController;
-import server.code.model.code.model.GameLobby;
-import server.code.model.code.model.Lobby;
-import server.code.model.code.model.MenuLobby;
+import server.code.model.GameLobby;
+import server.code.model.Lobby;
+import server.code.model.MenuLobby;
+import server.code.controller.LobbyController;
 
 /**
  * Main server class
