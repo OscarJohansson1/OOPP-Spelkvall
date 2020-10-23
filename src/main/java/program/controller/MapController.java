@@ -17,7 +17,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -402,7 +401,7 @@ public class MapController extends AnchorPane implements IObservable {
      *
      * @param phase the current phase
      */
-    public void updatePhase(String phase) {
+    private void updatePhase(String phase) {
         view.updatePhase(phase, MapController.this);
         view.updatePhaseText(phase, MapController.this);
     }
@@ -616,7 +615,7 @@ public class MapController extends AnchorPane implements IObservable {
         List<Color> colors = getColors();
         for (int i = 1; i < allButtons.size(); i++) {
             if (i == id) {
-                colors.set(i, (colors.get(i).darker().darker()));
+                colors.set(i, colors.get(i).darker().darker());
             }
         }
         view.resetColor(colors, allButtons);
@@ -662,7 +661,7 @@ public class MapController extends AnchorPane implements IObservable {
      * @param button display cube
      */
     public void removeMarkedCube(Button button) {
-        if (button == firstMarked) {
+        if (button.equals(firstMarked)) {
             firstDisplayText.setVisible(false);
             firstMarked.setVisible(false);
         } else {
@@ -686,7 +685,7 @@ public class MapController extends AnchorPane implements IObservable {
      * @param button display cube
      */
     public void addMarkedCube(Button button) {
-        if (button == firstMarked) {
+        if (button.equals(firstMarked)) {
             firstDisplayText.setVisible(true);
             firstMarked.setVisible(true);
         } else {
