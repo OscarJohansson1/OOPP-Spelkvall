@@ -18,9 +18,11 @@ public class Player implements Serializable {
     /**
      * A constructor for a player.
      *
-     * @param units This is the amount of units that a player has.
-     * @param id    This is the players id, it is used to find the different player
-     * @param color This is used to set different colors for all players.
+     * @param units     The amount of units that a player has.
+     * @param id        The players id.
+     * @param color     The players color.
+     * @param logoUrl   The name of the picture of the players logotype, without file-path or .png.
+     * @param name      The name of the player.
      */
     public Player(int units, int id, String color, String logoUrl, String name) {
         this.units = units;

@@ -1,5 +1,8 @@
 package program.controller;
 
+/**
+ * Class for creation of LobbyItems
+ */
 public class LobbyItemCreator {
     private String name;
     private String time;
@@ -7,6 +10,10 @@ public class LobbyItemCreator {
     private String players;
     private boolean done = false;
 
+    /**
+     * Sets the remaining non set variables until all are set
+     * @param message String that is related to one of the private strings
+     */
     public void setVariables(String message) {
         if (name == null) {
             name = message;
@@ -20,6 +27,10 @@ public class LobbyItemCreator {
         }
     }
 
+    /**
+     * if done then creates a new LobbyItem from the set strings in setVariables.
+     * @return returns the created LobbyItem.
+     */
     public LobbyItem createLobbyItem(StartController startController) {
         if (done) {
             LobbyItem lobbyItem = new LobbyItem(name, time, capacity, players, startController);

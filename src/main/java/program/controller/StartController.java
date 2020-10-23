@@ -17,7 +17,6 @@ import program.model.Player;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -112,14 +111,20 @@ public class StartController extends AnchorPane implements IObservable {
         });
     }
 
+    /**
+     * If the observer list isn't empty it creates a new LobbySelectController and adds it to the rootpane and asks the server for "LOBBYS".
+     */
     public void goToLobbySelect() throws IOException {
-        lobbySelectController = new LobbySelectController(this);
-        notifyObservers("LOBBYS");
         if (observers.size() != 0) {
+            lobbySelectController = new LobbySelectController(this);
+            notifyObservers("LOBBYS");
             rootpane.getChildren().add(lobbySelectController);
         }
     }
 
+    /**
+     * If there are no observers it tries to make a connection to the server.
+     */
     public void goOnline() throws IOException {
         if (observers.size() == 0) {
             Client.getClient().startConnection("95.80.61.51", 6666, this);
@@ -127,11 +132,20 @@ public class StartController extends AnchorPane implements IObservable {
         goToLobbySelect();
     }
 
+    /**
+     * Removes the client from the observer list and stops the connection to the server.
+     */
     public void exitOnline() throws IOException {
         Client.getClient().removeObserver();
         Client.getClient().stopConnection();
     }
 
+    /**
+     * Notifies the observers and moves on to the Lobby ready view
+     *
+     * @param player           receives player from MultiPlayerLogoController.
+     * @param gridPosImageview the id of a logo on the gridpane in MultiPlayerLogoController.
+     */
     public void goToLobbyReady(Player player, int gridPosImageview) throws IOException {
         notifyObservers(new Player(player));
         notifyObservers("LOBBYLEADER");
@@ -142,6 +156,9 @@ public class StartController extends AnchorPane implements IObservable {
         rootpane.getChildren().remove(multiplayerLogoController);
     }
 
+    /**
+     * Notifies the observers of the marked lobby and adds MultiPlayerLogoController to the rootpane.
+     */
     public void goToSetup() throws IOException {
         for (int i = 0; i < lobbySelectController.lobbyItems.size(); i++) {
             if (lobbySelectController.lobbyItems.get(i).marked) {
@@ -154,40 +171,36 @@ public class StartController extends AnchorPane implements IObservable {
         rootpane.getChildren().remove(lobbySelectController);
     }
 
+    /**
+     * Notifies the observers to start the game.
+     */
     public void startGame() throws IOException {
         notifyObservers("startGame");
     }
 
+    /**
+     * Returns to the lobby list view.
+     */
     public void removeSetUp() throws IOException {
         rootpane.getChildren().remove(multiplayerLogoController);
         goToLobbySelect();
     }
 
+    /**
+     * Returns to the lobby list view.
+     */
     public void removeLobbyReady() throws IOException {
         rootpane.getChildren().remove(lobbyReadyController);
         notifyObservers("removePlayer");
         goToLobbySelect();
     }
 
+    /**
+     * Returns to the start menu.
+     */
     public void backToMainMenu() throws IOException {
         rootpane.getChildren().remove(lobbySelectController);
         exitOnline();
     }
-
-    public void backToLobbySelect() {
-
-
-    }
-
-    public void backToSetupOnline() {
-
-
-    }
-
-    public void toLobbySelect() {
-        rootpane.getChildren().remove(multiplayerLogoController);
-        rootpane.getChildren().add(lobbySelectController);
-    }
-
 
 }

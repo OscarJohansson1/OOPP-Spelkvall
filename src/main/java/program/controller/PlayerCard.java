@@ -10,6 +10,9 @@ import program.model.Player;
 
 import java.io.IOException;
 
+/**
+ * The controller for usercard.fxml
+ */
 public class PlayerCard extends AnchorPane {
 
     @FXML

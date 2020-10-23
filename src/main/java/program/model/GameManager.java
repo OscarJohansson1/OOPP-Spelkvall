@@ -7,51 +7,52 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * This class controls everything at the moment. //TODO Make the class smaller
+ * This class controls the initialisation of the game and general methods for the flow of the game. GameManager also
+ * holds most of the general methods that later is used by other packages.
  */
 public class GameManager implements IObservable {
 
     private final List<IObserver> observers = new ArrayList<>();
-
     private List<Player> players;
+    public final Round round = new Round();
     private Player currentPlayer;
+    private BoardManager board;
+    private AttackPhase attack;
+    private int totalStartingUnits = 50;
     private int roundCount = 1;
     private int phaseCount = 1;
-    public final Round round = new Round();
-    private BoardManager board;
     private int unitsToUse = 1;
     public boolean firstDeployment = true;
-    private AttackPhase attack;
 
     public List<String> spaceNames = new ArrayList<>(Arrays.asList("Hubben", "Basen", "KajsaBaren", "Zaloonen", "Winden", "LofTDet",
             "RödaRummet", "Verum", "Villan", "A-dammen", "Focus", "FortNox", "GTSpritis", "GoldenI", "Chabo", "Wijkanders", "Hyddan",
             "Alvan", "Spektrum", "Gasquen", "Chalmersplatsen", "Olgas", "RunAn", "Tagvagnen", "Origogården", "KalleGlader", "Tvargatan"));
 
     /**
-     * Overrides the default constructor to prevent other classes from creating new ModelDataHandlers.
+     * Overrides the default constructor to prevent other classes from creating a new GameManager.
      */
     private GameManager() {
     }
 
     /**
-     * Private class that holds a single ModelDataHandler and is later used to implement the Singleton Pattern.
+     * Private class that holds a single GameManager and is used to implement the Singleton Pattern.
      */
     private static class GameManagerHolder {
         private static final GameManager gameManager = new GameManager();
     }
 
     /**
-     * Get the one ModelDataHandler that ModelDataHandlerHolder holds.
+     * Method that returns the single GameManager that GameManagerHolder holds.
      *
-     * @return The ModelDataHandler.
+     * @return The GameManager.
      */
     public static GameManager getGameManager() {
         return GameManagerHolder.gameManager;
     }
 
     /**
-     * Method that initialize the game board and add players to a list of players. Players are also given spaces that
-     * they hold in the beginning of the game.
+     * Method that initialize the game board and add players to a list of players. The phases are set up and players are
+     * given spaces that they hold in the beginning of the game.
      *
      * @param amountOfSpaces The amount of spaces on the game board
      * @param colors         A list of colors that should represent each player.
@@ -61,17 +62,20 @@ public class GameManager implements IObservable {
         setUpPhase();
         players = new ArrayList<>();
         for (int i = 0; i < colors.size(); i++) {
-            players.add(new Player((50 / colors.size()), i, colors.get(i), logoNames.get(i), i + 1 + ""));
+            players.add(new Player((totalStartingUnits / colors.size()), i, colors.get(i), logoNames.get(i), i + 1 + ""));
         }
         currentPlayer = getRandomPlayer(null, players);
         board = new BoardManager(new ChalmersBoard(randomizeSpaces(amountOfSpaces, players)));
     }
 
+    /**
+     * Method that initialize the phases, used by the online part of the game.
+     */
     public void initialize() {
         setUpPhase();
     }
 
-    void setUpPhase() {
+    private void setUpPhase() {
         DeployPhase deploy = new DeployPhase();
         attack = new AttackPhase();
         MovePhase move = new MovePhase();
@@ -81,6 +85,13 @@ public class GameManager implements IObservable {
         move.setNextPhase(deploy);
     }
 
+    /**
+     * Method that randomize the spaces between the players.
+     *
+     * @param amountOfSpaces The amount of spaces on the board.
+     * @param players        A list of players.
+     * @return A list with spaces that are controlled by players in the player list.
+     */
     public List<Space> randomizeSpaces(int amountOfSpaces, List<Player> players) {
         List<Space> spaces = new ArrayList<>();
         int player = 0;
@@ -112,36 +123,19 @@ public class GameManager implements IObservable {
         }
     }
 
-    @Override
-    public void addObserver(IObserver observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void notifyObservers(Object object) throws IOException {
-        for (IObserver observer : observers) {
-            observer.sendObject(object);
-        }
-    }
-
-    @Override
-    public void removeObserver(IObserver observer) {
-        observers.remove(observer);
-    }
-
     /**
-     * Method that sets selectedSpace/selectedSpace2 to a specific space based on id.
-     * //TODO Add better description/make method clearer.
+     * Method that sets a specific space, based on id, to either the first or second selected space based on if they're
+     * already selected spaces or not.
      *
-     * @param id The id of the space to add as a selectedSpace
-     * @return True if a the space was added to a selectedSpace, false if unsuccessful
+     * @param id The id of the space to add as a selected space.
+     * @return True if a the space was added as a selected space, false if unsuccessful.
      */
-    public boolean setSelectedSpace(int id) {
+    public boolean setSelectedSpace(int id) throws IOException {
         if (board.findSpace(id).getPlayerId() == currentPlayer.getId() && (board.getSelectedSpace() == null || round.getCurrentPhase().equals("DEPLOY"))) {
             board.setSelectedSpace(board.findSpace(id));
             return true;
         } else if (board.getSelectedSpace() == board.findSpace(id)) {
-            board.resetSpaces();
+            resetSelectedSpaces();
         } else if ((board.getSelectedSpace() != null && round.getCurrentPhase().equals("MOVE") &&
                 board.findSpace(id).getPlayerId() == currentPlayer.getId() && board.isNeighbours(board.findSpace(id))) || (board.getSelectedSpace() != null &&
                 board.findSpace(id).getPlayerId() != currentPlayer.getId() && round.getCurrentPhase().equals("ATTACK") && board.isNeighbours(board.findSpace(id)))) {
@@ -151,6 +145,12 @@ public class GameManager implements IObservable {
         return false;
     }
 
+    /**
+     * Method that sets a specific space to either the first or second selected space based on if they're already
+     * selected spaces or not. Used for the online part of the game.
+     *
+     * @param space The space to add as a selected space.
+     */
     public void receiveOnlineSelectedSpace(Space space) {
         if (board.getSelectedSpace() != null && !round.getCurrentPhase().equals("DEPLOY")) {
             board.setSelectedSpace2(board.findSpace(space.getId()));
@@ -162,19 +162,22 @@ public class GameManager implements IObservable {
     }
 
     /**
-     * Method that resets the current selected spaces.
+     * Method that resets the current selected spaces and notifies the observers.
      */
     public void resetSelectedSpaces() throws IOException {
         notifyObservers("resetSelectedSpaces");
         resetSpaces();
     }
 
+    /**
+     * Method that resets the current selected spaces.
+     */
     public void resetSpaces() {
         board.resetSpaces();
     }
 
     /**
-     * Method that change the phase to the next one and reset the selectedSpaces. If the round is over the method
+     * Method that change the phase to the next one and reset the selected spaces. If the round is over the method
      * change the current player to the next player and change the phase to the first phase.
      */
     public void nextPhase() throws IOException {
@@ -208,6 +211,13 @@ public class GameManager implements IObservable {
         notifyObservers(new Player(currentPlayer));
     }
 
+    /**
+     * Method that change the current player to the next player that should play.
+     *
+     * @param players       A list of the players in the game.
+     * @param currentPlayer The current player.
+     * @return The new current player.
+     */
     public static Player nextPlayer(List<Player> players, Player currentPlayer) {
         for (int i = 0; i < players.size(); i++) {
 
@@ -223,7 +233,7 @@ public class GameManager implements IObservable {
     }
 
     /**
-     * Method that checks if the selectedSpaces aren't null and initiates the phase if that is the case.
+     * Method that checks if the selected spaces aren't null and initiates the phase if that is the case.
      *
      * @return If the phase could start successfully.
      */
@@ -235,33 +245,59 @@ public class GameManager implements IObservable {
     }
 
     /**
-     * @return This method returns the amount that a player gets to deploy
+     * Method that returns the amount of extra units that a player gets to deploy.
+     *
+     * @return The extra amount of units.
      */
     public int calculateDeployableUnits(Player player) {
         return board.getUnitsForSpacesHold(player) + board.getUnitsFromAreas(player);
     }
 
     /**
-     * This method checks if there is a winner
+     * Method that checks if any player has won the game.
+     *
+     * @return If any player has won.
      */
     public boolean isWinner() {
         return board.isWinner();
     }
 
     /**
-     * This method removes any player from the playerlist that doesn't have any spaces left
+     * Method that removes any player from the player list that doesn't have any spaces left
      */
     public void removePlayersWithoutSpaces() {
         players.removeIf(player -> board.isPlayerOut(player));
     }
 
     /**
-     * Check if the attack is done by checking if a next attack is possible or not.
+     * Method that checks if the attack is done by checking if a next attack is possible or not.
      *
      * @return Returns true if a next attack isn't possible.
      */
-    public boolean isAttackDone() {
+    boolean isAttackDone() {
         return !attack.nextAttackPossible;
+    }
+
+    /**
+     * Method that gives the players the correct amount of units at the start of the game.
+     *
+     * @param players A list of players in the game.
+     */
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+        for (Player player : players) {
+            player.setUnits(totalStartingUnits / players.size());
+        }
+    }
+
+
+    /**
+     * Method that sets the amount of units the current player can deploy.
+     *
+     * @param units The amount of deployable units.
+     */
+    public void setDeployableUnits(int units) {
+        currentPlayer.setUnits(units);
     }
 
     public void setSliderAmount(int unitsToUse) {
@@ -270,10 +306,6 @@ public class GameManager implements IObservable {
 
     public void setCurrentPlayer(Player player) {
         currentPlayer = player;
-    }
-
-    public void setDeployableUnits(int units) {
-        currentPlayer.setUnits(units);
     }
 
     /**
@@ -317,7 +349,7 @@ public class GameManager implements IObservable {
         return roundCount;
     }
 
-    public void setAttack(AttackPhase attack){
+    public void setAttack(AttackPhase attack) {
         this.attack = attack;
     }
 
@@ -361,15 +393,15 @@ public class GameManager implements IObservable {
         return currentPlayer;
     }
 
-    public List<Integer> getAttackerDiceResults() {
+    List<Integer> getAttackerDiceResults() {
         return attack.attackerDiceResults();
     }
 
-    public List<Integer> getDefenderDiceResults() {
+    List<Integer> getDefenderDiceResults() {
         return attack.defenderDiceResults();
     }
 
-    public List<String> attackResult() {
+    List<String> attackResult() {
         return attack.attackResults();
     }
 
@@ -381,23 +413,24 @@ public class GameManager implements IObservable {
         this.board = board;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-        for (Player player : players) {
-            player.setUnits(50 / players.size());
-        }
-    }
-
     public List<Player> getPlayers() {
         return players;
     }
 
-    public void setSpace(Space receivedSpace) {
-        for (Space space : board.getSpaces()) {
-            if (receivedSpace.getId() == space.getId()) {
-                space.updateSpace(receivedSpace);
-                break;
-            }
+    @Override
+    public void addObserver(IObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notifyObservers(Object object) throws IOException {
+        for (IObserver observer : observers) {
+            observer.sendObject(object);
         }
+    }
+
+    @Override
+    public void removeObserver(IObserver observer) {
+        observers.remove(observer);
     }
 }

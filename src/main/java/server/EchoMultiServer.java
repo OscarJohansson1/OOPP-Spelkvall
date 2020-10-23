@@ -129,7 +129,6 @@ public class EchoMultiServer {
                 if (menuLobby != null) {
                     menuLobby.addPlayer(receivedPlayer);
                     receivedPlayer.setId(menuLobby.getLobbyPlayers().size() - 1);
-                    System.out.println(menuLobby.getLobbyPlayers());
                     writeToAllInLobby(new ArrayList<>(menuLobby.getLobbyPlayers()), menuLobby);
                     outObject.writeObject(menuLobby.getLobbyPlayers().indexOf(receivedPlayer));
                     return;
@@ -145,10 +144,6 @@ public class EchoMultiServer {
                     return;
                 }
             }
-            /*else if(inputLine instanceof AttackPhase){
-                writeToAllInLobby(new AttackPhase((AttackPhase) inputLine), gameLobby);
-                return;
-            }*/
             writeToAllInLobby(inputLine, gameLobby);
         }
 

@@ -12,6 +12,13 @@ class Area implements Serializable {
     private final int worth;
     private final List<Space> spaces;
 
+    /**
+     * Constructor of the class.
+     *
+     * @param name   The name of the area.
+     * @param worth  The amount of units a player gets for holding the area.
+     * @param spaces The spaces that are a part of the area.
+     */
     Area(String name, int worth, List<Space> spaces) {
         this.name = name;
         this.worth = worth;
@@ -33,7 +40,7 @@ class Area implements Serializable {
         return true;
     }
 
-    List<Space> getSpaces(){
+    List<Space> getSpaces() {
         return spaces;
     }
 

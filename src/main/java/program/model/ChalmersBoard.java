@@ -72,6 +72,11 @@ public class ChalmersBoard implements IBoard, Serializable {
             {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0},
     };
 
+    /**
+     * Constructor that takes in spaces and creates the predefined areas.
+     *
+     * @param spaces A list of spaces that should be 27 spaces long to fit the Chalmers board correctly.
+     */
     public ChalmersBoard(List<Space> spaces) {
         this.spaces = spaces;
         createAreas();

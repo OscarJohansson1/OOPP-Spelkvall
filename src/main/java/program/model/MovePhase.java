@@ -43,13 +43,18 @@ class MovePhase implements IPhase, Serializable {
         return nextPhase;
     }
 
-    @Override
-    public void setNextPhase(IPhase phase) {
-        nextPhase = phase;
-    }
-
+    /**
+     * Method that returns the name of the phase.
+     *
+     * @return The name as a String in the form: "MOVE".
+     */
     @Override
     public String getPhaseName() {
         return "MOVE";
+    }
+
+    @Override
+    public void setNextPhase(IPhase phase) {
+        nextPhase = phase;
     }
 }
