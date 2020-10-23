@@ -8,6 +8,7 @@ import program.controller.LobbyItemCreator;
 import program.controller.MapController;
 import program.controller.StartController;
 import program.model.*;
+
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -15,6 +16,10 @@ import java.net.SocketTimeoutException;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * This class is a singleton. This class is responsible for the connection with a server.
+ *
+ */
 public class Client implements IObserver {
     private LinkedBlockingQueue<Object> messages;
     private ConnectionToServer server;
@@ -82,7 +87,6 @@ public class Client implements IObserver {
         messageHandling.setDaemon(true);
         messageHandling.start();
     }
-
 
     private class ConnectionToServer {
         private final ObjectOutputStream outObject;
