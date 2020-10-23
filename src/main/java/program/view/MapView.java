@@ -12,7 +12,7 @@ import program.controller.MapController;
 import java.util.List;
 
 /**
- * the view for karta.fxml
+ * View for MapController.
  */
 public class MapView extends AnchorPane {
 
