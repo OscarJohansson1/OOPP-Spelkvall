@@ -457,8 +457,8 @@ public class MapController extends AnchorPane implements IObservable {
             notifyObservers(new Space(gameManager.getSelectedSpace()));
             notifyObservers(new Space(gameManager.getSelectedSpace2()));
             gameManager.resetSelectedSpaces();
+            resetColor();
         }
-        resetColor();
     }
 
     /**

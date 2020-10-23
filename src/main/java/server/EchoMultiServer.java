@@ -86,7 +86,7 @@ public class EchoMultiServer {
         /**
          * Handles the received input and does something depending on what the object is
          *
-         * @param inputLine recived input
+         * @param inputLine received input
          */
         private void handleObject(Object inputLine) throws IOException {
             System.out.println("Recieved: " + inputLine);
@@ -152,7 +152,6 @@ public class EchoMultiServer {
                     outObject.writeObject(menuLobby.getLobbyPlayers().indexOf(receivedPlayer));
                     return;
                 }
-
             } else if (inputLine instanceof Integer) {
                 if (menuLobby == null && gameLobby == null) {
                     menuLobby = lobbyController.getMenuLobbies().get((Integer) inputLine);
@@ -187,7 +186,7 @@ public class EchoMultiServer {
 
         private void writeToAllInLobby(Object input, Lobby lobby) throws IOException {
             for (ClientHandler client : findClientsInLobby(lobby)) {
-                if (client.player != null) {
+                if (client.player != null || lobby instanceof MenuLobby) {
                     client.outObject.writeObject(input);
                 }
             }

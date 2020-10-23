@@ -2,7 +2,6 @@ package program.client;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import program.controller.LobbyItem;
 import program.controller.LobbyItemCreator;
@@ -39,6 +38,13 @@ public class Client implements IObserver {
         return ClientHolder.client;
     }
 
+    /**
+     * Tries to establish connection with a server.
+     * if successful creates a thread that handles waits for input
+     *
+     * @param ip   ip address of server
+     * @param port port of server
+     */
     public void startConnection(String ip, int port, StartController startController) throws IOException {
         try {
             Socket socket = new Socket();
@@ -104,6 +110,11 @@ public class Client implements IObserver {
         }
     }
 
+    /**
+     * Handles the received input and does something depending on what the object is
+     *
+     * @param message received input
+     */
     private void handleObject(Object message) {
         try {
             if (message instanceof String) {
@@ -140,6 +151,7 @@ public class Client implements IObserver {
 
                 } else if (message.equals("resetSelectedSpaces")) {
                     gameManager.resetSpaces();
+                    mapController.resetColorOnline();
                 }
             } else if (message instanceof Integer) {
                 if (gameManager.getCurrentPlayer() == null) {
@@ -223,10 +235,10 @@ public class Client implements IObserver {
         server.outObject.writeObject(object);
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
+    /**
+     * Removes the client as observer from the classes
+     * StartController, MapController and GameManager.
+     */
     public void removeObserver() {
         if (startController != null) {
             startController.removeObserver(this);
