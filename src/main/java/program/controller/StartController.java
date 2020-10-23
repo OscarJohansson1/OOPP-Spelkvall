@@ -115,7 +115,7 @@ public class StartController extends AnchorPane implements IObservable {
      * If the observer list isn't empty it creates a new LobbySelectController and adds it to the rootpane and asks the server for "LOBBYS".
      */
     public void goToLobbySelect() throws IOException {
-        if (observers.size() != 0) {
+        if (!observers.isEmpty()) {
             lobbySelectController = new LobbySelectController(this);
             notifyObservers("LOBBYS");
             rootpane.getChildren().add(lobbySelectController);
@@ -126,7 +126,7 @@ public class StartController extends AnchorPane implements IObservable {
      * If there are no observers it tries to make a connection to the server.
      */
     public void goOnline() throws IOException {
-        if (observers.size() == 0) {
+        if (observers.isEmpty()) {
             Client.getClient().startConnection("95.80.61.51", 6666, this);
         }
         goToLobbySelect();

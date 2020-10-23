@@ -33,7 +33,7 @@ class Area implements Serializable {
      */
     boolean checkArea(Player player) {
         for (Space space : spaces) {
-            if (!(player.getId() == space.getPlayerId())) {
+            if (player.getId() != space.getPlayerId()) {
                 return false;
             }
         }

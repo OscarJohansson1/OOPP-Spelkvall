@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * the controller for setUpGame.fxml
@@ -100,10 +101,10 @@ public class SetUpGameController extends AnchorPane {
     private Button rec16;
 
     private int nextToChoose = 1;
-    private final ArrayList<ImageView> selectedDivisions = new ArrayList<>();
-    private final ArrayList<String> colorList = new ArrayList<>();
-    private final ArrayList<String> logoNameList = new ArrayList<>();
-    private ArrayList<Button> playerButtonList;
+    private final List<ImageView> selectedDivisions = new ArrayList<>();
+    private final List<String> colorList = new ArrayList<>();
+    private final List<String> logoNameList = new ArrayList<>();
+    private List<Button> playerButtonList;
 
     private int amountOfPlayers = 0;
 

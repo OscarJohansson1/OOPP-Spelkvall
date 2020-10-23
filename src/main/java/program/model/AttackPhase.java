@@ -22,11 +22,18 @@ public class AttackPhase implements IPhase, Serializable {
 
     public boolean destroyedOpponent = false;
 
-
+    /**
+     * Empty constructor
+     */
     AttackPhase() {
 
     }
 
+    /**
+     * Constructor for copies of AttackPhase
+     *
+     * @param attack The AttackPhase that should be copied.
+     */
     public AttackPhase(AttackPhase attack) {
         nextPhase = attack.nextPhase;
         attackerDice = attack.attackerDice;
@@ -37,6 +44,11 @@ public class AttackPhase implements IPhase, Serializable {
         destroyedOpponent = attack.destroyedOpponent;
     }
 
+    /**
+     * Update an AttackPhase so that its identical to another
+     *
+     * @param attack The attack the attack should be identical to.
+     */
     public void updateAttack(AttackPhase attack) {
         nextPhase = attack.nextPhase;
         attackerDice = attack.attackerDice;
@@ -94,7 +106,7 @@ public class AttackPhase implements IPhase, Serializable {
         throwDice(attacker, defender);
         List<Integer> tempAttacker = new ArrayList<>(attackerDice);
         List<Integer> tempDefender = new ArrayList<>(defenderDice);
-        while (tempAttacker.size() > 0 && tempDefender.size() > 0) {
+        while (!tempAttacker.isEmpty() && !tempDefender.isEmpty()) {
             if (findHighestDie(tempAttacker) > findHighestDie(tempDefender)) {
                 defender.updateSpace(defender.getUnits() - 1);
                 if (defender.getUnits() < 1) {

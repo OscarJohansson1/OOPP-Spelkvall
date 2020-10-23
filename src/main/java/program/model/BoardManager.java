@@ -64,7 +64,7 @@ public class BoardManager implements Serializable {
     boolean isWinner() {
         Player winner = board.getSpaces().get(0).getPlayer();
         for (Space space : board.getSpaces()) {
-            if (!(space.getPlayerId() == winner.getId())) {
+            if (space.getPlayerId() != winner.getId()) {
                 return false;
             }
         }

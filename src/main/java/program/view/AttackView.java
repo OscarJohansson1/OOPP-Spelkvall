@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import program.model.ModelToViewFacade;
 import program.model.*;
 
 
@@ -23,7 +22,6 @@ public class AttackView extends AnchorPane implements IObservable {
     private final ModelToViewFacade model = new ModelToViewFacade();
 
     private final List<ImageView> images;
-
 
     public AttackView(ArrayList<ImageView> images, ArrayList<ImageView> logoImages) {
         this.images = images;

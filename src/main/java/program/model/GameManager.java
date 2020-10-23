@@ -62,7 +62,7 @@ public class GameManager implements IObservable {
         setUpPhase();
         players = new ArrayList<>();
         for (int i = 0; i < colors.size(); i++) {
-            players.add(new Player((totalStartingUnits / colors.size()), i, colors.get(i), logoNames.get(i), i + 1 + ""));
+            players.add(new Player(totalStartingUnits / colors.size(), i, colors.get(i), logoNames.get(i), i + 1 + ""));
         }
         currentPlayer = getRandomPlayer(null, players);
         board = new BoardManager(new ChalmersBoard(randomizeSpaces(amountOfSpaces, players)));
@@ -181,7 +181,7 @@ public class GameManager implements IObservable {
      * change the current player to the next player and change the phase to the first phase.
      */
     public void nextPhase() throws IOException {
-        if (observers.size() != 0) {
+        if (!observers.isEmpty()) {
             notifyObservers("nextPhase");
         } else {
             round.nextPhase();
