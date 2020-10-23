@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * the controller for karta.fxml
+ * This is the controller for MapView
  */
 public class MapController extends AnchorPane implements IObservable {
 
