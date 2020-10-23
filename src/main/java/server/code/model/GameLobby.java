@@ -18,7 +18,7 @@ public class GameLobby extends Lobby {
     }
 
     /**
-     * @return returns next player in list
+     * @return returns next player in list or random player in list if currentplayer == null
      */
     public Player nextPlayer() {
         if (currentPlayer == null) {
@@ -42,5 +42,13 @@ public class GameLobby extends Lobby {
     public BoardManager initializeBoard() {
         GameManager modelDataHandler = GameManager.getGameManager();
         return new BoardManager(new ChalmersBoard(modelDataHandler.randomizeSpaces(modelDataHandler.spaceNames.size(), players)));
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player player) {
+        this.currentPlayer = player;
     }
 }
