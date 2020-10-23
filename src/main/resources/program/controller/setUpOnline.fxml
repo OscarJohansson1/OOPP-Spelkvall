@@ -132,7 +132,7 @@
                               </ImageView>
                            </children>
                         </GridPane>
-                        <TextField fx:id="playerNameTextField" layoutX="660.0" layoutY="385.0" prefHeight="55.0" prefWidth="151.0" text="Mums">
+                        <TextField fx:id="playerNameTextField" layoutX="660.0" layoutY="385.0" prefHeight="55.0" prefWidth="151.0">
                            <font>
                               <Font size="14.0" />
                            </font></TextField>
