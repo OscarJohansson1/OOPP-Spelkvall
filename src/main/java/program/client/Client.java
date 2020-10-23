@@ -18,7 +18,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * This class is a singleton. This class is responsible for the connection with a server.
- *
  */
 public class Client implements IObserver {
     private LinkedBlockingQueue<Object> messages;
@@ -234,6 +233,11 @@ public class Client implements IObserver {
         }
     }
 
+    /**
+     * Send the object to the connected server
+     *
+     * @param object An object that is of relevance for the IObserver.
+     */
     @Override
     public void sendObject(Object object) throws IOException {
         server.outObject.writeObject(object);

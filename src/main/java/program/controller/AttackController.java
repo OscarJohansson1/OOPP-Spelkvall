@@ -18,7 +18,6 @@ import java.util.*;
 /**
  * This class is the controller for the attackView. It holds all the logic for the buttons in that view.
  */
-
 public class AttackController extends AnchorPane {
 
     @FXML

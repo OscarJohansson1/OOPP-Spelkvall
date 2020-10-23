@@ -5,6 +5,9 @@ import program.model.Player;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test for lobby, gameloby and menulobby
+ */
 public class TestLobby {
 
 

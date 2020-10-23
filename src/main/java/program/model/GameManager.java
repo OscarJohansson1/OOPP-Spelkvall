@@ -18,7 +18,7 @@ public class GameManager implements IObservable {
     private Player currentPlayer;
     private BoardManager board;
     private AttackPhase attack;
-    private int totalStartingUnits = 50;
+    private final int totalStartingUnits = 50;
     private int roundCount = 1;
     private int phaseCount = 1;
     private int unitsToUse = 1;

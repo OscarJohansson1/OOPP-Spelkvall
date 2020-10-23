@@ -10,8 +10,8 @@ public class Player implements Serializable {
     private int units;
     private int id;
     private final String color;
-    private String logoUrl;
-    private String name;
+    private final String logoUrl;
+    private final String name;
     private boolean myTurn = false;
     private boolean ready = false;
 
