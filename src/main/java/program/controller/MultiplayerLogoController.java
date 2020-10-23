@@ -65,7 +65,7 @@ public class MultiplayerLogoController extends AnchorPane implements IObservable
     private ImageView recZ;
 
     private final List<IObserver> observers = new ArrayList<>();
-    private ArrayList<ImageView> divisionList;
+    private List<ImageView> divisionList;
     private final StartController startController;
     private ImageView selectedButton;
     private List<Integer> integerList = new ArrayList<>();

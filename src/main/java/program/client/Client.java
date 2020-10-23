@@ -8,7 +8,6 @@ import program.controller.LobbyItemCreator;
 import program.controller.MapController;
 import program.controller.StartController;
 import program.model.*;
-
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -188,8 +187,9 @@ public class Client implements IObserver {
             } else if (message instanceof BoardManager) {
                 gameManager.setBoard((BoardManager) message);
             } else if (message instanceof Boolean) {
-                if ((Boolean) message)
+                if ((Boolean) message) {
                     startController.lobbyReadyController.startButton.setVisible(true);
+                }
             } else if (message instanceof Space) {
                 Space space = (Space) message;
                 gameManager.receiveOnlineSelectedSpace(space);
