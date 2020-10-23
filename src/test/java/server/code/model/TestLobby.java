@@ -42,4 +42,23 @@ public class TestLobby {
         gameLobby.nextPlayer();
         assertEquals("yesman", gameLobby.getCurrentPlayer().getName());
     }
+
+    /**
+     * Tests if the method "checkIfAllPlayersReady" in MenuLobby correctly checks if all the players are ready
+     */
+    @Test
+    public void testCheckIfAllPlayersReady() {
+        MenuLobby menuLobby = new MenuLobby("yes");
+        menuLobby.addPlayer(new Player(0, 0, "", "", "yesman"));
+        menuLobby.addPlayer(new Player(0, 1, "", "", "noman"));
+        menuLobby.addPlayer(new Player(0, 2, "", "", "man3"));
+        menuLobby.addPlayer(new Player(0, 3, "", "", "man4"));
+        assertEquals(false, menuLobby.checkIfAllPlayersReady());
+        menuLobby.getLobbyPlayers().get(0).setReady(true);
+        menuLobby.getLobbyPlayers().get(1).setReady(true);
+        menuLobby.getLobbyPlayers().get(2).setReady(true);
+        menuLobby.getLobbyPlayers().get(3).setReady(true);
+        assertEquals(true, menuLobby.checkIfAllPlayersReady());
+
+    }
 }
