@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.Image?>
@@ -244,33 +245,43 @@
                         <Font size="24.0" />
                     </font>
                 </Text>
-                <Button fx:id="showCurrentPlayer" layoutX="244.0" layoutY="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="current-player-button" text="fhem" textAlignment="CENTER" />
-                <AnchorPane fx:id="movePhase" layoutX="510.0" prefHeight="200.0" prefWidth="250.0">
+                <Button fx:id="showCurrentPlayer" layoutX="244.0" layoutY="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="fhem" textAlignment="CENTER">
+               <styleClass>
+                  <String fx:value="current-player-button" />
+                  <String fx:value="button" />
+               </styleClass></Button>
+                <AnchorPane fx:id="movePhase" layoutX="475.0" prefHeight="200.0" prefWidth="300.0">
                     <children>
-                        <Button fx:id="moveButton" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Move" />
-                        <Button fx:id="doneMove" layoutX="139.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Done" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="moveButton" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Move" AnchorPane.leftAnchor="5.0" />
+                        <Button fx:id="doneMove" layoutX="139.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Done" AnchorPane.rightAnchor="5.0" />
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="attackPhase" layoutX="510.0" prefHeight="200.0" prefWidth="250.0">
+                <AnchorPane fx:id="attackPhase" layoutX="475.0" prefHeight="200.0" prefWidth="300.0">
                     <children>
-                        <Button fx:id="skipAttack" layoutX="139.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Skip" AnchorPane.rightAnchor="0.0" />
-                        <Button fx:id="attackButton" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Attack" />
+                        <Button fx:id="skipAttack" layoutX="139.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Skip" AnchorPane.rightAnchor="5.0" />
+                        <Button fx:id="attackButton" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Attack" AnchorPane.leftAnchor="5.0" />
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="deployPhase" layoutX="510.0" prefHeight="200.0" prefWidth="250.0">
+                <AnchorPane fx:id="deployPhase" layoutX="475.0" prefHeight="200.0" prefWidth="300.0">
                     <children>
-                        <Button fx:id="deployButton" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Deploy" AnchorPane.leftAnchor="0.0" />
-                        <Button fx:id="donedeploy" layoutX="139.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Done" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="deployButton" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Deploy" AnchorPane.leftAnchor="5.0" />
+                        <Button fx:id="donedeploy" layoutX="139.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Done" AnchorPane.rightAnchor="5.0" />
                     </children>
                 </AnchorPane>
-                <Pane fx:id="sliderPane" layoutX="510.0" layoutY="-3.0" prefHeight="82.0" prefWidth="250.0">
+                <Pane fx:id="sliderPane" layoutX="475.0" layoutY="-3.0" prefHeight="82.0" prefWidth="300.0">
                     <children>
-                        <Button fx:id="secondMarked" layoutX="200.0" layoutY="18.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
-                        <Button fx:id="firstMarked" layoutY="20.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
-                        <Text fx:id="firstDisplayText" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="50.0" />
-                        <Slider fx:id="moveSlider" layoutX="55.0" layoutY="29.0" max="25.0" min="1.0" showTickLabels="true" showTickMarks="true" />
-                        <Text fx:id="secondDisplayText" layoutX="203.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="44.0" />
-                        <Text fx:id="showMoveUnitsText" layoutX="122.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                        <Button fx:id="secondMarked" layoutX="220.0" layoutY="20.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
+                        <Button fx:id="firstMarked" layoutX="30.0" layoutY="20.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" />
+                        <Text fx:id="firstDisplayText" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" text="Text" textAlignment="CENTER" wrappingWidth="110.0">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Text>
+                        <Slider fx:id="moveSlider" layoutX="87.0" layoutY="26.0" max="25.0" min="1.0" prefHeight="37.0" prefWidth="127.0" showTickLabels="true" showTickMarks="true" />
+                        <Text fx:id="secondDisplayText" layoutX="190.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" text="Text" textAlignment="CENTER" wrappingWidth="110.0">
+                     <font>
+                        <Font size="13.0" />
+                     </font></Text>
+                        <Text fx:id="showMoveUnitsText" layoutX="150.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                     </children>
                 </Pane>
             </children>

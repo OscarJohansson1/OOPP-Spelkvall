@@ -28,7 +28,10 @@ public class MapView extends AnchorPane {
 
     public void updateCurrentPlayer(String currentPlayerColor, MapController mapController, String playerName) {
         Platform.runLater(() -> {
-            mapController.showCurrentPlayer.setStyle("-fx-background-color: " + currentPlayerColor + ";" + "-fx-text-fill: " + getContrastColor(Color.valueOf(currentPlayerColor)) + ";");
+            mapController.showCurrentPlayer.setStyle("-fx-background-color: " + currentPlayerColor + ";" +
+                    "-fx-text-fill: " + getContrastColor(Color.valueOf(currentPlayerColor)) + ";" +
+                    "-fx-border-color: " + getContrastColor(Color.valueOf(currentPlayerColor)) + ";" +
+                    "-fx-border-width: 3 "+";");
             mapController.showCurrentPlayer.setText(playerName);
             mapController.imageTeamLogo.setImage(new Image(mapController.getTeamLogo()));
 
@@ -160,12 +163,16 @@ public class MapView extends AnchorPane {
         switch (string) {
             case "DEPLOY":
                 Platform.runLater(() -> {
+                    mapController.toggleVisibilityDeployableUnits(true);
                     mapController.deployPhase.toFront();
                     mapController.sliderPane.toFront();
                 });
                 break;
             case "ATTACK":
-                Platform.runLater(() -> mapController.attackPhase.toFront());
+                Platform.runLater(() -> {
+                    mapController.toggleVisibilityDeployableUnits(false);
+                    mapController.attackPhase.toFront();
+                });
                 break;
             case "MOVE":
                 Platform.runLater(() -> {

@@ -618,6 +618,10 @@ public class MapController extends AnchorPane implements IObservable {
 
     }
 
+    public void toggleVisibilityDeployableUnits(boolean b){
+        deployableUnitsText.setVisible(b);
+    }
+
     public void addMarkedCube(Button button) {
         if (button == firstMarked) {
             firstDisplayText.setVisible(true);
