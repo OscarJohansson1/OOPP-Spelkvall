@@ -169,6 +169,8 @@ public class StartController extends AnchorPane implements IObservable {
         multiplayerLogoController = new MultiplayerLogoController(this);
         rootpane.getChildren().add(multiplayerLogoController);
         rootpane.getChildren().remove(lobbySelectController);
+        notifyObservers("gridPane");
+
     }
 
     /**

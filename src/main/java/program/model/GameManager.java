@@ -152,7 +152,7 @@ public class GameManager implements IObservable {
      * @param space The space to add as a selected space.
      */
     public void receiveOnlineSelectedSpace(Space space) {
-        if (board.getSelectedSpace() != null && !round.getCurrentPhase().equals("DEPLOY")) {
+        if (board.getSelectedSpace() != null && !round.getCurrentPhase().equals("DEPLOY") && board.getSelectedSpace().getId() != space.getId()) {
             board.setSelectedSpace2(board.findSpace(space.getId()));
         } else {
             board.setSelectedSpace(board.findSpace(space.getId()));
