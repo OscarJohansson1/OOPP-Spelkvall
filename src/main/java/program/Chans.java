@@ -7,13 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import program.client.Client;
 import program.controller.StartController;
 
 import java.awt.*;
 import java.io.IOException;
-import java.net.SocketException;
 
+/**
+ * The main class of the application that starts the application and sets the stage for the game.
+ */
 public class Chans extends Application {
     @Override
     public void start(Stage stage) throws IOException {
@@ -41,8 +42,6 @@ public class Chans extends Application {
                 System.out.println("Stage is closing");
                 Platform.exit();
                 System.exit(0);
-
-
             }
         });
 

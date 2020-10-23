@@ -11,7 +11,7 @@ interface IBoard {
     /**
      * Method that takes checks if two spaces are neighbours.
      *
-     * @param firstIndex The id of the first space.
+     * @param firstIndex  The id of the first space.
      * @param secondIndex The id of the second space.
      * @return If the spaces are neighbours or not.
      */

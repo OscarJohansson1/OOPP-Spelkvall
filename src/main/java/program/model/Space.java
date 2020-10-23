@@ -1,7 +1,5 @@
 package program.model;
 
-import javafx.application.Platform;
-
 import java.io.Serializable;
 
 /**

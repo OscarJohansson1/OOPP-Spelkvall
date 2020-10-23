@@ -38,21 +38,25 @@ class DeployPhase implements IPhase, Serializable {
     }
 
     /**
-     * Method that returns the phase that follows this phase.
+     * Method that returns the next phase.
      *
-     * @return The following phase.
+     * @return The next phase.
      */
     @Override
     public IPhase nextPhase() {
         return nextPhase;
     }
 
-
     @Override
     public void setNextPhase(IPhase phase) {
         nextPhase = phase;
     }
 
+    /**
+     * Method that returns the name of the phase.
+     *
+     * @return The name as a String in the form: "DEPLOY".
+     */
     @Override
     public String getPhaseName() {
         return "DEPLOY";

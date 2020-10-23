@@ -18,12 +18,12 @@ public class AttackPhase implements IPhase, Serializable {
     private int attackerLoss;
     private int defenderLoss;
 
-    public boolean nextAttackPossible = true;
+    boolean nextAttackPossible = true;
 
     public boolean destroyedOpponent = false;
 
 
-    public AttackPhase() {
+    AttackPhase() {
 
     }
 
@@ -167,16 +167,30 @@ public class AttackPhase implements IPhase, Serializable {
         return value;
     }
 
-    public List<Integer> attackerDiceResults() {
+    /**
+     * Method that returns the values of the dice that the attacker threw.
+     *
+     * @return A list of Integers representing the attackers dice throw.
+     */
+    List<Integer> attackerDiceResults() {
         return attackerDice;
     }
 
-    public List<Integer> defenderDiceResults() {
+    /**
+     * Method that returns the values of the dice that the defender threw.
+     *
+     * @return A list of Integers representing the defenders dice throw.
+     */
+    List<Integer> defenderDiceResults() {
         return defenderDice;
     }
 
-    //TODO kolla om det här kan göras i view
-    public List<String> attackResults() {
+    /**
+     * Method that returns the casualties of the attack.
+     *
+     * @return A list of Strings representing the casualties of the attack.
+     */
+    List<String> attackResults() {
         List<String> results = new ArrayList<>();
         results.add(" lost: " + attackerLoss);
         if (defenderLoss == -1) {
@@ -187,6 +201,11 @@ public class AttackPhase implements IPhase, Serializable {
         return results;
     }
 
+    /**
+     * Method that returns the next phase.
+     *
+     * @return The next phase.
+     */
     @Override
     public IPhase nextPhase() {
         return nextPhase;
@@ -197,6 +216,11 @@ public class AttackPhase implements IPhase, Serializable {
         nextPhase = phase;
     }
 
+    /**
+     * Method that returns the name of the phase.
+     *
+     * @return The name as a String in the form: "ATTACK".
+     */
     @Override
     public String getPhaseName() {
         return "ATTACK";
