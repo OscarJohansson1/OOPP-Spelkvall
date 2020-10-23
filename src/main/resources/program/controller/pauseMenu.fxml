@@ -35,12 +35,7 @@
                               <Font size="37.0" />
                            </font>
                         </Button>
-                        <Button fx:id="endGameButton" layoutX="310.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#endGameButtonPressed" prefHeight="100.0" prefWidth="440.0" text="End game">
-                           <font>
-                              <Font size="37.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="quitGameButton" layoutX="770.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#quitGameButtonPressed" prefHeight="100.0" prefWidth="440.0" text="Quit game">
+                        <Button fx:id="quitGameButton" layoutX="310.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#quitGameButtonPressed" prefHeight="100.0" prefWidth="900.0" text="Quit game">
                            <font>
                               <Font size="37.0" />
                            </font>
