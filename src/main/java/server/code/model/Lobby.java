@@ -6,7 +6,7 @@ import java.util.List;
 
 
 /**
- * a lobby consists of a list of players, the lobby's name and it's id.
+ * A lobby consists of a list of players, the lobby's name and it's id.
  */
 public abstract class Lobby {
     final String lobbyName;
