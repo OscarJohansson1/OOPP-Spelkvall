@@ -178,7 +178,6 @@ public class GameManager implements IObservable {
      * change the current player to the next player and change the phase to the first phase.
      */
     public void nextPhase() throws IOException {
-
         if (observers.size() != 0) {
             notifyObservers("nextPhase");
         } else {
@@ -236,19 +235,22 @@ public class GameManager implements IObservable {
     }
 
     /**
-     * @return Should return the calculated amount. Is hard coded right now and needs to be fixed
+     * @return This method returns the amount that a player gets to deploy
      */
     public int calculateDeployableUnits(Player player) {
         return board.getUnitsForSpacesHold(player) + board.getUnitsFromAreas(player);
     }
 
     /**
-     * Winner 2
+     * This method checks if there is a winner
      */
     public boolean isWinner() {
         return board.isWinner();
     }
 
+    /**
+     * This method removes any player from the playerlist that doesn't have any spaces left
+     */
     public void removePlayersWithoutSpaces() {
         players.removeIf(player -> board.isPlayerOut(player));
     }
@@ -398,5 +400,4 @@ public class GameManager implements IObservable {
             }
         }
     }
-
 }

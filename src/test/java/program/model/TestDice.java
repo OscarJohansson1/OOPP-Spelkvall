@@ -21,6 +21,4 @@ public class TestDice {
         ArrayList<Integer> list = dice.rollNDIce(5);
         assertEquals(5, list.size(), "List from rollNDice() has wrong length");
     }
-
-
 }
