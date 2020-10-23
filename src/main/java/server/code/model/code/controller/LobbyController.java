@@ -1,9 +1,9 @@
-package server.code.controller;
+package server.code.model.code.controller;
 
 import program.model.Player;
-import server.code.model.GameLobby;
-import server.code.model.Lobby;
-import server.code.model.MenuLobby;
+import server.code.model.code.model.GameLobby;
+import server.code.model.code.model.Lobby;
+import server.code.model.code.model.MenuLobby;
 
 import java.util.ArrayList;
 import java.util.List;

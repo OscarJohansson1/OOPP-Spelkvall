@@ -1,4 +1,4 @@
-package server.code.model;
+package server.code.model.code.model;
 
 import program.model.BoardManager;
 import program.model.ChalmersBoard;

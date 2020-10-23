@@ -1,6 +1,7 @@
-package server.code.model;
+package server.code.model.code.model;
 
 import program.model.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +30,11 @@ public abstract class Lobby {
         return players;
     }
 
-    public int getLobbyId(){
+    public int getLobbyId() {
         return lobbyId;
     }
-    public void setLobbyId(int lobbyId){
+
+    public void setLobbyId(int lobbyId) {
         this.lobbyId = lobbyId;
     }
 
