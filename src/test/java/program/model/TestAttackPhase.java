@@ -35,7 +35,6 @@ public class TestAttackPhase {
     @Test
     public void testStartPhase() {
         assertTrue(attackPhase.startPhase(space1, space2, player1, 0), "Space is null, or attack not possible");
-
         assertFalse(attackPhase.startPhase(space1, null, player1, 5), "SelectedSpace2 is null so attack should not be possible, but is");
         assertFalse(attackPhase.startPhase(null, space2, player1, 5), "SelectedSpace1 is null so attack should not be possible, but is");
         assertFalse(attackPhase.startPhase(null, null, player1, 5), "Both spaces is null so attack should not be possible, but is");
@@ -54,7 +53,6 @@ public class TestAttackPhase {
     @Test
     public void testCalculateAttack() {
         attackPhase.startPhase(space1, space2, player1, 5);
-
         space1.updateSpace(5);
         space2.updateSpace(5);
 
@@ -62,7 +60,6 @@ public class TestAttackPhase {
         List<Integer> testDefender = attackPhase.defenderDiceResults();
 
         while (testAttacker.size() > 0 && testDefender.size() > 0) {
-
             if (findHighestDie(testAttacker) > findHighestDie(testDefender)) {
                 space2.updateSpace(space2.getUnits() - 1);
                 defenderLoss++;
@@ -83,15 +80,7 @@ public class TestAttackPhase {
         } else {
             assertEquals((5 - defenderLoss), space2.getUnits(), "Player1's attack succeeded and player2 should lose units, but didn't ");
         }
-
-
     }
-
-    @Test
-    public void testUpdateCasualties() {
-
-    }
-
 
     private Integer findHighestDie(List<Integer> rolls) {
         int value = 0;
